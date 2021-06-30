@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import GlobalStyle from "./styles/GlobalStyle";
 import { Header } from "./components";
 import {
-  VolunteerPage,
   LoginPage,
   DogPage,
   InfoPage,
@@ -40,9 +39,6 @@ function App() {
           </Route>
           <Route path="/contact" exact>
             <ContactPage />
-          </Route>
-          <Route path="/volunteer" exact>
-            <VolunteerPage />
           </Route>
         </Switch>
       </Router>
