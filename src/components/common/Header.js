@@ -8,7 +8,7 @@ const Header = () => {
     console.log(location);
   }, []);
 
-  return <>{location.pathname !== "/login" && <div>Header</div>}</>;
+  return <>{location.pathname !== "/login" && <div>Header입니다</div>}</>;
 };
 
 export default Header;
