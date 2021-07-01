@@ -1,5 +1,5 @@
 import React from "react";
-import { useLocation, useHistory } from "react-router-dom";
+import { useLocation, useHistory } from "react-router";
 import styled from "styled-components";
 
 import Logo_black from "../../assets/img/ic_logo_small.svg";
@@ -25,13 +25,13 @@ const HeaderGnb = styled.div`
 `;
 
 const HeaderContent = styled.span`
-  font: ${({ theme }) => theme.font.body2};
+  font: ${({ theme }) => theme.font.gnb};
   display: flex;
   align-items: center;
 `;
 
 const HeaderLogin = styled.span`
-  font: ${({ theme }) => theme.font.body2};
+  font: ${({ theme }) => theme.font.gnb};
   display: flex;
   align-items: center;
 `;
@@ -53,12 +53,13 @@ const Header = () => {
               }}
             />
             <HeaderGnb>
-              <HeaderContent>이동봉사란?</HeaderContent>
-              <HeaderContent>대상견 탐색</HeaderContent>
-              <HeaderContent>대상견 등록</HeaderContent>
-              <HeaderContent>이동봉사 후기</HeaderContent>
+              <HeaderContent onClick={() => { history.push("/info"); }}>이동봉사란?</HeaderContent>
+              <HeaderContent onClick={() => { history.push("/dog"); }}>대상견 탐색</HeaderContent>
+              <HeaderContent onClick={() => { history.push("/dog/enroll"); }}>대상견 등록</HeaderContent>
+              <HeaderContent onClick={() => { history.push("/"); }}>이동봉사 후기</HeaderContent>
+              <HeaderContent onClick={() => { history.push("/contact"); }}>About us</HeaderContent>
             </HeaderGnb>
-            <HeaderLogin>로그인·회원가입</HeaderLogin>
+            <HeaderLogin onClick={() => { history.push("/login"); }}>로그인·회원가입</HeaderLogin>
           </HeaderInner>
         </HeaderWrap>
       )}
