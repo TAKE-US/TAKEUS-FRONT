@@ -6,10 +6,11 @@ const color = {
   primary: "#FDCB02",
   primary_light: "#FFE371",
   primary_lighter: "#FFEEBA",
-  primary_dark: "#E7BB0B",
-  primary_darker: "#D19701",
+  primary_soft: "#F8D05F",
+  primary_dark: "#FCB34A",
+  primary_darker: "#F29C4A",
   white: "#FFFFFF",
-  lightgray1: "#F8F6F6",
+  lightgray1: "#F8F7F6",
   lightgray2: "#DFDFDF",
   gray1: "#C1C1C1",
   gray2: "#A5A5A5",
@@ -19,12 +20,17 @@ const color = {
   black: "#000000",
   bg_yellow: "#FFFCF1",
   bg_gray: "#F8F8F8",
-  bg_sky: "#F0F8FE"
+  bg_sky: "#F0F8FE",
+  sky_blue: "#73ACFF",
+  marine_blue: "#3C89FF",
+  mina_blue: "#296CE1",
+  deep_blue: "#0E57E2",
+  honest_blue: "#003089"
 };
 
 const font = {
   display2: "normal 700 3.6rem 'Noto Sans kr'",
-  display1: "normal 700 3.6rem 'Noto Sans kr'",
+  display1: "normal 400 3rem 'Noto Sans kr'",
   headline: "normal 500 2.4rem 'Noto Sans kr'",
   title2: "normal 700 2.4rem 'Noto Sans kr'",
   title1: "normal 700 2.2rem 'Noto Sans kr'",
