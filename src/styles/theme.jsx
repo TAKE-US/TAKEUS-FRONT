@@ -23,14 +23,14 @@ const color = {
 };
 
 const font = {
-  display1: "normal 700 36px/49px 'Noto Sans kr'",
-  headline: "normal 500 24px/35px 'Noto Sans kr'",
-  title: "normal 700 22px/30px 'Noto Sans kr'",
-  subheading: "normal 500 18px/26px 'Noto Sans kr'",
-  body2: "normal 400 16px/23px 'Noto Sans kr'",
-  body1: "normal 400 14px/20px 'Noto Sans kr'",
-  caption: "normal 400 12px/17px 'Noto Sans kr'",
-  button: "normal 500 18px/22px 'Spoqa Han Sans Neo'"
+  display1: "normal 700 36rem 'Noto Sans kr'",
+  headline: "normal 500 24rem 'Noto Sans kr'",
+  title: "normal 700 22rem 'Noto Sans kr'",
+  subheading: "normal 500 18rem 'Noto Sans kr'",
+  body2: "normal 400 16rem 'Noto Sans kr'",
+  body1: "normal 400 14rem 'Noto Sans kr'",
+  caption: "normal 400 12rem 'Noto Sans kr'",
+  button: "normal 500 18rem 'Spoqa Han Sans Neo'"
 };
 const theme = {
   color,
