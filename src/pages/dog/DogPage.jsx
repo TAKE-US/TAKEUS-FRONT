@@ -1,7 +1,12 @@
 import React from "react";
+import { FindDogCard } from "../../components";
 
 const DogPage = () => {
-  return <div>대상견 찾기</div>;
+  return (
+    <section>
+      <FindDogCard />
+    </section>
+  );
 };
 
 export default DogPage;
