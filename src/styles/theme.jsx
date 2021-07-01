@@ -30,7 +30,9 @@ const font = {
   body2: "normal 400 1.6rem 'Noto Sans kr'",
   body1: "normal 400 1.4rem 'Noto Sans kr'",
   caption: "normal 400 1.2rem 'Noto Sans kr'",
-  button: "normal 500 1.8rem 'Spoqa Han Sans Neo'"
+  gnb: "normal 500 1.6rem 'Noto Sans kr'",
+  button: "normal 500 1.8rem 'Spoqa Han Sans Neo'",
+  button_middle: "normal 500 1.6rem 'Spoqa Han Sans Neo'"
 };
 const theme = {
   color,
