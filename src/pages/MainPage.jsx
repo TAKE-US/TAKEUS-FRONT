@@ -1,7 +1,11 @@
 import React from "react";
 
+import Searchbar from '../components/common/Searchbar';
+
 const MainPage = () => {
-  return <div>main</div>;
+  return (
+    <Searchbar />
+  );
 };
 
 export default MainPage;
