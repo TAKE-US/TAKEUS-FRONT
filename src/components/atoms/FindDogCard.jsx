@@ -27,11 +27,13 @@ const CardWrap = styled.article`
       &__location {
         display: flex;
         align-items: center;
-        width: 7.9rem;
+        min-width: 7.9rem;
         height: 2.4rem;
         border: 0.1rem solid ${({ theme }) => theme.color.primary_darker};
         border-radius: 3.5rem;
         img {
+          display: absolute;
+          left: 0;
           width: 1.8rem;
           height: 1.8rem;
           margin-left: 1rem;
@@ -39,6 +41,8 @@ const CardWrap = styled.article`
         p {
           font: ${({ theme }) => theme.font.body1};
           color: ${({ theme }) => theme.color.primary_darker};
+          text-align: center;
+          padding-right: 1.1rem;
         }
       }
     }
@@ -52,16 +56,16 @@ const CardWrap = styled.article`
   }
 `;
 
-const FindDogCard = () => {
+const FindDogCard = ({ key, dog }) => {
   return (
     <CardWrap>
       <img src={sampleImg} alt="" />
       <section className="cardInfo">
         <article className="cardInfo-main">
-          <p className="cardInfo-main__name">멍멍이</p>
+          <p className="cardInfo-main__name">{dog.name}</p>
           <div className="cardInfo-main__location">
             <img src={locationIcon} alt="card_image" />
-            <p>시카고</p>
+            <p>{dog.location}</p>
           </div>
         </article>
         <article className="cardInfo-sub">
