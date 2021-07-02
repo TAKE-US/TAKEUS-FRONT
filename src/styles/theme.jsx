@@ -40,7 +40,8 @@ const font = {
   caption: "normal 400 1.2rem/1.2rem 'Noto Sans kr'",
   gnb: "normal 500 1.6rem/1.6rem 'Noto Sans kr'",
   button: "normal 500 1.8rem/1.8rem 'Spoqa Han Sans Neo'",
-  button_middle: "normal 500 1.6rem/1.6rem 'Spoqa Han Sans Neo'"
+  button_middle: "normal 500 1.6rem/1.6rem 'Spoqa Han Sans Neo'",
+  button_small: "normal 400 1.4rem/1.4rem 'Noto Sans kr'"
 };
 const theme = {
   color,

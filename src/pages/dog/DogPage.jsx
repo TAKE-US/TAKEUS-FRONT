@@ -1,11 +1,6 @@
 import React from "react";
-import { DogCardContainer } from "../../components";
+import { DogCardContainer, PaginationNav } from "../../components";
 import styled from "styled-components";
-
-const DogPageWrap = styled.section`
-  display: flex;
-  justify-content: center;
-`;
 
 const dogs = [
   {
@@ -90,10 +85,17 @@ const dogs = [
   }
 ];
 
+const DogPageWrap = styled.section`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+`;
+
 const DogPage = () => {
   return (
     <DogPageWrap>
       <DogCardContainer dogs={dogs} />
+      <PaginationNav />
     </DogPageWrap>
   );
 };
