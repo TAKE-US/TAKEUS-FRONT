@@ -60,7 +60,7 @@ const FindDogCard = () => {
         <article className="cardInfo-main">
           <p className="cardInfo-main__name">멍멍이</p>
           <div className="cardInfo-main__location">
-            <img src={locationIcon} alt="" />
+            <img src={locationIcon} alt="card_image" />
             <p>시카고</p>
           </div>
         </article>

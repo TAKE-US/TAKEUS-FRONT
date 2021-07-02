@@ -22,10 +22,6 @@ const GlobalStyle = createGlobalStyle`
     outline: none;
     padding-left: 10px;
   }
-  p{
-    margin:0;
-    padding:0;
-  }
 `;
 
 export default GlobalStyle;
