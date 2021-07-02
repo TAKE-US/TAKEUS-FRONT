@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { withRouter } from "react-router-dom";
 //img
 import sampleImg from "../../assets/img/img_card_sample.svg";
 import locationIcon from "../../assets/img/ic_location_blue_18.svg";
@@ -56,9 +57,12 @@ const CardWrap = styled.article`
   }
 `;
 
-const FindDogCard = ({ key, dog }) => {
+const FindDogCard = ({ id, dog, history }) => {
+  const cardClickHandler = () => {
+    history.push(`/dog/${id}`);
+  };
   return (
-    <CardWrap>
+    <CardWrap onClick={cardClickHandler}>
       <img src={sampleImg} alt="" />
       <section className="cardInfo">
         <article className="cardInfo-main">
@@ -76,4 +80,4 @@ const FindDogCard = ({ key, dog }) => {
   );
 };
 
-export default FindDogCard;
+export default withRouter(FindDogCard);

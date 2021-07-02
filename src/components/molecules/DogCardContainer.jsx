@@ -12,8 +12,8 @@ const Container = styled.section`
 const DogCardContainer = ({ dogs }) => {
   return (
     <Container>
-      {dogs.map((dog, key) => (
-        <FindDogCard key={key} dog={dog} />
+      {dogs.map((dog) => (
+        <FindDogCard key={dog.id} id={dog.id} dog={dog} />
       ))}
     </Container>
   );
