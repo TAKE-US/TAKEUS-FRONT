@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 //img
-import sampleImg from "../assets/img/img_card_sample.svg";
-import locationIcon from "../assets/img/ic_location_blue_18.svg";
+import sampleImg from "../../assets/img/img_card_sample.svg";
+import locationIcon from "../../assets/img/ic_location_blue_18.svg";
 
 const CardWrap = styled.article`
   display: flex;
