@@ -89,12 +89,18 @@ const DogPageWrap = styled.section`
   display: flex;
   align-items: center;
   flex-direction: column;
+  .container-div {
+    padding-bottom: 9.7rem;
+    border-bottom: 1px solid ${({ theme }) => theme.color.lightgray2};
+  }
 `;
 
 const DogPage = () => {
   return (
     <DogPageWrap>
-      <DogCardContainer dogs={dogs} />
+      <div className="container-div">
+        <DogCardContainer dogs={dogs} />
+      </div>
       <PaginationNav />
     </DogPageWrap>
   );
