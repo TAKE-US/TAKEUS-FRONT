@@ -1,10 +1,10 @@
 import React from "react";
-import { FindDogCard } from "../../components";
+import { DogCardContainer } from "../../components";
 
 const DogPage = () => {
   return (
     <section>
-      <FindDogCard />
+      <DogCardContainer />
     </section>
   );
 };
