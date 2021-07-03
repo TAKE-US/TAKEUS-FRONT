@@ -21,6 +21,7 @@ const Styled = {
     }
 
     button {
+      display: block;
       margin: 54px auto 0 auto;
     }
   `,
