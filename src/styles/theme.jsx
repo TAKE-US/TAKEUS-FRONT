@@ -31,7 +31,7 @@ const color = {
 const font = {
   display2: "normal 700 3.6rem/3.6rem 'Noto Sans kr'",
   display1: "normal 400 3rem/3rem 'Noto Sans kr'",
-  headline: "normal 500 2.4rem/2.4rem 'Noto Sans kr'",
+  headline: "normal 500 2.8rem/2.8rem 'Noto Sans kr'",
   title2: "normal 700 2.4rem/2.4rem 'Noto Sans kr'",
   title1: "normal 700 2.2rem/2.2rem 'Noto Sans kr'",
   subheading: "normal 500 1.8rem/1.8rem 'Noto Sans kr'",
@@ -42,6 +42,7 @@ const font = {
   button: "normal 500 1.8rem/1.8rem 'Spoqa Han Sans Neo'",
   button_middle: "normal 500 1.6rem/1.6rem 'Spoqa Han Sans Neo'"
 };
+
 const theme = {
   color,
   font
