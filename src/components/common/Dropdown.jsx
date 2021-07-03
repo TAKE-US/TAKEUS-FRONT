@@ -54,7 +54,7 @@ const Dropdown = () => {
 
   return (
     <MenuContainer>
-      <MenuButton onClick={onClick} className="menu-trigger">
+      <MenuButton onClick={onClick}>
         <span>국가명</span>
         <img src={arrow_bottom} alt="" />
       </MenuButton>
