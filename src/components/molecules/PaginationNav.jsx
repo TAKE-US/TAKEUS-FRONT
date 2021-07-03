@@ -11,12 +11,12 @@ const PaginationNav = () => {
   //page 이동 함수
   const nextPageHandler = () => {
     if (selectPage !== pageNums.length) {
-      setSelectPage((prev) => prev + 1);
+      setSelectPage(prev => prev + 1);
     }
   };
   const prevPageHandler = () => {
     if (selectPage !== 1) {
-      setSelectPage((prev) => prev - 1);
+      setSelectPage(prev => prev - 1);
     }
   };
 
@@ -73,5 +73,5 @@ const PageMoveButton = styled.button`
   display: flex;
   width: 1.8rem;
   height: 1.8rem;
-  background: url(${(props) => props.bg}) no-repeat top center;
+  background: url(${props => props.bg}) no-repeat top center;
 `;
