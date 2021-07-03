@@ -16,7 +16,7 @@ function App() {
   return (
     <>
       <GlobalStyle />
-        <Router>
+      <Router>
         <Header />
         <Switch>
           <Route path="/" exact>
