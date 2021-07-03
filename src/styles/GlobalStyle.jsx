@@ -22,9 +22,10 @@ const GlobalStyle = createGlobalStyle`
   };
 
   button{
-    display: flex;
-    cursor: pointer;
     outline: none;
+    background: none;
+    border: none;
+    cursor:pointer;
   };
 
   input{
