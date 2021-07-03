@@ -33,6 +33,7 @@ const Styled = {
     flex-direction: column;
     align-items: center;
     width: 240px;
+    padding: 0 12px;
     
     img {
       margin-bottom: 18px;
@@ -40,8 +41,10 @@ const Styled = {
 
     p {
       font: ${({ theme }) => theme.font.subheading};
+      font-weight: 400;
       color: #6F6F6F;
       line-height: 26px;
+      word-break: keep-all;
     }
   `,
 };
