@@ -9,6 +9,7 @@ const CardWrap = styled.article`
   display: flex;
   flex-direction: column;
   width: 25.5rem;
+  cursor: pointer;
   img {
     width: 25.5rem;
     height: 25.5rem;
@@ -22,6 +23,11 @@ const CardWrap = styled.article`
       display: flex;
       justify-content: center;
       &__name {
+        //text 넘어가면 ...으로 처리
+        max-width: 11.2rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
         font: ${({ theme }) => theme.font.title2};
         margin-right: 0.6rem;
       }
@@ -53,6 +59,10 @@ const CardWrap = styled.article`
       font: ${({ theme }) => theme.font.body1};
       line-height: 2rem;
       color: ${({ theme }) => theme.color.gray3};
+      max-width: 24.7rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
 `;
@@ -69,11 +79,11 @@ const FindDogCard = ({ id, dog, history }) => {
           <p className="cardInfo-main__name">{dog.name}</p>
           <div className="cardInfo-main__location">
             <img src={locationIcon} alt="card_image" />
-            <p>{dog.location}</p>
+            <p>{dog.destination}</p>
           </div>
         </article>
         <article className="cardInfo-sub">
-          암컷ㅣ9KGㅣ중성화 유ㅣ접종 무
+          <p>단체 | {dog.organization}</p>
         </article>
       </section>
     </CardWrap>
