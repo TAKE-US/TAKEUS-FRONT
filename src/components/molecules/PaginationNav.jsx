@@ -5,7 +5,7 @@ import leftBtnIcon from "../../assets/img/ic_arrow_left_24.svg";
 import rightBtnIcon from "../../assets/img/ic_arrow_right_black_24.svg";
 
 const PaginationNav = () => {
-  const pageNums = [1, 2, 3, 4];
+  const pageNums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   const [selectPage, setSelectPage] = useState(1);
 
   //page 이동 함수
@@ -51,7 +51,7 @@ export default PaginationNav;
 
 const NavWrap = styled.section`
   display: flex;
-  width: 51.6rem;
+  min-width: 51.6rem;
   height: 2.9rem;
   margin-top: 10.1rem;
   margin-bottom: 14.6rem;
@@ -59,7 +59,8 @@ const NavWrap = styled.section`
   align-items: center;
   article {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: repeat(auto-fit, 2.6rem);
+    max-width: 51.6rem;
     grid-gap: 1.6rem;
     button {
       width: 2.6rem;
