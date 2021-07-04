@@ -9,7 +9,7 @@ const ContainerWrap = styled.article`
   display: flex;
   flex-direction: column;
   width: 108rem;
-  height: 30rem;
+  height: 38rem;
   margin: 0 18rem;
   .container-top {
     display: flex;
@@ -18,11 +18,24 @@ const ContainerWrap = styled.article`
     height: 10rem;
     &__title {
       width: 52.3rem;
+      font: ${({ theme }) => theme.font.title1};
+      &__number {
+        display: inline-block;
+        font: "normal 900 3.6rem 'Spoqa Han Sans Neo'";
+      }
     }
     &__btns {
       display: flex;
       justify-content: space-between;
       width: 10.4rem;
+      &__left {
+        width: 4rem;
+        height: 4rem;
+      }
+      &__right {
+        width: 4rem;
+        height: 4rem;
+      }
     }
   }
 `;
@@ -32,11 +45,20 @@ const CarouselDogContainer = () => {
     <ContainerWrap>
       <article className='container-top'>
         <section className='container-top__title'>
-          1622마리의 대상견이 이동 봉사를 기다리고 있습니다.
+          <p className='container-top__title__number'>1622</p>
+          마리의 대상견이 이동 봉사를 기다리고 있습니다.
         </section>
         <div className='container-top__btns'>
-          <img src={leftarrow} alt='leftarrow' />
-          <img src={rightarrow} alt='rightarrow' />
+          <img
+            className='container-top__btns__left'
+            src={leftarrow}
+            alt='leftarrow'
+          />
+          <img
+            className='container-top__btns__right'
+            src={rightarrow}
+            alt='rightarrow'
+          />
         </div>
       </article>
       <CarouselDogCard />
