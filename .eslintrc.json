@@ -8,10 +8,15 @@
     "eslint:recommended",
     "plugin:react/recommended"
   ],
-  "plugins": ["react"],
+  "plugins": [
+    "react"
+  ],
   "rules": {
     "react/prop-types": "off",
-    "arrow-parens": ["error", "as-needed"],
+    "arrow-parens": [
+      "error",
+      "as-needed"
+    ],
     "no-multiple-empty-lines": [
       "error",
       {
@@ -20,7 +25,10 @@
         "maxEOF": 0
       }
     ],
-    "semi": ["error", "always"],
+    "semi": [
+      "error",
+      "always"
+    ],
     "max-len": [
       "error",
       {
