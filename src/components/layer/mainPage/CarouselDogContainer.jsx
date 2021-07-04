@@ -1,9 +1,9 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import CarouselDogCard from "../atoms/CarouselDogCard";
-import leftarrow from "../../assets/img/btn_round_arrow_left_40.svg";
-import rightarrow from "../../assets/img/btn_round_arrow_right_40.svg";
+import CarouselDogCard from "../../atoms/CarouselDogCard";
+import leftarrow from "../../../assets/img/btn_round_arrow_left_40.svg";
+import rightarrow from "../../../assets/img/btn_round_arrow_right_40.svg";
 
 const ContainerWrap = styled.article`
   display: flex;

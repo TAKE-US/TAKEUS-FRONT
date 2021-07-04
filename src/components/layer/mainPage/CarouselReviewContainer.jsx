@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import leftarrow from "../../assets/img/btn_round_arrow_left_40.svg";
-import rightarrow from "../../assets/img/btn_round_arrow_right_40.svg";
-import CarouselReviewCard from "../atoms/CarouselReviewCard";
+import leftarrow from "../../../assets/img/btn_round_arrow_left_40.svg";
+import rightarrow from "../../../assets/img/btn_round_arrow_right_40.svg";
+import CarouselReviewCard from "../../atoms/CarouselReviewCard";
 
 const ContainerWrap = styled.article`
   display: flex;
