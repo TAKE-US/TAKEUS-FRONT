@@ -9,9 +9,7 @@ const ContainerWrap = styled.article`
   flex-direction: column;
   align-items: space-around;
   width: 108rem;
-  height: 38rem;
-  margin: 0 18rem;
-  margin-top: 5rem;
+  height: 48rem;
   .container-top {
     display: flex;
     justify-content: space-between;
