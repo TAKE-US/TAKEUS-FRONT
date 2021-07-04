@@ -4,12 +4,19 @@ import styled from "styled-components";
 import sampleImg from "../../assets/img/img_card_sample.svg";
 import locationIcon from "../../assets/img/ic_location_blue_18.svg";
 
-const CardWrap = styled.article`
+const CardContainer = styled.section`
   display: flex;
+  overflow: hidden;
   justify-content: space-between;
+`;
+const CardWrap = styled.article`
+  justify-content: space-between;
+  position: absolute;
+  overflow: hidden;
   opacity: 0;
-  /* width: 25%; */
-  transition: transform 0.5s, opacity 0.5s, z-index 0.5s;
+  left: 0;
+  margin-right: 1.5rem;
+  transition: transform 0.7s, opacity 0.5s, z-index 0.5s;
   transform: ${(props) => (props.prev ? "translateX(-100%)" : "")};
   transform: ${(props) => (props.next ? "translateX(100%)" : "")};
   z-index: ${(props) => (props.prev || props.next ? 800 : "")};
@@ -76,7 +83,7 @@ const CarouselDogCard = ({ id, slicedDogs, active, prev, next }) => {
   let fourth = slicedDogs[3];
 
   return (
-    <>
+    <CardContainer>
       <CardWrap key={id} active={active} prev={prev} next={next}>
         <Card>
           <img src={sampleImg} alt='sampleImg' />
@@ -137,7 +144,7 @@ const CarouselDogCard = ({ id, slicedDogs, active, prev, next }) => {
           </section>
         </Card>
       </CardWrap>
-    </>
+    </CardContainer>
   );
 };
 
