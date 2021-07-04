@@ -1,7 +1,12 @@
 import React from "react";
+import { DogDetail } from '../../components';
 
 const DogDetailPage = () => {
-  return <div>대상견 정보</div>;
+  return (
+    <section>
+      <DogDetail />
+    </section>
+  );
 };
 
 export default DogDetailPage;
