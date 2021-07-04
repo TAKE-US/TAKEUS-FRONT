@@ -45,6 +45,9 @@ const ContainerWrap = styled.article`
 const SliderContainer = styled.article`
   width: 100%;
   display: flex;
+  margin: 0 auto;
+  padding: 0;
+  overflow: hidden;
 `;
 
 const CarouselDogContainer = () => {
@@ -103,7 +106,6 @@ const CarouselDogContainer = () => {
     );
   });
 
-  console.log(CardList);
   return (
     <ContainerWrap>
       <article className='container-top'>
