@@ -9,7 +9,7 @@ const ContainerWrap = styled.article`
   display: flex;
   flex-direction: column;
   width: 108rem;
-  height: 38rem;
+  height: 48rem;
   margin: 0 18rem;
   .container-top {
     display: flex;
@@ -25,24 +25,31 @@ const ContainerWrap = styled.article`
       }
     }
     &__btns {
+      width: 10rem;
       display: flex;
       justify-content: space-between;
-      width: 10.4rem;
       &__left {
+        all: unset;
         width: 4rem;
-        height: 4rem;
+        height: 3.5rem;
       }
       &__right {
+        all: unset;
         width: 4rem;
-        height: 4rem;
+        height: 3.5rem;
       }
     }
   }
 `;
 
-const SliderContainer = styled.article`
-  display: flex;
+const TotalSliderContainer = styled.article`
   width: 100%;
+  overflow: hidden;
+`;
+
+const SliderContainer = styled.article`
+  width: 100%;
+  display: flex;
 `;
 
 const CarouselDogContainer = () => {
@@ -54,21 +61,22 @@ const CarouselDogContainer = () => {
           마리의 대상견이 이동 봉사를 기다리고 있습니다.
         </section>
         <div className='container-top__btns'>
-          <img
-            className='container-top__btns__left'
-            src={leftarrow}
-            alt='leftarrow'
-          />
-          <img
-            className='container-top__btns__right'
-            src={rightarrow}
-            alt='rightarrow'
-          />
+          <button className='container-top__btns__left'>
+            <img src={leftarrow} alt='leftarrow' />
+          </button>
+          <button className='container-top__btns__right'>
+            <img src={rightarrow} alt='rightarrow' />
+          </button>
         </div>
       </article>
-      <SliderContainer>
-        <CarouselDogCard />
-      </SliderContainer>
+      <TotalSliderContainer>
+        <SliderContainer>
+          <CarouselDogCard />
+          <CarouselDogCard />
+          <CarouselDogCard />
+          <CarouselDogCard />
+        </SliderContainer>
+      </TotalSliderContainer>
     </ContainerWrap>
   );
 };
