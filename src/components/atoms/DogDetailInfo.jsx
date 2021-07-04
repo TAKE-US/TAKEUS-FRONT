@@ -12,7 +12,6 @@ import FacebookImg from "../../assets/img/img_Facebook.svg";
 const DetailInfoWrap = styled.div`
   width: 30rem;
   margin-left: 9.4rem;
-  
   .departure {
     display: flex;
     flex-direction: column;
@@ -42,28 +41,8 @@ const DetailInfoWrap = styled.div`
     }
     &-main {
       display: grid;
-      grid-template-columns: 2;
+      grid-template-columns: repeat(2,1fr);
       column-gap: 16.16rem;
-    }
-    &--kakaotalk {
-      grid-column: 1;
-      grid-row: 1;
-    }
-    &--instagram {
-      grid-column: 1;
-      grid-row: 2;
-    }
-    &--call {
-      grid-column: 1;
-      grid-row: 3;
-    }
-    &--twitter {
-      grid-column: 2;
-      grid-row: 1;
-    }
-    &--facebook {
-      grid-column: 2;
-      grid-row: 2;
     }
     &--kakaotalk, &--call, &--instagram, &--twitter, &--facebook {
       display: flex;
