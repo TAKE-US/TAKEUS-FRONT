@@ -40,6 +40,11 @@ const ContainerWrap = styled.article`
   }
 `;
 
+const SliderContainer = styled.article`
+  display: flex;
+  width: 100%;
+`;
+
 const CarouselDogContainer = () => {
   return (
     <ContainerWrap>
@@ -61,7 +66,9 @@ const CarouselDogContainer = () => {
           />
         </div>
       </article>
-      <CarouselDogCard />
+      <SliderContainer>
+        <CarouselDogCard />
+      </SliderContainer>
     </ContainerWrap>
   );
 };
