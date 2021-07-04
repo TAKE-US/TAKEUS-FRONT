@@ -9,7 +9,7 @@ const Styled = {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #F8F8F8;
+    background-color: ${({ theme }) => theme.color.bg_gray};
     padding: 80px 0;
     
     font-size: 1.2rem;
