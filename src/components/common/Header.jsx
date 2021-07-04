@@ -20,15 +20,12 @@ const Head = {
       justify-content: space-between;
       align-items: center;
 
-
       img {
         width: 14.4rem;
         height: 4.2rem;
         &:hover {
         cursor: pointer; 
         }
-
-
       }
 
       .gnb {
