@@ -6,9 +6,9 @@ import SwiperContent from './SwiperContent';
 const SwiperWrap = styled.div`
   display: flex;
   flex-direction: row;
-  width: 364px;
-  height: 342px;
-  border-radius: 10px;
+  width: 36.4rem;
+  height: 34.2rem;
+  border-radius: 1rem;
 `;
 
 const Swiper = () => {
@@ -16,7 +16,6 @@ const Swiper = () => {
   const [width, setWidth] = useState(0);
   const [xPosition, setXPosition] = useState(0);
 
-  // mock data
   const images = [
     'https://images.unsplash.com/photo-1608831540955-35094d48694a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=753&q=80',
     'https://images.unsplash.com/photo-1596797882870-8c33deeac224?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80',

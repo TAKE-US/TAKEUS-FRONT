@@ -31,8 +31,7 @@ function App() {
           <Route path="/dog/enroll" exact>
             <DogEnrollPage />
           </Route>
-          <Route path="/dog/detail" exact>
-            {/* dog/:id 로 돌려놔야함 */}
+          <Route path="/dog/:id" exact>
             <DogDetailPage />
           </Route>
           <Route path="/info" exact>
