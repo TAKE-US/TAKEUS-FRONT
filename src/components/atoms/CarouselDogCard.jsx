@@ -1,3 +1,4 @@
+/* eslint-disable arrow-parens */
 import React from "react";
 import styled from "styled-components";
 import sampleImg from "../../assets/img/img_card_sample.svg";
@@ -6,7 +7,21 @@ import locationIcon from "../../assets/img/ic_location_blue_18.svg";
 const CardWrap = styled.article`
   display: flex;
   justify-content: space-between;
-  width: 100%;
+  opacity: 0;
+  /* width: 25%; */
+  transition: transform 0.5s, opacity 0.5s, z-index 0.5s;
+  transform: ${(props) => (props.prev ? "translateX(-100%)" : "")};
+  transform: ${(props) => (props.next ? "translateX(100%)" : "")};
+  z-index: ${(props) => (props.prev || props.next ? 800 : "")};
+
+  ${({ active }) =>
+    active &&
+    `
+    opacity: 1;
+    position: relative;
+    z-index: 900;
+  `}
+
   img {
     width: 25.5rem;
     height: 25.5rem;
@@ -54,9 +69,9 @@ const Card = styled.section`
   }
 `;
 
-const CarouselDogCard = ({id, name, location, info}) => {
+const CarouselDogCard = ({ id, name, location, info, active, prev, next }) => {
   return (
-    <CardWrap>
+    <CardWrap id={id} active={active} prev={prev} next={next}>
       <Card>
         <img src={sampleImg} alt='sampleImg' />
         <section className='cardInfo'>
@@ -67,9 +82,7 @@ const CarouselDogCard = ({id, name, location, info}) => {
               <p>{location}</p>
             </div>
           </article>
-          <article className='cardInfo-sub'>
-            {info}
-          </article>
+          <article className='cardInfo-sub'>{info}</article>
         </section>
       </Card>
     </CardWrap>
