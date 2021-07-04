@@ -24,7 +24,7 @@ const DotRow = styled.div`
   } 
 `;
 
-function Dot({ index, imagesLength }) {
+function PaginationDot({ index, imagesLength }) {
   return (
     <DotWrap>
       <DotRow
@@ -42,4 +42,4 @@ function Dot({ index, imagesLength }) {
   );
 }
 
-export default Dot;
+export default PaginationDot;

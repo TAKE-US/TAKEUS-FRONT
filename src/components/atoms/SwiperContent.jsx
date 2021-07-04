@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import Arrow from './Arrow';
-import Dot from './Dot';
+import PaginationDot from './PaginationDot';
 
 const SwiperContentWrap = styled.div`
   position: relative;
@@ -51,7 +51,7 @@ function SwiperContent({ index, images, setWidth, xPosition, handleClickPrev, ha
         handleClickPrev={handleClickPrev}
         handleClickNext={handleClickNext}
       />
-      <Dot
+      <PaginationDot
         index={index}
         imagesLength={images.length}
       />
