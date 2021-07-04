@@ -8,6 +8,12 @@ import SearchImgHover from '../../assets/img/btn_search_hover.svg';
 
 
 const Search = {
+  TotalContainer: styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  `,
+
   Container: styled.div`
     width: 77.4rem;
     border-radius: 1rem;
@@ -40,7 +46,7 @@ const Searchbar = () => {
 
 
   return (
-    <>
+    <Search.TotalContainer>
       <Search.Container>
         <Search.Dropdown>
           <DropdownCountry />
@@ -56,7 +62,7 @@ const Searchbar = () => {
           />
         </Search.Button>
       </Search.Container>
-    </>
+    </Search.TotalContainer>
   );
 };
 
