@@ -69,23 +69,75 @@ const Card = styled.section`
   }
 `;
 
-const CarouselDogCard = ({ id, name, location, info, active, prev, next }) => {
+const CarouselDogCard = ({ id, slicedDogs, active, prev, next }) => {
+  let first = slicedDogs[0];
+  let second = slicedDogs[1];
+  let third = slicedDogs[2];
+  let fourth = slicedDogs[3];
+
   return (
-    <CardWrap id={id} active={active} prev={prev} next={next}>
-      <Card>
-        <img src={sampleImg} alt='sampleImg' />
-        <section className='cardInfo'>
-          <article className='cardInfo-main'>
-            <p className='cardInfo-main__name'>{name}</p>
-            <div className='cardInfo-main__location'>
-              <img src={locationIcon} alt='' />
-              <p>{location}</p>
-            </div>
-          </article>
-          <article className='cardInfo-sub'>{info}</article>
-        </section>
-      </Card>
-    </CardWrap>
+    <>
+      <CardWrap key={id} active={active} prev={prev} next={next}>
+        <Card>
+          <img src={sampleImg} alt='sampleImg' />
+          <section className='cardInfo'>
+            <article className='cardInfo-main'>
+              <p className='cardInfo-main__name'>{first.name}</p>
+              <div className='cardInfo-main__location'>
+                <img src={locationIcon} alt='' />
+                <p>{first.location}</p>
+              </div>
+            </article>
+            <article className='cardInfo-sub'>{first.info}</article>
+          </section>
+        </Card>
+      </CardWrap>
+      <CardWrap key={id} active={active} prev={prev} next={next}>
+        <Card>
+          <img src={sampleImg} alt='sampleImg' />
+          <section className='cardInfo'>
+            <article className='cardInfo-main'>
+              <p className='cardInfo-main__name'>{second.name}</p>
+              <div className='cardInfo-main__location'>
+                <img src={locationIcon} alt='' />
+                <p>{second.location}</p>
+              </div>
+            </article>
+            <article className='cardInfo-sub'>{second.info}</article>
+          </section>
+        </Card>
+      </CardWrap>
+      <CardWrap key={id} active={active} prev={prev} next={next}>
+        <Card>
+          <img src={sampleImg} alt='sampleImg' />
+          <section className='cardInfo'>
+            <article className='cardInfo-main'>
+              <p className='cardInfo-main__name'>{third.name}</p>
+              <div className='cardInfo-main__location'>
+                <img src={locationIcon} alt='' />
+                <p>{third.location}</p>
+              </div>
+            </article>
+            <article className='cardInfo-sub'>{third.info}</article>
+          </section>
+        </Card>
+      </CardWrap>
+      <CardWrap key={id} active={active} prev={prev} next={next}>
+        <Card>
+          <img src={sampleImg} alt='sampleImg' />
+          <section className='cardInfo'>
+            <article className='cardInfo-main'>
+              <p className='cardInfo-main__name'>{fourth.name}</p>
+              <div className='cardInfo-main__location'>
+                <img src={locationIcon} alt='' />
+                <p>{fourth.location}</p>
+              </div>
+            </article>
+            <article className='cardInfo-sub'>{fourth.info}</article>
+          </section>
+        </Card>
+      </CardWrap>
+    </>
   );
 };
 
