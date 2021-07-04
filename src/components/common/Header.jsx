@@ -48,9 +48,6 @@ const Head = {
       color: ${({ theme }) => theme.color.primary};
     }
     color: ${props => props.value === props.location && '#FDCB02'};
-    text-emphasis: filled;
-    text-emphasis-style: dot;
-    text-emphasis-position: under;
   `,
 
   Login: styled.span`
@@ -119,7 +116,7 @@ const Header = () => {
               <Head.Content
                 value="/contact"
                 location={location.pathname}
-                onClick={() => { history.push("/contact"); }}>
+                onClick={() => { history.push("/about"); }}>
                 About us
               </Head.Content>
             </div>
