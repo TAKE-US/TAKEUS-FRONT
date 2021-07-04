@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled from "styled-components";
 
 import { Swiper } from "../../components";
 import { DogDetailInfo } from '../../components';
@@ -13,13 +13,15 @@ const DogDetailWrap = styled.div`
   .line {
     width: 100%;
     height: 0rem;
-    left: 18.1rem;
-    top: 14rem;
     border: 0.1rem solid ${({ theme }) => theme.color.lightgray2};
   }
 
-  .dog
+  .dog {
     &--title{
+      display: flex;
+      flex-direction: row;
+      margin-bottom: 2.4rem;
+      
       p {
         font-size: 3.2rem;
         font-weight: 700;
@@ -31,12 +33,23 @@ const DogDetailWrap = styled.div`
         font-size: 1.8rem;
         font-weight: 400;
       }
+
+      &--team {
+        margin: 1.5rem 1.2rem;
+        width: 9.1rem;
+        height: 2.6rem;
+        background-color: rgba(242, 183, 5, 0.2);
+        font: ${({ theme }) => theme.font.description};
+        color: ${({ theme }) => theme.color.darkgray3};
+        text-align: center;
+      }
     }
 
     &--detail {
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
       font-size: 1.6rem;
+      margin-top: 2.6rem;
       width: 100%;
       color: ${({ theme }) => theme.color.gray3};
     }
@@ -44,6 +57,7 @@ const DogDetailWrap = styled.div`
     &--description {
       width: 93.6rem;
       height: 11.2rem;
+      margin-top: 3.7rem;
       padding: 4.8rem 7.2rem;
       text-align: left;
       background-color: ${({ theme }) => theme.color.bg_gray};
@@ -51,7 +65,7 @@ const DogDetailWrap = styled.div`
       border-radius: 1.7rem;
       line-height: 154%;
     }
-
+  }
 `;
 
 function DogDetail() {
@@ -61,6 +75,9 @@ function DogDetail() {
         <p>멍멍이</p>
         <div className="dog--title--info">
           여 | 7살 | 9kg
+        </div>
+        <div className="dog--title--team">
+          다온레스큐
         </div>
       </div>
       <div className="line"></div>

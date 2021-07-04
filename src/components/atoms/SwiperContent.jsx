@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import Arrow from './Arrow';
+import Dot from './Dot';
 
 const SwiperContentWrap = styled.div`
   position: relative;
@@ -8,6 +9,8 @@ const SwiperContentWrap = styled.div`
   height: 100%;
   overflow: hidden;
   border-radius: 10px;
+  display: flex;
+  align-items: center;
 `;
 
 const Slide = styled.div`
@@ -24,7 +27,7 @@ const Slide = styled.div`
   }
 `;
 
-function SwiperContent({ images, setWidth, xPosition, handleClickPrev, handleClickNext }) {
+function SwiperContent({ index, images, setWidth, xPosition, handleClickPrev, handleClickNext }) {
   const slideRef = useRef();
 
   useEffect(() => {
@@ -44,10 +47,13 @@ function SwiperContent({ images, setWidth, xPosition, handleClickPrev, handleCli
           <img key={i} src={img} alt="" />
         ))}
       </Slide>
-
       <Arrow
         handleClickPrev={handleClickPrev}
         handleClickNext={handleClickNext}
+      />
+      <Dot
+        index={index}
+        imagesLength={images.length}
       />
     </SwiperContentWrap >
   );

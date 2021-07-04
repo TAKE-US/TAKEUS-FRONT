@@ -17,6 +17,7 @@ const color = {
   gray3: "#6F6F6F",
   darkgray1: "#3D3D3D",
   darkgray2: "#1A1A1A",
+  darkgray3: "#797979",
   black: "#000000",
   bg_yellow: "#FFFCF1",
   bg_gray: "#F8F8F8",

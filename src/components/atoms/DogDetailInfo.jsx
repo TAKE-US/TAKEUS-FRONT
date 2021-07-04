@@ -11,6 +11,7 @@ import FacebookImg from "../../assets/img/img_Facebook.svg";
 
 const DetailInfoWrap = styled.div`
   width: 30rem;
+  margin-left: 9.4rem;
   
   .departure {
     display: flex;
@@ -28,7 +29,7 @@ const DetailInfoWrap = styled.div`
       img {
         width: 2.4rem;
         height: 2.4rem;
-        margin-right: 0.5rem;
+        margin-right: 1.9rem;
       }
       p{
         line-height: 2.2rem;
@@ -73,7 +74,7 @@ const DetailInfoWrap = styled.div`
       img {
         width: 2.4rem;
         height: 2.4rem;
-        margin-right: 5rem;
+        margin-right: 1.84rem;
       }
       p{
         line-height: 2.2rem;
