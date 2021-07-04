@@ -1,8 +1,7 @@
 import React from "react";
-import styled from "styled-components";
 
 const CarouselDogCard = () => {
-  return <div></div>;
+  return <div>Dog Card 입니다</div>;
 };
 
 export default CarouselDogCard;
