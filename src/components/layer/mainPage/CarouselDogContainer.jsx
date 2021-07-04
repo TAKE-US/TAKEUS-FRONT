@@ -4,6 +4,7 @@ import styled from "styled-components";
 import CarouselDogCard from "../../atoms/CarouselDogCard";
 import leftarrow from "../../../assets/img/btn_round_arrow_left_40.svg";
 import rightarrow from "../../../assets/img/btn_round_arrow_right_40.svg";
+import CarouselButton from "../../atoms/CarouselButton";
 
 const ContainerWrap = styled.article`
   display: flex;
@@ -46,9 +47,8 @@ const SliderContainer = styled.article`
   display: flex;
 `;
 
-
 const CarouselDogContainer = () => {
-  const totalItems = 10;
+  const totalItems = 2;
   const [current, setCurrent] = useState(0);
   const isMoving = useRef(false);
 
@@ -79,7 +79,9 @@ const CarouselDogContainer = () => {
     }
   };
 
-  const ItemList = Array(totalItems)
+  const { id, name, location, info } = dogs;
+
+  const CardList = Array(totalItems)
     .fill()
     .map((_, index) => {
       const key = `item_${index}`;
@@ -87,10 +89,38 @@ const CarouselDogContainer = () => {
       const next = current === totalItems - 1 ? 0 : current + 1;
       return (
         <>
-          <CarouselDogCard key={id} name={name} location={location} info={info}/>
-          <Item
-            src={`https://picsum.photos/id/${index}/1600/900`}
-            key={key}
+          <CarouselDogCard
+            key={id}
+            name={name}
+            location={location}
+            info={info}
+            active={index === current}
+            prev={index === prev}
+            next={index === next}
+          />
+          <CarouselDogCard
+            key={id}
+            name={name}
+            location={location}
+            info={info}
+            active={index === current}
+            prev={index === prev}
+            next={index === next}
+          />
+          <CarouselDogCard
+            key={id}
+            name={name}
+            location={location}
+            info={info}
+            active={index === current}
+            prev={index === prev}
+            next={index === next}
+          />
+          <CarouselDogCard
+            key={id}
+            name={name}
+            location={location}
+            info={info}
             active={index === current}
             prev={index === prev}
             next={index === next}
@@ -99,8 +129,6 @@ const CarouselDogContainer = () => {
       );
     });
 
-  const {id, name, location, info} = dogs;
-  
   return (
     <ContainerWrap>
       <article className='container-top'>
@@ -118,70 +146,69 @@ const CarouselDogContainer = () => {
         </div>
       </article>
       <SliderContainer>
-        <CarouselDogCard key={id} name={name} location={location} info={info}/>
-        <CarouselDogCard key={id} name={name} location={location} info={info}/>
-        <CarouselDogCard key={id} name={name} location={location} info={info}/>
-        <CarouselDogCard key={id} name={name} location={location} info={info}/>
+        {CardList}
+        <CarouselButton prev handleSlide={movePrev} />
+        <CarouselButton next handleSlide={moveNext} />
       </SliderContainer>
     </ContainerWrap>
   );
 };
 
-  const dogs = [
-    {
-      id: 0,
-      name: "멍멍이",
-      location: "시카고",
-      info: "암컷ㅣ9KGㅣ중성화 유ㅣ접종 무"
-    },
-    {
-      id: 1,
-      name: "멍멍이",
-      location: "시카고",
-      info: "암컷ㅣ9KGㅣ중성화 유ㅣ접종 무"
-    },
-    {
-      id: 2,
-      name: "멍멍이",
-      location: "시카고",
-      info: "암컷ㅣ9KGㅣ중성화 유ㅣ접종 무"
-    },
-    {
-      id: 3,
-      name: "멍멍이",
-      location: "시카고",
-      info: "암컷ㅣ9KGㅣ중성화 유ㅣ접종 무"
-    },
-    {
-      id: 4,
-      name: "멍멍이",
-      location: "시카고",
-      info: "암컷ㅣ9KGㅣ중성화 유ㅣ접종 무"
-    },
-    {
-      id: 5,
-      name: "멍멍이",
-      location: "시카고",
-      info: "암컷ㅣ9KGㅣ중성화 유ㅣ접종 무"
-    },
-    {
-      id: 6,
-      name: "멍멍이",
-      location: "시카고",
-      info: "암컷ㅣ9KGㅣ중성화 유ㅣ접종 무"
-    },
-    {
-      id: 7,
-      name: "멍멍이",
-      location: "시카고",
-      info: "암컷ㅣ9KGㅣ중성화 유ㅣ접종 무"
-    },
-    {
-      id: 8,
-      name: "멍멍이",
-      location: "시카고",
-      info: "암컷ㅣ9KGㅣ중성화 유ㅣ접종 무"
-    }
-  ];
+const dogs = [
+  {
+    id: 0,
+    name: "멍멍이",
+    location: "시카고",
+    info: "암컷ㅣ9KGㅣ중성화 유ㅣ접종 무",
+  },
+  {
+    id: 1,
+    name: "멍멍이",
+    location: "시카고",
+    info: "암컷ㅣ9KGㅣ중성화 유ㅣ접종 무",
+  },
+  {
+    id: 2,
+    name: "멍멍이",
+    location: "시카고",
+    info: "암컷ㅣ9KGㅣ중성화 유ㅣ접종 무",
+  },
+  {
+    id: 3,
+    name: "멍멍이",
+    location: "시카고",
+    info: "암컷ㅣ9KGㅣ중성화 유ㅣ접종 무",
+  },
+  {
+    id: 4,
+    name: "멍멍이",
+    location: "시카고",
+    info: "암컷ㅣ9KGㅣ중성화 유ㅣ접종 무",
+  },
+  {
+    id: 5,
+    name: "멍멍이",
+    location: "시카고",
+    info: "암컷ㅣ9KGㅣ중성화 유ㅣ접종 무",
+  },
+  {
+    id: 6,
+    name: "멍멍이",
+    location: "시카고",
+    info: "암컷ㅣ9KGㅣ중성화 유ㅣ접종 무",
+  },
+  {
+    id: 7,
+    name: "멍멍이",
+    location: "시카고",
+    info: "암컷ㅣ9KGㅣ중성화 유ㅣ접종 무",
+  },
+  {
+    id: 8,
+    name: "멍멍이",
+    location: "시카고",
+    info: "암컷ㅣ9KGㅣ중성화 유ㅣ접종 무",
+  },
+];
 
 export default CarouselDogContainer;
