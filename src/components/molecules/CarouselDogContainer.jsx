@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import CarouselDogCard from "../atoms/CarouselDogCard";
 import leftarrow from "../../assets/img/btn_round_arrow_left_40.svg";
@@ -15,13 +15,13 @@ const ContainerWrap = styled.article`
     display: flex;
     justify-content: space-between;
     width: 108rem;
-    height: 10rem;
+    height: 6rem;
     &__title {
       width: 52.3rem;
       font: ${({ theme }) => theme.font.title1};
       &__number {
         display: inline-block;
-        font: "normal 900 3.6rem 'Spoqa Han Sans Neo'";
+        font-size: 3.2rem;
       }
     }
     &__btns {

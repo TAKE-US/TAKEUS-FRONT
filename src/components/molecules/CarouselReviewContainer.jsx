@@ -7,22 +7,22 @@ import CarouselReviewCard from "../atoms/CarouselReviewCard";
 const ContainerWrap = styled.article`
   display: flex;
   flex-direction: column;
+  align-items: space-around;
   width: 108rem;
   height: 38rem;
   margin: 0 18rem;
-  margin-top: 10rem;
-
+  margin-top: 5rem;
   .container-top {
     display: flex;
     justify-content: space-between;
     width: 108rem;
-    height: 10rem;
+    height: 6rem;
     &__title {
       width: 52.3rem;
       font: ${({ theme }) => theme.font.title1};
       &__number {
         display: inline-block;
-        font: "normal 900 3.6rem 'Spoqa Han Sans Neo'";
+        font-size: 3.2rem;
       }
     }
     &__btns {
@@ -38,6 +38,12 @@ const ContainerWrap = styled.article`
         height: 4rem;
       }
     }
+  }
+  .container-bottom {
+    display: flex;
+    justify-content: space-between;
+    width: 108rem;
+    height: 10rem;
   }
 `;
 
@@ -62,7 +68,11 @@ const CarouselReviewContainer = () => {
           />
         </div>
       </article>
-      <CarouselReviewCard />
+      <article className='container-bottom'>
+        <CarouselReviewCard />
+        <CarouselReviewCard />
+        <CarouselReviewCard />
+      </article>
     </ContainerWrap>
   );
 };
