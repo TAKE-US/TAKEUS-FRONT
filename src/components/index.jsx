@@ -8,3 +8,5 @@ export { default as FindDogCard } from "./atoms/FindDogCard";
 //molcules
 export { default as DogCardContainer } from "./molecules/DogCardContainer";
 export { default as PaginationNav } from "./molecules/PaginationNav";
+export { default as CarouselDogContainer } from "./molecules/CarouselDogContainer";
+export { default as CarouselReviewContainer } from "./molecules/CarouselReviewContainer";
