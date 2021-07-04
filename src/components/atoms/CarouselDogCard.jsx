@@ -54,21 +54,21 @@ const Card = styled.section`
   }
 `;
 
-const CarouselDogCard = () => {
+const CarouselDogCard = ({id, name, location, info}) => {
   return (
     <CardWrap>
       <Card>
         <img src={sampleImg} alt='sampleImg' />
         <section className='cardInfo'>
           <article className='cardInfo-main'>
-            <p className='cardInfo-main__name'>멍멍이</p>
+            <p className='cardInfo-main__name'>{name}</p>
             <div className='cardInfo-main__location'>
               <img src={locationIcon} alt='' />
-              <p>시카고</p>
+              <p>{location}</p>
             </div>
           </article>
           <article className='cardInfo-sub'>
-            암컷ㅣ9KGㅣ중성화 유ㅣ접종 무
+            {info}
           </article>
         </section>
       </Card>
