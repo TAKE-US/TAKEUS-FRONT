@@ -114,23 +114,16 @@ const CarouselDogContainer = () => {
           마리의 대상견이 이동 봉사를 기다리고 있습니다.
         </section>
         <div className='container-top__btns'>
-          <button className='container-top__btns__left'>
-            <img src={leftarrow} alt='leftarrow' />
-          </button>
-          <button className='container-top__btns__right'>
-            <img src={rightarrow} alt='rightarrow' />
-          </button>
+          <CarouselButton prev handleSlide={movePrev} />
+          <CarouselButton next handleSlide={moveNext} />
         </div>
       </article>
-      <SliderContainer>
-        {CardList}
-        <CarouselButton prev handleSlide={movePrev} />
-        <CarouselButton next handleSlide={moveNext} />
-      </SliderContainer>
+      <SliderContainer>{CardList}</SliderContainer>
     </ContainerWrap>
   );
 };
 
+// mock data
 const dogs = [
   {
     id: 0,
