@@ -5,8 +5,6 @@ import SwiperContent from './SwiperContent';
 
 const SwiperWrap = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: row;
   width: 364px;
   height: 342px;

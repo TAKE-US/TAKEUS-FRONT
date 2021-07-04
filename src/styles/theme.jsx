@@ -35,6 +35,7 @@ const font = {
   title2: "normal 700 2.4rem/2.4rem 'Noto Sans kr'",
   title1: "normal 700 2.2rem/2.2rem 'Noto Sans kr'",
   subheading: "normal 500 1.8rem/1.8rem 'Noto Sans kr'",
+  description: "normal 400 1.8rem/1.8rem 'Noto Sans kr'",
   body2: "normal 400 1.6rem/1.6rem 'Noto Sans kr'",
   body1: "normal 400 1.4rem/1.4rem 'Noto Sans kr'",
   caption: "normal 400 1.2rem/1.2rem 'Noto Sans kr'",
