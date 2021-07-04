@@ -5,7 +5,8 @@ import locationIcon from "../../assets/img/ic_location_blue_18.svg";
 
 const CardWrap = styled.article`
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  width: 100%;
   img {
     width: 25.5rem;
     height: 25.5rem;
