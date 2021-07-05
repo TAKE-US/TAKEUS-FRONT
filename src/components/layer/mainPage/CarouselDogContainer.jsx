@@ -1,10 +1,8 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
-import CarouselDogCard from "../../atoms/CarouselDogCard";
 import CarouselButton from "../../atoms/CarouselButton";
-import leftarrow from "../../../assets/img/btn_round_arrow_left_40.svg";
-import rightarrow from "../../../assets/img/btn_round_arrow_right_40.svg";
+import Carousel from "../../atoms/Carousel";
 
 const ContainerWrap = styled.article`
   display: flex;
@@ -45,67 +43,10 @@ const ContainerWrap = styled.article`
 const SliderContainer = styled.article`
   width: 100%;
   display: flex;
-  margin: 0 auto;
-  padding: 0;
-  overflow: hidden;
 `;
 
 const CarouselDogContainer = () => {
-  const totalItems = 8;
-  const [current, setCurrent] = useState(0);
-  const isMoving = useRef(false);
-
-  useEffect(() => {
-    isMoving.current = true;
-    setTimeout(() => {
-      isMoving.current = false;
-    }, 500);
-  }, [current]);
-
-  const moveNext = () => {
-    if (!isMoving.current) {
-      if (current === totalItems - 1) {
-        setCurrent(0);
-      } else {
-        setCurrent(current + 1);
-      }
-    }
-  };
-
-  const movePrev = () => {
-    if (!isMoving.current) {
-      if (current === 0) {
-        setCurrent(totalItems - 1);
-      } else {
-        setCurrent(current - 1);
-      }
-    }
-  };
-
-  const { id, ...rest } = dogs;
-
-  const CardList = dogs.map((dog, index, dogs) => {
-    let slicedDogs;
-    if (index <= dogs.length - 4) {
-      slicedDogs = dogs.slice(index, index + 4);
-    } else {
-      slicedDogs = dogs
-        .slice(index, index + 4)
-        .concat(dogs.slice(0, index - 5));
-    }
-    const prev = current === 0 ? totalItems - 1 : current - 1;
-    const next = current === totalItems - 1 ? 0 : current + 1;
-    return (
-      <CarouselDogCard
-        key={dog.id}
-        slicedDogs={slicedDogs}
-        active={index === current}
-        prev={index === prev}
-        next={index === next}
-      />
-    );
-  });
-
+  const data = dogs;
   return (
     <ContainerWrap>
       <article className='container-top'>
@@ -114,11 +55,12 @@ const CarouselDogContainer = () => {
           마리의 대상견이 이동 봉사를 기다리고 있습니다.
         </section>
         <div className='container-top__btns'>
-          <CarouselButton prev handleSlide={movePrev} />
-          <CarouselButton next handleSlide={moveNext} />
+          <CarouselButton />
         </div>
       </article>
-      <SliderContainer>{CardList}</SliderContainer>
+      <SliderContainer>
+        <Carousel data={data} />
+      </SliderContainer>
     </ContainerWrap>
   );
 };
