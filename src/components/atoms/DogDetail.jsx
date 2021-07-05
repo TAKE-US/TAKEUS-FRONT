@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { withRouter } from 'react-router-dom';
 import styled from "styled-components";
+import axios from 'axios';
 
 import { Swiper } from "../../components";
 import { DogDetailInfo } from '../../components';
@@ -68,31 +70,52 @@ const DogDetailWrap = styled.div`
   }
 `;
 
-function DogDetail() {
+const getDogData = async () => {
+  const data = await axios.get(`http://localhost:4000/data`);
+  console.log("getDogData: ", data);
+  return data.data;
+};
+
+function DogDetail({ match }) {
+  const [dogData, setDogData] = useState(null);
+
+  useEffect(() => {
+    (async () => {
+      console.log('match.params.id: ', match.params.id);
+      const dog = await getDogData();
+      console.log("DogDetail: ", dog);
+      setDogData(dog[match.params.id - 1]);
+    })();
+  }, [match.params.id]);
+
   return (
     <DogDetailWrap>
-      <header className="dog--title">
-        <p>멍멍이</p>
-        <div className="dog--title--info">
-          여 | 7살 | 9kg
-        </div>
-        <div className="dog--title--team">
-          다온레스큐
-        </div>
-      </header>
-      <div className="line"></div>
-      <section className="dog--detail">
-        <Swiper />
-        <DogDetailInfo />
-      </section>
-      <article className="dog--description">
-        멍멍이는 인천 남동구에서 구조된 멍멍이에요. 멍멍이는 어쩌구 저쩌고 그런 강아진데요,<br />
-        좋은 기회로 해외에 입양을 가게 되었답니다. 멍멍이가 좋은 가족을 만나서 행복한 삶을 살 수 있도록 도와주세요. 도움의 손길 어<br />
-        쩌구 저쩌구 저희도 어쩌구 저쩌구 멍멍이는 인천 남동구에서 구조된 멍멍이에요. 멍멍이는 어쩌구 저쩌고 그런 강아진데요, 좋은<br />
-        기회로 해외에 입양을 가게 되었답니다.
-      </article>
+      {dogData &&
+        <>
+          <header className="dog--title">
+            <p>{dogData.name}</p>
+            <div className="dog--title--info">
+              {dogData.gender} | {dogData.age}살 | {dogData.weight}kg
+            </div>
+            <div className="dog--title--organization">
+              {dogData.organization}
+            </div>
+          </header>
+          <div className="line"></div>
+          <section className="dog--detail">
+            <Swiper images={dogData.images} />
+            <DogDetailInfo dogData={dogData} />
+          </section>
+          <article className="dog--description">
+            멍멍이는 인천 남동구에서 구조된 멍멍이에요. 멍멍이는 어쩌구 저쩌고 그런 강아진데요,<br />
+            좋은 기회로 해외에 입양을 가게 되었답니다. 멍멍이가 좋은 가족을 만나서 행복한 삶을 살 수 있도록 도와주세요. 도움의 손길 어<br />
+            쩌구 저쩌구 저희도 어쩌구 저쩌구 멍멍이는 인천 남동구에서 구조된 멍멍이에요. 멍멍이는 어쩌구 저쩌고 그런 강아진데요, 좋은<br />
+            기회로 해외에 입양을 가게 되었답니다.
+          </article>
+        </>
+      }
     </DogDetailWrap>
   );
 }
 
-export default DogDetail;
+export default withRouter(DogDetail);

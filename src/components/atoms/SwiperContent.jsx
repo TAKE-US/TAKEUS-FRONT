@@ -31,11 +31,12 @@ function SwiperContent({ index, images, setWidth, xPosition, handleClickPrev, ha
   const slideRef = useRef();
 
   useEffect(() => {
+    console.log('Swiper Content UseEffect: ', images);
     if (slideRef.current) {
       const width = slideRef.current.clientWidth;
       setWidth(width);
     }
-  }, [setWidth, xPosition]);
+  }, [setWidth, images]);
 
   return (
     <SwiperContentWrap>
@@ -44,7 +45,7 @@ function SwiperContent({ index, images, setWidth, xPosition, handleClickPrev, ha
         ref={slideRef}
       >
         {images.map((img, i) => (
-          <img key={i} src={img} alt="" />
+          <img key={i} src={img} alt="i" />
         ))}
       </Slide>
       <Arrow

@@ -72,14 +72,14 @@ const DetailInfoWrap = styled.div`
   }
 `;
 
-function DogDetailInfo() {
+function DogDetailInfo({ dogData }) {
   return (
     <DetailInfoWrap>
       <section className="departure">
         <p>출국 정보</p>
         <div className="departure--airport">
           <img src={LocationIcon} alt="card_image" />
-          <p>어쩌고 공항, 시카고, 미국, 아메리카</p>
+          <p>{dogData.destination}</p>
         </div>
         <div className="departure--calendar">
           <img src={CalendarIcon} alt="card_image" />

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import leftArrow from '../../assets/icon/arrow_circle_left.svg';
-import rightArrow from '../../assets/icon/arrow_circle_right.svg';
+import leftArrow from '../../assets/icon/Arrow_left.svg';
+import rightArrow from '../../assets/icon/Arrow_right.svg';
 
 const ArrowWrap = styled.img`
   position: absolute;
