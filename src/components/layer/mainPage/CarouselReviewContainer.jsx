@@ -1,17 +1,15 @@
 import React from "react";
 import styled from "styled-components";
-import leftarrow from "../../assets/img/btn_round_arrow_left_40.svg";
-import rightarrow from "../../assets/img/btn_round_arrow_right_40.svg";
-import CarouselReviewCard from "../atoms/CarouselReviewCard";
+import leftarrow from "../../../assets/img/btn_round_arrow_left_40.svg";
+import rightarrow from "../../../assets/img/btn_round_arrow_right_40.svg";
+import CarouselReviewCard from "../../atoms/CarouselReviewCard";
 
 const ContainerWrap = styled.article`
   display: flex;
   flex-direction: column;
   align-items: space-around;
   width: 108rem;
-  height: 38rem;
-  margin: 0 18rem;
-  margin-top: 5rem;
+  height: 48rem;
   .container-top {
     display: flex;
     justify-content: space-between;

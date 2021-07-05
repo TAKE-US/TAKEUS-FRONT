@@ -1,12 +1,34 @@
+/* eslint-disable arrow-parens */
 import React from "react";
 import styled from "styled-components";
 import sampleImg from "../../assets/img/img_card_sample.svg";
 import locationIcon from "../../assets/img/ic_location_blue_18.svg";
 
-const CardWrap = styled.article`
+const CardContainer = styled.section`
   display: flex;
+  overflow: hidden;
   justify-content: space-between;
-  width: 100%;
+`;
+const CardWrap = styled.article`
+  justify-content: space-between;
+  position: absolute;
+  overflow: hidden;
+  opacity: 0;
+  left: 0;
+  margin-right: 1.5rem;
+  transition: transform 0.7s, opacity 0.5s, z-index 0.5s;
+  transform: ${(props) => (props.prev ? "translateX(-100%)" : "")};
+  transform: ${(props) => (props.next ? "translateX(100%)" : "")};
+  z-index: ${(props) => (props.prev || props.next ? 800 : "")};
+
+  ${({ active }) =>
+    active &&
+    `
+    opacity: 1;
+    position: relative;
+    z-index: 900;
+  `}
+
   img {
     width: 25.5rem;
     height: 25.5rem;
@@ -54,25 +76,75 @@ const Card = styled.section`
   }
 `;
 
-const CarouselDogCard = () => {
+const CarouselDogCard = ({ id, slicedDogs, active, prev, next }) => {
+  let first = slicedDogs[0];
+  let second = slicedDogs[1];
+  let third = slicedDogs[2];
+  let fourth = slicedDogs[3];
+
   return (
-    <CardWrap>
-      <Card>
-        <img src={sampleImg} alt='sampleImg' />
-        <section className='cardInfo'>
-          <article className='cardInfo-main'>
-            <p className='cardInfo-main__name'>멍멍이</p>
-            <div className='cardInfo-main__location'>
-              <img src={locationIcon} alt='' />
-              <p>시카고</p>
-            </div>
-          </article>
-          <article className='cardInfo-sub'>
-            암컷ㅣ9KGㅣ중성화 유ㅣ접종 무
-          </article>
-        </section>
-      </Card>
-    </CardWrap>
+    <CardContainer>
+      <CardWrap key={id} active={active} prev={prev} next={next}>
+        <Card>
+          <img src={sampleImg} alt='sampleImg' />
+          <section className='cardInfo'>
+            <article className='cardInfo-main'>
+              <p className='cardInfo-main__name'>{first.name}</p>
+              <div className='cardInfo-main__location'>
+                <img src={locationIcon} alt='' />
+                <p>{first.location}</p>
+              </div>
+            </article>
+            <article className='cardInfo-sub'>{first.info}</article>
+          </section>
+        </Card>
+      </CardWrap>
+      <CardWrap key={id} active={active} prev={prev} next={next}>
+        <Card>
+          <img src={sampleImg} alt='sampleImg' />
+          <section className='cardInfo'>
+            <article className='cardInfo-main'>
+              <p className='cardInfo-main__name'>{second.name}</p>
+              <div className='cardInfo-main__location'>
+                <img src={locationIcon} alt='' />
+                <p>{second.location}</p>
+              </div>
+            </article>
+            <article className='cardInfo-sub'>{second.info}</article>
+          </section>
+        </Card>
+      </CardWrap>
+      <CardWrap key={id} active={active} prev={prev} next={next}>
+        <Card>
+          <img src={sampleImg} alt='sampleImg' />
+          <section className='cardInfo'>
+            <article className='cardInfo-main'>
+              <p className='cardInfo-main__name'>{third.name}</p>
+              <div className='cardInfo-main__location'>
+                <img src={locationIcon} alt='' />
+                <p>{third.location}</p>
+              </div>
+            </article>
+            <article className='cardInfo-sub'>{third.info}</article>
+          </section>
+        </Card>
+      </CardWrap>
+      <CardWrap key={id} active={active} prev={prev} next={next}>
+        <Card>
+          <img src={sampleImg} alt='sampleImg' />
+          <section className='cardInfo'>
+            <article className='cardInfo-main'>
+              <p className='cardInfo-main__name'>{fourth.name}</p>
+              <div className='cardInfo-main__location'>
+                <img src={locationIcon} alt='' />
+                <p>{fourth.location}</p>
+              </div>
+            </article>
+            <article className='cardInfo-sub'>{fourth.info}</article>
+          </section>
+        </Card>
+      </CardWrap>
+    </CardContainer>
   );
 };
 
