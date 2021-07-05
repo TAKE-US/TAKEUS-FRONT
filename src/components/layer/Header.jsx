@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { useLocation, useHistory } from "react-router";
 import styled from "styled-components";
 
@@ -8,14 +8,16 @@ import Logo_yellow from "../../assets/img/ic_logo_wordmark_small.svg";
 const Head = {
   Wrap: styled.nav`
     position: sticky;
-    top: 2.3rem;
+    top: 0;
+    z-index: 15;
 
     .inner {
       background-color: white;
-      margin-top: 6.1rem;
-      margin-bottom: 2.3rem;
+      margin-top: 3.8rem;
       margin-left: 18rem;
       margin-right: 18rem;
+      padding-top: 2.3rem;
+      padding-bottom: 2.3rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -39,12 +41,25 @@ const Head = {
   `,
 
   Content: styled.span`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     font: ${({ theme }) => theme.font.gnb};
     &:hover {
       cursor: pointer;
       color: ${({ theme }) => theme.color.primary};
     }
-    color: ${props => props.value === props.location && '#FDCB02'};
+    color: ${props => props.isSelect && '#FDCB02'};
+    ::after {
+      content: "";
+      display: ${props => props.isSelect ? "block" : "none"};
+      background-color: ${({ theme }) => (theme.color.primary)};
+      width: 0.4rem;
+      height: 0.4rem;
+      border-radius: 50%;
+      position: relative;
+      top: 0.5rem;
+    }
   `,
 
   Login: styled.span`
@@ -63,6 +78,17 @@ const Header = () => {
   const location = useLocation();
   const history = useHistory();
   const hoverImg = useRef();
+  const [isScrolling, setIsScrolling] = useState(false);
+
+  useEffect(() => {
+    window.addEventListener("scroll", e => {
+      setIsScrolling(true);
+      if (window.scrollY === 0) {
+        setIsScrolling(false);
+      }
+    });
+    console.log(isScrolling);
+  }, [isScrolling]);
 
   return (
     <>
@@ -72,7 +98,7 @@ const Header = () => {
             <img
               src={
                 location.pathname === "/"
-                  ? Logo_black
+                  ? isScrolling ? Logo_yellow : Logo_black
                   : Logo_yellow
               }
               alt=""
@@ -86,33 +112,28 @@ const Header = () => {
             />
             <div className="gnb">
               <Head.Content
-                value="/info"
-                location={location.pathname}
+                isSelect={location.pathname === "/info" ? true : false}
                 onClick={() => { history.push("/info"); }}
               >
                 이동봉사정보
               </Head.Content>
               <Head.Content
-                value="/dogSearch"
-                location={location.pathname}
+                isSelect={location.pathname === "/dogSearch" ? true : false}
                 onClick={() => { history.push("/dogSearch"); }}>
                 대상견 찾기
               </Head.Content>
               <Head.Content
-                value="/dogEnroll"
-                location={location.pathname}
+                isSelect={location.pathname === "/dogEnroll" ? true : false}
                 onClick={() => { history.push("/dogEnroll"); }}>
                 대상견 등록
               </Head.Content>
               <Head.Content
-                value="/review"
-                location={location.pathname}
+                isSelect={location.pathname === "/review" ? true : false}
                 onClick={() => { history.push("/review"); }}>
                 이동봉사 후기
               </Head.Content>
               <Head.Content
-                value="/about"
-                location={location.pathname}
+                isSelect={location.pathname === "/about" ? true : false}
                 onClick={() => { history.push("/about"); }}>
                 About us
               </Head.Content>
