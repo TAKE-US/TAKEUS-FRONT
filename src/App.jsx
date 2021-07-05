@@ -1,15 +1,16 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import GlobalStyle from "./styles/GlobalStyle";
-import { Header, Footer } from "./components";
+import { Header, Footer } from "./components/index";
 import {
   LoginPage,
   DogPage,
   InfoPage,
-  ContactPage,
+  AboutPage,
   MainPage,
   DogDetailPage,
-  DogEnrollPage
+  DogEnrollPage,
+  ReviewPage,
 } from "./pages";
 import styled from 'styled-components';
 
@@ -35,20 +36,23 @@ function App() {
             <Route path="/login" exact>
               <LoginPage />
             </Route>
-            <Route path="/dog" exact>
+            <Route path="/dogSearch" exact>
               <DogPage />
             </Route>
-            <Route path="/dog/enroll" exact>
+            <Route path="/dogEnroll" exact>
               <DogEnrollPage />
             </Route>
-            <Route path="/dog/:id" exact>
+            <Route path="/dogSearch/:id" exact>
               <DogDetailPage />
             </Route>
             <Route path="/info" exact>
               <InfoPage />
             </Route>
-            <Route path="/contact" exact>
-              <ContactPage />
+            <Route path="/about" exact>
+              <AboutPage />
+            </Route>
+            <Route path="/review" exact>
+              <ReviewPage />
             </Route>
           </Switch>
         </Styled.ContentWrapper>
