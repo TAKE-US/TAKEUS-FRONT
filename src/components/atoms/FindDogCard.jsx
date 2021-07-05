@@ -69,7 +69,7 @@ const CardWrap = styled.article`
 
 const FindDogCard = ({ id, dog, history }) => {
   const cardClickHandler = () => {
-    history.push(`/dog/${id}`);
+    history.push(`/dogSearch/${id}`);
   };
   return (
     <CardWrap onClick={cardClickHandler}>
