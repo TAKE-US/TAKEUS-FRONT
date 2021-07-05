@@ -1,10 +1,9 @@
 /* eslint-disable no-unused-vars */
-import React, { useEffect, useState, useRef } from "react";
+import React, { useRef } from "react";
 import styled from "styled-components";
 import CarouselDogCard from "../../atoms/CarouselDogCard";
-import CarouselButton from "../../atoms/CarouselButton";
-import leftarrow from "../../../assets/img/btn_round_arrow_left_40.svg";
 import rightarrow from "../../../assets/img/btn_round_arrow_right_40.svg";
+import leftarrow from "../../../assets/img/btn_round_arrow_left_40.svg";
 
 const ContainerWrap = styled.article`
   display: flex;
@@ -28,83 +27,62 @@ const ContainerWrap = styled.article`
       width: 10rem;
       display: flex;
       justify-content: space-between;
-      &__left {
+      &__left + &__right {
         all: unset;
         width: 4rem;
         height: 3.5rem;
-      }
-      &__right {
-        all: unset;
+        position: absolute;
+        top: 50%;
         width: 4rem;
         height: 3.5rem;
       }
     }
   }
-`;
 
-const SliderContainer = styled.article`
-  width: 100%;
-  display: flex;
-  margin: 0 auto;
-  padding: 0;
-  overflow: hidden;
+  /* slide-container */
+  .container-bottom {
+    width: 100%;
+    display: flex;
+    max-width: 120rem;
+    overflow-y: auto;
+    /* items-container */
+    &__cards {
+      display: flex;
+      overflow-y: hidden;
+    }
+    &__cards::-webkit-scrollbar {
+      display: none;
+    }
+  }
+  .container-bottom::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 const CarouselDogContainer = () => {
-  const totalItems = 8;
-  const [current, setCurrent] = useState(0);
-  const isMoving = useRef(false);
+  const listRef = useRef(null);
 
-  useEffect(() => {
-    isMoving.current = true;
-    setTimeout(() => {
-      isMoving.current = false;
-    }, 500);
-  }, [current]);
-
-  const moveNext = () => {
-    if (!isMoving.current) {
-      if (current === totalItems - 1) {
-        setCurrent(0);
-      } else {
-        setCurrent(current + 1);
-      }
+  const scrollLeft = () => {
+    if (listRef.current) {
+      listRef.current.scrollBy({
+        top: 0,
+        left: 268,
+        behavior: "smooth",
+      });
     }
   };
 
-  const movePrev = () => {
-    if (!isMoving.current) {
-      if (current === 0) {
-        setCurrent(totalItems - 1);
-      } else {
-        setCurrent(current - 1);
-      }
+  const scrollRight = () => {
+    if (listRef.current) {
+      listRef.current.scrollBy({
+        top: 0,
+        left: -268,
+        behavior: "smooth",
+      });
     }
   };
 
-  const { id, ...rest } = dogs;
-
-  const CardList = dogs.map((dog, index, dogs) => {
-    let slicedDogs;
-    if (index <= dogs.length - 4) {
-      slicedDogs = dogs.slice(index, index + 4);
-    } else {
-      slicedDogs = dogs
-        .slice(index, index + 4)
-        .concat(dogs.slice(0, index - 5));
-    }
-    const prev = current === 0 ? totalItems - 1 : current - 1;
-    const next = current === totalItems - 1 ? 0 : current + 1;
-    return (
-      <CarouselDogCard
-        key={dog.id}
-        slicedDogs={slicedDogs}
-        active={index === current}
-        prev={index === prev}
-        next={index === next}
-      />
-    );
-  });
+  const data = dogs;
 
   return (
     <ContainerWrap>
@@ -114,11 +92,22 @@ const CarouselDogContainer = () => {
           마리의 대상견이 이동 봉사를 기다리고 있습니다.
         </section>
         <div className='container-top__btns'>
-          <CarouselButton prev handleSlide={movePrev} />
-          <CarouselButton next handleSlide={moveNext} />
+          <div className='container-top__btns__left' onClick={scrollLeft}>
+            <img src={leftarrow} alt='leftarrow' />
+          </div>
+          <div className='container-top__btns__right' onClick={scrollRight}>
+            <img src={rightarrow} alt='rightarrow' />
+          </div>
         </div>
       </article>
-      <SliderContainer>{CardList}</SliderContainer>
+      <article className='container-bottom'>
+        <div className='container-bottom__cards' ref={listRef}>
+          {data.length &&
+            data.map((item, i) => (
+              <CarouselDogCard key={item.id} item={item} />
+            ))}
+        </div>
+      </article>
     </ContainerWrap>
   );
 };
