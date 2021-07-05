@@ -42,7 +42,7 @@ const DetailInfoWrap = styled.div`
     &-main {
       display: grid;
       grid-template-columns: repeat(2,1fr);
-      column-gap: 16.16rem;
+      column-gap: 8.4rem;
     }
     &--kakaotalk, &--call, &--instagram, &--twitter, &--facebook {
       display: flex;
@@ -60,7 +60,6 @@ const DetailInfoWrap = styled.div`
       }
     }
   }
-  }
   .dog--description {
     width: 93.6rem;
     height: 11.2rem;
@@ -76,7 +75,7 @@ const DetailInfoWrap = styled.div`
 function DogDetailInfo() {
   return (
     <DetailInfoWrap>
-      <div className="departure">
+      <section className="departure">
         <p>출국 정보</p>
         <div className="departure--airport">
           <img src={LocationIcon} alt="card_image" />
@@ -86,33 +85,33 @@ function DogDetailInfo() {
           <img src={CalendarIcon} alt="card_image" />
           <p>2021년 9월 21일 ~ 10월 29일</p>
         </div>
-      </div>
+      </section>
 
-      <div className="contact">
+      <section className="contact">
         <p>연락처</p>
         <div className="contact-main">
           <div className="contact--kakaotalk">
             <img src={KakaotalkIcon} alt="card_image" />
             <p>lovedog</p>
           </div>
+          <div className="contact--twitter">
+            <img src={TwitterIcon} alt="card_image" />
+            <p>lovedog</p>
+          </div>
           <div className="contact--instagram">
             <img src={InstagramIcon} alt="card_image" />
+            <p>takers_lovedog</p>
+          </div>
+          <div className="contact--facebook">
+            <img src={FacebookIcon} alt="card_image" />
             <p>takers_lovedog</p>
           </div>
           <div className="contact--call">
             <img src={CallIcon} alt="card_image" />
             <p>010 9292 9292</p>
           </div>
-          <div className="contact--twitter">
-            <img src={TwitterIcon} alt="card_image" />
-            <p>lovedog</p>
-          </div>
-          <div className="contact--facebook">
-            <img src={FacebookIcon} alt="card_image" />
-            <p>takers_lovedog</p>
-          </div>
         </div>
-      </div>
+      </section>
     </DetailInfoWrap>
   );
 }

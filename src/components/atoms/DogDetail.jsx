@@ -71,7 +71,7 @@ const DogDetailWrap = styled.div`
 function DogDetail() {
   return (
     <DogDetailWrap>
-      <div className="dog--title">
+      <header className="dog--title">
         <p>멍멍이</p>
         <div className="dog--title--info">
           여 | 7살 | 9kg
@@ -79,18 +79,18 @@ function DogDetail() {
         <div className="dog--title--team">
           다온레스큐
         </div>
-      </div>
+      </header>
       <div className="line"></div>
-      <div className="dog--detail">
+      <section className="dog--detail">
         <Swiper />
         <DogDetailInfo />
-      </div>
-      <div className="dog--description">
+      </section>
+      <article className="dog--description">
         멍멍이는 인천 남동구에서 구조된 멍멍이에요. 멍멍이는 어쩌구 저쩌고 그런 강아진데요,<br />
         좋은 기회로 해외에 입양을 가게 되었답니다. 멍멍이가 좋은 가족을 만나서 행복한 삶을 살 수 있도록 도와주세요. 도움의 손길 어<br />
         쩌구 저쩌구 저희도 어쩌구 저쩌구 멍멍이는 인천 남동구에서 구조된 멍멍이에요. 멍멍이는 어쩌구 저쩌고 그런 강아진데요, 좋은<br />
         기회로 해외에 입양을 가게 되었답니다.
-      </div>
+      </article>
     </DogDetailWrap>
   );
 }
