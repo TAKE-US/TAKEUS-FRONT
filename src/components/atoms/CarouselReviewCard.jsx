@@ -36,8 +36,6 @@ const Card = styled.article`
       }
     }
   }
-
-  
 `;
 
 const CarouselReviewCard = () => {
