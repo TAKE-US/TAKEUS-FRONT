@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import backgroundImg from 'assets/img/img_before_volunteer.png';
+import backgroundImg from '../../../assets/img/img_before_volunteer.png';
 
 const Styled = {
   Wrapper: styled.section`

@@ -9,6 +9,7 @@ const SwiperWrap = styled.div`
   width: 36.4rem;
   height: 34.2rem;
   border-radius: 1rem;
+  z-index: -1;
 `;
 
 const Swiper = () => {
@@ -25,15 +26,12 @@ const Swiper = () => {
   ];
 
   const handleClickPrev = () => {
-    console.log('index: ', index);
     if (index === 0) return;
     setIndex(index - 1);
     setXPosition(xPosition + width);
   };
 
   const handleClickNext = () => {
-    console.log('index: ', index);
-
     if (index === images.length - 1) {
       setIndex(0);
       setXPosition(0);

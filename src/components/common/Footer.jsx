@@ -1,8 +1,8 @@
 import React from 'react';
 import { useLocation } from "react-router";
 import styled from "styled-components";
-import Logo from 'assets/img/ic_logo_wordmark_smallest.svg';
-import CopyRight from 'assets/img/ic_logo_copyright.svg';
+import Logo from '../../assets/img/ic_logo_wordmark_smallest.svg';
+import CopyRight from '../../assets/img/ic_logo_copyright.svg';
 
 const Styled = {
   Wrapper: styled.footer`

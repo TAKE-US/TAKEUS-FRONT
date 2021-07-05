@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import ClockImg from 'assets/img/img_clock.svg';
-import HeartImg from 'assets/img/img_heart.svg';
-import SearchImg from 'assets/img/img_search.svg';
+import ClockImg from '../../../assets/img/img_clock.svg';
+import HeartImg from '../../../assets/img/img_heart.svg';
+import SearchImg from '../../../assets/img/img_search.svg';
 
 const Styled = {
   Wrapper: styled.div`
