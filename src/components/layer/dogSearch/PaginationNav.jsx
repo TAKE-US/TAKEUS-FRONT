@@ -25,21 +25,16 @@ const PaginationNav = () => {
       <PageMoveButton bg={leftBtnIcon} onClick={prevPageHandler} />
       <article>
         {pageNums.map((num, key) => (
-          <button
+          <PageBtn
             key={key}
-            style={
+            isSelect={
               //선택된 page에서는 색 변함
-              num === selectPage
-                ? {
-                  color: "#F29C42",
-                  borderBottom: "1px solid #F29C42"
-                }
-                : { color: "#3D3D3D" }
+              num === selectPage ? true : false
             }
             onClick={() => setSelectPage(num)}
           >
             {num}
-          </button>
+          </PageBtn>
         ))}
       </article>
       <PageMoveButton bg={rightBtnIcon} onClick={nextPageHandler} />
@@ -62,12 +57,21 @@ const NavWrap = styled.section`
     grid-template-columns: repeat(auto-fit, 2.6rem);
     max-width: 51.6rem;
     grid-gap: 1.6rem;
-    button {
-      width: 2.6rem;
-      height: 2.9rem;
-
-      font: ${({ theme }) => theme.font.button_small};
-    }
+  }
+`;
+const PageBtn = styled.button`
+  display: block;
+  width: 2.6rem;
+  height: 2.9rem;
+  color: ${props => (props.isSelect ? "#F29C42" : "#3D3D3D")};
+  font: ${({ theme }) => theme.font.button_small};
+  ::after {
+    content: "";
+    display: ${props => (props.isSelect ? "block" : "none")};
+    position: relative;
+    top: 6px;
+    padding-left: 10px;
+    border-bottom: 1px solid #f29c42;
   }
 `;
 const PageMoveButton = styled.button`
