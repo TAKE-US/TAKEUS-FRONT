@@ -26,7 +26,7 @@ const CardWrap = styled.article`
     `
     opacity: 1;
     position: relative;
-    z-index: 900;
+    z-index: 10;
   `}
 
   img {
