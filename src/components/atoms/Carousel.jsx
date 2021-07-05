@@ -3,23 +3,21 @@ import CarouselDogCard from "../atoms/CarouselDogCard";
 import styled from "styled-components";
 
 const CarouselContainer = styled.article`
-  section {
+  .cards-container {
     display: flex;
+  }
+  .cards-container::-webkit-scrollbar {
+    display: none;
   }
 `;
 
 const Carousel = ({ data }) => {
   return (
     <CarouselContainer>
-      {data.length && (
-        <section>
-          {data.map((item, i) => (
-            <div key={item.id}>
-              <CarouselDogCard item={item} />
-            </div>
-          ))}
-        </section>
-      )}
+      <div className='cards-container'>
+        {data.length &&
+          data.map((item, i) => <CarouselDogCard key={item.id} item={item} />)}
+      </div>
     </CarouselContainer>
   );
 };

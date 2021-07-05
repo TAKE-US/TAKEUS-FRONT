@@ -1,8 +1,9 @@
 /* eslint-disable no-unused-vars */
-import React, { useEffect, useState, useRef } from "react";
+import React, { useRef } from "react";
 import styled from "styled-components";
-import CarouselButton from "../../atoms/CarouselButton";
 import Carousel from "../../atoms/Carousel";
+import rightarrow from "../../../assets/img/btn_round_arrow_right_40.svg";
+import leftarrow from "../../../assets/img/btn_round_arrow_left_40.svg";
 
 const ContainerWrap = styled.article`
   display: flex;
@@ -26,26 +27,51 @@ const ContainerWrap = styled.article`
       width: 10rem;
       display: flex;
       justify-content: space-between;
-      &__left {
+      &__left + &__right {
         all: unset;
         width: 4rem;
         height: 3.5rem;
-      }
-      &__right {
-        all: unset;
+        position: absolute;
+        top: 50%;
         width: 4rem;
         height: 3.5rem;
       }
     }
   }
-`;
 
-const SliderContainer = styled.article`
-  width: 100%;
-  display: flex;
+  .container-bottom {
+    width: 100%;
+    display: flex;
+    max-width: 120rem;
+    overflow-y: auto;
+  }
+  .container-bottom::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 const CarouselDogContainer = () => {
+  const listRef = useRef(null);
+
+  const scrollLeft = () => {
+    if (listRef.current) {
+      listRef.current.scrollBy({
+        top: 0,
+        left: 200,
+        behavior: "smooth",
+      });
+    }
+  };
+
+  const scrollRight = () => {
+    if (listRef.current) {
+      listRef.current.scrollBy({
+        top: 0,
+        left: -200,
+        behavior: "smooth",
+      });
+    }
+  };
   const data = dogs;
   return (
     <ContainerWrap>
@@ -55,12 +81,17 @@ const CarouselDogContainer = () => {
           마리의 대상견이 이동 봉사를 기다리고 있습니다.
         </section>
         <div className='container-top__btns'>
-          <CarouselButton />
+          <div className='container-top__btns__left'>
+            <img src={leftarrow} alt='leftarrow' />
+          </div>
+          <div className='container-top__btns__right'>
+            <img src={rightarrow} alt='rightarrow' />
+          </div>
         </div>
       </article>
-      <SliderContainer>
+      <article className='container-bottom'>
         <Carousel data={data} />
-      </SliderContainer>
+      </article>
     </ContainerWrap>
   );
 };
