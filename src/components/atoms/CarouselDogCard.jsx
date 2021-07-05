@@ -58,7 +58,7 @@ const CarouselDogCard = ({ item }) => {
       <img src={sampleImg} alt='sampleImg' />
       <section className='cardInfo'>
         <article className='cardInfo-main'>
-          <p className='cardInfo-main__name'></p>
+          <p className='cardInfo-main__name'>{item.name}</p>
           <div className='cardInfo-main__location'>
             <img src={locationIcon} alt='' />
             <p>{item.location}</p>

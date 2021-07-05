@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useRef } from "react";
 import styled from "styled-components";
-import Carousel from "../../atoms/Carousel";
+import CarouselDogCard from "../../atoms/CarouselDogCard";
 import rightarrow from "../../../assets/img/btn_round_arrow_right_40.svg";
 import leftarrow from "../../../assets/img/btn_round_arrow_left_40.svg";
 
@@ -39,11 +39,20 @@ const ContainerWrap = styled.article`
     }
   }
 
+  /* slide-container */
   .container-bottom {
     width: 100%;
     display: flex;
     max-width: 120rem;
     overflow-y: auto;
+    /* items-container */
+    &__cards {
+      display: flex;
+      overflow-y: hidden;
+    }
+    &__cards::-webkit-scrollbar {
+      display: none;
+    }
   }
   .container-bottom::-webkit-scrollbar {
     display: none;
@@ -57,7 +66,7 @@ const CarouselDogContainer = () => {
     if (listRef.current) {
       listRef.current.scrollBy({
         top: 0,
-        left: 200,
+        left: 268,
         behavior: "smooth",
       });
     }
@@ -67,12 +76,14 @@ const CarouselDogContainer = () => {
     if (listRef.current) {
       listRef.current.scrollBy({
         top: 0,
-        left: -200,
+        left: -268,
         behavior: "smooth",
       });
     }
   };
+
   const data = dogs;
+
   return (
     <ContainerWrap>
       <article className='container-top'>
@@ -81,16 +92,21 @@ const CarouselDogContainer = () => {
           마리의 대상견이 이동 봉사를 기다리고 있습니다.
         </section>
         <div className='container-top__btns'>
-          <div className='container-top__btns__left'>
+          <div className='container-top__btns__left' onClick={scrollLeft}>
             <img src={leftarrow} alt='leftarrow' />
           </div>
-          <div className='container-top__btns__right'>
+          <div className='container-top__btns__right' onClick={scrollRight}>
             <img src={rightarrow} alt='rightarrow' />
           </div>
         </div>
       </article>
       <article className='container-bottom'>
-        <Carousel data={data} />
+        <div className='container-bottom__cards' ref={listRef}>
+          {data.length &&
+            data.map((item, i) => (
+              <CarouselDogCard key={item.id} item={item} />
+            ))}
+        </div>
       </article>
     </ContainerWrap>
   );
