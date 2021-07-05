@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import EmptyDot from '../../assets/img/img_emptyDot.svg';
-import FullDot from '../../assets/img/img_fullDot.svg';
+import EmptyDot from '../../assets/icon/emptyDot.svg';
+import FullDot from '../../assets/icon/fullDot.svg';
 
 const DotWrap = styled.div`
   position: absolute;
@@ -38,7 +38,6 @@ function PaginationDot({ index, imagesLength }) {
         )}
       </DotRow>
     </DotWrap>
-
   );
 }
 
