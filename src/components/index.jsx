@@ -1,8 +1,9 @@
 // atoms
 export { default as Swiper } from "./atoms/Swiper";
 export { default as DogDetailInfo } from "./atoms/DogDetailInfo";
-export { default as DogDetail } from "./atoms/DogDetail";
+export { default as DogDetail } from "./layer/dogSearch/DogDetailContainer";
 export { default as FindDogCard } from "./atoms/FindDogCard";
+export { default as GetLinkButton } from "./atoms/GetLinkButton";
 export { default as Searchbar } from "./atoms/Searchbar";
 
 // layer

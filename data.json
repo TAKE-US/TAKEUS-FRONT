@@ -3,7 +3,7 @@
     {
       "id": 1,
       "name": "세바스찬",
-      "gender": "남",
+      "gender": "수컷",
       "organization": "15글자가넘어가면안된다고했다",
       "age": 3,
       "weight": 10.2,
@@ -14,7 +14,7 @@
       "destination": "샌프란시스코",
       "registrationDate": "2021-07-02",
       "deadline": "2021-08-01",
-      "detail": "이러쿵저러쿵입니다.",
+      "description": "멍멍이는 인천 남동구에서 구조된 멍멍이에요.\n멍멍이는 어쩌구 저쩌고 그런 강아진데요, 좋은 기회로 해외에 입양을 가게 되었답니다.\n.",
       "user": "07xb259d1",
       "status": false,
       "images": [
@@ -33,7 +33,7 @@
     {
       "id": 2,
       "name": "엘리자베스2세",
-      "gender": "남",
+      "gender": "암컷",
       "organization": "웰컴독코리아",
       "age": 3,
       "weight": 10.2,
@@ -44,7 +44,7 @@
       "destination": "케네디",
       "registrationDate": "2021-07-02",
       "deadline": "2021-08-01",
-      "detail": "이러쿵저러쿵입니다.",
+      "description": "멍멍이는 인천 남동구에서 구조된 멍멍이에요.\n멍멍이는 어쩌구 저쩌고 그런 강아진데요, 좋은 기회로 해외에 입양을 가게 되었답니다. 이러쿵저러쿵 도와주세요.",
       "user": "07xb259d1",
       "status": false,
       "images": [

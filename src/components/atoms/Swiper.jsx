@@ -6,8 +6,8 @@ import SwiperContent from './SwiperContent';
 const SwiperWrap = styled.div`
   display: flex;
   flex-direction: row;
-  width: 36.4rem;
-  height: 34.2rem;
+  width: 40.3rem;
+  height: 40.3rem;
   border-radius: 1rem;
 `;
 

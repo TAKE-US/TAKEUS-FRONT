@@ -5,7 +5,7 @@ import PaginationDot from './PaginationDot';
 
 const SwiperContentWrap = styled.div`
   position: relative;
-  width: 364px;
+  width: 40.3rem;
   height: 100%;
   overflow: hidden;
   border-radius: 10px;
