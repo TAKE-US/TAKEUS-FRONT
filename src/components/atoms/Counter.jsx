@@ -36,7 +36,9 @@ const Counter = () => {
     setNum(prev => prev + 1);
   };
   const minusHandler = () => {
-    setNum(prev => prev - 1);
+    if (num > 0) {
+      setNum(prev => prev - 1);
+    }
   };
   return (
     <CounterWrap>
