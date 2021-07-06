@@ -12,28 +12,28 @@ const Styled = {
   Wrapper: styled.div`
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     width: 62.2rem;
-    height: 46.7rem;
+    height: 46rem;
     margin: 0rem 0rem 3.2rem 5.5rem;
   `,
 
   Departure: styled.section`
     display: flex;
     flex-direction: column;
+    margin-bottom: 3.2rem;
 
     p {
+      height: 2.3rem;
       font: ${({ theme }) => theme.font.body1};
       color: ${({ theme }) => theme.color.black};
-      margin-bottom: 1.2rem;
     }
     `,
 
   DepartureRow: styled.div`
     display: flex;
     flex-direction: row;
-    margin-top: 0.7rem;
-    height: 2.9rem;
+    height: 2.6rem;
+    padding: 1rem 0rem 1.2rem 0rem;
     color: ${({ theme }) => theme.color.black};
 
     img {
@@ -49,10 +49,11 @@ const Styled = {
   `,
 
   DogInfo: styled.section`
+    margin-bottom: 3.2rem;
     p {
+      height: 2.3rem;
       font: ${({ theme }) => theme.font.body1};
       color: ${({ theme }) => theme.color.black};
-      margin-bottom: 1.3rem;
     }
 
     .info--main {
@@ -64,12 +65,12 @@ const Styled = {
   DogInfoRow: styled.div`
     display: flex;
     flex-direction: row;
-    margin-top: 0.7rem;
     width: 31.1rem;
-    height: 2.9rem;
+    height: 2.6rem;
+    padding: 1rem 0rem 1.2rem 0rem;
     font: ${({ theme }) => theme.font.description};
     color: ${({ theme }) => theme.color.black};
-    
+
     img {
       width: 2.4rem;
       height: 2.4rem;
@@ -84,10 +85,11 @@ const Styled = {
   `,
 
   Contact: styled.section`
+    margin-bottom: 3.2rem;
     p {
+      height: 2.3rem;
       font: ${({ theme }) => theme.font.body1};
       color: ${({ theme }) => theme.color.black};
-      margin-bottom: 1.3rem;
     }
 
     .contact--main {
@@ -100,9 +102,9 @@ const Styled = {
   ContactRow: styled.div`
     display: flex;
     flex-direction: row;
-    margin-top: 0.7rem;
     width: 31.1rem;
-    height: 2.9rem;
+    height: 2.6rem;
+    padding: 1rem 0rem 1.2rem 0rem;
     color: ${({ theme }) => theme.color.black};
 
     img {

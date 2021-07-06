@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { withRouter } from 'react-router-dom';
 import styled from "styled-components";
 import axios from 'axios';
+import DeleteIcon from '../../../assets/icon/Delete.svg';
+import EditIcon from '../../../assets/icon/Edit.svg';
 
 import {
   Swiper,
@@ -12,7 +14,7 @@ import {
 const DogDetailWrap = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 4.3rem auto;
+  margin: 4.6rem auto;
   width: 108rem;
 
   .goBack {
@@ -31,6 +33,12 @@ const DogDetailWrap = styled.div`
     border: 0.1rem solid ${({ theme }) => theme.color.lightgray2};
   }
 
+  header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  
   .dog {
     &--title{
       display: flex;
@@ -48,6 +56,35 @@ const DogDetailWrap = styled.div`
         height: 2.6rem;
         font: ${({ theme }) => theme.font.subheading};
         color: ${({ theme }) => theme.color.darkgray1};
+      }
+    }
+
+    &--post {
+      margin-top: 2.4rem;
+      display: flex;
+      flex-direction: row;
+
+      .delete, .edit {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+        width: 8.6rem;
+        height: 4rem;
+        border: 0.1rem solid ${({ theme }) => theme.color.lightgray2};
+        box-sizing: border-box;
+        border-radius: 0.8rem;
+        font: ${({ theme }) => theme.font.button_middle};
+
+        div {
+          width: 3rem;
+          height: 1.5rem;
+        }
+      }
+
+      .edit {
+        margin-right: 0.8rem;
       }
     }
 
@@ -74,7 +111,7 @@ const DogDetailWrap = styled.div`
       font: ${({ theme }) => theme.font.body1};
       color: ${({ theme }) => theme.color.darkgray1};
       border-radius: 1.7rem;
-      line-height: 154%;
+      line-height: 1rem;
     }
   }
 `;
@@ -106,9 +143,21 @@ function DogDetail({ match, history }) {
             다시 목록으로
           </button>
           <div className="line"></div>
-          <header className="dog--title">
-            <h1>{dogData.name}</h1>
-            <h2>단체 | {dogData.organization}</h2>
+          <header>
+            <div className="dog--title">
+              <h1>{dogData.name}</h1>
+              <h2>단체 | {dogData.organization}</h2>
+            </div>
+            <div className="dog--post">
+              <button className="edit">
+                <img src={EditIcon} alt="edit"></img>
+                <div>수정</div>
+              </button>
+              <button className="delete">
+                <img src={DeleteIcon} alt="delete"></img>
+                <div>삭제</div>
+              </button>
+            </div>
           </header>
           <section className="dog--detail">
             <div className="swiperAndLink">
