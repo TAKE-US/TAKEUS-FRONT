@@ -16,10 +16,11 @@ export { default as Header } from "./layer/Header";
 export { default as Footer } from "./layer/Footer";
 
 // layer/mainPage
-export { default as AboutTakeUs } from "./layer/mainPage/AboutTakeUs";
-export { default as BeforeVolunteer } from "./layer/mainPage/BeforeVolunteer";
-export { default as CarouselDogContainer } from "./layer/mainPage/CarouselDogContainer";
-export { default as CarouselReviewContainer } from "./layer/mainPage/CarouselReviewContainer";
+export { default as AboutTakeUs } from './layer/mainPage/AboutTakeUs';
+export { default as BeforeVolunteer } from './layer/mainPage/BeforeVolunteer';
+export { default as CarouselDogContainer } from './layer/mainPage/CarouselDogContainer';
+export { default as CarouselReviewContainer } from './layer/mainPage/CarouselReviewContainer';
+export { default as MainNavigation } from './layer/mainPage/MainNavigation';
 
 // layer/about
 
