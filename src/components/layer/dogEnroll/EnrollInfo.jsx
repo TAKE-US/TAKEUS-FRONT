@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import DogEnrollInput from "components/atoms/DogEnrollInput";
+import { DogEnrollInput, RadioButton } from "components";
 
 const EnrollInfoWrap = styled.section`
   display: flex;
@@ -27,6 +27,13 @@ const EnrollInfo = () => {
       </div>
       <div>
         <label>대상견 성별</label>
+        <RadioButton
+          items={[
+            { value: "여", select: true },
+            { value: "남", select: false },
+            { value: "선택안함", select: false },
+          ]}
+        />
       </div>
       <div>
         <label>대상견 나이</label>
@@ -37,6 +44,12 @@ const EnrollInfo = () => {
       </div>
       <div>
         <label>중성화 여부</label>
+        <RadioButton
+          items={[
+            { value: "완료", select: true },
+            { value: "미완료", select: false },
+          ]}
+        />
       </div>
       <div>
         <label>건강상태</label>
@@ -44,6 +57,12 @@ const EnrollInfo = () => {
       </div>
       <div>
         <label>소속여부</label>
+        <RadioButton
+          items={[
+            { value: "개인구조자", select: true },
+            { value: "단체", select: false },
+          ]}
+        />
         <DogEnrollInput placeholder="단체명을 입력해주세요." maxLength="15" />
       </div>
     </EnrollInfoWrap>

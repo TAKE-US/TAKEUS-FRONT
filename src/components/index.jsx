@@ -6,6 +6,7 @@ export { default as FindDogCard } from "./atoms/FindDogCard";
 export { default as Searchbar } from "./atoms/Searchbar";
 export { default as DogFilter } from "./atoms/DogFilter";
 export { default as DogEnrollInput } from "./atoms/DogEnrollInput";
+export { default as RadioButton } from "./atoms/RadioButton";
 
 // layer
 export { default as Header } from "./layer/Header";
