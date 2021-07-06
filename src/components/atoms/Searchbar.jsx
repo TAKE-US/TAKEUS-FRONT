@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 
 import DropdownCountry from './DropdownCountry';
@@ -15,9 +15,10 @@ const Search = {
   `,
 
   Container: styled.div`
+    background-color: ${({ theme }) => theme.color.white};
     width: 77.4rem;
     border-radius: 1rem;
-    box-shadow: 0rem 0rem 2rem 0.1rem rgba(0,0,0,0.5);
+    box-shadow: 0rem 0rem 2rem 0.1rem rgba(0,0,0,0.05);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -43,14 +44,16 @@ const Search = {
 
 const Searchbar = () => {
   const buttonRef = useRef();
+  const [currCountry, setCurrCountry] = useState('어디로 가시나요?');
+  const [currAirport, setCurrAirport] = useState('도착 공항은 어디인가요?');
 
 
   return (
     <Search.TotalContainer>
       <Search.Container>
         <Search.Dropdown>
-          <DropdownCountry />
-          <DropdownAirport />
+          <DropdownCountry currCountry={currCountry} setCurrCountry={setCurrCountry} />
+          <DropdownAirport currCountry={currCountry} currAirport={currAirport} setCurrAirport={setCurrAirport} />
         </Search.Dropdown>
         <Search.Button>
           <img

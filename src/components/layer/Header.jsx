@@ -12,7 +12,6 @@ const Head = {
     z-index: 15;
 
     .inner {
-      background-color: white;
       margin-top: 3.8rem;
       margin-left: 18rem;
       margin-right: 18rem;
@@ -80,21 +79,22 @@ const Header = () => {
   const hoverImg = useRef();
   const [isScrolling, setIsScrolling] = useState(false);
 
+  const scrollHandler = e => {
+    setIsScrolling(true);
+    if (window.scrollY === 0) {
+      setIsScrolling(false);
+    }
+  };
+
   useEffect(() => {
-    window.addEventListener("scroll", e => {
-      setIsScrolling(true);
-      if (window.scrollY === 0) {
-        setIsScrolling(false);
-      }
-    });
-    console.log(isScrolling);
-  }, [isScrolling]);
+    window.addEventListener("scroll", scrollHandler);
+  }, []);
 
   return (
     <>
       {location.pathname !== "/login" && (
         <Head.Wrap>
-          <div className="inner">
+          <div className="inner" isScrolling={isScrolling}>
             <img
               src={
                 location.pathname === "/"

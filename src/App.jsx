@@ -19,6 +19,7 @@ const Styled = {
     max-width: 1078px;
     margin: 0 auto;
     padding: 0 180px;
+    margin-top: -14rem;
   `,
 };
 

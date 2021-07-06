@@ -1,6 +1,12 @@
 import React from "react";
 import styled from 'styled-components';
-import { Searchbar, AboutTakeUs, BeforeVolunteer, CarouselDogContainer, CarouselReviewContainer } from '../components';
+import {
+  AboutTakeUs,
+  BeforeVolunteer,
+  CarouselDogContainer,
+  CarouselReviewContainer,
+  MainNavigation,
+} from '../components';
 
 const Styled = {
   Wrapper: styled.div`
@@ -13,7 +19,7 @@ const Styled = {
 const MainPage = () => {
   return (
     <Styled.Wrapper>
-      <Searchbar />
+      <MainNavigation />
       <CarouselDogContainer />
       <CarouselReviewContainer />
       <BeforeVolunteer />
