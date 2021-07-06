@@ -12,12 +12,22 @@ import {
 const DogDetailWrap = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 0 auto;
-  width: 107.7rem;
+  margin: 4.3rem auto;
+  width: 108rem;
+
+  .goBack {
+    width: 13rem;
+    height: 2.4rem;
+    margin-bottom: 3.2rem;
+    font: ${({ theme }) => theme.font.body2};
+    color: ${({ theme }) => theme.color.gray3};
+    text-align: left;
+    text-decoration: underline;
+    text-underline-position: under;
+  }
 
   .line {
     width: 100%;
-    height: 0rem;
     border: 0.1rem solid ${({ theme }) => theme.color.lightgray2};
   }
 
@@ -25,7 +35,7 @@ const DogDetailWrap = styled.div`
     &--title{
       display: flex;
       flex-direction: column;
-      margin: 2.4rem 0rem;
+      margin: 2.7rem 0rem;
       
       h1 {
         font: ${({ theme }) => theme.font.display2};
@@ -33,7 +43,7 @@ const DogDetailWrap = styled.div`
       }
 
       h2 {
-        margin-top: 1.5rem;
+        margin-top: 1.8rem;
         width: 30rem;
         height: 2.6rem;
         font: ${({ theme }) => theme.font.subheading};
@@ -74,7 +84,7 @@ const getDogData = async () => {
   return data.data;
 };
 
-function DogDetail({ match }) {
+function DogDetail({ match, history }) {
   const [dogData, setDogData] = useState(null);
 
   useEffect(() => {
@@ -88,6 +98,13 @@ function DogDetail({ match }) {
     <DogDetailWrap>
       {dogData &&
         <>
+          <button
+            className="goBack"
+            type="button"
+            onClick={history.goBack}
+          >
+            다시 목록으로
+          </button>
           <div className="line"></div>
           <header className="dog--title">
             <h1>{dogData.name}</h1>
