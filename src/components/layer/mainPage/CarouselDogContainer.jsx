@@ -61,12 +61,12 @@ const ContainerWrap = styled.article`
 
 const CarouselDogContainer = () => {
   const listRef = useRef(null);
-
   const scrollLeft = () => {
     if (listRef.current) {
+      console.log(listRef.current);
       listRef.current.scrollBy({
         top: 0,
-        left: -268,
+        left: -270,
         behavior: "smooth",
       });
     }
@@ -76,14 +76,14 @@ const CarouselDogContainer = () => {
     if (listRef.current) {
       listRef.current.scrollBy({
         top: 0,
-        left: 268,
+        left: 270,
         behavior: "smooth",
       });
     }
   };
 
-  const data = dogs;
 
+  const data = dogs;
   return (
     <ContainerWrap>
       <article className='container-top'>
