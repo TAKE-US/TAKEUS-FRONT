@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
-import AddDogCard from "components/atoms/AddDogCard";
+import AddDogCardContainer from 'components/atoms/AddDogCardContainer';
 
 const Styled = {
   Wrapper: styled.section`
@@ -24,7 +24,7 @@ const AddDogLayer = () => {
   return (
     <Styled.Wrapper>
       <section className="title">대상견 사진을 올려주세요.(최대 5개)</section>
-      <AddDogCard />
+      <AddDogCardContainer />
     </Styled.Wrapper>
   );
 };
