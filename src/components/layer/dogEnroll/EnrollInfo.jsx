@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { DogEnrollInput, RadioButton } from "components";
+import { DogEnrollInput, RadioButton, Counter } from "components";
 
 const EnrollInfoWrap = styled.section`
   display: flex;
@@ -41,6 +41,7 @@ const EnrollInfo = () => {
       </div>
       <div>
         <label>대상견 무게</label>
+        <Counter />
       </div>
       <div>
         <label>중성화 여부</label>
