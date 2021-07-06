@@ -5,6 +5,7 @@ export { default as DogDetail } from "./atoms/DogDetail";
 export { default as FindDogCard } from "./atoms/FindDogCard";
 export { default as Searchbar } from "./atoms/Searchbar";
 export { default as DogFilter } from "./atoms/DogFilter";
+export { default as DogEnrollInput } from "./atoms/DogEnrollInput";
 
 // layer
 export { default as Header } from "./layer/Header";
@@ -19,6 +20,8 @@ export { default as CarouselReviewContainer } from "./layer/mainPage/CarouselRev
 // layer/about
 
 // layer/dogEnroll
+export { default as EnrollPrecaution } from "./layer/dogEnroll/EnrollPrecaution";
+export { default as EnrollInfo } from "./layer/dogEnroll/EnrollInfo.jsx";
 
 // layer/dogSearch
 export { default as DogCardContainer } from "./layer/dogSearch/DogCardContainer";
