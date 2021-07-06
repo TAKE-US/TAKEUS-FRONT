@@ -75,8 +75,8 @@ const Input = ({ children, placeholder, description, max, childPos }) => {
         {
           children && childPos === 'right' ?
             (<>
-              <Styled.Child className="test">{children}</Styled.Child>
               <Styled.Divider></Styled.Divider>
+              <Styled.Child className="test">{children}</Styled.Child>
             </>) : ''
         }
       </Styled.InputWrapper>

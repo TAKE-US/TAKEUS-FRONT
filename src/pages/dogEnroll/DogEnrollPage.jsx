@@ -8,6 +8,9 @@ const DogEnrollPage = () => {
       <Input placeholder={'test'} description={'최대 10 글자'} max={10} childPos={'left'}>
         <div>dropdown slot</div>
       </Input>
+      <Input placeholder={'test'} description={'최대 10 글자'} max={10} childPos={'right'}>
+        <div>dropdown slot</div>
+      </Input>
     </>
   );
 };
