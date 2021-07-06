@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { DogEnrollInput, RadioButton, Counter } from "components";
+import { DogEnrollInput, RadioButton, Counter, TextField } from "components";
 
 const EnrollInfoWrap = styled.section`
   display: flex;
@@ -66,6 +66,7 @@ const EnrollInfo = () => {
         />
         <DogEnrollInput placeholder="단체명을 입력해주세요." maxLength="15" />
       </div>
+      <TextField />
     </EnrollInfoWrap>
   );
 };
