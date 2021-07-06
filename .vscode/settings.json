@@ -1,5 +1,8 @@
 {
   "editor.formatOnSave": true,
   "editor.formatOnType": true,
-  "editor.tabSize": 2
+  "editor.tabSize": 2,
+  "eslint.format.enable": true,
+  "eslint.lintTask.enable": true,
+  "eslint.debug": true
 }
