@@ -66,7 +66,7 @@ const CarouselDogContainer = () => {
     if (listRef.current) {
       listRef.current.scrollBy({
         top: 0,
-        left: 268,
+        left: -268,
         behavior: "smooth",
       });
     }
@@ -76,7 +76,7 @@ const CarouselDogContainer = () => {
     if (listRef.current) {
       listRef.current.scrollBy({
         top: 0,
-        left: -268,
+        left: 268,
         behavior: "smooth",
       });
     }
