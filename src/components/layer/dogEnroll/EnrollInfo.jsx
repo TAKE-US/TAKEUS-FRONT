@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { DogEnrollInput, RadioButton, Counter, TextField } from "components";
+import Input from "components/atoms/input";
 
 const EnrollInfoWrap = styled.section`
   display: flex;
@@ -66,6 +67,16 @@ const EnrollInfo = () => {
         />
         <DogEnrollInput placeholder="단체명을 입력해주세요." maxLength="15" />
       </div>
+
+      {/* 준엽님이 작업할 부분 */}
+      <Input placeholder={"test"} description={"최대 10 글자"} max={10} childPos={"left"}>
+        <div>dropdown slot</div>
+      </Input>
+      <Input placeholder={"test"} description={"최대 10 글자"} max={10} childPos={"right"}>
+        <div>dropdown slot</div>
+      </Input>
+      {/* 준엽님이 작업할 부분 */}
+
       <TextField />
     </EnrollInfoWrap>
   );

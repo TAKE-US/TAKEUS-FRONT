@@ -26,7 +26,7 @@ const color = {
   marine_blue: "#3C89FF",
   mina_blue: "#296CE1",
   deep_blue: "#0E57E2",
-  honest_blue: "#003089"
+  honest_blue: "#003089",
 };
 
 const font = {
@@ -44,12 +44,12 @@ const font = {
   gnb: "normal 500 1.6rem/1.6rem 'Noto Sans kr'",
   button: "normal 500 1.8rem/1.8rem 'Spoqa Han Sans Neo'",
   button_middle: "normal 500 1.6rem/1.6rem 'Spoqa Han Sans Neo'",
-  button_small: "normal 400 1.4rem/1.4rem 'Noto Sans kr'"
+  button_small: "normal 400 1.4rem/1.4rem 'Noto Sans kr'",
 };
 
 const theme = {
   color,
-  font
+  font,
 };
 
 export default theme;

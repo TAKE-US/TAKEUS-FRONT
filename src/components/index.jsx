@@ -9,6 +9,7 @@ export { default as DogEnrollInput } from "./atoms/DogEnrollInput";
 export { default as RadioButton } from "./atoms/RadioButton";
 export { default as Counter } from "./atoms/Counter";
 export { default as TextField } from "./atoms/TextField";
+export { default as Input } from "./atoms/input";
 
 // layer
 export { default as Header } from "./layer/Header";
