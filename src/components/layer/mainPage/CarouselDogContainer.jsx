@@ -1,9 +1,7 @@
-/* eslint-disable no-unused-vars */
 import React, { useRef } from "react";
 import styled from "styled-components";
 import CarouselDogCard from "../../atoms/CarouselDogCard";
-import rightarrow from "../../../assets/img/btn_round_arrow_right_40.svg";
-import leftarrow from "../../../assets/img/btn_round_arrow_left_40.svg";
+import Carousel from "components/atoms/Carousel";
 
 const ContainerWrap = styled.article`
   display: flex;
@@ -21,20 +19,6 @@ const ContainerWrap = styled.article`
       &__number {
         display: inline-block;
         font-size: 3.2rem;
-      }
-    }
-    &__btns {
-      width: 10rem;
-      display: flex;
-      justify-content: space-between;
-      &__left + &__right {
-        all: unset;
-        width: 4rem;
-        height: 3.5rem;
-        position: absolute;
-        top: 50%;
-        width: 4rem;
-        height: 3.5rem;
       }
     }
   }
@@ -61,47 +45,19 @@ const ContainerWrap = styled.article`
 
 const CarouselDogContainer = () => {
   const listRef = useRef(null);
-  const scrollLeft = () => {
-    if (listRef.current) {
-      console.log(listRef.current);
-      listRef.current.scrollBy({
-        top: 0,
-        left: -270,
-        behavior: "smooth",
-      });
-    }
-  };
-
-  const scrollRight = () => {
-    if (listRef.current) {
-      listRef.current.scrollBy({
-        top: 0,
-        left: 270,
-        behavior: "smooth",
-      });
-    }
-  };
-
-
+  const movingValue = 270;
   const data = dogs;
   return (
     <ContainerWrap>
-      <article className='container-top'>
-        <section className='container-top__title'>
-          <p className='container-top__title__number'>1622</p>
+      <article className="container-top">
+        <section className="container-top__title">
+          <p className="container-top__title__number">1622</p>
           마리의 대상견이 이동 봉사를 기다리고 있습니다.
         </section>
-        <div className='container-top__btns'>
-          <div className='container-top__btns__left' onClick={scrollLeft}>
-            <img src={leftarrow} alt='leftarrow' />
-          </div>
-          <div className='container-top__btns__right' onClick={scrollRight}>
-            <img src={rightarrow} alt='rightarrow' />
-          </div>
-        </div>
+        <Carousel listRef={listRef} movingValue={movingValue} />
       </article>
-      <article className='container-bottom'>
-        <div className='container-bottom__cards' ref={listRef}>
+      <article className="container-bottom">
+        <div className="container-bottom__cards" ref={listRef}>
           {data.length &&
             data.map((item, i) => (
               <CarouselDogCard key={item.id} item={item} />
