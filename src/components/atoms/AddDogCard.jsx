@@ -64,11 +64,9 @@ const AddDogCard = ({ count, setCount }) => {
           />
         </div>
       ) : (
-        imgfile && (
-          <div className="image_area">
-            <img src={url} alt={imgfile.name} />
-          </div>
-        )
+        <div className="image_area">
+          <img src={url} alt={imgfile.name} />
+        </div>
       )}
     </Styled.Wrapper>
   );
