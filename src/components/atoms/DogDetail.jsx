@@ -5,7 +5,7 @@ import axios from 'axios';
 import DeleteIcon from '../../assets/img/ic_delete.svg';
 import EditIcon from '../../assets/img/ic_edit.svg';
 
-import { Swiper, DogDetailInfo } from "../";
+import { Swiper, DogDetailInfo, CopyLinkButton } from "../";
 
 const DogDetailWrap = styled.div`
   display: flex;
@@ -159,6 +159,7 @@ function DogDetail({ match, history }) {
           <section className="dog--detail">
             <div className="swiperAndLink">
               <Swiper images={dogData.images} />
+              <CopyLinkButton />
             </div>
             <DogDetailInfo dogData={dogData} />
           </section>
