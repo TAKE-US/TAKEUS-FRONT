@@ -22,21 +22,21 @@ const Menu = {
     border: none;
     background-color: #FFFFFF;
     cursor: pointer;
-    
 
     .destination {
       display: flex;
       flex-direction: column;
       text-align: left;
-      color: ${({ theme }) => theme.color.gray1};
 
       .name {
         font: ${({ theme }) => theme.font.caption};
+        color: ${({ theme }) => theme.color.gray3};
       }
 
       .text {
         margin-top: 0.6rem;
         font: ${({ theme }) => theme.font.body2};
+        color: ${props => props.currCountry ? "#3D3D3D" : "#C1C1C1"};
       }
     }
   `,
@@ -63,7 +63,7 @@ const Menu = {
     height: 3.4rem;
     padding-left: 1.4rem;
     font: ${({ theme }) => theme.font.body1};
-    color: ${props => props.selectd
+    color: ${props => props.selected
       ? "#FDCB02"
       : "#3D3D3D"
     };
@@ -85,15 +85,15 @@ const DropdownCountry = ({ currCountry, setCurrCountry }) => {
     setIsActive(!isActive);
   };
 
-  const country = ["미국", "캐나다", "독일"];
+  const country = ["미국", "캐나다", "독일", "프랑스", "네덜란드"];
 
   return (
     <Menu.Container>
-      <Menu.Button onClick={onClick} >
+      <Menu.Button onClick={onClick} currCountry={currCountry}>
         <div className="destination">
           <span className="name">국가</span>
           <span className="text">
-            {currCountry}
+            {currCountry ? currCountry : "어디로 가시나요?"}
           </span>
         </div>
         <img
@@ -106,7 +106,7 @@ const DropdownCountry = ({ currCountry, setCurrCountry }) => {
           {country.map((country, index) => (
             <Menu.List
               key={index}
-              selectd={
+              selected={
                 currCountry === country ? true : false
               }
               onClick={() => {

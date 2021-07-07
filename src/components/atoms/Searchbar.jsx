@@ -43,8 +43,8 @@ const Search = {
 
 const Searchbar = () => {
   const buttonRef = useRef();
-  const [currCountry, setCurrCountry] = useState('어디로 가시나요?');
-  const [currAirport, setCurrAirport] = useState('도착 공항은 어디인가요?');
+  const [currCountry, setCurrCountry] = useState('');
+  const [currAirport, setCurrAirport] = useState('');
 
 
   return (
