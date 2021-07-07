@@ -1,7 +1,12 @@
 import React from "react";
+import { LoginLayer } from '../../components';
 
 const LoginPage = () => {
-  return <div>로그인</div>;
+  return (
+    <>
+      <LoginLayer />
+    </>
+  );
 };
 
 export default LoginPage;
