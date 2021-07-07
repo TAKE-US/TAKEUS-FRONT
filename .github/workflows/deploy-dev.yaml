@@ -5,13 +5,49 @@ on:
       - dev
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [15.x]
+
     steps:
       - uses: actions/checkout@v2
-      - uses: FirebaseExtended/action-hosting-deploy@v0
+      - uses: actions/setup-node@v2
         with:
-          repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_TAKE__US }}'
-          projectId: take--us
-          channelId: live
+          node-version: ${{ matrix.node-version }}
+
+      - name: Cache node modules
+        id: node-cache
+        env:
+          cache-name: node-cache
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build webpack
+        run: npm run build
+      
+      - uses: actions/upload-artifact@v2
+        with:
+          name: built-artifact
+          path: build/
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Deploy firebase
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_TAKE__US }}
+        run: |
+          npm install firebase-tools
+          firebase deploy --token $FIREBASE_TOKEN
+
