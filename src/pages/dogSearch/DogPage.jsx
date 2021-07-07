@@ -1,5 +1,5 @@
 import React from "react";
-import { DogCardContainer, PaginationNav, DogFilter } from "../../components";
+import { DogCardContainer, PaginationNav, DogSearchNavigation } from "components";
 import styled from "styled-components";
 
 const DogPageWrap = styled.section`
@@ -11,18 +11,6 @@ const DogPageWrap = styled.section`
     border-bottom: 1px solid ${({ theme }) => theme.color.lightgray2};
   }
 `;
-
-const DogPage = () => {
-  return (
-    <DogPageWrap>
-      <DogFilter />
-      <div className="container-div">
-        <DogCardContainer dogs={dogs} />
-      </div>
-      <PaginationNav />
-    </DogPageWrap>
-  );
-};
 
 const dogs = [
   {
@@ -41,13 +29,9 @@ const dogs = [
     detail: "이러쿵저러쿵입니다.",
     user: "07xb259d1",
     status: false,
-    photos: [
-      "www.awss3ajdi.cjdgksd.com",
-      "www.awss3ajdsjg.ckjsdlf.com",
-      "www.awss3jdskgj.skljdf.com"
-    ],
+    photos: ["www.awss3ajdi.cjdgksd.com", "www.awss3ajdsjg.ckjsdlf.com", "www.awss3jdskgj.skljdf.com"],
     contacts: "01089101879",
-    reports: ["072xgjklbdjks2", "ashxon24nkgld2"]
+    reports: ["072xgjklbdjks2", "ashxon24nkgld2"],
   },
   {
     name: "엘리자베스2세",
@@ -65,13 +49,9 @@ const dogs = [
     detail: "이러쿵저러쿵입니다.",
     user: "07xb259d1",
     status: false,
-    photos: [
-      "www.awss3ajdi.cjdgksd.com",
-      "www.awss3ajdsjg.ckjsdlf.com",
-      "www.awss3jdskgj.skljdf.com"
-    ],
+    photos: ["www.awss3ajdi.cjdgksd.com", "www.awss3ajdsjg.ckjsdlf.com", "www.awss3jdskgj.skljdf.com"],
     contacts: "01089101879",
-    reports: ["072xgjklbdjks2", "ashxon24nkgld2"]
+    reports: ["072xgjklbdjks2", "ashxon24nkgld2"],
   },
   {
     name: "5글자이름",
@@ -89,13 +69,9 @@ const dogs = [
     detail: "이러쿵저러쿵입니다.",
     user: "07xb259d1",
     status: false,
-    photos: [
-      "www.awss3ajdi.cjdgksd.com",
-      "www.awss3ajdsjg.ckjsdlf.com",
-      "www.awss3jdskgj.skljdf.com"
-    ],
+    photos: ["www.awss3ajdi.cjdgksd.com", "www.awss3ajdsjg.ckjsdlf.com", "www.awss3jdskgj.skljdf.com"],
     contacts: "01089101879",
-    reports: ["072xgjklbdjks2", "ashxon24nkgld2"]
+    reports: ["072xgjklbdjks2", "ashxon24nkgld2"],
   },
   {
     name: "멍뭉이",
@@ -113,13 +89,9 @@ const dogs = [
     detail: "이러쿵저러쿵입니다.",
     user: "07xb259d1",
     status: false,
-    photos: [
-      "www.awss3ajdi.cjdgksd.com",
-      "www.awss3ajdsjg.ckjsdlf.com",
-      "www.awss3jdskgj.skljdf.com"
-    ],
+    photos: ["www.awss3ajdi.cjdgksd.com", "www.awss3ajdsjg.ckjsdlf.com", "www.awss3jdskgj.skljdf.com"],
     contacts: "01089101879",
-    reports: ["072xgjklbdjks2", "ashxon24nkgld2"]
+    reports: ["072xgjklbdjks2", "ashxon24nkgld2"],
   },
   {
     name: "멍뭉이",
@@ -137,13 +109,9 @@ const dogs = [
     detail: "이러쿵저러쿵입니다.",
     user: "07xb259d1",
     status: false,
-    photos: [
-      "www.awss3ajdi.cjdgksd.com",
-      "www.awss3ajdsjg.ckjsdlf.com",
-      "www.awss3jdskgj.skljdf.com"
-    ],
+    photos: ["www.awss3ajdi.cjdgksd.com", "www.awss3ajdsjg.ckjsdlf.com", "www.awss3jdskgj.skljdf.com"],
     contacts: "01089101879",
-    reports: ["072xgjklbdjks2", "ashxon24nkgld2"]
+    reports: ["072xgjklbdjks2", "ashxon24nkgld2"],
   },
   {
     name: "멍뭉이",
@@ -161,13 +129,9 @@ const dogs = [
     detail: "이러쿵저러쿵입니다.",
     user: "07xb259d1",
     status: false,
-    photos: [
-      "www.awss3ajdi.cjdgksd.com",
-      "www.awss3ajdsjg.ckjsdlf.com",
-      "www.awss3jdskgj.skljdf.com"
-    ],
+    photos: ["www.awss3ajdi.cjdgksd.com", "www.awss3ajdsjg.ckjsdlf.com", "www.awss3jdskgj.skljdf.com"],
     contacts: "01089101879",
-    reports: ["072xgjklbdjks2", "ashxon24nkgld2"]
+    reports: ["072xgjklbdjks2", "ashxon24nkgld2"],
   },
   {
     name: "멍뭉이",
@@ -185,13 +149,9 @@ const dogs = [
     detail: "이러쿵저러쿵입니다.",
     user: "07xb259d1",
     status: false,
-    photos: [
-      "www.awss3ajdi.cjdgksd.com",
-      "www.awss3ajdsjg.ckjsdlf.com",
-      "www.awss3jdskgj.skljdf.com"
-    ],
+    photos: ["www.awss3ajdi.cjdgksd.com", "www.awss3ajdsjg.ckjsdlf.com", "www.awss3jdskgj.skljdf.com"],
     contacts: "01089101879",
-    reports: ["072xgjklbdjks2", "ashxon24nkgld2"]
+    reports: ["072xgjklbdjks2", "ashxon24nkgld2"],
   },
   {
     name: "멍뭉이",
@@ -209,13 +169,9 @@ const dogs = [
     detail: "이러쿵저러쿵입니다.",
     user: "07xb259d1",
     status: false,
-    photos: [
-      "www.awss3ajdi.cjdgksd.com",
-      "www.awss3ajdsjg.ckjsdlf.com",
-      "www.awss3jdskgj.skljdf.com"
-    ],
+    photos: ["www.awss3ajdi.cjdgksd.com", "www.awss3ajdsjg.ckjsdlf.com", "www.awss3jdskgj.skljdf.com"],
     contacts: "01089101879",
-    reports: ["072xgjklbdjks2", "ashxon24nkgld2"]
+    reports: ["072xgjklbdjks2", "ashxon24nkgld2"],
   },
   {
     name: "멍뭉이",
@@ -233,13 +189,9 @@ const dogs = [
     detail: "이러쿵저러쿵입니다.",
     user: "07xb259d1",
     status: false,
-    photos: [
-      "www.awss3ajdi.cjdgksd.com",
-      "www.awss3ajdsjg.ckjsdlf.com",
-      "www.awss3jdskgj.skljdf.com"
-    ],
+    photos: ["www.awss3ajdi.cjdgksd.com", "www.awss3ajdsjg.ckjsdlf.com", "www.awss3jdskgj.skljdf.com"],
     contacts: "01089101879",
-    reports: ["072xgjklbdjks2", "ashxon24nkgld2"]
+    reports: ["072xgjklbdjks2", "ashxon24nkgld2"],
   },
   {
     name: "멍뭉이",
@@ -257,13 +209,9 @@ const dogs = [
     detail: "이러쿵저러쿵입니다.",
     user: "07xb259d1",
     status: false,
-    photos: [
-      "www.awss3ajdi.cjdgksd.com",
-      "www.awss3ajdsjg.ckjsdlf.com",
-      "www.awss3jdskgj.skljdf.com"
-    ],
+    photos: ["www.awss3ajdi.cjdgksd.com", "www.awss3ajdsjg.ckjsdlf.com", "www.awss3jdskgj.skljdf.com"],
     contacts: "01089101879",
-    reports: ["072xgjklbdjks2", "ashxon24nkgld2"]
+    reports: ["072xgjklbdjks2", "ashxon24nkgld2"],
   },
   {
     name: "멍뭉이",
@@ -281,13 +229,9 @@ const dogs = [
     detail: "이러쿵저러쿵입니다.",
     user: "07xb259d1",
     status: false,
-    photos: [
-      "www.awss3ajdi.cjdgksd.com",
-      "www.awss3ajdsjg.ckjsdlf.com",
-      "www.awss3jdskgj.skljdf.com"
-    ],
+    photos: ["www.awss3ajdi.cjdgksd.com", "www.awss3ajdsjg.ckjsdlf.com", "www.awss3jdskgj.skljdf.com"],
     contacts: "01089101879",
-    reports: ["072xgjklbdjks2", "ashxon24nkgld2"]
+    reports: ["072xgjklbdjks2", "ashxon24nkgld2"],
   },
   {
     name: "멍뭉이",
@@ -305,13 +249,9 @@ const dogs = [
     detail: "이러쿵저러쿵입니다.",
     user: "07xb259d1",
     status: false,
-    photos: [
-      "www.awss3ajdi.cjdgksd.com",
-      "www.awss3ajdsjg.ckjsdlf.com",
-      "www.awss3jdskgj.skljdf.com"
-    ],
+    photos: ["www.awss3ajdi.cjdgksd.com", "www.awss3ajdsjg.ckjsdlf.com", "www.awss3jdskgj.skljdf.com"],
     contacts: "01089101879",
-    reports: ["072xgjklbdjks2", "ashxon24nkgld2"]
+    reports: ["072xgjklbdjks2", "ashxon24nkgld2"],
   },
   {
     name: "멍뭉이",
@@ -329,13 +269,9 @@ const dogs = [
     detail: "이러쿵저러쿵입니다.",
     user: "07xb259d1",
     status: false,
-    photos: [
-      "www.awss3ajdi.cjdgksd.com",
-      "www.awss3ajdsjg.ckjsdlf.com",
-      "www.awss3jdskgj.skljdf.com"
-    ],
+    photos: ["www.awss3ajdi.cjdgksd.com", "www.awss3ajdsjg.ckjsdlf.com", "www.awss3jdskgj.skljdf.com"],
     contacts: "01089101879",
-    reports: ["072xgjklbdjks2", "ashxon24nkgld2"]
+    reports: ["072xgjklbdjks2", "ashxon24nkgld2"],
   },
   {
     name: "멍뭉이",
@@ -353,13 +289,9 @@ const dogs = [
     detail: "이러쿵저러쿵입니다.",
     user: "07xb259d1",
     status: false,
-    photos: [
-      "www.awss3ajdi.cjdgksd.com",
-      "www.awss3ajdsjg.ckjsdlf.com",
-      "www.awss3jdskgj.skljdf.com"
-    ],
+    photos: ["www.awss3ajdi.cjdgksd.com", "www.awss3ajdsjg.ckjsdlf.com", "www.awss3jdskgj.skljdf.com"],
     contacts: "01089101879",
-    reports: ["072xgjklbdjks2", "ashxon24nkgld2"]
+    reports: ["072xgjklbdjks2", "ashxon24nkgld2"],
   },
   {
     name: "멍뭉이",
@@ -377,13 +309,9 @@ const dogs = [
     detail: "이러쿵저러쿵입니다.",
     user: "07xb259d1",
     status: false,
-    photos: [
-      "www.awss3ajdi.cjdgksd.com",
-      "www.awss3ajdsjg.ckjsdlf.com",
-      "www.awss3jdskgj.skljdf.com"
-    ],
+    photos: ["www.awss3ajdi.cjdgksd.com", "www.awss3ajdsjg.ckjsdlf.com", "www.awss3jdskgj.skljdf.com"],
     contacts: "01089101879",
-    reports: ["072xgjklbdjks2", "ashxon24nkgld2"]
+    reports: ["072xgjklbdjks2", "ashxon24nkgld2"],
   },
   {
     name: "멍뭉이",
@@ -401,14 +329,24 @@ const dogs = [
     detail: "이러쿵저러쿵입니다.",
     user: "07xb259d1",
     status: false,
-    photos: [
-      "www.awss3ajdi.cjdgksd.com",
-      "www.awss3ajdsjg.ckjsdlf.com",
-      "www.awss3jdskgj.skljdf.com"
-    ],
+    photos: ["www.awss3ajdi.cjdgksd.com", "www.awss3ajdsjg.ckjsdlf.com", "www.awss3jdskgj.skljdf.com"],
     contacts: "01089101879",
-    reports: ["072xgjklbdjks2", "ashxon24nkgld2"]
-  }
+    reports: ["072xgjklbdjks2", "ashxon24nkgld2"],
+  },
 ];
+
+const DogPage = () => {
+  return (
+    <>
+      <DogSearchNavigation />
+      <DogPageWrap>
+        <div className="container-div">
+          <DogCardContainer dogs={dogs} />
+        </div>
+        <PaginationNav />
+      </DogPageWrap>
+    </>
+  );
+};
 
 export default DogPage;

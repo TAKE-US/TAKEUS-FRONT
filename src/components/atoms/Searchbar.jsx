@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 
 import DropdownCountry from './DropdownCountry';
@@ -10,17 +10,17 @@ import SearchImgHover from '../../assets/img/btn_search_hover.svg';
 const Search = {
   TotalContainer: styled.div`
     width: 100%;
-    display: flex;
-    justify-content: center;
   `,
 
   Container: styled.div`
+    background-color: ${({ theme }) => theme.color.white};
     width: 77.4rem;
     border-radius: 1rem;
-    box-shadow: 0rem 0rem 2rem 0.1rem rgba(0,0,0,0.5);
+    box-shadow: 0rem 0rem 2rem 0.1rem rgba(0,0,0,0.05);
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin: 0 auto;
   `,
 
   Dropdown: styled.div`
@@ -43,14 +43,16 @@ const Search = {
 
 const Searchbar = () => {
   const buttonRef = useRef();
+  const [currCountry, setCurrCountry] = useState('');
+  const [currAirport, setCurrAirport] = useState('');
 
 
   return (
     <Search.TotalContainer>
       <Search.Container>
         <Search.Dropdown>
-          <DropdownCountry />
-          <DropdownAirport />
+          <DropdownCountry currCountry={currCountry} setCurrCountry={setCurrCountry} />
+          <DropdownAirport currCountry={currCountry} currAirport={currAirport} setCurrAirport={setCurrAirport} />
         </Search.Dropdown>
         <Search.Button>
           <img
