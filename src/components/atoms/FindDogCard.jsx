@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { withRouter } from "react-router-dom";
 //img
-import sampleImg from "../../assets/img/img_card_sample.svg";
+// import sampleImg from "../../assets/img/img_card_sample.svg";
 import locationIcon from "../../assets/img/ic_location_blue_18.svg";
 
 const CardWrap = styled.article`
@@ -14,6 +14,7 @@ const CardWrap = styled.article`
     width: 25.5rem;
     height: 25.5rem;
     border-radius: 1rem;
+    object-fit: cover;
   }
   .cardInfo {
     display: flex;
@@ -69,17 +70,17 @@ const CardWrap = styled.article`
 
 const FindDogCard = ({ id, dog, history }) => {
   const cardClickHandler = () => {
-    history.push(`/dogSearch/${id}`);
+    history.push(`/dogSearch/${dog._id}`);
   };
   return (
     <CardWrap onClick={cardClickHandler}>
-      <img src={sampleImg} alt="" />
+      <img src={dog.photos[0]} alt="" />
       <section className="cardInfo">
         <article className="cardInfo-main">
           <p className="cardInfo-main__name">{dog.name}</p>
           <div className="cardInfo-main__location">
             <img src={locationIcon} alt="card_image" />
-            <p>{dog.destination}</p>
+            <p>{dog.endingAirport}</p>
           </div>
         </article>
         <article className="cardInfo-sub">
