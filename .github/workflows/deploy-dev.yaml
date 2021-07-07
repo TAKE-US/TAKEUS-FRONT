@@ -51,7 +51,7 @@ jobs:
 
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
-          repoToken: GITHUB_TOKEN
+          repoToken: $GITHUB_TOKEN
           firebaseServiceAccount: $FIREBASE_TOKEN
           projectId: take--us
 
