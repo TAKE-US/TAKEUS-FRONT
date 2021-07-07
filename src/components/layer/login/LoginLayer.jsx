@@ -12,7 +12,7 @@ const Styled = {
     position: absolute;
     left: 0rem;
     width: 144rem;
-    height: 102.4rem
+    height: 102.4rem;
   `,
 
   Image: styled.img`
@@ -74,6 +74,7 @@ const Styled = {
     }
   `
 };
+
 const LoginLayer = () => {
   return (
     <Styled.Wrapper>
