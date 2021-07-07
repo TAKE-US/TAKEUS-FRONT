@@ -13,19 +13,20 @@ const Head = {
 
     .inner {
       margin-top: 3.8rem;
-      margin-left: 18rem;
-      margin-right: 18rem;
+      padding-left: 18rem;
+      padding-right: 18rem;
       padding-top: 2.3rem;
       padding-bottom: 2.3rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      background: ${props => (props.isScrolling ? "#ffffff" : "none")};
 
       img {
         width: 14.4rem;
         height: 4.2rem;
         &:hover {
-        cursor: pointer; 
+          cursor: pointer;
         }
       }
 
@@ -48,11 +49,11 @@ const Head = {
       cursor: pointer;
       color: ${({ theme }) => theme.color.primary};
     }
-    color: ${props => props.isSelect && '#FDCB02'};
+    color: ${props => props.isSelect && "#FDCB02"};
     ::after {
       content: "";
-      display: ${props => props.isSelect ? "block" : "none"};
-      background-color: ${({ theme }) => (theme.color.primary)};
+      display: ${props => (props.isSelect ? "block" : "none")};
+      background-color: ${({ theme }) => theme.color.primary};
       width: 0.4rem;
       height: 0.4rem;
       border-radius: 50%;
@@ -93,14 +94,10 @@ const Header = () => {
   return (
     <>
       {location.pathname !== "/login" && (
-        <Head.Wrap>
+        <Head.Wrap isScrolling={isScrolling}>
           <div className="inner">
             <img
-              src={
-                location.pathname === "/"
-                  ? isScrolling ? Logo_yellow : Logo_black
-                  : Logo_yellow
-              }
+              src={location.pathname === "/" ? (isScrolling ? Logo_yellow : Logo_black) : Logo_yellow}
               alt=""
               onClick={() => {
                 history.push("/");
@@ -113,36 +110,55 @@ const Header = () => {
             <div className="gnb">
               <Head.Content
                 isSelect={location.pathname === "/info" ? true : false}
-                onClick={() => { history.push("/info"); }}
+                onClick={() => {
+                  history.push("/info");
+                }}
               >
                 이동봉사정보
               </Head.Content>
               <Head.Content
                 isSelect={location.pathname === "/dogSearch" ? true : false}
-                onClick={() => { history.push("/dogSearch"); }}>
+                onClick={() => {
+                  history.push("/dogSearch");
+                }}
+              >
                 대상견 찾기
               </Head.Content>
               <Head.Content
                 isSelect={location.pathname === "/dogEnroll" ? true : false}
-                onClick={() => { history.push("/dogEnroll"); }}>
+                onClick={() => {
+                  history.push("/dogEnroll");
+                }}
+              >
                 대상견 등록
               </Head.Content>
               <Head.Content
                 isSelect={location.pathname === "/review" ? true : false}
-                onClick={() => { history.push("/review"); }}>
+                onClick={() => {
+                  history.push("/review");
+                }}
+              >
                 이동봉사 후기
               </Head.Content>
               <Head.Content
                 isSelect={location.pathname === "/about" ? true : false}
-                onClick={() => { history.push("/about"); }}>
+                onClick={() => {
+                  history.push("/about");
+                }}
+              >
                 About us
               </Head.Content>
             </div>
-            <Head.Login onClick={() => { history.push("/login"); }}>로그인·회원가입</Head.Login>
+            <Head.Login
+              onClick={() => {
+                history.push("/login");
+              }}
+            >
+              로그인·회원가입
+            </Head.Login>
           </div>
         </Head.Wrap>
-      )
-      }
+      )}
     </>
   );
 };
