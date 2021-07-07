@@ -27,6 +27,7 @@ export { default as MainNavigation } from './layer/mainPage/MainNavigation';
 // layer/dogEnroll
 export { default as EnrollPrecaution } from "./layer/dogEnroll/EnrollPrecaution";
 export { default as EnrollInfo } from "./layer/dogEnroll/EnrollInfo.jsx";
+export { default as AddDogLayer } from "./layer/dogEnroll/AddDogLayer";
 
 // layer/dogSearch
 export { default as DogSearchNavigation } from "./layer/dogSearch/DogSearchNavigation";
