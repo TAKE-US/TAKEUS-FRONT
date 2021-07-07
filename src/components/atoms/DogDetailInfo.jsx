@@ -1,114 +1,183 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import LocationIcon from "../../assets/img/img_Location.svg";
-import CallIcon from "../../assets/img/img_Call.svg";
-import InstagramIcon from "../../assets/img/img_Instagram.svg";
-import KakaotalkIcon from "../../assets/img/img_Kakaotalk.svg";
-import TwitterIcon from "../../assets/img/img_Twitter.svg";
-import FacebookIcon from "../../assets/img/img_Facebook.svg";
+import LocationIcon from "../../assets/icon/Location.svg";
+import CallIcon from "../../assets/icon/Call.svg";
+import InstagramIcon from "../../assets/icon/Instagram.svg";
+import KakaotalkIcon from "../../assets/icon/Kakaotalk.svg";
+import TwitterIcon from "../../assets/icon/Twitter.svg";
+import FacebookIcon from "../../assets/icon/Facebook.svg";
 
-const DetailInfoWrap = styled.div`
-  width: 30rem;
-  margin-left: 9.4rem;
-  .departure {
+const Styled = {
+  Wrapper: styled.div`
     display: flex;
     flex-direction: column;
-    margin-bottom: 6.2rem;
+    width: 62.2rem;
+    height: 46rem;
+    margin: 0rem 0rem 3.2rem 5.5rem;
+  `,
+
+  Departure: styled.section`
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 3.2rem;
+
     p {
-      margin-bottom: 1.2rem;
-    }
-    &--airport, &--calendar {
-      display: flex;
-      flex-direction: row;
-      margin-top: 0.7rem;
-      height: 2.9rem;
+      height: 2.3rem;
+      font: ${({ theme }) => theme.font.body1};
       color: ${({ theme }) => theme.color.black};
-      img {
-        width: 2.4rem;
-        height: 2.4rem;
-        margin-right: 1.9rem;
-      }
-      p{
-        line-height: 2.2rem;
-      }
     }
-  }
-  .contact {
+    `,
+
+  DepartureRow: styled.div`
+    display: flex;
+    flex-direction: row;
+    height: 2.6rem;
+    padding: 1rem 0rem 1.2rem 0rem;
+    color: ${({ theme }) => theme.color.black};
+
+    img {
+      width: 2.4rem;
+      height: 2.4rem;
+      margin-right: 1.9rem;
+    }
+
+    p{
+      font: ${({ theme }) => theme.font.description};
+      line-height: 2.2rem;
+    }
+  `,
+
+  DogInfo: styled.section`
+    margin-bottom: 3.2rem;
     p {
-      margin-bottom: 1.3rem;
+      height: 2.3rem;
+      font: ${({ theme }) => theme.font.body1};
+      color: ${({ theme }) => theme.color.black};
     }
-    &-main {
+
+    .info--main {
       display: grid;
       grid-template-columns: repeat(2,1fr);
-      column-gap: 16.16rem;
     }
-    &--kakaotalk, &--call, &--instagram, &--twitter, &--facebook {
-      display: flex;
-      flex-direction: row;
-      margin-top: 0.7rem;
-      height: 2.9rem;
-      color: ${({ theme }) => theme.color.black};
-      img {
-        width: 2.4rem;
-        height: 2.4rem;
-        margin-right: 1.84rem;
-      }
-      p{
-        line-height: 2.2rem;
-      }
-    }
-  }
-  }
-  .dog--description {
-    width: 93.6rem;
-    height: 11.2rem;
-    padding: 4.8rem 7.2rem;
-    text-align: left;
-    background: ${({ theme }) => theme.color.bg_gray};
+  `,
+
+  DogInfoRow: styled.div`
+    display: flex;
+    flex-direction: row;
+    width: 31.1rem;
+    height: 2.6rem;
+    padding: 1rem 0rem 1.2rem 0rem;
     font: ${({ theme }) => theme.font.description};
-    border-radius: 1.7rem;
-    line-height: 154%;
-  }
-`;
+    color: ${({ theme }) => theme.color.black};
+
+    img {
+      width: 2.4rem;
+      height: 2.4rem;
+      margin-right: 1.84rem;
+    }
+    
+    p{
+      font: ${({ theme }) => theme.font.description};
+      color: ${({ theme }) => theme.color.gray3};
+      width: 9.9rem;
+    }
+  `,
+
+  Contact: styled.section`
+    margin-bottom: 3.2rem;
+    p {
+      height: 2.3rem;
+      font: ${({ theme }) => theme.font.body1};
+      color: ${({ theme }) => theme.color.black};
+    }
+
+    .contact--main {
+      display: grid;
+      grid-template-columns: repeat(2,1fr);
+    }
+
+  `,
+
+  ContactRow: styled.div`
+    display: flex;
+    flex-direction: row;
+    width: 31.1rem;
+    height: 2.6rem;
+    padding: 1rem 0rem 1.2rem 0rem;
+    color: ${({ theme }) => theme.color.black};
+
+    img {
+      width: 2.4rem;
+      height: 2.4rem;
+      margin-right: 1.84rem;
+    }
+
+    p{
+      font: ${({ theme }) => theme.font.description};
+      line-height: 2.2rem;
+    }
+  `
+};
 
 function DogDetailInfo({ dogData }) {
   return (
-    <DetailInfoWrap>
-      <div className="departure">
+    <Styled.Wrapper>
+      <Styled.Departure>
         <p>출국 정보</p>
-        <div className="departure--airport">
+        <Styled.DepartureRow>
           <img src={LocationIcon} alt="card_image" />
-          <p>어쩌고 공항, 시카고, 미국, 아메리카</p>
-        </div>
-      </div>
+          <p>{dogData.destination}</p>
+        </Styled.DepartureRow>
+      </Styled.Departure>
 
-      <div className="contact">
+      <Styled.DogInfo>
+        <p>대상견 정보</p>
+        <div className="info--main">
+          <Styled.DogInfoRow>
+            <p>성별</p>{dogData.gender}
+          </Styled.DogInfoRow>
+          <Styled.DogInfoRow>
+            <p>나이</p>{dogData.age}살
+          </Styled.DogInfoRow>
+          <Styled.DogInfoRow>
+            <p>무게</p>{dogData.weight}kg
+          </Styled.DogInfoRow>
+          <Styled.DogInfoRow>
+            <p>중성화</p>{dogData.neutralization}
+          </Styled.DogInfoRow>
+          <Styled.DogInfoRow>
+            <p>건강상태</p>{dogData.vaccination}
+          </Styled.DogInfoRow>
+        </div>
+      </Styled.DogInfo>
+
+      <Styled.Contact>
         <p>연락처</p>
-        <div className="contact-main">
-          <div className="contact--kakaotalk">
+        <div className="contact--main">
+          <Styled.ContactRow>
             <img src={KakaotalkIcon} alt="card_image" />
             <p>lovedog</p>
-          </div>
-          <div className="contact--instagram">
-            <img src={InstagramIcon} alt="card_image" />
-            <p>takers_lovedog</p>
-          </div>
-          <div className="contact--call">
-            <img src={CallIcon} alt="card_image" />
-            <p>010 9292 9292</p>
-          </div>
-          <div className="contact--twitter">
+          </Styled.ContactRow>
+          <Styled.ContactRow>
             <img src={TwitterIcon} alt="card_image" />
             <p>lovedog</p>
-          </div>
-          <div className="contact--facebook">
+          </Styled.ContactRow>
+          <Styled.ContactRow>
+            <img src={InstagramIcon} alt="card_image" />
+            <p>takers_lovedog</p>
+          </Styled.ContactRow>
+          <Styled.ContactRow>
             <img src={FacebookIcon} alt="card_image" />
             <p>takers_lovedog</p>
-          </div>
+          </Styled.ContactRow>
+          <Styled.ContactRow>
+            <img src={CallIcon} alt="card_image" />
+            <p>010 9292 9292</p>
+          </Styled.ContactRow>
         </div>
-      </div>
-    </DetailInfoWrap>
+      </Styled.Contact>
+    </Styled.Wrapper>
   );
 }
 
