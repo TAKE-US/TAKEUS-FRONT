@@ -1,4 +1,4 @@
-![img](https://github.com/TAKE-US/TAKEUS-FRONT/tree/dev/src/assets/img/background.png)
+![img](<https://user-images.githubusercontent.com/68781598/124507888-bc4a7400-de09-11eb-9476-149ac4ac613d.PNG>)
 
 # ✈️ Project
 
