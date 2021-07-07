@@ -7,7 +7,7 @@ const Styled = {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    margin: 5.6rem 0;
+    margin-top: 5.6rem;
     height: 28rem;
     .title {
       width: 43.3rem;

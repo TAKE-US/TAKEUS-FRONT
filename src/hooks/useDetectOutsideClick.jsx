@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 export const useDetectOutsideClick = (el, initialState) => {
   const [isActive, setIsActive] = useState(initialState);
@@ -11,11 +11,11 @@ export const useDetectOutsideClick = (el, initialState) => {
     };
 
     if (isActive) {
-      window.addEventListener('click', pageClickEvent);
+      window.addEventListener("click", pageClickEvent);
     }
 
     return () => {
-      window.removeEventListener('click', pageClickEvent);
+      window.removeEventListener("click", pageClickEvent);
     };
   }, [isActive, el]);
 
