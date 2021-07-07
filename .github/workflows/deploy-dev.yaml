@@ -49,6 +49,7 @@ jobs:
         - name: FIREBASE_TOKEN
           value: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_TAKE__US }}
 
+      - uses: actions/checkout@v2
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: $GITHUB_TOKEN
