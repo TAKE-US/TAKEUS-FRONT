@@ -1,47 +1,86 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { withRouter } from 'react-router-dom';
 import styled from "styled-components";
+import axios from 'axios';
+import DeleteIcon from '../../assets/img/ic_delete.svg';
+import EditIcon from '../../assets/img/ic_edit.svg';
 
-import { Swiper } from "../../components";
-import { DogDetailInfo } from '../../components';
+import { Swiper, DogDetailInfo, CopyLinkButton } from "../";
 
 const DogDetailWrap = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 0 auto;
-  width: 107.7rem;
+  margin: 4.6rem auto;
+  width: 108rem;
+
+  .goBack {
+    width: 13rem;
+    height: 2.4rem;
+    margin-bottom: 3.2rem;
+    font: ${({ theme }) => theme.font.body2};
+    color: ${({ theme }) => theme.color.gray3};
+    text-align: left;
+    text-decoration: underline;
+    text-underline-position: under;
+  }
 
   .line {
     width: 100%;
-    height: 0rem;
     border: 0.1rem solid ${({ theme }) => theme.color.lightgray2};
   }
 
+  header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  
   .dog {
     &--title{
       display: flex;
-      flex-direction: row;
-      margin-bottom: 2.4rem;
+      flex-direction: column;
+      margin: 2.7rem 0rem;
       
-      p {
-        font-size: 3.2rem;
-        font-weight: 700;
+      h1 {
+        font: ${({ theme }) => theme.font.display2};
         color: ${({ theme }) => theme.color.black};
       }
-      
-      &--info {
-        margin: 1.5rem 1.2rem;
-        font-size: 1.8rem;
-        font-weight: 400;
+
+      h2 {
+        margin-top: 1.8rem;
+        width: 30rem;
+        height: 2.6rem;
+        font: ${({ theme }) => theme.font.subheading};
+        color: ${({ theme }) => theme.color.darkgray1};
+      }
+    }
+
+    &--post {
+      margin-top: 2.4rem;
+      display: flex;
+      flex-direction: row;
+
+      .delete, .edit {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+        width: 8.6rem;
+        height: 4rem;
+        border: 0.1rem solid ${({ theme }) => theme.color.lightgray2};
+        box-sizing: border-box;
+        border-radius: 0.8rem;
+        font: ${({ theme }) => theme.font.button_middle};
+
+        div {
+          width: 3rem;
+          height: 1.5rem;
+        }
       }
 
-      &--team {
-        margin: 1.5rem 1.2rem;
-        width: 9.1rem;
-        height: 2.6rem;
-        background-color: rgba(242, 183, 5, 0.2);
-        font: ${({ theme }) => theme.font.description};
-        color: ${({ theme }) => theme.color.darkgray3};
-        text-align: center;
+      .edit {
+        margin-right: 0.8rem;
       }
     }
 
@@ -49,50 +88,88 @@ const DogDetailWrap = styled.div`
       display: flex;
       flex-direction: row;
       font-size: 1.6rem;
-      margin-top: 2.6rem;
       width: 100%;
       color: ${({ theme }) => theme.color.gray3};
+
+      .swiperAndLink{
+        display: flex;
+        flex-direction: column;
+      }
     }
 
     &--description {
-      width: 93.6rem;
-      height: 11.2rem;
-      margin-top: 3.7rem;
-      padding: 4.8rem 7.2rem;
+      width: 101.6rem;
+      height: 17.6rem;
+      padding: 2.4rem 3.2rem;
+      margin-bottom: 4rem;
       text-align: left;
-      background-color: ${({ theme }) => theme.color.bg_gray};
-      font: ${({ theme }) => theme.font.description};
+      border: 1px solid ${({ theme }) => theme.color.lightgray1};
+      font: ${({ theme }) => theme.font.body1};
+      color: ${({ theme }) => theme.color.darkgray1};
       border-radius: 1.7rem;
-      line-height: 154%;
+      line-height: 1rem;
     }
   }
 `;
 
-function DogDetail() {
+const getDogData = async () => {
+  const data = await axios.get(`http://localhost:4000/data`);
+  /* tested with data.json in local */
+  return data.data;
+};
+
+function DogDetail({ match, history }) {
+  const [dogData, setDogData] = useState(null);
+
+  useEffect(() => {
+    (async () => {
+      const dog = await getDogData();
+      setDogData(dog[match.params.id - 1]);
+    })();
+  }, [match.params.id]);
+
   return (
     <DogDetailWrap>
-      <div className="dog--title">
-        <p>멍멍이</p>
-        <div className="dog--title--info">
-          여 | 7살 | 9kg
-        </div>
-        <div className="dog--title--team">
-          다온레스큐
-        </div>
-      </div>
-      <div className="line"></div>
-      <div className="dog--detail">
-        <Swiper />
-        <DogDetailInfo />
-      </div>
-      <div className="dog--description">
-        멍멍이는 인천 남동구에서 구조된 멍멍이에요. 멍멍이는 어쩌구 저쩌고 그런 강아진데요,<br />
-        좋은 기회로 해외에 입양을 가게 되었답니다. 멍멍이가 좋은 가족을 만나서 행복한 삶을 살 수 있도록 도와주세요. 도움의 손길 어<br />
-        쩌구 저쩌구 저희도 어쩌구 저쩌구 멍멍이는 인천 남동구에서 구조된 멍멍이에요. 멍멍이는 어쩌구 저쩌고 그런 강아진데요, 좋은<br />
-        기회로 해외에 입양을 가게 되었답니다.
-      </div>
+      {dogData &&
+        <>
+          <button
+            className="goBack"
+            type="button"
+            onClick={history.goBack}
+          >
+            다시 목록으로
+          </button>
+          <div className="line"></div>
+          <header>
+            <div className="dog--title">
+              <h1>{dogData.name}</h1>
+              <h2>단체 | {dogData.organization}</h2>
+            </div>
+            <div className="dog--post">
+              <button className="edit">
+                <img src={EditIcon} alt="edit"></img>
+                <div>수정</div>
+              </button>
+              <button className="delete">
+                <img src={DeleteIcon} alt="delete"></img>
+                <div>삭제</div>
+              </button>
+            </div>
+          </header>
+          <section className="dog--detail">
+            <div className="swiperAndLink">
+              <Swiper images={dogData.images} />
+              <CopyLinkButton />
+            </div>
+            <DogDetailInfo dogData={dogData} />
+          </section>
+          <article className="dog--description">
+            {dogData.description}
+          </article>
+        </>
+      }
     </DogDetailWrap>
   );
 }
 
-export default DogDetail;
+export default withRouter(DogDetail);
