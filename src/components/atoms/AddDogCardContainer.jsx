@@ -1,7 +1,7 @@
-/* eslint-disable default-case */
-import React, {useState} from 'react';
+import React, { useState } from "react";
 import styled from "styled-components";
 import AddDogCard from "components/atoms/AddDogCard";
+// import EmptyCards from "components/atoms/EmptyCards";
 
 const Styled = {
   Wrapper: styled.section`
@@ -15,9 +15,9 @@ const Styled = {
       width: 20rem;
       height: 20rem;
       border-radius: 1rem;
-      background-color: #F8F8F8;
+      background-color: #f8f8f8;
       margin-right: 1.5rem;
-      img{
+      img {
         width: 20rem;
         height: 20rem;
         border-radius: 1rem;
@@ -25,66 +25,32 @@ const Styled = {
       p {
         z-index: 0;
       }
-      input{
+      input {
         width: 20rem;
         height: 20rem;
         opacity: 0;
       }
-      input:hover{
+      input:hover {
         cursor: pointer;
       }
     }
-  `
+  `,
 };
-
 
 const AddDogCardContainer = () => {
   const [count, setCount] = useState(0);
-  console.log(count);
+  const full = Array.from({ length: count + 1 }, () => 0);
+  const empty = Array.from({ length: 4 - count }, () => 0);
   return (
     <Styled.Wrapper>
-      {count === 0 ? 
-        <>
-          <AddDogCard count={count} setCount={setCount} />
-          <div className="card"></div>
-          <div className="card"></div>
-          <div className="card"></div>
-          <div className="card"></div>
-        </> : ( count === 1 ?
-          <>
-            <AddDogCard count={count} setCount={setCount} />
-            <AddDogCard count={count} setCount={setCount} />
-            <div className="card"></div>
-            <div className="card"></div>
-            <div className="card"></div>
-          </> : (count === 2 ?
-            <>
-              <AddDogCard count={count} setCount={setCount} />
-              <AddDogCard count={count} setCount={setCount} />
-              <AddDogCard count={count} setCount={setCount} />
-              <div className="card"></div>
-              <div className="card"></div>
-            </> : (
-              count === 3 ? 
-              <>
-                <AddDogCard count={count} setCount={setCount} />
-                <AddDogCard count={count} setCount={setCount} />
-                <AddDogCard count={count} setCount={setCount} />
-                <AddDogCard count={count} setCount={setCount} />
-                <div className="card"></div>
-                </> : <>
-                  <AddDogCard count={count} setCount={setCount} />
-                  <AddDogCard count={count} setCount={setCount} />
-                  <AddDogCard count={count} setCount={setCount} />
-                  <AddDogCard count={count} setCount={setCount} />
-                  <AddDogCard count={count} setCount={setCount} />
-                </>
-            )
-          )
-        )
-      }
-        
-        
+      <>
+        {full.map((_, i) => (
+          <AddDogCard key={i} count={count} setCount={setCount} />
+        ))}
+        {empty.map((_, i) => (
+          <div className="card" key={i}></div>
+        ))}
+      </>
     </Styled.Wrapper>
   );
 };
