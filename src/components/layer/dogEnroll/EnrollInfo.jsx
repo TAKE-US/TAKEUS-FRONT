@@ -6,7 +6,7 @@ import Input from "components/atoms/input";
 const EnrollInfoWrap = styled.section`
   display: flex;
   flex-direction: column;
-  div {
+  .wrap {
     display: flex;
     margin-top: 5.7rem;
     label {
@@ -14,19 +14,23 @@ const EnrollInfoWrap = styled.section`
       font: ${({ theme }) => theme.font.headline};
     }
   }
+  .contact {
+    display: flex;
+    margin-top: 5.7rem;
+  }
 `;
 
 const EnrollInfo = () => {
   return (
     <EnrollInfoWrap>
-      <div>
+      <div className="wrap">
         <label>출국정보</label>
       </div>
-      <div>
+      <div className="wrap">
         <label>대상견 이름</label>
         <DogEnrollInput placeholder="ex 멍멍이" maxLength="30" />
       </div>
-      <div>
+      <div className="wrap">
         <label>대상견 성별</label>
         <RadioButton
           items={[
@@ -36,15 +40,15 @@ const EnrollInfo = () => {
           ]}
         />
       </div>
-      <div>
+      <div className="wrap">
         <label>대상견 나이</label>
         <DogEnrollInput placeholder="ex 1살 , 2개월 등" maxLength="10" />
       </div>
-      <div>
+      <div className="wrap">
         <label>대상견 무게</label>
         <Counter />
       </div>
-      <div>
+      <div className="wrap">
         <label>중성화 여부</label>
         <RadioButton
           items={[
@@ -53,11 +57,11 @@ const EnrollInfo = () => {
           ]}
         />
       </div>
-      <div>
+      <div className="wrap">
         <label>건강상태</label>
         <DogEnrollInput placeholder="ex 접종내역, 건강상태, 유의할 점 등" maxLength="50" />
       </div>
-      <div>
+      <div className="wrap">
         <label>소속여부</label>
         <RadioButton
           items={[
@@ -69,12 +73,14 @@ const EnrollInfo = () => {
       </div>
 
       {/* 준엽님이 작업할 부분 */}
-      <Input placeholder={"test"} description={"최대 10 글자"} max={10} childPos={"left"}>
-        <div>dropdown slot</div>
-      </Input>
-      <Input placeholder={"test"} description={"최대 10 글자"} max={10} childPos={"right"}>
-        <div>dropdown slot</div>
-      </Input>
+      <section className="contact">
+        <Input placeholder={"test"} description={"최대 10 글자"} max={10} childPos={"left"}>
+          <div>dropdown slot</div>
+        </Input>
+        <Input placeholder={"test"} description={"최대 10 글자"} max={10} childPos={"right"}>
+          <div>dropdown slot</div>
+        </Input>
+      </section>
       {/* 준엽님이 작업할 부분 */}
 
       <TextField />
