@@ -84,7 +84,7 @@ const FindDogCard = ({ id, dog, history }) => {
           </div>
         </article>
         <article className="cardInfo-sub">
-          <p>단체 | {dog.organization}</p>
+          <p>단체 | {dog.institutionName}</p>
         </article>
       </section>
     </CardWrap>
