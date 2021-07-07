@@ -35,7 +35,7 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: built-artifact
-          path: dist/
+          path: build/
 
   deploy:
     needs: build
@@ -44,8 +44,12 @@ jobs:
     steps:
       - name: Deploy Firebase
         env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_TAKE__US }}
 
-        run: |
-          npm install firebase-tools
-          firebase deploy --token $FIREBASE_TOKEN --non-interactive
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: GITHUB_TOKEN
+          firebaseServiceAccount: $FIREBASE_TOKEN
+          projectId: take--us
+
