@@ -1,5 +1,5 @@
 import React from "react";
-import { DogCardContainer, PaginationNav, DogFilter } from "../../components";
+import { DogCardContainer, PaginationNav, DogSearchNavigation } from "components";
 import styled from "styled-components";
 
 const DogPageWrap = styled.section`
@@ -11,18 +11,6 @@ const DogPageWrap = styled.section`
     border-bottom: 1px solid ${({ theme }) => theme.color.lightgray2};
   }
 `;
-
-const DogPage = () => {
-  return (
-    <DogPageWrap>
-      <DogFilter />
-      <div className="container-div">
-        <DogCardContainer dogs={dogs} />
-      </div>
-      <PaginationNav />
-    </DogPageWrap>
-  );
-};
 
 const dogs = [
   {
@@ -410,5 +398,29 @@ const dogs = [
     reports: ["072xgjklbdjks2", "ashxon24nkgld2"]
   }
 ];
+
+const DogPageWrap = styled.section`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  .container-div {
+    padding-bottom: 9.7rem;
+    border-bottom: 1px solid ${({ theme }) => theme.color.lightgray2};
+  }
+`;
+
+const DogPage = () => {
+  return (
+    <>
+      <DogSearchNavigation />
+      <DogPageWrap>
+        <div className="container-div">
+          <DogCardContainer dogs={dogs} />
+        </div>
+        <PaginationNav />
+      </DogPageWrap>
+    </>
+  );
+};
 
 export default DogPage;

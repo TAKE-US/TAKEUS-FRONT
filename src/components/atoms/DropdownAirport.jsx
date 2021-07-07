@@ -22,7 +22,7 @@ const Menu = {
 
   Button: styled.button`
     width: 42rem;
-    height: 8.2rem;
+    height: 7.4rem;
     font: ${({ theme }) => theme.font.subheading};
     display: flex;
     justify-content: space-between;

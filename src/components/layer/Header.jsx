@@ -94,7 +94,7 @@ const Header = () => {
     <>
       {location.pathname !== "/login" && (
         <Head.Wrap>
-          <div className="inner" isScrolling={isScrolling}>
+          <div className="inner">
             <img
               src={
                 location.pathname === "/"
