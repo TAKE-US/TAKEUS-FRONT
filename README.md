@@ -7,8 +7,16 @@
 - **SOPT 28th APPJAM, TAKE US**
 - 프로젝트 기간: 2021.06.26 ~ 2021.07.17
 
-# 📂 Directory 
+# 📒 기술 스택 및 라이브러리 
+```
+React
+JavaScript ES6
+axios
+styled-component
+react-redux
+```
 
+# 📂 Directory 
 ```
 src
 ├── App.jsx
