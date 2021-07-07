@@ -6,7 +6,18 @@ const GlobalStyle = createGlobalStyle`
 
   html{
     font-size: 10px;
+
   }
+@media screen and (max-width: 1440px) {
+  html {
+    font-size: 8px;
+  }
+}
+@media screen and (max-width: 1024px) {
+  html {
+    font-size: 6px;
+  }
+}
 
   body{
     -webkit-font-smoothing: antialiased;
@@ -19,6 +30,21 @@ const GlobalStyle = createGlobalStyle`
 
     padding: 0;
     margin: 0;
+    overflow: overlay;
+    -ms-overflow-style: none;
+    
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-thumb {
+      border-radius: 6px;
+      background: #ccc;
+      
+      &:hover {
+        background: #aaa;
+      }
+    }
+
   };
 
   button{
