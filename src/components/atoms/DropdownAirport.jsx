@@ -129,7 +129,7 @@ const DropdownAirport = ({ currCountry, currAirport, setCurrAirport }) => {
   useEffect(() => {
     setAirport(allAirport[currCountry]);
     setCurrAirport('');
-  }, [currCountry]);
+  }, [currCountry, setCurrAirport]);
 
   return (
     <Menu.Container>
