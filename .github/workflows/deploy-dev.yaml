@@ -44,8 +44,10 @@ jobs:
     steps:
       - name: Deploy Firebase
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_TAKE__US }}
+        - name: GITHUB_TOKEN
+          value: ${{ secrets.GITHUB_TOKEN }}
+        - name: FIREBASE_TOKEN
+          value: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_TAKE__US }}
 
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
