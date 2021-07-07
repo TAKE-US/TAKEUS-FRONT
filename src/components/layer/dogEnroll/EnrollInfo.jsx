@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { DogEnrollInput, RadioButton, Counter, TextField } from "components";
+import { DogEnrollInput, RadioButton, Counter, TextField, AddDogLayer } from "components";
 import Input from "components/atoms/input";
 
 const EnrollInfoWrap = styled.section`
@@ -23,6 +23,7 @@ const EnrollInfoWrap = styled.section`
 const EnrollInfo = () => {
   return (
     <EnrollInfoWrap>
+      <AddDogLayer />
       <div className="wrap">
         <label>출국정보</label>
       </div>
