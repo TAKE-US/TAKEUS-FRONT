@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 import styled from "styled-components";
-import AddDogCardContainer from 'components/atoms/AddDogCardContainer';
+import AddDogCardContainer from "components/atoms/AddDogCardContainer";
 
 const Styled = {
   Wrapper: styled.section`
@@ -17,7 +17,7 @@ const Styled = {
     .contents {
       display: flex;
     }
-  `
+  `,
 };
 
 const AddDogLayer = () => {

@@ -2,7 +2,6 @@
 import React, {useState} from 'react';
 import styled from "styled-components";
 import AddDogCard from "components/atoms/AddDogCard";
-// import plus from "assets/img/plus_icon.svg";
 
 const Styled = {
   Wrapper: styled.section`
