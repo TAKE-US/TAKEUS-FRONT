@@ -1,7 +1,13 @@
 import React from "react";
+import { EnrollPrecaution, EnrollInfo } from "components";
 
 const DogEnrollPage = () => {
-  return <div>대상견 등록</div>;
+  return (
+    <div>
+      <EnrollPrecaution />
+      <EnrollInfo />
+    </div>
+  );
 };
 
 export default DogEnrollPage;

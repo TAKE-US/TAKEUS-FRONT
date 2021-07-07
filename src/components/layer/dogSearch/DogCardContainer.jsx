@@ -7,6 +7,7 @@ const Container = styled.section`
   display: grid;
   grid-template-columns: repeat(4, 25.5rem);
   gap: 3.9rem 2.1rem;
+  margin-top: 2.8rem;
 `;
 
 const DogCardContainer = ({ dogs }) => {
