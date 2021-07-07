@@ -1,24 +1,60 @@
 import React from "react";
-import CarouselDogCard from "../atoms/CarouselDogCard";
+import rightarrow from "assets/img/btn_round_arrow_right_40.svg";
+import leftarrow from "assets/img/btn_round_arrow_left_40.svg";
 import styled from "styled-components";
 
-const CarouselContainer = styled.article`
-  .cards-container {
+const Styled = {
+  Wrapper: styled.section`
+    position: relative;
     display: flex;
-  }
-  .cards-container::-webkit-scrollbar {
-    display: none;
-  }
-`;
+    width: 10rem;
+    .left {
+      all: unset;
+      left: 0;
+      width: 4rem;
+      height: 3.5rem;
+      position: absolute;
+    }
+    .right {
+      all: unset;
+      right: 0;
+      width: 4rem;
+      height: 3.5rem;
+      position: absolute;
+    }
+  `,
+};
 
-const Carousel = ({ data }) => {
+const Carousel = ({ listRef, movingValue }) => {
+  const scrollLeft = () => {
+    if (listRef.current) {
+      listRef.current.scrollBy({
+        top: 0,
+        left: -parseInt(movingValue, 10),
+        behavior: "smooth",
+      });
+    }
+  };
+
+  const scrollRight = () => {
+    if (listRef.current) {
+      listRef.current.scrollBy({
+        top: 0,
+        left: parseInt(movingValue, 10),
+        behavior: "smooth",
+      });
+    }
+  };
+
   return (
-    <CarouselContainer>
-      <div className='cards-container'>
-        {data.length &&
-          data.map((item, i) => <CarouselDogCard key={item.id} item={item} />)}
+    <Styled.Wrapper>
+      <div className="left" onClick={scrollLeft}>
+        <img src={leftarrow} alt="leftarrow" />
       </div>
-    </CarouselContainer>
+      <div className="right" onClick={scrollRight}>
+        <img src={rightarrow} alt="rightarrow" />
+      </div>
+    </Styled.Wrapper>
   );
 };
 

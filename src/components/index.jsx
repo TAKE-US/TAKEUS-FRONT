@@ -26,6 +26,7 @@ export { default as CarouselReviewContainer } from "./layer/mainPage/CarouselRev
 // layer/dogEnroll
 export { default as EnrollPrecaution } from "./layer/dogEnroll/EnrollPrecaution";
 export { default as EnrollInfo } from "./layer/dogEnroll/EnrollInfo.jsx";
+export { default as AddDogLayer } from "./layer/dogEnroll/AddDogLayer";
 
 // layer/dogSearch
 export { default as DogCardContainer } from "./layer/dogSearch/DogCardContainer";

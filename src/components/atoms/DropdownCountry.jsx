@@ -91,10 +91,8 @@ const DropdownCountry = () => {
       </Menu.Button>
       <Menu.Nav ref={dropdownRef} isActive={isActive}>
         <Menu.Ul>
-          {country.map((country, index) => (
-            <Menu.List key={index}>
-              {country}
-            </Menu.List>
+          {country.map((country, index) => (<Menu.List key={index}>{country}
+          </Menu.List>
           ))}
         </Menu.Ul>
       </Menu.Nav>
