@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import AddDogCard from "components/atoms/AddDogCard";
-// import EmptyCards from "components/atoms/EmptyCards";
 
 const Styled = {
   Wrapper: styled.section`
