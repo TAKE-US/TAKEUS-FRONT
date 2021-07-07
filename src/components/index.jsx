@@ -8,6 +8,7 @@ export { default as Searchbar } from "./atoms/Searchbar";
 // layer
 export { default as Header } from "./layer/Header";
 export { default as Footer } from './layer/Footer';
+export { default as LoginLayer } from './layer/login/LoginLayer';
 
 // layer/mainPage
 export { default as AboutTakeUs } from './layer/mainPage/AboutTakeUs';
