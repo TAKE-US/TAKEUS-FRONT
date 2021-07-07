@@ -4,10 +4,16 @@ export { default as DogDetailInfo } from "./atoms/DogDetailInfo";
 export { default as DogDetail } from "./atoms/DogDetail";
 export { default as FindDogCard } from "./atoms/FindDogCard";
 export { default as Searchbar } from "./atoms/Searchbar";
+export { default as DogFilter } from "./atoms/DogFilter";
+export { default as DogEnrollInput } from "./atoms/DogEnrollInput";
+export { default as RadioButton } from "./atoms/RadioButton";
+export { default as Counter } from "./atoms/Counter";
+export { default as TextField } from "./atoms/TextField";
+export { default as Input } from "./atoms/input";
 
 // layer
 export { default as Header } from "./layer/Header";
-export { default as Footer } from './layer/Footer';
+export { default as Footer } from "./layer/Footer";
 
 // layer/mainPage
 export { default as AboutTakeUs } from './layer/mainPage/AboutTakeUs';
@@ -19,6 +25,8 @@ export { default as MainNavigation } from './layer/mainPage/MainNavigation';
 // layer/about
 
 // layer/dogEnroll
+export { default as EnrollPrecaution } from "./layer/dogEnroll/EnrollPrecaution";
+export { default as EnrollInfo } from "./layer/dogEnroll/EnrollInfo.jsx";
 
 // layer/dogSearch
 export { default as DogSearchNavigation } from "./layer/dogSearch/DogSearchNavigation";
