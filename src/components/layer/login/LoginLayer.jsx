@@ -74,6 +74,7 @@ const Styled = {
     }
   `
 };
+
 const LoginLayer = () => {
   return (
     <Styled.Wrapper>
