@@ -11,7 +11,7 @@ const Menu = {
   `,
 
   Button: styled.button`
-    width: 21rem;
+    width: 20rem;
     height: 8.2rem;
     font: ${({ theme }) => theme.font.subheading};
     display: flex;

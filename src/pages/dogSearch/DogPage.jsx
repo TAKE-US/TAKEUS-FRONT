@@ -1,12 +1,12 @@
 import React from "react";
-import { DogCardContainer, PaginationNav } from "../../components";
+import { DogCardContainer, PaginationNav, DogSearchNavigation } from "components";
 import styled from "styled-components";
 
 const dogs = [
   {
     name: "세바스찬",
     gender: "남",
-    organization:"15글자가넘어가면안된다고했다",
+    organization: "15글자가넘어가면안된다고했다",
     age: 3,
     weight: 10.2,
     vaccination: true,
@@ -33,7 +33,7 @@ const dogs = [
   {
     name: "엘리자베스2세",
     gender: "남",
-    organization:"웰컴독코리아",
+    organization: "웰컴독코리아",
     age: 3,
     weight: 10.2,
     vaccination: true,
@@ -60,7 +60,7 @@ const dogs = [
   {
     name: "5글자이름",
     gender: "남",
-    organization:"동물권보호 카라",
+    organization: "동물권보호 카라",
     age: 3,
     weight: 10.2,
     vaccination: true,
@@ -87,7 +87,7 @@ const dogs = [
   {
     name: "멍뭉이",
     gender: "남",
-    organization:"웰컴독코리아",
+    organization: "웰컴독코리아",
     age: 3,
     weight: 10.2,
     vaccination: true,
@@ -114,7 +114,7 @@ const dogs = [
   {
     name: "멍뭉이",
     gender: "남",
-    organization:"웰컴독코리아",
+    organization: "웰컴독코리아",
     age: 3,
     weight: 10.2,
     vaccination: true,
@@ -141,7 +141,7 @@ const dogs = [
   {
     name: "멍뭉이",
     gender: "남",
-    organization:"웰컴독코리아",
+    organization: "웰컴독코리아",
     age: 3,
     weight: 10.2,
     vaccination: true,
@@ -168,7 +168,7 @@ const dogs = [
   {
     name: "멍뭉이",
     gender: "남",
-    organization:"웰컴독코리아",
+    organization: "웰컴독코리아",
     age: 3,
     weight: 10.2,
     vaccination: true,
@@ -195,7 +195,7 @@ const dogs = [
   {
     name: "멍뭉이",
     gender: "남",
-    organization:"웰컴독코리아",
+    organization: "웰컴독코리아",
     age: 3,
     weight: 10.2,
     vaccination: true,
@@ -222,7 +222,7 @@ const dogs = [
   {
     name: "멍뭉이",
     gender: "남",
-    organization:"웰컴독코리아",
+    organization: "웰컴독코리아",
     age: 3,
     weight: 10.2,
     vaccination: true,
@@ -249,7 +249,7 @@ const dogs = [
   {
     name: "멍뭉이",
     gender: "남",
-    organization:"웰컴독코리아",
+    organization: "웰컴독코리아",
     age: 3,
     weight: 10.2,
     vaccination: true,
@@ -276,7 +276,7 @@ const dogs = [
   {
     name: "멍뭉이",
     gender: "남",
-    organization:"웰컴독코리아",
+    organization: "웰컴독코리아",
     age: 3,
     weight: 10.2,
     vaccination: true,
@@ -303,7 +303,7 @@ const dogs = [
   {
     name: "멍뭉이",
     gender: "남",
-    organization:"웰컴독코리아",
+    organization: "웰컴독코리아",
     age: 3,
     weight: 10.2,
     vaccination: true,
@@ -330,7 +330,7 @@ const dogs = [
   {
     name: "멍뭉이",
     gender: "남",
-    organization:"웰컴독코리아",
+    organization: "웰컴독코리아",
     age: 3,
     weight: 10.2,
     vaccination: true,
@@ -357,7 +357,7 @@ const dogs = [
   {
     name: "멍뭉이",
     gender: "남",
-    organization:"웰컴독코리아",
+    organization: "웰컴독코리아",
     age: 3,
     weight: 10.2,
     vaccination: true,
@@ -384,7 +384,7 @@ const dogs = [
   {
     name: "멍뭉이",
     gender: "남",
-    organization:"웰컴독코리아",
+    organization: "웰컴독코리아",
     age: 3,
     weight: 10.2,
     vaccination: true,
@@ -411,7 +411,7 @@ const dogs = [
   {
     name: "멍뭉이",
     gender: "남",
-    organization:"웰컴독코리아",
+    organization: "웰컴독코리아",
     age: 3,
     weight: 10.2,
     vaccination: true,
@@ -449,12 +449,15 @@ const DogPageWrap = styled.section`
 
 const DogPage = () => {
   return (
-    <DogPageWrap>
-      <div className="container-div">
-        <DogCardContainer dogs={dogs} />
-      </div>
-      <PaginationNav />
-    </DogPageWrap>
+    <>
+      <DogSearchNavigation />
+      <DogPageWrap>
+        <div className="container-div">
+          <DogCardContainer dogs={dogs} />
+        </div>
+        <PaginationNav />
+      </DogPageWrap>
+    </>
   );
 };
 

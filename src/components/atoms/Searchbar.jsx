@@ -10,8 +10,6 @@ import SearchImgHover from '../../assets/img/btn_search_hover.svg';
 const Search = {
   TotalContainer: styled.div`
     width: 100%;
-    display: flex;
-    justify-content: center;
   `,
 
   Container: styled.div`
@@ -22,6 +20,7 @@ const Search = {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin: 0 auto;
   `,
 
   Dropdown: styled.div`

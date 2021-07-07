@@ -21,6 +21,7 @@ export { default as MainNavigation } from './layer/mainPage/MainNavigation';
 // layer/dogEnroll
 
 // layer/dogSearch
+export { default as DogSearchNavigation } from "./layer/dogSearch/DogSearchNavigation";
 export { default as DogCardContainer } from "./layer/dogSearch/DogCardContainer";
 export { default as PaginationNav } from "./layer/dogSearch/PaginationNav";
 
