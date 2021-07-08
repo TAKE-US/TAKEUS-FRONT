@@ -9,7 +9,7 @@ const Styled = {
     flex-direction: column;
     align-items: center;
     & > * {
-      margin-bottom: 120px;
+      margin-bottom: 10rem;
     }
   `,
 };
