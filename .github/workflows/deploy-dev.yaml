@@ -9,13 +9,13 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [15.x]
+        node: ['15']
 
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: ${{ matrix.node }}
 
       - name: Cache node modules
         id: node-cache
@@ -24,28 +24,39 @@ jobs:
         uses: actions/cache@v2
         with:
           path: node_modules
-          key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
 
       - name: Install Dependencies
-        run: npm install
+        if: steps.node-cache.outputs.cache-hit != 'true'
+        run: yarn install
 
       - name: Build webpack
-        run: npm run build
+        run: yarn build
+
+      - run: ls build
       
       - uses: actions/upload-artifact@v2
         with:
           name: built-artifact
-          path: dist/
+          path: build/
+      
+      - run: ls build
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
 
     steps:
-      - name: Deploy Firebase
-        env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+      - uses: actions/checkout@v2
 
-        run: |
-          npm install firebase-tools
-          firebase deploy --token $FIREBASE_TOKEN --non-interactive
+      - uses: actions/download-artifact@v2
+        with:
+          name: built-artifact
+          path: build/
+          
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_TAKE__US }}'
+          channelId: live
+          projectId: take--us
