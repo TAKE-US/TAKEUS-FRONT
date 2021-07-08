@@ -5,11 +5,31 @@ const Styled = {
   InputWrapper: styled.div`
     position: relative;
     display: flex;
+    align-items: center;
     width: 100%;
     height: 100%;
     padding: 0 2rem;
     border: solid 1px ${({ theme }) => theme.color.lightgray2};
     border-radius: 5.4rem;
+
+    &.disabled {
+      background-color: ${({ theme }) => theme.color.bg_gray};
+      &:hover {
+        cursor: default;
+      }
+      
+      input {
+        &::placeholder {
+          color: ${({ theme }) => theme.color.gray1};
+        }
+        &:disabled {
+          background-color: ${({ theme }) => theme.color.bg_gray};
+        }
+      }
+      p {
+        color: ${({ theme }) => theme.color.gray1};
+      }
+    }
   `,
   Input: styled.input`
     flex: 1;
@@ -41,7 +61,7 @@ const isValidLength = (text, maxLength) => {
   return text.length > maxLength ? false : true;
 };
 
-const Input = ({ children, placeholder, caption, maxLength }) => {
+const Input = ({ children, placeholder, caption, maxLength, disabled }) => {
   const [value, setValue] = useState('');
   const [isError, setError] = useState(false);
 
@@ -73,9 +93,10 @@ const Input = ({ children, placeholder, caption, maxLength }) => {
 
   return (
     <>
-      <Styled.InputWrapper>
+      <Styled.InputWrapper className={disabled ? 'disabled' : ''}>
         {children}
         <Styled.Input
+          disabled={disabled}
           placeholder={placeholder}
           value={value}
           onChange={changeValue}
