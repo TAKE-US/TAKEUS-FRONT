@@ -26,6 +26,8 @@ export { default as MainNavigation } from "./layer/mainPage/MainNavigation";
 
 // layer/about
 export { default as AboutUsTop } from "./layer/about/AboutUsTop";
+export { default as AboutUsMission } from "./layer/about/AboutUsMission";
+export { default as AboutUsTeam } from "./layer/about/AboutUsTeam";
 
 // layer/dogEnroll
 export { default as EnrollPrecaution } from "./layer/dogEnroll/EnrollPrecaution";

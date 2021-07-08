@@ -5,7 +5,6 @@ import backgroundAboutusImg from "assets/img/img_AboutUsTop.png";
 const Styled = {
   Wrapper: styled.div`
     width: 100vw;
-    margin-left: calc(-50vw + 50%);
     height: 79.9rem;
     background-image: url(${backgroundAboutusImg});
     background-size: cover;
