@@ -1,7 +1,9 @@
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import styled from "styled-components";
-import CarouselDogCard from "../../atoms/CarouselDogCard";
+import { withRouter } from "react-router-dom";
+import FindDogCard from "../../atoms/FindDogCard";
 import Carousel from "components/atoms/Carousel";
+import { getDogs } from "lib/api/sample";
 
 const ContainerWrap = styled.article`
   display: flex;
@@ -27,12 +29,18 @@ const ContainerWrap = styled.article`
   .container-bottom {
     width: 100%;
     display: flex;
-    max-width: 120rem;
+    max-width: 115rem;
     overflow-y: auto;
     /* items-container */
     &__cards {
       display: flex;
       overflow-y: hidden;
+      article {
+        margin-right: 1.8rem;
+      }
+    }
+    &__cards::nth-last-child(1) {
+      margin-right: 0;
     }
     &__cards::-webkit-scrollbar {
       display: none;
@@ -44,9 +52,17 @@ const ContainerWrap = styled.article`
 `;
 
 const CarouselDogContainer = () => {
+  const [dogs, setDogs] = useState([]);
   const listRef = useRef(null);
-  const movingValue = 270;
-  const data = dogs;
+  const movingValue = 272;
+  useEffect(() => {
+    (async () => {
+      const data = await getDogs();
+      setDogs(data);
+      console.log(data);
+    })();
+  }, []);
+
   return (
     <ContainerWrap>
       <article className="container-top">
@@ -58,9 +74,9 @@ const CarouselDogContainer = () => {
       </article>
       <article className="container-bottom">
         <div className="container-bottom__cards" ref={listRef}>
-          {data.length &&
-            data.map((item, i) => (
-              <CarouselDogCard key={item.id} item={item} />
+          {dogs.length &&
+            dogs.map((dog, i) => (
+              <FindDogCard key={dog._id} id={dog._id} dog={dog} />
             ))}
         </div>
       </article>
@@ -68,62 +84,4 @@ const CarouselDogContainer = () => {
   );
 };
 
-// mock data
-const dogs = [
-  {
-    id: 0,
-    name: "멍멍이",
-    location: "시카고",
-    info: "암컷ㅣ9KGㅣ중성화 유ㅣ접종 무",
-  },
-  {
-    id: 1,
-    name: "강아지",
-    location: "시카고",
-    info: "암컷ㅣ9KGㅣ중성화 유ㅣ접종 무",
-  },
-  {
-    id: 2,
-    name: "강강강",
-    location: "시카고",
-    info: "암컷ㅣ9KGㅣ중성화 유ㅣ접종 무",
-  },
-  {
-    id: 3,
-    name: "낭낭낭",
-    location: "시카고",
-    info: "암컷ㅣ9KGㅣ중성화 유ㅣ접종 무",
-  },
-  {
-    id: 4,
-    name: "왈왈왈",
-    location: "시카고",
-    info: "암컷ㅣ9KGㅣ중성화 유ㅣ접종 무",
-  },
-  {
-    id: 5,
-    name: "하하하",
-    location: "시카고",
-    info: "암컷ㅣ9KGㅣ중성화 유ㅣ접종 무",
-  },
-  {
-    id: 6,
-    name: "멍멍이",
-    location: "시카고",
-    info: "암컷ㅣ9KGㅣ중성화 유ㅣ접종 무",
-  },
-  {
-    id: 7,
-    name: "멍멍이",
-    location: "시카고",
-    info: "암컷ㅣ9KGㅣ중성화 유ㅣ접종 무",
-  },
-  {
-    id: 8,
-    name: "멍멍이",
-    location: "시카고",
-    info: "암컷ㅣ9KGㅣ중성화 유ㅣ접종 무",
-  },
-];
-
-export default CarouselDogContainer;
+export default withRouter(CarouselDogContainer);
