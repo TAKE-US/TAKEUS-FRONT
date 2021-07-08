@@ -14,17 +14,18 @@ export { default as Input } from "./atoms/input";
 
 // layer
 export { default as Header } from "./layer/Header";
-export { default as Footer } from './layer/Footer';
-export { default as LoginLayer } from './layer/login/LoginLayer';
+export { default as Footer } from "./layer/Footer";
+export { default as LoginLayer } from "./layer/login/LoginLayer";
 
 // layer/mainPage
-export { default as AboutTakeUs } from './layer/mainPage/AboutTakeUs';
-export { default as BeforeVolunteer } from './layer/mainPage/BeforeVolunteer';
-export { default as CarouselDogContainer } from './layer/mainPage/CarouselDogContainer';
-export { default as CarouselReviewContainer } from './layer/mainPage/CarouselReviewContainer';
-export { default as MainNavigation } from './layer/mainPage/MainNavigation';
+export { default as AboutTakeUs } from "./layer/mainPage/AboutTakeUs";
+export { default as BeforeVolunteer } from "./layer/mainPage/BeforeVolunteer";
+export { default as CarouselDogContainer } from "./layer/mainPage/CarouselDogContainer";
+export { default as CarouselReviewContainer } from "./layer/mainPage/CarouselReviewContainer";
+export { default as MainNavigation } from "./layer/mainPage/MainNavigation";
 
 // layer/about
+export { default as AboutUsTop } from "./layer/about/AboutUsTop";
 
 // layer/dogEnroll
 export { default as EnrollPrecaution } from "./layer/dogEnroll/EnrollPrecaution";
