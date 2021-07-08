@@ -1,20 +1,18 @@
 import React from "react";
 import styled from "styled-components";
-//components
-import { ReviewCard } from "components";
 
 const Styled = {
   Wrapper: styled.div`
-    margin-top: 14rem;
+    border: 1px solid ${({ theme }) => theme.color.primary};
   `,
 };
 
-const ReviewPage = () => {
+const Hashtag = ({ tag, sort }) => {
   return (
     <Styled.Wrapper>
-      <ReviewCard />
+      <p>{tag}</p>
     </Styled.Wrapper>
   );
 };
 
-export default ReviewPage;
+export default Hashtag;
