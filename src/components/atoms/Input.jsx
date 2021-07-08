@@ -3,28 +3,31 @@ import styled from "styled-components";
 
 const Styled = {
   InputWrapper: styled.div`
+    position: relative;
     display: flex;
     width: 100%;
+    height: 100%;
     padding: 0 2rem;
     border: solid 1px ${({ theme }) => theme.color.lightgray2};
     border-radius: 5.4rem;
   `,
   Input: styled.input`
     flex: 1;
-    padding-left: 1rem;
+    padding: 0.8rem 0 0.8rem 1rem;
     font: ${({ theme }) => theme.font.button};
     color: ${({ theme }) => theme.color.darkgray1};
     line-height: 2.6rem;
-
     &::placeholder {
       color: ${({ theme }) => theme.color.gray1};
     }
   `,
-  Desc: styled.p`
-    margin-left: 0.6rem;
-    font-size: 1.2rem;
-    line-height: 1.7rem;
+  Caption: styled.p`
+    position: absolute;
+    left: 0.6rem;
+    bottom: -2rem;
+    font: ${({ theme }) => theme.font.caption};
     color: ${({ theme }) => theme.color.gray3};
+
     &.error {
       color: #F2754E;
     }
@@ -38,7 +41,7 @@ const isValidLength = (text, maxLength) => {
   return text.length > maxLength ? false : true;
 };
 
-const Input = ({ children, placeholder, description, maxLength }) => {
+const Input = ({ children, placeholder, caption, maxLength }) => {
   const [value, setValue] = useState('');
   const [isError, setError] = useState(false);
 
@@ -64,7 +67,7 @@ const Input = ({ children, placeholder, description, maxLength }) => {
     if (isValid) setValue(newValue);
     else {
       if (isValidLength(newValue, maxLength)) setValue(newValue);
-      else setValue(value.slice(0, maxLength).concat(newValue[maxLength + 1]));
+      else setValue(value.slice(0, maxLength).concat(newValue[newValue.length - 1]));
     }
   };
 
@@ -77,8 +80,8 @@ const Input = ({ children, placeholder, description, maxLength }) => {
           value={value}
           onChange={changeValue}
         />
+        <Styled.Caption className={isError ? "error" : ""}>{caption}</Styled.Caption>
       </Styled.InputWrapper>
-      <Styled.Desc className={isError ? "error" : ""}>{description}</Styled.Desc>
     </>
   );
 };
