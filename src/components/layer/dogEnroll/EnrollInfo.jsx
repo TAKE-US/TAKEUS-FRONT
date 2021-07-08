@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { DogEnrollInput, RadioButton, Counter, TextField, AddDogLayer } from "components";
-import Input from "components/atoms/input";
+import Input from "components/atoms/Input";
 
 const EnrollInfoWrap = styled.section`
   display: flex;

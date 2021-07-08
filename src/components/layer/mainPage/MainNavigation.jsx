@@ -11,6 +11,7 @@ const Styled = {
     height: 63.7rem;
     background-image: url(${backgroundBeachImg});
     background-size: cover;
+    background-position: bottom center;
     padding-top: 19rem;
 
     .text {

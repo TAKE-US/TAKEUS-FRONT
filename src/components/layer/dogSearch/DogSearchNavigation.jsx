@@ -22,7 +22,7 @@ const Styled = {
       margin-left: calc(-50vw + 50%);
 
       p {
-        font: ${({ theme }) => theme.font.display2};
+        font: ${({ theme }) => theme.font.display1};
         color: ${({ theme }) => theme.color.black};
         text-align: center;
         padding-top: 5rem;
