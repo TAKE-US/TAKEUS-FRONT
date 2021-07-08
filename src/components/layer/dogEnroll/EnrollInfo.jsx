@@ -1,13 +1,19 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { RadioButton, Counter, TextField, AddDogLayer, Input } from "components";
+import { RadioButton, Counter, TextField, AddDogLayer, Input, Button } from "components";
 // import { DogEnrollInput } from 'components';
+import plusIcon from 'assets/icon/ic_plus_24.svg';
 
 const EnrollInfoWrap = styled.section`
   display: flex;
   flex-direction: column;
+  
   .wrap {
     margin-top: 6rem;
+    
+    &:last-child {
+      margin-bottom: 18rem;
+    }
     &--flex {
       display: flex;
       align-items: center;
@@ -17,6 +23,7 @@ const EnrollInfoWrap = styled.section`
       .contact-layer {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
+        grid-auto-rows: calc(4.2rem + 2px);
         column-gap: 1.9rem;
         row-gap: 1.2rem;
         margin-top: 2.4rem;
@@ -44,7 +51,7 @@ const EnrollInfoWrap = styled.section`
 `;
 
 const EnrollInfo = () => {
-  const [contacts, setContacts] = useState([]);
+  const [contacts, setContacts] = useState([{ type: 'phone' }]);
 
   const addContact = () => {
     setContacts(contacts.concat({ type: 'kakaotalk' }));
@@ -113,11 +120,15 @@ const EnrollInfo = () => {
               <div className="dropdown">{contact.type}</div>
             </Input>
           ))}
-          <button onClick={addContact}>+연락처 추가하기 버튼</button>
+          <div onClick={addContact}>
+            <Button rounded full padding="8px 0"><img src={plusIcon} alt="plus"/>연락처 추가하기</Button>
+          </div>
         </div>
-
       </div>
       <TextField />
+      <div className="wrap">
+        <Button rounded full font="headline" padding="15px">대상견 등록하기</Button>
+      </div>
     </EnrollInfoWrap>
   );
 };

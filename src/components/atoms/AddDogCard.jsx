@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import plus from "assets/img/ic_plus.svg";
+import plus from "assets/icon/ic_plus_24.svg";
 
 const Styled = {
   Wrapper: styled.section`

@@ -11,6 +11,7 @@ export { default as RadioButton } from "./atoms/RadioButton";
 export { default as Counter } from "./atoms/Counter";
 export { default as TextField } from "./atoms/TextField";
 export { default as Input } from "./atoms/Input";
+export { default as Button } from "./atoms/Button";
 
 // layer
 export { default as Header } from "./layer/Header";

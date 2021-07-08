@@ -6,32 +6,29 @@ const EnrollInfoWrap = styled.div`
   flex-direction: column;
   align-items: center;
   header{
-    width:100%;
+    width: 100%;
     text-align: center;
-    padding: 4.8rem;
-    border-bottom: 1.5px solid #DFDFDF;
-    p{
-      font:${({ theme }) => theme.font.display1};
+    padding-bottom: 4.8rem;
+    border-bottom: 1.5px solid ${({theme}) => theme.color.lightgray2};
+    p {
+      font: ${({ theme }) => theme.font.display1};
     }
   }
-  section{
-    width:107.9rem;
+  section {
+    width: 107.9rem;
     margin-top: 5.6rem;
-    h3{
-      font:${({ theme }) => theme.font.headline};
+    h3 {
+      font: ${({ theme }) => theme.font.headline};
     }
-    article{
+    article {
         background: ${({ theme }) => theme.color.bg_gray} ;
         margin-top: 2.4rem;
         border-radius: 1rem;
-        ul{
+        ul {
           list-style: disc;
           padding: 4rem 6.4rem;
-          li{
-            font-family: "Noto Sans KR";
-            font-style: normal;
-            font-weight: normal;
-            font-size: 1.8rem;
+          li {
+            font: ${({theme}) => theme.font.description};
             line-height: 2.8rem;
           }
         }

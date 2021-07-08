@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Button } from 'components';
+
 import ClockImg from 'assets/img/img_clock.svg';
 import HeartImg from 'assets/img/img_heart.svg';
 import SearchImg from 'assets/img/img_search.svg';
@@ -71,7 +73,7 @@ const AboutTakeUs = () => {
           <p>단체/개인구조자는 TAKEUS를 통해 이동봉사자를 모집하는 과정에서 들이는 시간과 수고를 줄일 수 있습니다.</p>
         </Styled.Content>
       </Styled.ContentArea>
-      <button>테이커스에 문의하기 - 버튼은 컴포넌트로 만들자</button>
+      <Button primary rounded padding="12px 30px">테이커스에 문의하기</Button>
     </Styled.Wrapper>
   );
 };
