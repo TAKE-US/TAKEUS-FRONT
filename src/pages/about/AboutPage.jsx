@@ -1,11 +1,9 @@
-import React from "react";
-
-import { ContactUs } from 'components';
+import React from 'react';
 
 const AboutPage = () => {
   return (
     <div>
-      <ContactUs />
+      AboutPage
     </div>
   );
 };

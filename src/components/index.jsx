@@ -10,6 +10,8 @@ export { default as DogEnrollInput } from "./atoms/DogEnrollInput";
 export { default as RadioButton } from "./atoms/RadioButton";
 export { default as Counter } from "./atoms/Counter";
 export { default as TextField } from "./atoms/TextField";
+export { default as ReviewCard } from "./atoms/ReviewCard";
+export { default as Hashtag } from "./atoms/Hashtag";
 export { default as Input } from "./atoms/Input";
 export { default as ContactUsInput } from "./atoms/ContactUsInput";
 export { default as ContactUsDetails } from "./atoms/ContactUsDetails";
@@ -17,18 +19,21 @@ export { default as Button } from "./atoms/Button";
 
 // layer
 export { default as Header } from "./layer/Header";
-export { default as Footer } from './layer/Footer';
-export { default as LoginLayer } from './layer/login/LoginLayer';
+export { default as Footer } from "./layer/Footer";
+export { default as LoginLayer } from "./layer/login/LoginLayer";
 
 // layer/mainPage
-export { default as AboutTakeUs } from './layer/mainPage/AboutTakeUs';
-export { default as BeforeVolunteer } from './layer/mainPage/BeforeVolunteer';
-export { default as CarouselDogContainer } from './layer/mainPage/CarouselDogContainer';
-export { default as CarouselReviewContainer } from './layer/mainPage/CarouselReviewContainer';
-export { default as MainNavigation } from './layer/mainPage/MainNavigation';
+export { default as AboutTakeUs } from "./layer/mainPage/AboutTakeUs";
+export { default as BeforeVolunteer } from "./layer/mainPage/BeforeVolunteer";
+export { default as CarouselDogContainer } from "./layer/mainPage/CarouselDogContainer";
+export { default as CarouselReviewContainer } from "./layer/mainPage/CarouselReviewContainer";
+export { default as MainNavigation } from "./layer/mainPage/MainNavigation";
 
 // layer/about
 export { default as ContactUs } from './layer/about/ContactUs';
+export { default as AboutUsTop } from "./layer/about/AboutUsTop";
+export { default as AboutUsMission } from "./layer/about/AboutUsMission";
+export { default as AboutUsTeam } from "./layer/about/AboutUsTeam";
 
 // layer/dogEnroll
 export { default as EnrollPrecaution } from "./layer/dogEnroll/EnrollPrecaution";

@@ -40,12 +40,15 @@ const AddDogCardContainer = () => {
   const [count, setCount] = useState(0);
   const full = Array.from({ length: count + 1 }, () => 0);
   const empty = Array.from({ length: 4 - count }, () => 0);
+
   return (
     <Styled.Wrapper>
       <>
-        {full.map((_, i) => (
-          <AddDogCard key={i} count={count} setCount={setCount} />
-        ))}
+        {full.map((_, i) =>
+          full.length !== 6 || i !== 5 ? (
+            <AddDogCard key={i} count={count} setCount={setCount} />
+          ) : null
+        )}
         {empty.map((_, i) => (
           <div className="card" key={i}></div>
         ))}
