@@ -8,12 +8,12 @@ import { getDogs } from "lib/api/sample";
 const ContainerWrap = styled.article`
   display: flex;
   flex-direction: column;
-  width: 108rem;
+  width: 100%;
   height: 48rem;
   .container-top {
     display: flex;
     justify-content: space-between;
-    width: 108rem;
+    width: 100%;
     height: 6rem;
     &__title {
       width: 52.3rem;
@@ -29,18 +29,17 @@ const ContainerWrap = styled.article`
   .container-bottom {
     width: 100%;
     display: flex;
-    max-width: 115rem;
+    /* max-width: 100%; */
     overflow-y: auto;
     /* items-container */
     &__cards {
-      display: flex;
+      display: grid;
+      grid-template-columns: repeat(30, 25.5rem);
+      grid-gap: 1.75rem;
       overflow-y: hidden;
       article {
         margin-right: 1.8rem;
       }
-    }
-    &__cards::nth-last-child(1) {
-      margin-right: 0;
     }
     &__cards::-webkit-scrollbar {
       display: none;
