@@ -52,8 +52,9 @@ const Styled = {
     }
 
     .line {
-      height: 0.05rem;
-      background-color: ${({theme}) => theme.color.gray2};
+      height: 0;
+      margin: 1rem 0;
+      border-top: solid 0.1rem ${({theme}) => theme.color.gray2};
     }
   `,
 
