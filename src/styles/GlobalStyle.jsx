@@ -10,18 +10,18 @@ const GlobalStyle = createGlobalStyle`
 
   html{
     font-size: 10px;
+  }
 
+  @media screen and (max-width: 1440px) {
+    html {
+      font-size: 8px;
+    }
   }
-@media screen and (max-width: 1440px) {
-  html {
-    font-size: 8px;
+  @media screen and (max-width: 1024px) {
+    html {
+      font-size: 6px;
+    }
   }
-}
-@media screen and (max-width: 1024px) {
-  html {
-    font-size: 6px;
-  }
-}
 
   body{
     -webkit-font-smoothing: antialiased;
@@ -55,13 +55,12 @@ const GlobalStyle = createGlobalStyle`
     outline: none;
     background: none;
     border: none;
-    cursor:pointer;
+    cursor: pointer;
   };
 
-  input{
-    display: flex;
+  input {
+    border: none;
     outline: none;
-    padding-left: 10px;
   }
 `;
 
