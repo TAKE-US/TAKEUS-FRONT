@@ -29,11 +29,11 @@ export { default as CarouselDogContainer } from "./layer/mainPage/CarouselDogCon
 export { default as CarouselReviewContainer } from "./layer/mainPage/CarouselReviewContainer";
 export { default as MainNavigation } from "./layer/mainPage/MainNavigation";
 
-// layer/about
-export { default as ContactUs } from './layer/about/ContactUs';
-export { default as AboutUsTop } from "./layer/about/AboutUsTop";
-export { default as AboutUsMission } from "./layer/about/AboutUsMission";
-export { default as AboutUsTeam } from "./layer/about/AboutUsTeam";
+// layer/aboutUs
+export { default as ContactUs } from './layer/aboutUs/ContactUs';
+export { default as AboutUsTop } from "./layer/aboutUs/AboutUsTop";
+export { default as AboutUsMission } from "./layer/aboutUs/AboutUsMission";
+export { default as AboutUsTeam } from "./layer/aboutUs/AboutUsTeam";
 
 // layer/dogEnroll
 export { default as EnrollPrecaution } from "./layer/dogEnroll/EnrollPrecaution";
