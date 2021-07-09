@@ -13,6 +13,8 @@ export { default as TextField } from "./atoms/TextField";
 export { default as ReviewCard } from "./atoms/ReviewCard";
 export { default as Hashtag } from "./atoms/Hashtag";
 export { default as Input } from "./atoms/Input";
+export { default as ContactUsInput } from "./atoms/ContactUsInput";
+export { default as ContactUsDetails } from "./atoms/ContactUsDetails";
 export { default as Button } from "./atoms/Button";
 
 // layer
@@ -28,6 +30,7 @@ export { default as CarouselReviewContainer } from "./layer/mainPage/CarouselRev
 export { default as MainNavigation } from "./layer/mainPage/MainNavigation";
 
 // layer/about
+export { default as ContactUs } from './layer/about/ContactUs';
 export { default as AboutUsTop } from "./layer/about/AboutUsTop";
 export { default as AboutUsMission } from "./layer/about/AboutUsMission";
 export { default as AboutUsTeam } from "./layer/about/AboutUsTeam";

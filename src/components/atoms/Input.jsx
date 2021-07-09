@@ -1,109 +1,86 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import styled from "styled-components";
 
 const Styled = {
   InputWrapper: styled.div`
-    position: relative;
     display: flex;
-    align-items: center;
     width: 100%;
-    height: 100%;
-    padding: 0 2rem;
+    padding: 4px 20px;
+    padding-left: 20px;
     border: solid 1px ${({ theme }) => theme.color.lightgray2};
-    border-radius: 5.4rem;
-
-    &.disabled {
-      background-color: ${({ theme }) => theme.color.bg_gray};
-      &:hover {
-        cursor: default;
-      }
-      
-      input {
-        &::placeholder {
-          color: ${({ theme }) => theme.color.gray1};
-        }
-        &:disabled {
-          background-color: ${({ theme }) => theme.color.bg_gray};
-        }
-      }
-      p {
-        color: ${({ theme }) => theme.color.gray1};
-      }
-    }
+    border-radius: 54px;
   `,
   Input: styled.input`
     flex: 1;
-    padding: 0.8rem 0 0.8rem 1rem;
-    font: ${({ theme, fontStyle }) => theme.font[fontStyle] || theme.font.button};
+    font: ${({ theme }) => theme.font.button};
     color: ${({ theme }) => theme.color.darkgray1};
-    line-height: 2.6rem;
+    line-height: 23px;
+    border: none;
+
     &::placeholder {
+      line-height: 26px;
       color: ${({ theme }) => theme.color.gray1};
     }
   `,
-  Caption: styled.p`
-    position: absolute;
-    left: 0.6rem;
-    bottom: -2rem;
-    font: ${({ theme }) => theme.font.caption};
+  Desc: styled.p`
+    margin-left: 6px;
+    font-size: 12px;
+    line-height: 17px;
     color: ${({ theme }) => theme.color.gray3};
-
     &.error {
       color: #F2754E;
     }
+  `,
+  Child: styled.div``,
+  Divider: styled.div`
+    margin: 0 16px;
+    width: 0;
+    border-right: solid 1px ${({ theme }) => theme.color.lightgray2};
   `
 };
 
-
-const isValidLength = (text, maxLength) => {
-  if (!maxLength) return true;
-
-  return text.length > maxLength ? false : true;
-};
-
-const Input = ({ children, placeholder, caption, maxLength, font, disabled }) => {
-  const [value, setValue] = useState('');
+const Input = ({ children, placeholder, description, max, childPos }) => {
+  const [word, setWord] = useState("");
   const [isError, setError] = useState(false);
 
-  const isValid = useMemo(() => {
-    switch (true) {
-      case !isValidLength(value, maxLength):
-        break;
-      default:
-        return true;
-    }
-
-    return false;
-  }, [value, maxLength]);
-
   useEffect(() => {
-    if (isValid) setError(false);
-    else setError(true);
-  }, [isValid]);
+    if (!max) return;
 
-  const changeValue = evt => {
-    const newValue = evt.target.value;
+    if (word.length > max) setError(true);
+    else setError(false);
+  }, [word, max]);
 
-    if (isValid) setValue(newValue);
-    else {
-      if (isValidLength(newValue, maxLength)) setValue(newValue);
-      else setValue(value.slice(0, maxLength).concat(newValue[newValue.length - 1]));
-    }
+  const hasLeftChild = useMemo(() => children && childPos !== 'right' ? true : false, [children, childPos]);
+
+  const changeWord = evt => {
+    setWord(evt.target.value);
   };
 
   return (
     <>
-      <Styled.InputWrapper className={disabled ? 'disabled' : ''}>
-        {children}
+      <Styled.InputWrapper hasLeftChild={hasLeftChild}
+      >
+        {
+          children && childPos !== 'right' ?
+            (<>
+              <Styled.Child className="test">{children}</Styled.Child>
+              <Styled.Divider></Styled.Divider>
+            </>) : ''
+        }
         <Styled.Input
-          disabled={disabled}
           placeholder={placeholder}
-          value={value}
-          fontStyle={font}
-          onChange={changeValue}
+          value={word}
+          onChange={changeWord}
         />
-        <Styled.Caption className={isError ? "error" : ""}>{caption}</Styled.Caption>
+        {
+          children && childPos === 'right' ?
+            (<>
+              <Styled.Divider></Styled.Divider>
+              <Styled.Child className="test">{children}</Styled.Child>
+            </>) : ''
+        }
       </Styled.InputWrapper>
+      <Styled.Desc className={isError ? "error" : ""}>{description}</Styled.Desc>
     </>
   );
 };
