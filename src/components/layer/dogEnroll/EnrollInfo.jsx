@@ -9,6 +9,7 @@ const EnrollInfoWrap = styled.section`
     margin-top: 6rem;
     
     &:last-child {
+      margin-top: 8rem;
       margin-bottom: 18rem;
     }
     &--flex {
@@ -135,7 +136,9 @@ const EnrollInfo = () => {
           </div>
         </div>
       </div>
-      <TextField />
+      <div className="wrap">
+        <TextField label="내용을 작성해주세요" maxLength={500}/>
+      </div>
       <div className="wrap">
         <Button rounded full font="headline" padding="15px">대상견 등록하기</Button>
       </div>

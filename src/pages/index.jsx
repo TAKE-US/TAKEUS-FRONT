@@ -5,4 +5,5 @@ export { default as AboutPage } from "./about/AboutPage";
 export { default as InfoPage } from "./info/InfoPage";
 export { default as LoginPage } from "./login/LoginPage";
 export { default as ReviewPage } from "./review/ReviewPage";
+export { default as ReviewPostPage } from "./review/ReviewPostPage";
 export { default as MainPage } from "./MainPage";
