@@ -62,7 +62,7 @@ const ReviewCard = () => {
       <section className="text">
         <section className="tags">
           {tags.map(tag => (
-            <Hashtag key={tag} tag={tag} sort="card" />
+            <Hashtag key={tag} tag={tag} primary />
           ))}
         </section>
         <article>
