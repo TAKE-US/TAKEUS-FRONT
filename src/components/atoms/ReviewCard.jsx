@@ -51,6 +51,7 @@ const Styled = {
     }
     .image {
       margin-left: 2.4rem;
+      border-radius: 0.6rem;
     }
   `,
 };
@@ -86,6 +87,6 @@ const ReviewCard = () => {
 };
 
 //mock data
-const tags = ["이동봉사과정", "도착공항정보", "봉사국가"];
+const tags = ["이동봉사과정", "도착공항정보", "봉사국가", "봉사국가"];
 
 export default ReviewCard;
