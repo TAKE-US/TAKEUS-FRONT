@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import rightarrow from "assets/img/btn_round_arrow_right_40.svg";
 import leftarrow from "assets/img/btn_round_arrow_left_40.svg";
 import styled from "styled-components";
@@ -26,32 +26,56 @@ const Styled = {
 };
 
 const Carousel = ({ listRef, movingValue }) => {
-  const scrollLeft = () => {
+  //state 100 + 20
+  const [position, setPosition] = useState(0);
+
+  const LeftScroll = () => {
+    if (position > 0) {
+      setPosition(position - movingValue);
+    } else {
+      setPosition(0);
+    }
+
     if (listRef.current) {
-      listRef.current.scrollBy({
-        top: 0,
-        left: -parseInt(movingValue, 10),
+      listRef.current.scrollTo({
+        left: position - movingValue,
         behavior: "smooth",
       });
     }
   };
 
-  const scrollRight = () => {
+  const RightScroll = () => {
+    if (position < 7000) {
+      setPosition(position + movingValue);
+    } else {
+      setPosition(7073);
+    }
+
     if (listRef.current) {
-      listRef.current.scrollBy({
-        top: 0,
-        left: parseInt(movingValue, 10),
+      listRef.current.scrollTo({
+        left: position + movingValue,
         behavior: "smooth",
       });
     }
   };
+  // // setRight(0);
+  // function RightScroll(count) {
+  //   let totalMoved = parseInt(movingValue, 10) * count;
+  //   if (listRef.current) {
+  //     listRef.current.scrollBy({
+  //       top: 0,
+  //       left: totalMoved,
+  //       behavior: "smooth",
+  //     });
+  //   }
+  // }
 
   return (
     <Styled.Wrapper>
-      <div className="left" onClick={scrollLeft}>
+      <div className="left" onClick={LeftScroll}>
         <img src={leftarrow} alt="leftarrow" />
       </div>
-      <div className="right" onClick={scrollRight}>
+      <div className="right" onClick={RightScroll}>
         <img src={rightarrow} alt="rightarrow" />
       </div>
     </Styled.Wrapper>
