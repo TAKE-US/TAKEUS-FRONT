@@ -2,10 +2,10 @@
 export { default as Swiper } from "./atoms/Swiper";
 export { default as DogDetailInfo } from "./atoms/DogDetailInfo";
 export { default as DogDetail } from "./atoms/DogDetail";
-export { default as FindDogCard } from "./atoms/FindDogCard";
+export { default as DogCard } from "./atoms/DogCard";
 export { default as CopyLinkButton } from "./atoms/CopyLinkButton";
 export { default as Searchbar } from "./atoms/Searchbar";
-export { default as DogFilter } from "./atoms/DogFilter";
+export { default as Filter } from "./atoms/Filter";
 export { default as DogEnrollInput } from "./atoms/DogEnrollInput";
 export { default as RadioButton } from "./atoms/RadioButton";
 export { default as Counter } from "./atoms/Counter";
@@ -13,6 +13,8 @@ export { default as TextField } from "./atoms/TextField";
 export { default as ReviewCard } from "./atoms/ReviewCard";
 export { default as Hashtag } from "./atoms/Hashtag";
 export { default as Input } from "./atoms/Input";
+export { default as ContactUsInput } from "./atoms/ContactUsInput";
+export { default as ContactUsDetails } from "./atoms/ContactUsDetails";
 export { default as Button } from "./atoms/Button";
 
 // layer
@@ -27,10 +29,11 @@ export { default as CarouselDogContainer } from "./layer/mainPage/CarouselDogCon
 export { default as CarouselReviewContainer } from "./layer/mainPage/CarouselReviewContainer";
 export { default as MainNavigation } from "./layer/mainPage/MainNavigation";
 
-// layer/about
-export { default as AboutUsTop } from "./layer/about/AboutUsTop";
-export { default as AboutUsMission } from "./layer/about/AboutUsMission";
-export { default as AboutUsTeam } from "./layer/about/AboutUsTeam";
+// layer/aboutUs
+export { default as ContactUs } from './layer/aboutUs/ContactUs';
+export { default as AboutUsTop } from "./layer/aboutUs/AboutUsTop";
+export { default as AboutUsMission } from "./layer/aboutUs/AboutUsMission";
+export { default as AboutUsTeam } from "./layer/aboutUs/AboutUsTeam";
 
 // layer/dogEnroll
 export { default as EnrollPrecaution } from "./layer/dogEnroll/EnrollPrecaution";

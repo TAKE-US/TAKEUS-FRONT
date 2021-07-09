@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import styled from "styled-components";
 //hooks
 import { useDetectOutsideClick } from "hooks/useDetectOutsideClick";
@@ -6,17 +6,19 @@ import { useDetectOutsideClick } from "hooks/useDetectOutsideClick";
 import downIcon from "../../assets/icon/ic_arrow_bottom_18.svg";
 import upIcon from "../../assets/icon/ic_arrow_top_18.svg";
 
+const Wrapper = styled.section`
+  min-width: 108rem;
+`;
+
 const FilterWrap = styled.section`
-  //오른쪽 끝으로 위치하게
   position: relative;
-  right: -50%;
-  transform: translateX(-50%);
+  left: calc(100% - 8.5rem);
 `;
 const SelectedFilter = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 8.5rem;
+  width: 9rem;
   margin-top: 3.6rem;
   background: ${({ theme }) => theme.color.bg_gray};
   border: 1px solid #dfdfdf;
@@ -66,26 +68,32 @@ const DropDownWrap = styled.div`
   }
 `;
 
-const DogFilter = () => {
+const Filter = ({ contents }) => {
   const dropDownRef = useRef(null);
+  const [selectedFilter, setSelectedFilter] = useState(contents[0]);
   const [isOpen, setIsOpen] = useDetectOutsideClick(dropDownRef, false);
 
   return (
-    <FilterWrap>
-      <SelectedFilter onClick={() => setIsOpen(!isOpen)}>
-        <p>최신순</p>
-        <img src={isOpen ? upIcon : downIcon} alt="downIcon" />
-      </SelectedFilter>
-      {isOpen && (
-        <DropDownWrap ref={dropDownRef}>
-          <ul>
-            <li>최신순</li>
-            <li>오래된순</li>
-          </ul>
-        </DropDownWrap>
-      )}
-    </FilterWrap>
+    <Wrapper>
+      <FilterWrap>
+        <SelectedFilter onClick={() => setIsOpen(!isOpen)}>
+          <p>{selectedFilter}</p>
+          <img src={isOpen ? upIcon : downIcon} alt="downIcon" />
+        </SelectedFilter>
+        {isOpen && (
+          <DropDownWrap ref={dropDownRef}>
+            <ul>
+              {contents?.map(content => (
+                <li key={content} onClick={() => setSelectedFilter(content)}>
+                  {content}
+                </li>
+              ))}
+            </ul>
+          </DropDownWrap>
+        )}
+      </FilterWrap>
+    </Wrapper>
   );
 };
 
-export default DogFilter;
+export default Filter;

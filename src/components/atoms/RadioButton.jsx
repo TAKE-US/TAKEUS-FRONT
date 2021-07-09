@@ -23,6 +23,7 @@ const RadioBtn = styled.button`
   width: 2.4rem;
   height: 2.4rem;
   background-image: url(${props => props.bg});
+  background-size: 100% 100%;
 `;
 
 const RadioButton = ({ items }) => {

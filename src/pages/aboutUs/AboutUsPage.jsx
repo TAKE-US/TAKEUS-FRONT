@@ -1,8 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { AboutUsTop } from "../../components";
-import { AboutUsMission } from "../../components";
-import { AboutUsTeam } from "../../components";
+import { AboutUsTop, AboutUsMission, AboutUsTeam, ContactUs } from "components";
+
 const Styled = {
   Wrapper: styled.div`
     display: flex;
@@ -20,6 +19,7 @@ const AboutPage = () => {
       <AboutUsTop />
       <AboutUsMission />
       <AboutUsTeam />
+      <ContactUs />
     </Styled.Wrapper>
   );
 };
