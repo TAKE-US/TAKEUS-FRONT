@@ -3,84 +3,106 @@ import styled from "styled-components";
 
 const Styled = {
   InputWrapper: styled.div`
+    position: relative;
     display: flex;
+    align-items: center;
     width: 100%;
-    padding: 4px 20px;
-    padding-left: 20px;
+    height: 100%;
+    padding: 0 2rem;
     border: solid 1px ${({ theme }) => theme.color.lightgray2};
-    border-radius: 54px;
+    border-radius: 5.4rem;
+
+    &.disabled {
+      background-color: ${({ theme }) => theme.color.bg_gray};
+      &:hover {
+        cursor: default;
+      }
+      
+      input {
+        &::placeholder {
+          color: ${({ theme }) => theme.color.gray1};
+        }
+        &:disabled {
+          background-color: ${({ theme }) => theme.color.bg_gray};
+        }
+      }
+      p {
+        color: ${({ theme }) => theme.color.gray1};
+      }
+    }
   `,
   Input: styled.input`
     flex: 1;
+    padding: 0.8rem 0 0.8rem 1rem;
     font: ${({ theme }) => theme.font.button};
     color: ${({ theme }) => theme.color.darkgray1};
-    line-height: 23px;
-    border: none;
-
+    line-height: 2.6rem;
     &::placeholder {
-      line-height: 26px;
       color: ${({ theme }) => theme.color.gray1};
     }
   `,
-  Desc: styled.p`
-    margin-left: 6px;
-    font-size: 12px;
-    line-height: 17px;
+  Caption: styled.p`
+    position: absolute;
+    left: 0.6rem;
+    bottom: -2rem;
+    font: ${({ theme }) => theme.font.caption};
     color: ${({ theme }) => theme.color.gray3};
+
     &.error {
       color: #F2754E;
     }
-  `,
-  Child: styled.div``,
-  Divider: styled.div`
-    margin: 0 16px;
-    width: 0;
-    border-right: solid 1px ${({ theme }) => theme.color.lightgray2};
   `
 };
 
-const Input = ({ children, placeholder, description, max, childPos }) => {
-  const [word, setWord] = useState("");
+const isValidLength = (text, maxLength) => {
+  if (!maxLength) return true;
+
+  return text.length > maxLength ? false : true;
+};
+
+const Input = ({ children, placeholder, caption, maxLength, font, disabled }) => {
+  const [value, setValue] = useState('');
   const [isError, setError] = useState(false);
 
+  const isValid = useMemo(() => {
+    switch (true) {
+      case !isValidLength(value, maxLength):
+        break;
+      default:
+        return true;
+    }
+
+    return false;
+  }, [value, maxLength]);
+
   useEffect(() => {
-    if (!max) return;
+    if (isValid) setError(false);
+    else setError(true);
+  }, [isValid]);
 
-    if (word.length > max) setError(true);
-    else setError(false);
-  }, [word, max]);
+  const changeValue = evt => {
+    const newValue = evt.target.value;
 
-  const hasLeftChild = useMemo(() => children && childPos !== 'right' ? true : false, [children, childPos]);
-
-  const changeWord = evt => {
-    setWord(evt.target.value);
+    if (isValid) setValue(newValue);
+    else {
+      if (isValidLength(newValue, maxLength)) setValue(newValue);
+      else setValue(value.slice(0, maxLength).concat(newValue[newValue.length - 1]));
+    }
   };
 
   return (
     <>
-      <Styled.InputWrapper hasLeftChild={hasLeftChild}
-      >
-        {
-          children && childPos !== 'right' ?
-            (<>
-              <Styled.Child className="test">{children}</Styled.Child>
-              <Styled.Divider></Styled.Divider>
-            </>) : ''
-        }
+      <Styled.InputWrapper className={disabled ? 'disabled' : ''}>
+        {children}
         <Styled.Input
+          disabled={disabled}
           placeholder={placeholder}
-          value={word}
-          onChange={changeWord}
+          value={value}
+          fontStyle={font}
+          onChange={changeValue}
         />
-        {
-          children && childPos === 'right' ?
-            (<>
-              <Styled.Divider></Styled.Divider>
-              <Styled.Child className="test">{children}</Styled.Child>
-            </>) : ''
-        }
+        <Styled.Caption className={isError ? "error" : ""}>{caption}</Styled.Caption>
       </Styled.InputWrapper>
-      <Styled.Desc className={isError ? "error" : ""}>{description}</Styled.Desc>
     </>
   );
 };
