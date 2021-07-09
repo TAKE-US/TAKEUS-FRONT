@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import SwiperContent from './SwiperContent';
 
 const SwiperWrap = styled.div`
-  float: left;
   position: relative;
   width: 100%;
   padding-bottom: 100%;
