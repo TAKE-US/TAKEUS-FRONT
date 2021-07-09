@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { RadioButton, Counter, TextField, AddDogLayer, Input, Button } from "components";
 // import { DogEnrollInput } from 'components';
-import plusIcon from 'assets/icon/ic_plus_24.svg';
+import { ReactComponent as Plus } from 'assets/icon/ic_plus_24.svg';
 
 const EnrollInfoWrap = styled.section`
   .wrap {
@@ -24,6 +24,19 @@ const EnrollInfoWrap = styled.section`
         column-gap: 1.9rem;
         row-gap: 1.2rem;
         margin-top: 2.4rem;
+      }
+      .contact__btn {
+        svg {
+          width: calc(2.4rem - 2px);
+          height: calc(2.4rem - 2px);
+          margin-right: 0.8rem;
+          stroke: ${({ theme }) => theme.color.primary};
+        }
+        &:hover {
+          svg {
+            stroke: ${({ theme }) => theme.color.white};
+          }
+        }
       }
     }
 
@@ -117,8 +130,8 @@ const EnrollInfo = () => {
               <div className="dropdown">{contact.type}</div>
             </Input>
           ))}
-          <div onClick={addContact}>
-            <Button rounded full padding="8px 0"><img src={plusIcon} alt="plus"/>연락처 추가하기</Button>
+          <div className="contact__btn" onClick={addContact}>
+            <Button rounded full padding="8px 0"><Plus />연락처 추가하기</Button>
           </div>
         </div>
       </div>
