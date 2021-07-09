@@ -6,7 +6,7 @@ import {
   LoginPage,
   DogPage,
   InfoPage,
-  AboutPage,
+  AboutUsPage,
   MainPage,
   DogDetailPage,
   DogEnrollPage,
@@ -49,7 +49,7 @@ function App() {
               <InfoPage />
             </Route>
             <Route path="/about" exact>
-              <AboutPage />
+              <AboutUsPage />
             </Route>
             <Route path="/review" exact>
               <ReviewPage />
