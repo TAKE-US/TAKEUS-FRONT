@@ -1,10 +1,10 @@
-import React from 'react';
-import { withRouter, useHistory } from 'react-router-dom'; // useHistory
+import React  from 'react';
+import { withRouter } from 'react-router-dom'; 
 import styled from "styled-components";
 import DeleteIcon from '../../assets/img/ic_delete.svg';
 import EditIcon from '../../assets/img/ic_edit.svg';
  
-import { Swiper, DogDetailInfo, CopyLinkButton } from "../"; //DogDetailInfo,
+import { Swiper, DogDetailInfo, CopyLinkButton } from "../"; 
  
 const DogDetailWrap = styled.div`
  display: flex;
@@ -109,9 +109,7 @@ const DogDetailWrap = styled.div`
  }
 `;
  
-const DogDetail = ({ dogs, match }) => {
- let history = useHistory();
- 
+const DogDetail = ({ dogs, match, history }) => {
  return (
    <DogDetailWrap>
      {dogs?.map(dog => (
