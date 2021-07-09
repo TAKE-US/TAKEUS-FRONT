@@ -1,27 +1,24 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 
 import { useDetectOutsideClick } from '../../hooks/useDetectOutsideClick';
 import Arrow_Bottom from '../../assets/img/ic_arrow_bottom_black_24.svg';
 import Arrow_Top from '../../assets/img/ic_arrow_top_black_24.svg';
 
-const Menu = {
+const Styled = {
   Container: styled.div`
     position: relative;
   `,
 
   Button: styled.button`
-    width: 20rem;
-    height: 8.2rem;
-    font: ${({ theme }) => theme.font.subheading};
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 2.6rem;
-    border-radius: 10px;
+    width: 100%;
+    padding: ${props => props.small ? "0.8rem 2rem" : "2.4rem 2.6rem"};
+    border-radius: ${props => props.rounded ? '5.4rem' : '1rem'};
     border: none;
-    background-color: #FFFFFF;
-    cursor: pointer;
+    background-color: ${({ theme }) => theme.color.white};
 
     .destination {
       display: flex;
@@ -29,22 +26,23 @@ const Menu = {
       text-align: left;
 
       .name {
+        display: ${props => props.caption ? 'block' : 'none'};
         font: ${({ theme }) => theme.font.caption};
         color: ${({ theme }) => theme.color.gray3};
       }
 
       .text {
-        margin-top: 0.6rem;
-        font: ${({ theme }) => theme.font.body2};
-        color: ${props => props.currCountry ? "#3D3D3D" : "#C1C1C1"};
+        margin-top: ${props => props.caption ? '0.6rem' : '0'};
+        font: ${({ theme, fontStyle }) => fontStyle ? theme.font[fontStyle] : theme.font.body2};
+        color: ${props => props.list ? "#3D3D3D" : "#C1C1C1"};
       }
     }
   `,
 
   Nav: styled.nav`
+    width: 100%;
     position: absolute;
     display: ${props => props.isActive ? 'flex' : 'none'};
-    width: 19.8rem;
     padding: 1rem 0.6rem;
     box-shadow: 0rem 0rem 3rem 0.1rem rgba(0,0,0,0.1);
     border-radius: 1rem;
@@ -53,19 +51,19 @@ const Menu = {
   `,
 
   Ul: styled.ul`
+    width: 100%;
     list-style: none;
     padding: 0;
     margin: 0;
   `,
 
   List: styled.li`
-    width: 18.4rem;
     height: 3.4rem;
     padding-left: 1.4rem;
     font: ${({ theme }) => theme.font.body1};
-    color: ${props => props.selected
-      ? "#FDCB02"
-      : "#3D3D3D"
+    color: ${({ theme, selected }) => selected
+      ? theme.color.primary
+      : theme.color.darkgray1
     };
     display: flex;
     align-items: center;
@@ -77,50 +75,56 @@ const Menu = {
   `,
 };
 
-const DropdownCountry = ({ currCountry, setCurrCountry }) => {
+const Dropdown = ({ children, placeholder, rounded, font, caption, small }) => {
   const dropdownRef = useRef(null);
   const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
-
+  const [list, setList] = useState('');
+  
   const onClick = () => {
     setIsActive(!isActive);
   };
 
-  const country = ["미국", "캐나다", "독일", "프랑스", "네덜란드"];
-
   return (
-    <Menu.Container>
-      <Menu.Button onClick={onClick} currCountry={currCountry}>
+    <Styled.Container>
+      <Styled.Button
+        onClick={onClick}
+        list={list}
+        rounded={rounded}
+        fontStyle={font}
+        caption={caption}
+        small={small}
+      >
         <div className="destination">
-          <span className="name">국가</span>
+          <span className="name">{caption}</span>
           <span className="text">
-            {currCountry ? currCountry : "어디로 가시나요?"}
+            {list ? list : placeholder}
           </span>
         </div>
         <img
           src={isActive ? Arrow_Top : Arrow_Bottom}
           alt=""
         />
-      </Menu.Button>
-      <Menu.Nav ref={dropdownRef} isActive={isActive}>
-        <Menu.Ul>
-          {country.map((country, index) => (
-            <Menu.List
-              key={index}
-              selected={
-                currCountry === country ? true : false
-              }
-              onClick={() => {
-                setCurrCountry(country);
-                setIsActive(!isActive);
-              }}
-            >
-              {country}
-            </Menu.List>
-          ))}
-        </Menu.Ul>
-      </Menu.Nav>
-    </Menu.Container>
+      </Styled.Button>
+      <Styled.Nav ref={dropdownRef} isActive={isActive}>
+        <Styled.Ul>
+          {children.map((value, index) => (
+              <Styled.List
+                key={index}
+                selected={
+                  list === value ? true : false
+                }
+                onClick={() => {
+                  setList(value);
+                  setIsActive(!isActive);
+                }}
+              >
+                {value}
+              </Styled.List>
+            ))}
+        </Styled.Ul>
+      </Styled.Nav>
+    </Styled.Container>
   );
 };
 
-export default DropdownCountry;
+export default Dropdown;

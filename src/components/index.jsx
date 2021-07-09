@@ -16,6 +16,7 @@ export { default as Input } from "./atoms/Input";
 export { default as ContactUsInput } from "./atoms/ContactUsInput";
 export { default as ContactUsDetails } from "./atoms/ContactUsDetails";
 export { default as Button } from "./atoms/Button";
+export { default as Dropdown } from "./atoms/Dropdown";
 
 // layer
 export { default as Header } from "./layer/Header";
