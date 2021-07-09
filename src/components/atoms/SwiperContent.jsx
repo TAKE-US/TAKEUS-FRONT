@@ -4,9 +4,9 @@ import Arrow from './Arrow';
 import PaginationDot from './PaginationDot';
 
 const SwiperContentWrap = styled.div`
-  position: relative;
-  width: 40.3rem;
-  height: 100%;
+  position: absolute;
+  height: 100%; 
+  width: 100%;
   overflow: hidden;
   border-radius: 10px;
   display: flex;

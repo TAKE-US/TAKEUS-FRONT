@@ -3,11 +3,10 @@ import styled from 'styled-components';
 import SwiperContent from './SwiperContent';
 
 const SwiperWrap = styled.div`
-  display: flex;
-  flex-direction: row;
+  float: left;
+  position: relative;
   width: 100%;
-  height: 100%;
-  border-radius: 1rem;
+  padding-bottom: 100%;
 `;
 
 const Swiper = ({ images }) => {
