@@ -34,7 +34,7 @@ const Styled = {
   Input: styled.input`
     flex: 1;
     padding: 0.8rem 0 0.8rem 1rem;
-    font: ${({ theme }) => theme.font.button};
+    font: ${({ theme, fontStyle }) => theme.font[fontStyle] || theme.font.button};
     color: ${({ theme }) => theme.color.darkgray1};
     line-height: 2.6rem;
     &::placeholder {
@@ -61,7 +61,7 @@ const isValidLength = (text, maxLength) => {
   return text.length > maxLength ? false : true;
 };
 
-const Input = ({ children, placeholder, caption, maxLength, disabled }) => {
+const Input = ({ children, placeholder, caption, maxLength, font, disabled }) => {
   const [value, setValue] = useState('');
   const [isError, setError] = useState(false);
 
@@ -99,6 +99,7 @@ const Input = ({ children, placeholder, caption, maxLength, disabled }) => {
           disabled={disabled}
           placeholder={placeholder}
           value={value}
+          fontStyle={font}
           onChange={changeValue}
         />
         <Styled.Caption className={isError ? "error" : ""}>{caption}</Styled.Caption>
