@@ -5,9 +5,6 @@ import { RadioButton, Counter, TextField, AddDogLayer, Input, Button } from "com
 import plusIcon from 'assets/icon/ic_plus_24.svg';
 
 const EnrollInfoWrap = styled.section`
-  display: flex;
-  flex-direction: column;
-  
   .wrap {
     margin-top: 6rem;
     

@@ -30,7 +30,6 @@ const EnrollInfoWrap = styled.div`
         }
       }
   }
-
 `;
 
 const EnrollInfo = () => {
