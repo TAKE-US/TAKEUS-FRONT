@@ -68,7 +68,7 @@ const CardWrap = styled.article`
   }
 `;
 
-const FindDogCard = ({ id, dog, history }) => {
+const DogCard = ({ id, dog, history }) => {
   const cardClickHandler = () => {
     history.push(`/dogSearch/${dog._id}`);
   };
@@ -91,4 +91,4 @@ const FindDogCard = ({ id, dog, history }) => {
   );
 };
 
-export default withRouter(FindDogCard);
+export default withRouter(DogCard);

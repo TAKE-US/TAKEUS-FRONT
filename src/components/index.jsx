@@ -2,10 +2,10 @@
 export { default as Swiper } from "./atoms/Swiper";
 export { default as DogDetailInfo } from "./atoms/DogDetailInfo";
 export { default as DogDetail } from "./atoms/DogDetail";
-export { default as FindDogCard } from "./atoms/FindDogCard";
+export { default as DogCard } from "./atoms/DogCard";
 export { default as CopyLinkButton } from "./atoms/CopyLinkButton";
 export { default as Searchbar } from "./atoms/Searchbar";
-export { default as DogFilter } from "./atoms/DogFilter";
+export { default as Filter } from "./atoms/Filter";
 export { default as DogEnrollInput } from "./atoms/DogEnrollInput";
 export { default as RadioButton } from "./atoms/RadioButton";
 export { default as Counter } from "./atoms/Counter";

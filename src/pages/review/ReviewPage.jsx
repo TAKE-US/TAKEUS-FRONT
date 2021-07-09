@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 //components
-import { ReviewCard, PaginationNav, DogFilter } from "components";
+import { ReviewCard, PaginationNav, Filter } from "components";
 
 const Styled = {
   Wrapper: styled.div`
@@ -10,9 +10,10 @@ const Styled = {
 };
 
 const ReviewPage = () => {
+  const contents = ["최신순", "오래된순"];
   return (
     <Styled.Wrapper>
-      <DogFilter />
+      <Filter contents={contents} />
       <ReviewCard />
       <PaginationNav />
     </Styled.Wrapper>

@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import styled from "styled-components";
 import { withRouter } from "react-router-dom";
-import FindDogCard from "../../atoms/FindDogCard";
+import DogCard from "../../atoms/DogCard";
 import Carousel from "components/atoms/Carousel";
 import { getDogs } from "lib/api/sample";
 
@@ -74,10 +74,7 @@ const CarouselDogContainer = () => {
       </article>
       <article className="container-bottom">
         <div className="container-bottom__cards" ref={listRef}>
-          {dogs.length &&
-            dogs.map((dog, i) => (
-              <FindDogCard key={dog._id} id={dog._id} dog={dog} />
-            ))}
+          {dogs.length && dogs.map((dog, i) => <DogCard key={dog._id} id={dog._id} dog={dog} />)}
         </div>
       </article>
     </ContainerWrap>
