@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 //components
-import { ReviewCard, PaginationNav } from "components";
+import { ReviewCard, PaginationNav, DogFilter } from "components";
 
 const Styled = {
   Wrapper: styled.div`
@@ -12,6 +12,7 @@ const Styled = {
 const ReviewPage = () => {
   return (
     <Styled.Wrapper>
+      <DogFilter />
       <ReviewCard />
       <PaginationNav />
     </Styled.Wrapper>
