@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { DogCardContainer, PaginationNav, DogFilter, DogSearchNavigation } from "../../components";
+import { DogCardContainer, PaginationNav, DogSearchNavigation } from "../../components";
 //api
 import { getDogs } from "lib/api/sample";
 
@@ -17,7 +17,6 @@ const DogPage = () => {
   return (
     <>
       <DogSearchNavigation />
-      <DogFilter />
       <div className="container-div">
         <DogCardContainer dogs={dogs} />
       </div>

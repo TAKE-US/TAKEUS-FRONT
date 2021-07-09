@@ -1,28 +1,28 @@
-import React, { useRef } from 'react';
-import styled from 'styled-components';
+import React, { useRef } from "react";
+import styled from "styled-components";
 import { useHistory } from "react-router";
 
-import Searchbar from 'components/atoms/Searchbar';
-import RegisterDefault from 'assets/img/btn_register_default.svg';
-import RegisterHover from 'assets/img/btn_register_hover.svg';
-import backgroundImg from 'assets/img/img_bg_explore.png';
+import Searchbar from "components/atoms/Searchbar";
+import RegisterDefault from "assets/img/btn_register_default.svg";
+import RegisterHover from "assets/img/btn_register_hover.svg";
+import backgroundImg from "assets/img/img_bg_explore.png";
 
 const Styled = {
   Wrapper: styled.section`
-  
     .empty {
       background-color: ${({ theme }) => theme.color.white};
       height: 14.6rem;
     }
-    
+
     .img {
-      background-image: url(${backgroundImg});
+      background: url(${backgroundImg}) center;
       height: 24rem;
       width: 100vw;
       margin-left: calc(-50vw + 50%);
 
       p {
         font: ${({ theme }) => theme.font.display1};
+        line-height: 4.3rem;
         color: ${({ theme }) => theme.color.black};
         text-align: center;
         padding-top: 5rem;
@@ -34,12 +34,10 @@ const Styled = {
         margin: 0 auto;
         width: 84.6rem;
       }
-    };
+    }
   `,
 
-  Button: styled.button`
-  
-  `,
+  Button: styled.button``,
 };
 
 const DogSearchNavigation = () => {
@@ -58,8 +56,8 @@ const DogSearchNavigation = () => {
               src={RegisterDefault}
               alt=""
               ref={buttonRef}
-              onMouseEnter={() => buttonRef.current.src = RegisterHover}
-              onMouseLeave={() => buttonRef.current.src = RegisterDefault}
+              onMouseEnter={() => (buttonRef.current.src = RegisterHover)}
+              onMouseLeave={() => (buttonRef.current.src = RegisterDefault)}
               onClick={() => history.push("/dogEnroll")}
             />
           </Styled.Button>
