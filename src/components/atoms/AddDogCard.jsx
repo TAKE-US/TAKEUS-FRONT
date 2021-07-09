@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import styled from "styled-components";
 import plus from "assets/icon/ic_plus_24.svg";
@@ -47,13 +48,28 @@ const Styled = {
 const AddDogCard = ({ count, setCount }) => {
   const [imgfile, setImage] = useState(null);
   const [url, setUrl] = useState(null);
-  const setImageFromFile = ({ file, setImageUrl }) => {
+
+  function createImagePreview(event) {
+    const files = event.target.files;
+    if (files.length) {
+      setImageFromFile({
+        file: files[0],
+        setImageUrl: ({ result }) => {
+          setImage(files[0]);
+          setUrl(result);
+        },
+      });
+    }
+    setCount(count + 1);
+  }
+
+  function setImageFromFile({ file, setImageUrl }) {
     let reader = new FileReader();
     reader.onload = () => {
       setImageUrl({ result: reader.result });
     };
     reader.readAsDataURL(file);
-  };
+  }
 
   return (
     <Styled.Wrapper>
@@ -64,19 +80,11 @@ const AddDogCard = ({ count, setCount }) => {
           <input
             className="card__input"
             type="file"
+            multiple
             id="detail_image"
             accept="image/*"
-            onChange={({ target: { files } }) => {
-              if (files.length) {
-                setImageFromFile({
-                  file: files[0],
-                  setImageUrl: ({ result }) => {
-                    setImage(files[0]);
-                    setUrl(result);
-                  },
-                });
-              }
-              setCount(count + 1);
+            onChange={function (e) {
+              return createImagePreview(e);
             }}
           />
         </div>
