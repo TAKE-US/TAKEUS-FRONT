@@ -44,10 +44,10 @@ const Carousel = ({ listRef, movingValue }) => {
   };
 
   const RightScroll = () => {
-    if (position < 7000) {
+    if (position < 1361) {
       setPosition(position + movingValue);
     } else {
-      setPosition(7073);
+      setPosition(1360);
     }
 
     if (listRef.current) {
