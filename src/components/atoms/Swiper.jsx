@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import SwiperContent from './SwiperContent';
 
@@ -11,6 +11,14 @@ const SwiperWrap = styled.div`
 `;
 
 const Swiper = ({ images }) => {
+  useEffect(() => {
+    try {
+      console.log(images);
+    } catch (err) {
+      console.log(err);
+    }
+  });
+
   const [index, setIndex] = useState(0);
   const [xPosition, setXPosition] = useState(0);
   const width = 403;

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import LocationIcon from "../../assets/img/img_Location.svg";
+import LocationIcon from "../../assets/icon/ic_location_24.svg";
 import CallIcon from "../../assets/img/img_Call.svg";
 import InstagramIcon from "../../assets/img/img_Instagram.svg";
 import KakaotalkIcon from "../../assets/img/img_Kakaotalk.svg";
@@ -12,7 +12,7 @@ const Styled = {
   Wrapper: styled.div`
     display: flex;
     flex-direction: column;
-    width: 62.2rem;
+    width: 43%;
     height: 46rem;
     margin: 0rem 0rem 3.2rem 5.5rem;
   `,
@@ -120,14 +120,14 @@ const Styled = {
   `
 };
 
-function DogDetailInfo({ dogData }) {
+function DogDetailInfo({ dog }) {
   return (
     <Styled.Wrapper>
       <Styled.Departure>
         <p>출국 정보</p>
         <Styled.DepartureRow>
           <img src={LocationIcon} alt="card_image" />
-          <p>{dogData.destination}</p>
+          <p>{dog.endingCountry}, {dog.endingAirport}</p>
         </Styled.DepartureRow>
       </Styled.Departure>
 
@@ -135,19 +135,24 @@ function DogDetailInfo({ dogData }) {
         <p>대상견 정보</p>
         <div className="info--main">
           <Styled.DogInfoRow>
-            <p>성별</p>{dogData.gender}
+            <p>성별</p>{dog.gender}
           </Styled.DogInfoRow>
           <Styled.DogInfoRow>
-            <p>나이</p>{dogData.age}살
+            <p>나이</p>{dog.age}살
           </Styled.DogInfoRow>
           <Styled.DogInfoRow>
-            <p>무게</p>{dogData.weight}kg
+            <p>무게</p>{dog.weight}kg
           </Styled.DogInfoRow>
+          
+          {(dog.neutralization === true)
+            ? (<Styled.DogInfoRow>
+              <p>중성화</p>완료
+            </Styled.DogInfoRow>)
+            : (<Styled.DogInfoRow>
+              <p>중성화</p>미완료
+            </Styled.DogInfoRow>)}
           <Styled.DogInfoRow>
-            <p>중성화</p>{dogData.neutralization}
-          </Styled.DogInfoRow>
-          <Styled.DogInfoRow>
-            <p>건강상태</p>{dogData.vaccination}
+            <p>건강상태</p>{dog.health}
           </Styled.DogInfoRow>
         </div>
       </Styled.DogInfo>
@@ -157,23 +162,23 @@ function DogDetailInfo({ dogData }) {
         <div className="contact--main">
           <Styled.ContactRow>
             <img src={KakaotalkIcon} alt="card_image" />
-            <p>lovedog</p>
+            <p>{dog.kakaotalkId}</p>
           </Styled.ContactRow>
           <Styled.ContactRow>
             <img src={TwitterIcon} alt="card_image" />
-            <p>lovedog</p>
+            <p>{dog.twitter}</p>
           </Styled.ContactRow>
           <Styled.ContactRow>
             <img src={InstagramIcon} alt="card_image" />
-            <p>takers_lovedog</p>
+            <p>{dog.instagram}</p>
           </Styled.ContactRow>
           <Styled.ContactRow>
             <img src={FacebookIcon} alt="card_image" />
-            <p>takers_lovedog</p>
+            <p>{dog.facebook}</p>
           </Styled.ContactRow>
           <Styled.ContactRow>
             <img src={CallIcon} alt="card_image" />
-            <p>010 9292 9292</p>
+            <p>{dog.phoneNumber}</p>
           </Styled.ContactRow>
         </div>
       </Styled.Contact>

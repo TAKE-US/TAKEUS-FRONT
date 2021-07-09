@@ -6,10 +6,8 @@ import FullDot from '../../assets/img/img_fullDot.svg';
 
 const DotWrap = styled.div`
   position: absolute;
-  top: 30rem;
-  z-index: 10;
-  left: 13rem;
-  right: 0;
+  top: 90%;
+  left: 50%;
   margin: 0 auto;
 `;
 
