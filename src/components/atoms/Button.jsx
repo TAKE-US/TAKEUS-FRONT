@@ -3,14 +3,15 @@ import styled from 'styled-components';
 
 const Styled = {
   Button: styled.button`
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: ${props => props.full ? '100%' : 'auto'};
     padding: ${props => props.padding || '0.5rem'};
     border-radius: ${props => props.rounded ? '50px' : '8px'};
     font: ${({ theme, fontStyle }) => fontStyle ? theme.font[fontStyle] : theme.font.button};
-    & > * {
-      vertical-align: sub;
-    }
+
+
     &.primary {
       color: ${({theme}) => theme.color.white};
       background-color: ${({theme}) => theme.color.primary};
