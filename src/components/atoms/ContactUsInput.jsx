@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import { Input, Button } from 'components';
 import useInput from "hooks/useInput";
 
 const Styled = {
@@ -20,15 +21,6 @@ const Styled = {
       flex-direction: column;
       justify-content: space-between;
 
-      .button {
-        height: 4.2rem;
-        background-color: ${({ theme }) => theme.color.primary};
-        color: ${({ theme }) => theme.color.white};
-        font: ${({ theme }) => theme.font.button};
-        border-radius: 5.4rem;
-        margin-top: 2.6rem;
-      }
-
       .text{
         width: 100%;
         height: 25.4rem;
@@ -46,37 +38,19 @@ const Styled = {
           font: ${({theme}) => theme.font.body2};
         }
       }
+      .name, .email {
+        text-align: center;
+        width: 7rem;
+        font: ${({ theme }) => theme.font.body2};
+        color: ${({ theme }) => theme.color.gray3};
+        border-right: 1px solid ${({ theme }) => theme.color.lightgray2};
+        padding-right: 2rem
+      }
     }
   `,
-  InputWrapper: styled.div`
-    display: flex;
-    width: 100%;
-    padding: 0.7rem 2rem;
-    padding-left: 2rem;
-    border: solid 0.1rem ${({ theme }) => theme.color.lightgray2};
-    border-radius: 5.4rem;
-  `,
-  Input: styled.input`
-    flex: 1;
-    font: ${({ theme }) => theme.font.body2};
-    color: ${({ theme }) => theme.color.darkgray1};
-    line-height: 2.3rem;
-    border: none;
 
-    &::placeholder {
-      line-height: 2.6rem;
-      color: ${({ theme }) => theme.color.gray1};
-    }
-    `,
-  
-  Info: styled.div`
-    width: 5rem;
-    height: 2.6rem;
-    font: ${({ theme }) => theme.font.body2};
-    color: ${({ theme }) => theme.color.gray3};
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  Button: styled.div`
+    height: 4.2rem;
   `,
   
   Divider: styled.div`
@@ -88,30 +62,26 @@ const Styled = {
 
 const ContactUsInput = () => {
   const [text, setText] = useInput("");
-  const [name, setName] = useInput("");
-  const [email, setEmail] = useInput("");
 
   return (
     <Styled.Wrapper>
       <div className="inputinner">
-        <Styled.InputWrapper>
-          <Styled.Info>name</Styled.Info>
-          <Styled.Divider></Styled.Divider>
-          <Styled.Input
+        <div>
+          <Input
             placeholder="이름을 입력해주세요."
-            value={name}
-            onChange={setName}
-          ></Styled.Input>
-        </Styled.InputWrapper>
-        <Styled.InputWrapper>
-          <Styled.Info>e-mail</Styled.Info>
-          <Styled.Divider></Styled.Divider>
-          <Styled.Input
+            font="body2"
+          >
+            <span className="name">name</span>
+          </Input>
+        </div>
+        <div>
+          <Input
             placeholder="이메일을 입력해주세요."
-            value={email}
-            onChange={setEmail}
-          ></Styled.Input>
-        </Styled.InputWrapper>
+            font="body2"
+            >
+            <span className="email">e-mail</span>
+          </Input>
+        </div>
         <textarea
           className="text"
           value={text}
@@ -120,9 +90,14 @@ const ContactUsInput = () => {
         >
           {text}
         </textarea>
-        <button className="button">
-          TAKE US에 보내기
-        </button>
+          <Button
+            primary
+            rounded
+            full
+            padding="1.2rem 0"
+          >
+            TAKEUS에 보내기
+          </Button>
       </div>
     </Styled.Wrapper>
   );
