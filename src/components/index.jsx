@@ -10,6 +10,8 @@ export { default as DogEnrollInput } from "./atoms/DogEnrollInput";
 export { default as RadioButton } from "./atoms/RadioButton";
 export { default as Counter } from "./atoms/Counter";
 export { default as TextField } from "./atoms/TextField";
+export { default as ReviewCard } from "./atoms/ReviewCard";
+export { default as Hashtag } from "./atoms/Hashtag";
 export { default as Input } from "./atoms/Input";
 export { default as Button } from "./atoms/Button";
 
