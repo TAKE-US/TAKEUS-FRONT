@@ -26,7 +26,6 @@ const Styled = {
 };
 
 const Carousel = ({ listRef, movingValue }) => {
-  //state 100 + 20
   const [position, setPosition] = useState(0);
 
   const LeftScroll = () => {
@@ -58,17 +57,6 @@ const Carousel = ({ listRef, movingValue }) => {
       });
     }
   };
-  // // setRight(0);
-  // function RightScroll(count) {
-  //   let totalMoved = parseInt(movingValue, 10) * count;
-  //   if (listRef.current) {
-  //     listRef.current.scrollBy({
-  //       top: 0,
-  //       left: totalMoved,
-  //       behavior: "smooth",
-  //     });
-  //   }
-  // }
 
   return (
     <Styled.Wrapper>
