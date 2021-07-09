@@ -1,7 +1,6 @@
 import React from "react";
-import styled from 'styled-components';
-import { EnrollPrecaution, EnrollInfo } from "components";
 import styled from "styled-components";
+import { EnrollPrecaution, EnrollInfo } from "components";
 
 const PageStyle = styled.div`
   margin-top: 18.7rem;
