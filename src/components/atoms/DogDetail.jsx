@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { withRouter, useHistory } from 'react-router-dom'; // useHistory
 import styled from "styled-components";
 import DeleteIcon from '../../assets/img/ic_delete.svg';
@@ -14,7 +14,7 @@ const DogDetailWrap = styled.div`
  .goBack {
    width: 14%;
    height: 6%; 
-   margin-bottom: 7%;
+   margin-bottom: 3.2rem;
    font: ${({ theme }) => theme.font.body2};
    color: ${({ theme }) => theme.color.gray3};
    text-align: left;
@@ -104,18 +104,13 @@ const DogDetailWrap = styled.div`
      font: ${({ theme }) => theme.font.body1};
      color: ${({ theme }) => theme.color.darkgray1};
      border-radius: 1.7rem;
-     line-height: 1rem;
+     line-height: 140%;
    }
  }
 `;
  
 const DogDetail = ({ dogs, match }) => {
  let history = useHistory();
- 
-  useEffect(() => {
-    console.log(dogs);
-    console.log(match.params.id);
- }, [dogs, match]);
  
  return (
    <DogDetailWrap>

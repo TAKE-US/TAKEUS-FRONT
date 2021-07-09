@@ -13,14 +13,13 @@ const Styled = {
     display: flex;
     flex-direction: column;
     width: 43%;
-    height: 46rem;
     margin: 0rem 0rem 3.2rem 5.5rem;
   `,
 
   Departure: styled.section`
     display: flex;
     flex-direction: column;
-    margin-bottom: 3.2rem;
+    margin-bottom: 10%;
 
     p {
       height: 2.3rem;
@@ -32,14 +31,14 @@ const Styled = {
   DepartureRow: styled.div`
     display: flex;
     flex-direction: row;
-    height: 2.6rem;
-    padding: 1rem 0rem 1.2rem 0rem;
+    height: 10%;
+    padding: 3% 0% 3% 0%;
     color: ${({ theme }) => theme.color.black};
 
     img {
       width: 2.4rem;
       height: 2.4rem;
-      margin-right: 1.9rem;
+      margin-right: 1.5rem;
     }
 
     p{
@@ -49,7 +48,7 @@ const Styled = {
   `,
 
   DogInfo: styled.section`
-    margin-bottom: 3.2rem;
+    margin-bottom: 10%;
     p {
       height: 2.3rem;
       font: ${({ theme }) => theme.font.body1};
@@ -66,8 +65,8 @@ const Styled = {
     display: flex;
     flex-direction: row;
     width: 31.1rem;
-    height: 2.6rem;
-    padding: 1rem 0rem 1.2rem 0rem;
+    height: 10%;
+    padding: 3% 0% 3% 0%;
     font: ${({ theme }) => theme.font.description};
     color: ${({ theme }) => theme.color.black};
 
@@ -85,7 +84,7 @@ const Styled = {
   `,
 
   Contact: styled.section`
-    margin-bottom: 3.2rem;
+    margin-bottom: 10%;
     p {
       height: 2.3rem;
       font: ${({ theme }) => theme.font.body1};
@@ -103,8 +102,8 @@ const Styled = {
     display: flex;
     flex-direction: row;
     width: 31.1rem;
-    height: 2.6rem;
-    padding: 1rem 0rem 1.2rem 0rem;
+    height: 10%;
+    padding: 3% 0% 3% 0%;
     color: ${({ theme }) => theme.color.black};
 
     img {
@@ -160,26 +159,41 @@ function DogDetailInfo({ dog }) {
       <Styled.Contact>
         <p>연락처</p>
         <div className="contact--main">
-          <Styled.ContactRow>
-            <img src={KakaotalkIcon} alt="card_image" />
-            <p>{dog.kakaotalkId}</p>
-          </Styled.ContactRow>
-          <Styled.ContactRow>
-            <img src={TwitterIcon} alt="card_image" />
-            <p>{dog.twitter}</p>
-          </Styled.ContactRow>
-          <Styled.ContactRow>
-            <img src={InstagramIcon} alt="card_image" />
-            <p>{dog.instagram}</p>
-          </Styled.ContactRow>
-          <Styled.ContactRow>
-            <img src={FacebookIcon} alt="card_image" />
-            <p>{dog.facebook}</p>
-          </Styled.ContactRow>
-          <Styled.ContactRow>
-            <img src={CallIcon} alt="card_image" />
-            <p>{dog.phoneNumber}</p>
-          </Styled.ContactRow>
+          {dog.kakaotalkId && 
+            (
+              <Styled.ContactRow>
+                <img src={KakaotalkIcon} alt="card_image" />
+                <p>{dog.kakaotalkId}</p>
+              </Styled.ContactRow>
+            )}
+          {dog.twitter && 
+            (
+              <Styled.ContactRow>
+                <img src={TwitterIcon} alt="card_image" />
+                <p>{dog.twitter}</p>
+              </Styled.ContactRow>
+          )}
+          {dog.instagram && 
+            (
+              <Styled.ContactRow>
+                <img src={InstagramIcon} alt="card_image" />
+                <p>{dog.instagram}</p>
+              </Styled.ContactRow>
+            )}
+          {dog.facebook && 
+            (
+              <Styled.ContactRow>
+                <img src={FacebookIcon} alt="card_image" />
+                <p>{dog.facebook}</p>
+              </Styled.ContactRow>
+            )}
+          {dog.phoneNumber && 
+            (
+              <Styled.ContactRow>
+                <img src={CallIcon} alt="card_image" />
+                <p>{dog.phoneNumber}</p>
+              </Styled.ContactRow>
+          )}
         </div>
       </Styled.Contact>
     </Styled.Wrapper>

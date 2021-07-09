@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import Arrow from './Arrow';
 import PaginationDot from './PaginationDot';
@@ -10,7 +10,7 @@ const SwiperContentWrap = styled.div`
   overflow: hidden;
   border-radius: 10px;
   display: flex;
-  align-items: center;
+  justify-content: center;
 `;
 
 const Slide = styled.div`
@@ -27,11 +27,21 @@ const Slide = styled.div`
   }
 `;
 
-function SwiperContent({ index, images, xPosition, handleClickPrev, handleClickNext }) {
+function SwiperContent({ index, images, setWidth, xPosition, handleClickPrev, handleClickNext }) {
+  const slideRef = useRef();
+
+  useEffect(() => {
+    if (slideRef.current) {
+      const width = slideRef.current.clientWidth;
+      setWidth(width);
+    }
+  }, [setWidth, xPosition]);
+
   return (
     <SwiperContentWrap>
       <Slide
         xPosition={xPosition}
+        ref={slideRef}
       >
         {images.map((img, i) => (
           <img key={i} src={img} alt="i" />
