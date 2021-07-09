@@ -1,26 +1,25 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import LocationIcon from "../../assets/img/img_Location.svg";
-import CallIcon from "../../assets/img/img_Call.svg";
-import InstagramIcon from "../../assets/img/img_Instagram.svg";
-import KakaotalkIcon from "../../assets/img/img_Kakaotalk.svg";
-import TwitterIcon from "../../assets/img/img_Twitter.svg";
-import FacebookIcon from "../../assets/img/img_Facebook.svg";
+import { ReactComponent as LocationIcon } from "../../assets/icon/ic_location_24.svg";
+import { ReactComponent as CallIcon } from "../../assets/icon/ic_Call.svg";
+import { ReactComponent as InstagramIcon }  from "../../assets/icon/ic_Instagram.svg";
+import { ReactComponent as KakaotalkIcon } from "../../assets/icon/ic_Kakaotalk.svg";
+import { ReactComponent as TwitterIcon } from "../../assets/icon/ic_Twitter.svg";
+import { ReactComponent as FacebookIcon }  from "../../assets/icon/ic_Facebook.svg";
 
 const Styled = {
   Wrapper: styled.div`
     display: flex;
     flex-direction: column;
-    width: 62.2rem;
-    height: 46rem;
+    width: 43%;
     margin: 0rem 0rem 3.2rem 5.5rem;
   `,
 
   Departure: styled.section`
     display: flex;
     flex-direction: column;
-    margin-bottom: 3.2rem;
+    margin-bottom: 10%;
 
     p {
       height: 2.3rem;
@@ -32,24 +31,20 @@ const Styled = {
   DepartureRow: styled.div`
     display: flex;
     flex-direction: row;
-    height: 2.6rem;
-    padding: 1rem 0rem 1.2rem 0rem;
+    height: 10%;
+    padding: 3% 0% 3% 0%;
     color: ${({ theme }) => theme.color.black};
 
-    img {
-      width: 2.4rem;
-      height: 2.4rem;
-      margin-right: 1.9rem;
-    }
-
     p{
+      margin-left: 1rem;
       font: ${({ theme }) => theme.font.description};
-      line-height: 2.2rem;
+      line-height: 150%;
     }
   `,
 
   DogInfo: styled.section`
-    margin-bottom: 3.2rem;
+    margin-bottom: 10%;
+
     p {
       height: 2.3rem;
       font: ${({ theme }) => theme.font.body1};
@@ -66,16 +61,10 @@ const Styled = {
     display: flex;
     flex-direction: row;
     width: 31.1rem;
-    height: 2.6rem;
-    padding: 1rem 0rem 1.2rem 0rem;
+    height: 10%;
+    padding: 3% 0% 3% 0%;
     font: ${({ theme }) => theme.font.description};
     color: ${({ theme }) => theme.color.black};
-
-    img {
-      width: 2.4rem;
-      height: 2.4rem;
-      margin-right: 1.84rem;
-    }
     
     p{
       font: ${({ theme }) => theme.font.description};
@@ -85,7 +74,8 @@ const Styled = {
   `,
 
   Contact: styled.section`
-    margin-bottom: 3.2rem;
+    margin-bottom: 10%;
+
     p {
       height: 2.3rem;
       font: ${({ theme }) => theme.font.body1};
@@ -103,31 +93,26 @@ const Styled = {
     display: flex;
     flex-direction: row;
     width: 31.1rem;
-    height: 2.6rem;
-    padding: 1rem 0rem 1.2rem 0rem;
+    height: 10%;
+    padding: 3% 0% 3% 0%;
     color: ${({ theme }) => theme.color.black};
 
-    img {
-      width: 2.4rem;
-      height: 2.4rem;
-      margin-right: 1.84rem;
-    }
-
     p{
+      margin-left: 2rem;
       font: ${({ theme }) => theme.font.description};
-      line-height: 2.2rem;
+      line-height: 150%;
     }
   `
 };
 
-function DogDetailInfo({ dogData }) {
+function DogDetailInfo({ dog }) {
   return (
     <Styled.Wrapper>
       <Styled.Departure>
         <p>출국 정보</p>
         <Styled.DepartureRow>
-          <img src={LocationIcon} alt="card_image" />
-          <p>{dogData.destination}</p>
+          <LocationIcon width="23" height="23"/>
+          <p>{dog.endingCountry}, {dog.endingAirport}</p>
         </Styled.DepartureRow>
       </Styled.Departure>
 
@@ -135,19 +120,28 @@ function DogDetailInfo({ dogData }) {
         <p>대상견 정보</p>
         <div className="info--main">
           <Styled.DogInfoRow>
-            <p>성별</p>{dogData.gender}
+            <p>성별</p>{dog.gender}
           </Styled.DogInfoRow>
           <Styled.DogInfoRow>
-            <p>나이</p>{dogData.age}살
+            <p>나이</p>{dog.age}살
           </Styled.DogInfoRow>
           <Styled.DogInfoRow>
-            <p>무게</p>{dogData.weight}kg
+            <p>무게</p>{dog.weight}kg
           </Styled.DogInfoRow>
+          
+          {(dog.neutralization === true)
+            ? (
+              <Styled.DogInfoRow>
+                <p>중성화</p>완료
+              </Styled.DogInfoRow>
+            ) : (
+              <Styled.DogInfoRow>
+                <p>중성화</p>미완료
+              </Styled.DogInfoRow>
+            )}
+          
           <Styled.DogInfoRow>
-            <p>중성화</p>{dogData.neutralization}
-          </Styled.DogInfoRow>
-          <Styled.DogInfoRow>
-            <p>건강상태</p>{dogData.vaccination}
+            <p>건강상태</p>{dog.health}
           </Styled.DogInfoRow>
         </div>
       </Styled.DogInfo>
@@ -155,26 +149,41 @@ function DogDetailInfo({ dogData }) {
       <Styled.Contact>
         <p>연락처</p>
         <div className="contact--main">
-          <Styled.ContactRow>
-            <img src={KakaotalkIcon} alt="card_image" />
-            <p>lovedog</p>
-          </Styled.ContactRow>
-          <Styled.ContactRow>
-            <img src={TwitterIcon} alt="card_image" />
-            <p>lovedog</p>
-          </Styled.ContactRow>
-          <Styled.ContactRow>
-            <img src={InstagramIcon} alt="card_image" />
-            <p>takers_lovedog</p>
-          </Styled.ContactRow>
-          <Styled.ContactRow>
-            <img src={FacebookIcon} alt="card_image" />
-            <p>takers_lovedog</p>
-          </Styled.ContactRow>
-          <Styled.ContactRow>
-            <img src={CallIcon} alt="card_image" />
-            <p>010 9292 9292</p>
-          </Styled.ContactRow>
+          {dog.kakaotalkId && 
+            (
+              <Styled.ContactRow>
+                <KakaotalkIcon width="21" height="21"/>
+                <p>{dog.kakaotalkId}</p>
+              </Styled.ContactRow>
+            )}
+          {dog.twitter && 
+            (
+              <Styled.ContactRow>
+                <TwitterIcon width="21" height="21"/>
+                <p>{dog.twitter}</p>
+              </Styled.ContactRow>
+          )}
+          {dog.instagram && 
+            (
+              <Styled.ContactRow>
+                <InstagramIcon width="21" height="21"/>
+                <p>{dog.instagram}</p>
+              </Styled.ContactRow>
+            )}
+          {dog.facebook && 
+            (
+              <Styled.ContactRow>
+                <FacebookIcon width="21" height="21"/>
+                <p>{dog.facebook}</p>
+              </Styled.ContactRow>
+            )}
+          {dog.phoneNumber && 
+            (
+              <Styled.ContactRow>
+                <CallIcon width="21" height="21"/>
+                <p>{dog.phoneNumber}</p>
+              </Styled.ContactRow>
+          )}
         </div>
       </Styled.Contact>
     </Styled.Wrapper>
