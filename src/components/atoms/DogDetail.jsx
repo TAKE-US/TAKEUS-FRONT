@@ -1,8 +1,8 @@
 import React  from 'react';
 import { withRouter } from 'react-router-dom'; 
 import styled from "styled-components";
-import DeleteIcon from '../../assets/img/ic_delete.svg';
-import EditIcon from '../../assets/img/ic_edit.svg';
+import { ReactComponent as DeleteIcon } from '../../assets/img/ic_delete.svg';
+import { ReactComponent as EditIcon }  from '../../assets/img/ic_edit.svg';
  
 import { Swiper, DogDetailInfo, CopyLinkButton } from "../"; 
  
@@ -81,7 +81,7 @@ const DogDetailWrap = styled.div`
      }
    }
  
-   &--detail {
+   &--images {
      display: flex;
      flex-direction: row;
      font-size: 1.6rem;
@@ -94,7 +94,7 @@ const DogDetailWrap = styled.div`
      }
    }
  
-   &--description {
+   &--detail {
      width: 101.6rem;
      height: 17.6rem;
      padding: 2.4rem 3.2rem;
@@ -130,24 +130,24 @@ const DogDetail = ({ dogs, match, history }) => {
             </div>
             <div className="dog--post">
               <button className="edit">
-                <img src={EditIcon} alt="edit"></img>
+                <EditIcon width="20" height="20" />
                 <div>수정</div>
               </button>
               <button className="delete">
-                <img src={DeleteIcon} alt="delete"></img>
+                <DeleteIcon width="20" height="20" />
                 <div>삭제</div>
               </button>
             </div>
           </header>
-          <section className="dog--detail">
+          <section className="dog--images">
             <div className="swiperAndLink">
               <Swiper images={dog.photos} />
               <CopyLinkButton />
             </div>
             <DogDetailInfo dog={dog} />
           </section>
-          <article className="dog--description">
-            {dog.detail}
+          <article className="dog--detail">
+           {dog.detail}
           </article>
         </>)
      ))}
