@@ -8,12 +8,12 @@ import { getDogs } from "lib/api/sample";
 const ContainerWrap = styled.article`
   display: flex;
   flex-direction: column;
-  width: 108rem;
+  width: 100%;
   height: 48rem;
   .container-top {
     display: flex;
     justify-content: space-between;
-    width: 108rem;
+    width: 100%;
     height: 6rem;
     &__title {
       width: 52.3rem;
