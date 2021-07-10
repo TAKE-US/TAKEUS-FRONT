@@ -8,7 +8,7 @@ const Styled = {
     width: 108rem;
     margin: 18rem auto;
     display: flex;
-    justify-content: center;
+    justify-content: center; 
   `
 };
  

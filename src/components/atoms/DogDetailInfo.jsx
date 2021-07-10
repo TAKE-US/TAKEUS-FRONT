@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { ReactComponent as LocationIcon } from "../../assets/icon/ic_location_24.svg";
-import { ReactComponent as CallIcon } from "../../assets/icon/ic_Call.svg";
-import { ReactComponent as InstagramIcon }  from "../../assets/icon/ic_Instagram.svg";
-import { ReactComponent as KakaotalkIcon } from "../../assets/icon/ic_Kakaotalk.svg";
-import { ReactComponent as TwitterIcon } from "../../assets/icon/ic_Twitter.svg";
-import { ReactComponent as FacebookIcon }  from "../../assets/icon/ic_Facebook.svg";
+import { ReactComponent as LocationIcon } from "assets/icon/ic_location_24.svg";
+import { ReactComponent as CallIcon } from "assets/icon/ic_Call.svg";
+import { ReactComponent as InstagramIcon }  from "assets/icon/ic_Instagram.svg";
+import { ReactComponent as KakaotalkIcon } from "assets/icon/ic_Kakaotalk.svg";
+import { ReactComponent as TwitterIcon } from "assets/icon/ic_Twitter.svg";
+import { ReactComponent as FacebookIcon }  from "assets/icon/ic_Facebook.svg";
 
 const Styled = {
   Wrapper: styled.div`
