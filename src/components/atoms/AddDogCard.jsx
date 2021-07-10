@@ -59,11 +59,13 @@ const Styled = {
 };
 
 //todo 일부러 남겨놓은 console입니다
-const AddDogCard = ({ value, photoHandle, deleteImage }) => {
+const AddDogCard = ({ value, photoHandle, deleteHandle }) => {
   // console.log(slicedPhotos)
   // console.log(`AdddogCard : ${value}`);
   const [imgfile, setImage] = useState("");
   const [url, setUrl] = useState("");
+  console.log(`value : ${value}`);
+  console.log(`url : ${url}`);
 
   function createImagePreview(e) {
     const files = e.target.files;
@@ -86,14 +88,17 @@ const AddDogCard = ({ value, photoHandle, deleteImage }) => {
     reader.readAsDataURL(file);
   }
 
-  console.log(value.id);
   return (
     <Styled.Wrapper>
-      {imgfile ? (
+      {value[value.id] !== undefined ? (
         <div className="image__area">
           <img
             className="image__area-delete"
-            onClick={deleteImage}
+            onClick={(e) => {
+              deleteHandle(e);
+              // setImage(undefined);
+              // setUrl("");
+            }}
             src={deleteBtn}
             alt={"delete"}
           />
@@ -115,8 +120,8 @@ const AddDogCard = ({ value, photoHandle, deleteImage }) => {
             id="detail_image"
             accept="image/*"
             onChange={(e) => {
-              createImagePreview(e);
               photoHandle(e);
+              createImagePreview(e);
             }}
           />
         </div>

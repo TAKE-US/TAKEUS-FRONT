@@ -40,12 +40,15 @@ const Styled = {
 
 const AddDogCardContainer = () => {
   const [photo, setPhoto] = useState(null);
-  const [photoArray, setPhotoArray] = useState([]);
-  let modifiedPhotos =
-    photoArray.slice(1).length > 0
-      ? photoArray.slice(1).concat([1, 0, 0, 0])
-      : [1, 0, 0, 0, 0];
-  let slicedPhotos = modifiedPhotos.slice(0, 5);
+  const [photoArray, setPhotoArray] = useState([1, 0, 0, 0, 0]);
+  console.log(photoArray);
+  // let modifiedPhotos =
+  //   photoArray.slice(1).length > 0
+  //     ? photoArray.slice(1).concat([1, 0, 0, 0])
+  //     : [1, 0, 0, 0, 0];
+
+  // console.log(`modifiedPhotos : ${modifiedPhotos}`);
+  // let slicedPhotos = modifiedPhotos.slice(0, 5);
 
   const photoHandle = (e) => {
     const newFile = e.target.files;
@@ -60,17 +63,21 @@ const AddDogCardContainer = () => {
       id: nextId.current,
       photo,
     };
-    setPhotoArray([...photoArray, idPhoto]);
+    if (photo !== null) {
+      setPhotoArray([idPhoto, ...photoArray]);
+    }
     nextId.current += 1;
   };
 
-  function deleteImage(e) {
-    e.preventDefault();
+  const deleteHandle = (e) => {
     const deletedKey = e.target.nextSibling.dataset.key;
-    // setImage(undefined);
-    // setUrl("");
-    // window.location.reload();
-  }
+    console.log(deletedKey);
+    const filteredArray = photoArray.filter(
+      (photo) => parseInt(photo.id, 10) !== parseInt(deletedKey, 10)
+    );
+    setPhotoArray(filteredArray);
+  };
+
   useEffect(() => {
     arrayHandle(photo);
   }, [photo]);
@@ -79,15 +86,18 @@ const AddDogCardContainer = () => {
   return (
     <Styled.Wrapper>
       <>
-        {slicedPhotos.map((value, i) => (
+        {photoArray.map(
+          (value, i) =>
+            i < 5 ? (
+              <AddDogCard
+                key={i}
+                value={value}
+                photoHandle={photoHandle}
+                deleteHandle={deleteHandle}
+              />
+            ) : null
           // console.log(`value : ${value}`),
-          <AddDogCard
-            key={i}
-            value={value}
-            photoHandle={photoHandle}
-            deleteHandle
-          />
-        ))}
+        )}
       </>
     </Styled.Wrapper>
   );
