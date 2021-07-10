@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+/* eslint-disable arrow-parens */
+/* eslint-disable no-unused-vars */
+import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import AddDogCard from "components/atoms/AddDogCard";
 
@@ -37,20 +39,54 @@ const Styled = {
 };
 
 const AddDogCardContainer = () => {
-  const [count, setCount] = useState(0);
-  const full = Array.from({ length: count + 1 }, () => 0);
-  const empty = Array.from({ length: 4 - count }, () => 0);
+  const [photo, setPhoto] = useState(null);
+  const [photoArray, setPhotoArray] = useState([]);
+  let modifiedPhotos =
+    photoArray.slice(1).length > 0
+      ? photoArray.slice(1).concat([1, 0, 0, 0])
+      : [1, 0, 0, 0, 0];
+  let slicedPhotos = modifiedPhotos.slice(0, 5);
 
+  const photoHandle = (e) => {
+    const newFile = e.target.files;
+    (async () => {
+      setPhoto(newFile);
+    })();
+  };
+
+  const nextId = useRef(0);
+  const arrayHandle = (photo) => {
+    const idPhoto = {
+      id: nextId.current,
+      photo,
+    };
+    setPhotoArray([...photoArray, idPhoto]);
+    nextId.current += 1;
+  };
+
+  function deleteImage(e) {
+    e.preventDefault();
+    const deletedKey = e.target.nextSibling.dataset.key;
+    // setImage(undefined);
+    // setUrl("");
+    // window.location.reload();
+  }
+  useEffect(() => {
+    arrayHandle(photo);
+  }, [photo]);
+
+  //todo 일부러 남겨놓은 console 입니다
   return (
     <Styled.Wrapper>
       <>
-        {full.map((_, i) =>
-          full.length !== 6 || i !== 5 ? (
-            <AddDogCard key={i} count={count} setCount={setCount} />
-          ) : null
-        )}
-        {empty.map((_, i) => (
-          <div className="card" key={i}></div>
+        {slicedPhotos.map((value, i) => (
+          // console.log(`value : ${value}`),
+          <AddDogCard
+            key={i}
+            value={value}
+            photoHandle={photoHandle}
+            deleteHandle
+          />
         ))}
       </>
     </Styled.Wrapper>

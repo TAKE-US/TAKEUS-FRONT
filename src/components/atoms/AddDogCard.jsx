@@ -1,5 +1,6 @@
+/* eslint-disable arrow-parens */
 /* eslint-disable no-unused-vars */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import plus from "assets/icon/ic_plus_24.svg";
 import deleteBtn from "assets/icon/btn_delete.svg";
@@ -57,9 +58,12 @@ const Styled = {
   `,
 };
 
-const AddDogCard = ({ count, setCount }) => {
-  const [imgfile, setImage] = useState(null);
-  const [url, setUrl] = useState(null);
+//todo 일부러 남겨놓은 console입니다
+const AddDogCard = ({ value, photoHandle, deleteImage }) => {
+  // console.log(slicedPhotos)
+  // console.log(`AdddogCard : ${value}`);
+  const [imgfile, setImage] = useState("");
+  const [url, setUrl] = useState("");
 
   function createImagePreview(e) {
     const files = e.target.files;
@@ -72,14 +76,6 @@ const AddDogCard = ({ count, setCount }) => {
         },
       });
     }
-    setCount(count + 1);
-  }
-
-  function deleteImage(e) {
-    e.preventDefault();
-    setImage(undefined);
-    setUrl("");
-    window.location.reload();
   }
 
   function setImageFromFile({ file, setImageUrl }) {
@@ -90,9 +86,25 @@ const AddDogCard = ({ count, setCount }) => {
     reader.readAsDataURL(file);
   }
 
+  console.log(value.id);
   return (
     <Styled.Wrapper>
-      {!imgfile ? (
+      {imgfile ? (
+        <div className="image__area">
+          <img
+            className="image__area-delete"
+            onClick={deleteImage}
+            src={deleteBtn}
+            alt={"delete"}
+          />
+          <img
+            className="image__area-img"
+            data-key={value.id}
+            src={url}
+            alt={imgfile.name}
+          />
+        </div>
+      ) : value ? (
         <div className="card">
           <img className="card__img" src={plus} alt="plus" />
           <p className="card__content">사진 추가하기</p>
@@ -102,19 +114,17 @@ const AddDogCard = ({ count, setCount }) => {
             multiple
             id="detail_image"
             accept="image/*"
-            onChange={function (e) {
-              return createImagePreview(e);
+            onChange={(e) => {
+              createImagePreview(e);
+              photoHandle(e);
             }}
           />
         </div>
-      ) : (
-        <div className="image__area">
-          <img className="image__area-delete" src={deleteBtn} alt={"delete"} />
-          <img className="image__area-img" src={url} alt={imgfile.name} />
-        </div>
-      )}
+      ) : null}
     </Styled.Wrapper>
   );
 };
 
 export default AddDogCard;
+
+// console.log(newphotoArray);
