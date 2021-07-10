@@ -5,8 +5,8 @@ import styled from "styled-components";
 
 const Styled = {
   Wrapper: styled.div`
-    margin-top: 18rem;
-    width: 100%;
+    width: 108rem;
+    margin: 18rem auto;
     display: flex;
     justify-content: center;
   `

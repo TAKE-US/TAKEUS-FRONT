@@ -1,7 +1,6 @@
 // atoms
 export { default as Swiper } from "./atoms/Swiper";
 export { default as DogDetailInfo } from "./atoms/DogDetailInfo";
-export { default as DogDetail } from "./atoms/DogDetail";
 export { default as DogCard } from "./atoms/DogCard";
 export { default as CopyLinkButton } from "./atoms/CopyLinkButton";
 export { default as Searchbar } from "./atoms/Searchbar";
@@ -44,6 +43,9 @@ export { default as AddDogLayer } from "./layer/dogEnroll/AddDogLayer";
 export { default as DogSearchNavigation } from "./layer/dogSearch/DogSearchNavigation";
 export { default as DogCardContainer } from "./layer/dogSearch/DogCardContainer";
 export { default as PaginationNav } from "./layer/dogSearch/PaginationNav";
+
+// layer/dogDetail 
+export { default as DogDetail } from "./layer/dogDetail/DogDetail";
 
 // layer/info
 
