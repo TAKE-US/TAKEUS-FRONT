@@ -1,5 +1,4 @@
 /* eslint-disable arrow-parens */
-/* eslint-disable no-unused-vars */
 import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import AddDogCard from "components/atoms/AddDogCard";
@@ -41,24 +40,15 @@ const Styled = {
 const AddDogCardContainer = () => {
   const [photo, setPhoto] = useState(null);
   const [photoArray, setPhotoArray] = useState([1, 0, 0, 0, 0]);
-  console.log(photoArray);
-  // let modifiedPhotos =
-  //   photoArray.slice(1).length > 0
-  //     ? photoArray.slice(1).concat([1, 0, 0, 0])
-  //     : [1, 0, 0, 0, 0];
-
-  // console.log(`modifiedPhotos : ${modifiedPhotos}`);
-  // let slicedPhotos = modifiedPhotos.slice(0, 5);
-
-  const photoHandle = (e) => {
+  function photoHandle(e) {
     const newFile = e.target.files;
     (async () => {
       setPhoto(newFile);
     })();
-  };
+  }
 
   const nextId = useRef(0);
-  const arrayHandle = (photo) => {
+  function arrayHandle(photo) {
     const idPhoto = {
       id: nextId.current,
       photo,
@@ -67,36 +57,32 @@ const AddDogCardContainer = () => {
       setPhotoArray([idPhoto, ...photoArray]);
     }
     nextId.current += 1;
-  };
+  }
 
-  const deleteHandle = (e) => {
+  function deleteHandle(e) {
     const deletedKey = e.target.nextSibling.dataset.key;
-    console.log(deletedKey);
     const filteredArray = photoArray.filter(
       (photo) => parseInt(photo.id, 10) !== parseInt(deletedKey, 10)
     );
     setPhotoArray(filteredArray);
-  };
+  }
 
   useEffect(() => {
     arrayHandle(photo);
   }, [photo]);
 
-  //todo 일부러 남겨놓은 console 입니다
   return (
     <Styled.Wrapper>
       <>
-        {photoArray.map(
-          (value, i) =>
-            i < 5 ? (
-              <AddDogCard
-                key={i}
-                value={value}
-                photoHandle={photoHandle}
-                deleteHandle={deleteHandle}
-              />
-            ) : null
-          // console.log(`value : ${value}`),
+        {photoArray.map((value, i) =>
+          i < 5 ? (
+            <AddDogCard
+              key={i}
+              value={value}
+              photoHandle={photoHandle}
+              deleteHandle={deleteHandle}
+            />
+          ) : null
         )}
       </>
     </Styled.Wrapper>

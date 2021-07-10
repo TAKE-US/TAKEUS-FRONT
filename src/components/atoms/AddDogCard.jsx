@@ -1,6 +1,5 @@
 /* eslint-disable arrow-parens */
-/* eslint-disable no-unused-vars */
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import plus from "assets/icon/ic_plus_24.svg";
 import deleteBtn from "assets/icon/btn_delete.svg";
@@ -58,15 +57,9 @@ const Styled = {
   `,
 };
 
-//todo 일부러 남겨놓은 console입니다
 const AddDogCard = ({ value, photoHandle, deleteHandle }) => {
-  // console.log(slicedPhotos)
-  // console.log(`AdddogCard : ${value}`);
   const [imgfile, setImage] = useState("");
   const [url, setUrl] = useState("");
-  console.log(`value : ${value}`);
-  console.log(`url : ${url}`);
-
   function createImagePreview(e) {
     const files = e.target.files;
     if (files.length) {
@@ -90,14 +83,12 @@ const AddDogCard = ({ value, photoHandle, deleteHandle }) => {
 
   return (
     <Styled.Wrapper>
-      {value[value.id] !== undefined ? (
+      {value.id !== undefined ? (
         <div className="image__area">
           <img
             className="image__area-delete"
             onClick={(e) => {
               deleteHandle(e);
-              // setImage(undefined);
-              // setUrl("");
             }}
             src={deleteBtn}
             alt={"delete"}
