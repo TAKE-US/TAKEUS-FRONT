@@ -7,33 +7,6 @@ const Styled = {
   Wrapper: styled.section`
     width: 100%;
     display: flex;
-    max-width: 120rem;
-
-    .card {
-      display: flex;
-      align-items: center;
-      width: 20rem;
-      height: 20rem;
-      border-radius: 1rem;
-      background-color: #f8f8f8;
-      margin-right: 1.5rem;
-      img {
-        width: 20rem;
-        height: 20rem;
-        border-radius: 1rem;
-      }
-      p {
-        z-index: 0;
-      }
-      input {
-        width: 20rem;
-        height: 20rem;
-        opacity: 0;
-      }
-      input:hover {
-        cursor: pointer;
-      }
-    }
   `,
 };
 
