@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import { useDetectOutsideClick } from '../../hooks/useDetectOutsideClick';
 import Arrow_Bottom from '../../assets/img/ic_arrow_bottom_black_24.svg';
-import Arrow_Top from '../../assets/img/ic_arrow_top_black_24.svg';
+// import Arrow_Top from '../../assets/img/ic_arrow_top_black_24.svg';
 
 const Styled = {
   Container: styled.div`
@@ -25,6 +25,11 @@ const Styled = {
       flex-direction: column;
       text-align: left;
 
+      .item {
+        display: flex;
+        align-items: center;
+      }
+
       .name {
         display: ${props => props.caption ? 'block' : 'none'};
         font: ${({ theme }) => theme.font.caption};
@@ -33,9 +38,14 @@ const Styled = {
 
       .text {
         margin-top: ${props => props.caption ? '0.6rem' : '0'};
+        margin-left: ${props => props.image && '0.4rem'};
         font: ${({ theme, fontStyle }) => fontStyle ? theme.font[fontStyle] : theme.font.body2};
         color: ${props => props.list ? "#3D3D3D" : "#C1C1C1"};
       }
+    }
+
+    .arrowimg {
+      transform: ${props => props.isActive && 'rotate(180deg)' };
     }
   `,
 
@@ -73,12 +83,17 @@ const Styled = {
       background-color: ${({ theme }) => theme.color.bg_yellow};
     }
   `,
+
+  Img: styled.div`
+
+  `,
 };
 
-const Dropdown = ({ children, placeholder, rounded, font, caption, small }) => {
+const Dropdown = ({ item, placeholder, rounded, font, caption, small }) => {
   const dropdownRef = useRef(null);
   const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
   const [list, setList] = useState('');
+  const [image, setImage] = useState('');
   
   const onClick = () => {
     setIsActive(!isActive);
@@ -89,38 +104,47 @@ const Dropdown = ({ children, placeholder, rounded, font, caption, small }) => {
       <Styled.Button
         onClick={onClick}
         list={list}
+        image={image}
         rounded={rounded}
         fontStyle={font}
         caption={caption}
         small={small}
+        isActive={isActive}
       >
         <div className="destination">
           <span className="name">{caption}</span>
-          <span className="text">
-            {list ? list : placeholder}
-          </span>
+          <div className="item">
+            {image && image}
+            <span className="text">
+              {list ? list : placeholder}
+            </span>
+          </div>
         </div>
         <img
-          src={isActive ? Arrow_Top : Arrow_Bottom}
+          className="arrowimg"
+          src={Arrow_Bottom}
           alt=""
         />
       </Styled.Button>
       <Styled.Nav ref={dropdownRef} isActive={isActive}>
         <Styled.Ul>
-          {children.map((value, index) => (
+          {item.map((value, index) => (
+            <>
               <Styled.List
                 key={index}
                 selected={
-                  list === value ? true : false
+                  list === value["name"] ? true : false
                 }
                 onClick={() => {
-                  setList(value);
+                  setList(value["name"]);
+                  setImage(value["img"]);
                   setIsActive(!isActive);
                 }}
               >
-                {value}
+                {value["name"]}
               </Styled.List>
-            ))}
+            </>
+          ))}
         </Styled.Ul>
       </Styled.Nav>
     </Styled.Container>

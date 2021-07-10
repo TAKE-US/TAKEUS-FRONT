@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Searchbar from 'components/atoms/Searchbar';
+import { Searchbar } from 'components';
 import backgroundBeachImg from 'assets/img/img_main_dogonthebeach.png';
 
 const Styled = {
