@@ -26,10 +26,9 @@ const Styled = {
       display: flex;
       flex-direction: row;
       align-items: center;
-      justify-content: space-around;
       top: 12%;
       left: 70%;
-      width: 5%;
+      width: 4.4%;
       height: 1.65%;
       font: ${({ theme }) => theme.font.body2};
       color: white;
