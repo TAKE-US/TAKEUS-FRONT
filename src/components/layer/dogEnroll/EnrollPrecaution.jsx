@@ -2,11 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const EnrollInfoWrap = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   header{
-    width: 100%;
     text-align: center;
     padding-bottom: 4.8rem;
     border-bottom: 1.5px solid ${({theme}) => theme.color.lightgray2};
@@ -14,8 +10,8 @@ const EnrollInfoWrap = styled.div`
       font: ${({ theme }) => theme.font.display1};
     }
   }
+
   section {
-    width: 107.9rem;
     margin-top: 5.6rem;
     h3 {
       font: ${({ theme }) => theme.font.headline};
@@ -34,7 +30,6 @@ const EnrollInfoWrap = styled.div`
         }
       }
   }
-
 `;
 
 const EnrollInfo = () => {
