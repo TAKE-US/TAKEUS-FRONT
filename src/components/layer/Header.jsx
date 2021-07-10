@@ -1,9 +1,8 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useLocation, useHistory } from "react-router";
 import styled from "styled-components";
 
-import Logo_black from "../../assets/img/ic_logo_wordmark_black_small.svg";
-import Logo_yellow from "../../assets/img/ic_logo_wordmark_small.svg";
+import { ReactComponent as LogoBlack } from "../../assets/img/ic_logo_wordmark_black_small.svg";
 
 const Head = {
   Wrap: styled.nav`
@@ -21,6 +20,7 @@ const Head = {
       justify-content: space-between;
       align-items: center;
       background: ${props => (props.isScrolling ? "#ffffff" : "none")};
+      box-shadow: ${props => props.isScrolling && "0rem 0rem 1.6rem 0.1rem rgba(0, 0, 0, 0.08)"};
 
       img {
         width: 14.4rem;
@@ -79,10 +79,12 @@ const Header = () => {
   const history = useHistory();
   const hoverImg = useRef();
   const [isScrolling, setIsScrolling] = useState(false);
+  const [imgHover, setImgHover] = useState(false);
 
   const scrollHandler = e => {
-    setIsScrolling(true);
-    if (window.scrollY === 0) {
+    if (window.scrollY >= 38) {
+      setIsScrolling(true);
+    } else {
       setIsScrolling(false);
     }
   };
@@ -96,15 +98,16 @@ const Header = () => {
       {location.pathname !== "/login" && (
         <Head.Wrap isScrolling={isScrolling}>
           <div className="inner">
-            <img
-              src={location.pathname === "/" ? (isScrolling ? Logo_yellow : Logo_black) : Logo_yellow}
-              alt=""
+            <LogoBlack
               onClick={() => {
                 history.push("/");
               }}
-              onMouseEnter={() => (hoverImg.current.src = Logo_yellow)}
-              onMouseLeave={() => (hoverImg.current.src = Logo_black)}
-              onScroll={() => (hoverImg.current.src = Logo_yellow)}
+              fill={(isScrolling || imgHover || location.pathname !== "/") ? "#FDCB02" : "#1A1A1A"}
+              onMouseEnter={() => {
+                setImgHover(true);
+                hoverImg.current.style.cursor = "pointer";
+              }}
+              onMouseLeave={() => setImgHover(false)}
               ref={hoverImg}
             />
             <div className="gnb">
