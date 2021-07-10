@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import plus from "assets/icon/ic_plus_24.svg";
+import deleteBtn from "assets/icon/btn_delete.svg";
 
 const Styled = {
   Wrapper: styled.section`
@@ -37,10 +38,21 @@ const Styled = {
         }
       }
     }
-    .image_area > img {
-      width: 20rem;
-      height: 20rem;
-      border-radius: 1rem;
+    .image__area {
+      position: relative;
+      &-img {
+        width: 20rem;
+        height: 20rem;
+        border-radius: 1rem;
+      }
+      &-delete {
+        position: absolute;
+        right: 1rem;
+        top: 1rem;
+        :hover {
+          cursor: pointer;
+        }
+      }
     }
   `,
 };
@@ -49,8 +61,8 @@ const AddDogCard = ({ count, setCount }) => {
   const [imgfile, setImage] = useState(null);
   const [url, setUrl] = useState(null);
 
-  function createImagePreview(event) {
-    const files = event.target.files;
+  function createImagePreview(e) {
+    const files = e.target.files;
     if (files.length) {
       setImageFromFile({
         file: files[0],
@@ -61,6 +73,13 @@ const AddDogCard = ({ count, setCount }) => {
       });
     }
     setCount(count + 1);
+  }
+
+  function deleteImage(e) {
+    e.preventDefault();
+    setImage(undefined);
+    setUrl("");
+    window.location.reload();
   }
 
   function setImageFromFile({ file, setImageUrl }) {
@@ -89,8 +108,9 @@ const AddDogCard = ({ count, setCount }) => {
           />
         </div>
       ) : (
-        <div className="image_area">
-          <img src={url} alt={imgfile.name} />
+        <div className="image__area">
+          <img className="image__area-delete" src={deleteBtn} alt={"delete"} />
+          <img className="image__area-img" src={url} alt={imgfile.name} />
         </div>
       )}
     </Styled.Wrapper>
