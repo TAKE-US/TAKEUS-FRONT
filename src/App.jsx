@@ -1,6 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import GlobalStyle from "./styles/GlobalStyle";
+import styled from 'styled-components';
+
 import { Header, Footer } from "./components/index";
 import {
   LoginPage,
@@ -11,8 +13,8 @@ import {
   DogDetailPage,
   DogEnrollPage,
   ReviewPage,
+  ReviewPostPage,
 } from "./pages";
-import styled from 'styled-components';
 
 const Styled = {
   ContentWrapper: styled.main`
@@ -54,11 +56,13 @@ function App() {
             <Route path="/review" exact>
               <ReviewPage />
             </Route>
+            <Route path="/review/post" exact>
+              <ReviewPostPage />
+            </Route>
           </Switch>
         </Styled.ContentWrapper>
         <Footer />
       </Router>
-
     </>
   );
 }

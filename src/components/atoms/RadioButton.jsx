@@ -6,15 +6,16 @@ import radioOn from "assets/icon/btn_radio_on_24.svg";
 
 const RadioBtnWrap = styled.section`
   display: flex;
-  min-width: 35rem;
+  justify-content: space-between;
   article {
     display: flex;
     align-items: center;
     margin-right: 6.6rem;
     p {
+      margin-left: 1rem;
       font: ${({ theme }) => theme.font.description};
       color: ${({ theme }) => theme.color.darkgray1};
-      margin-left: 1rem;
+      white-space: nowrap;
     }
   }
 `;

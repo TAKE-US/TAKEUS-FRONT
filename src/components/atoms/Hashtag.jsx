@@ -3,6 +3,12 @@ import styled from "styled-components";
 
 const Styled = {
   Wrapper: styled.div`
+    padding: ${props => (props.rounded ? "0.6rem 1.7rem" : "0.4rem 1.1rem")};
+    border-radius: ${props => (props.rounded ? "2.4rem" : "0.7rem")};
+    font: ${props => (props.rounded ? props.theme.font.button : props.theme.font.body1)};
+    line-height: 2.2rem;
+    white-space: nowrap;
+
     &.primary {
       border: 1px solid ${({ theme }) => theme.color.primary};
       color: ${({ theme }) => theme.color.primary};
@@ -11,11 +17,12 @@ const Styled = {
       border: 1px solid ${({ theme }) => theme.color.gray1};
       color: ${({ theme }) => theme.color.gray1};
     }
-    border-radius: ${props => (props.rounded ? "2.4rem" : "0.7rem")};
-    font: ${props => (props.rounded ? props.theme.font.button : props.theme.font.body1)};
-    line-height: 2.2rem;
-    padding: ${props => (props.rounded ? "0.6rem 1.7rem" : "0.4rem 1.1rem")};
-    margin-right: 0.9rem;
+
+    &:hover {
+      cursor: pointer;
+      border: 1px solid ${({ theme }) => theme.color.primary};
+      color: ${({ theme }) => theme.color.primary};
+    }
   `,
 };
 

@@ -2,16 +2,14 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { RadioButton, Counter, TextField, AddDogLayer, Input, Button } from "components";
 // import { DogEnrollInput } from 'components';
-import plusIcon from 'assets/icon/ic_plus_24.svg';
+import { ReactComponent as Plus } from 'assets/icon/ic_plus_24.svg';
 
 const EnrollInfoWrap = styled.section`
-  display: flex;
-  flex-direction: column;
-  
   .wrap {
     margin-top: 6rem;
     
     &:last-child {
+      margin-top: 8rem;
       margin-bottom: 18rem;
     }
     &--flex {
@@ -23,10 +21,23 @@ const EnrollInfoWrap = styled.section`
       .contact-layer {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        grid-auto-rows: calc(4.2rem + 2px);
+        grid-auto-rows: calc(4.2rem + .2rem);
         column-gap: 1.9rem;
         row-gap: 1.2rem;
         margin-top: 2.4rem;
+      }
+      .contact__btn {
+        svg {
+          width: calc(2.4rem - 0.2rem);
+          height: calc(2.4rem - 0.2rem);
+          margin-right: 0.8rem;
+          stroke: ${({ theme }) => theme.color.primary};
+        }
+        &:hover {
+          svg {
+            stroke: ${({ theme }) => theme.color.white};
+          }
+        }
       }
     }
 
@@ -120,14 +131,16 @@ const EnrollInfo = () => {
               <div className="dropdown">{contact.type}</div>
             </Input>
           ))}
-          <div onClick={addContact}>
-            <Button rounded full padding="8px 0"><img src={plusIcon} alt="plus"/>연락처 추가하기</Button>
+          <div className="contact__btn" onClick={addContact}>
+            <Button rounded full padding="1rem 0"><Plus />연락처 추가하기</Button>
           </div>
         </div>
       </div>
-      <TextField />
       <div className="wrap">
-        <Button rounded full font="headline" padding="15px">대상견 등록하기</Button>
+        <TextField label="내용을 작성해주세요" maxLength={500} />
+      </div>
+      <div className="wrap">
+        <Button rounded full font="headline" padding="1.5rem">대상견 등록하기</Button>
       </div>
     </EnrollInfoWrap>
   );
