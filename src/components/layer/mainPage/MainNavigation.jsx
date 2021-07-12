@@ -12,7 +12,7 @@ const Styled = {
     background-image: url(${backgroundBeachImg});
     background-size: cover;
     background-position: bottom center;
-    padding-top: 17.3rem;
+    padding-top: 13.7rem;
   `,
 };
 
