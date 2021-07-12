@@ -2,7 +2,6 @@
 import React from "react";
 import styled from "styled-components";
 import LoginImg from "../../../assets/img/img_Login.png";
-import KakaotalkIcon from "../../../assets/img/ic_kakaotalk.svg";
 import NaverIcon from "../../../assets/img/ic_naver.svg";
 import GoogleIcon from "../../../assets/img/ic_google.svg";
 import KakaoLogin from "components/atoms/LoginKakao";
@@ -64,10 +63,6 @@ const Styled = {
       right: 1rem;
     }
 
-    .kakaotalkIcon {
-      right: 1rem;
-    }
-
     .naverIcon {
       right: 2.4rem;
     }
@@ -104,11 +99,7 @@ const LoginLayer = () => {
       <Styled.Section>
         <h1>Takeus 시작하기</h1>
         <h2>SNS 계정으로 손쉽게 가입하고 Takers가 될 수 있어요 :)</h2>
-        <Styled.Button type="button" color={"#FEE500"}>
-          <img className="kakaotalkIcon" src={KakaotalkIcon} alt="kakakotalk" />
-          카카오톡으로 시작하기
-          <KakaoLogin />
-        </Styled.Button>
+        <KakaoLogin />
         <Styled.Button type="button" color={"#1EC800"}>
           <img className="naverIcon" src={NaverIcon} alt="naver" />
           네이버로 시작하기
