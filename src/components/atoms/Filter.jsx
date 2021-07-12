@@ -7,12 +7,13 @@ import downIcon from "../../assets/icon/ic_arrow_bottom_18.svg";
 import upIcon from "../../assets/icon/ic_arrow_top_18.svg";
 
 const Wrapper = styled.section`
+  display: flex;
   min-width: 108rem;
 `;
 
 const FilterWrap = styled.section`
   position: relative;
-  left: calc(100% - 8.5rem);
+  margin-left: auto;
 `;
 const SelectedFilter = styled.button`
   display: flex;
