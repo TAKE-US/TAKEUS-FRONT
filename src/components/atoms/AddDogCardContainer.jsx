@@ -1,5 +1,5 @@
 /* eslint-disable arrow-parens */
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import styled from "styled-components";
 import AddDogCard from "components/atoms/AddDogCard";
 
@@ -17,6 +17,9 @@ const AddDogCardContainer = () => {
     const newFile = e.target.files;
     (async () => {
       setPhoto(newFile);
+    })();
+    (async () => {
+      arrayHandle(newFile);
     })();
   }
 
@@ -40,9 +43,11 @@ const AddDogCardContainer = () => {
     setPhotoArray(filteredArray);
   }
 
-  useEffect(() => {
-    arrayHandle(photo);
-  }, [photo]);
+  console.log(photoArray);
+  console.log(photo);
+  // useEffect(() => {
+
+  // }, [photo]);
 
   return (
     <Styled.Wrapper>

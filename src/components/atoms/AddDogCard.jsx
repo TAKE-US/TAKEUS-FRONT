@@ -1,7 +1,7 @@
 /* eslint-disable arrow-parens */
 import React, { useState } from "react";
 import styled from "styled-components";
-import plus from "assets/icon/ic_plus_24.svg";
+import btn_plus from "assets/icon/btn_plus.svg";
 import deleteBtn from "assets/icon/btn_delete.svg";
 
 const Styled = {
@@ -19,17 +19,15 @@ const Styled = {
       position: relative;
       &__img {
         position: absolute;
-        top: 5rem;
-        left: 3.8rem;
-        width: 2rem;
-        height: 2rem;
-        /* max-width: 2rem;
-        max-height: 2rem; */
+        top: 9.4rem;
+        left: 3rem;
+        max-width: 2rem;
+        max-height: 2rem;
       }
       &__content {
         position: absolute;
         width: 12rem;
-        left: 5rem;
+        left: 5.5rem;
         top: 9.5rem;
         font: ${({ theme }) => theme.font.button};
         color: ${({ theme }) => theme.color.primary};
@@ -110,7 +108,7 @@ const AddDogCard = ({ value, photoHandle, deleteHandle }) => {
         </div>
       ) : value ? (
         <div className="card">
-          <img className="card__img" src={plus} alt="plus" />
+          <img className="card__img" src={btn_plus} alt="plus" />
           <p className="card__content">사진 추가하기</p>
           <input
             className="card__input"
