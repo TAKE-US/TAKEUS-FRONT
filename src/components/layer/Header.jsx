@@ -7,11 +7,11 @@ import { ReactComponent as LogoBlack } from "../../assets/img/ic_logo_wordmark_b
 const Head = {
   Wrap: styled.nav`
     position: sticky;
-    top: -3.6rem;
+    top: ${props => props.isLogin ? '0' : '-3.6rem'};
     z-index: 15;
 
     .aside {
-      display: flex;
+      display: ${props => props.isLogin ? 'none' : 'flex'};
       justify-content: center;
       align-items: center;
       background-color: ${({ theme }) => theme.color.darkgray1};
@@ -87,12 +87,21 @@ const Header = () => {
   const hoverImg = useRef();
   const [isScrolling, setIsScrolling] = useState(false);
   const [imgHover, setImgHover] = useState(false);
+  const isLogin = localStorage.getItem("token");
 
   const scrollHandler = () => {
-    if (window.scrollY >= 38) {
-      setIsScrolling(true);
+    if (isLogin) {
+      if (window.scrollY !== 0) {
+        setIsScrolling(true);
+      } else {
+        setIsScrolling(false);
+      }
     } else {
-      setIsScrolling(false);
+      if (window.scrollY >= 38) {
+        setIsScrolling(true);
+      } else {
+        setIsScrolling(false);
+      }
     }
   };
 
@@ -103,7 +112,7 @@ const Header = () => {
   return (
     <>
       {location.pathname !== "/login" && (
-        <Head.Wrap isScrolling={isScrolling}>
+        <Head.Wrap isScrolling={isScrolling} isLogin={isLogin}>
           <aside className="aside">
             회원가입을 하시면 대상견 등록이 가능합니다:)
           </aside>
