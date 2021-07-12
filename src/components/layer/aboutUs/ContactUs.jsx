@@ -5,6 +5,9 @@ import { ContactUsInput, ContactUsDetails } from 'components';
 
 
 const Styled = {
+  Wrapper: styled.div`
+  `,
+
   Header: styled.header`
     display: flex;
     align-items: center;
@@ -31,6 +34,7 @@ const Styled = {
   `,
 
   Content: styled.div`
+    width: 100%;
     margin-top: 7.3rem;
     display: flex;
     justify-content: space-between;
@@ -40,16 +44,16 @@ const Styled = {
 const ContactUs = () => {
 
   return (
-    <>
+    <Styled.Wrapper>
       <Styled.Header>
         <h1 className="h1">Contact US</h1>
         <h2 className="h2">언제든지 연락 주세요. 확인하는대로 회신 드리겠습니다 :)</h2>
       </Styled.Header>
       <Styled.Content>
-        <ContactUsInput />
-        <ContactUsDetails />
+          <ContactUsInput />
+          <ContactUsDetails />
       </Styled.Content>
-    </>
+    </Styled.Wrapper>
   );
 };
 

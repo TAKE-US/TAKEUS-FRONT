@@ -44,7 +44,8 @@ const Styled = {
         font: ${({ theme }) => theme.font.body2};
         color: ${({ theme }) => theme.color.gray3};
         border-right: 1px solid ${({ theme }) => theme.color.lightgray2};
-        padding-right: 2rem
+        padding-right: 2rem;
+        white-space: nowrap;
       }
     }
   `,
@@ -90,6 +91,7 @@ const ContactUsInput = () => {
         >
           {text}
         </textarea>
+        <button>
           <Button
             primary
             rounded
@@ -98,6 +100,7 @@ const ContactUsInput = () => {
           >
             TAKEUS에 보내기
           </Button>
+        </button>
       </div>
     </Styled.Wrapper>
   );

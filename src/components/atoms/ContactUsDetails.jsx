@@ -15,6 +15,7 @@ const Styled = {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-left: 1.3rem;
 
     .detailinner {
       width: 33.2rem;
