@@ -100,22 +100,22 @@ const Menu = {
   `,
 };
 
-const allAirport = {
-  "미국": {
-    "워싱턴 DC": ["델러스 국제공항", "로널드 레이건 워싱턴 국제공항"],
-    "뉴욕": ["JFK 국제공항", "시러큐스 핸콕 국제공항", "스튜어트 국제공항", "롱아일랜드 아이슬립 맥아더 공항", "라구아디아 공항"],
-  },
-  "캐나다": {
-    "밴쿠버": ["밴쿠버 국제공항"],
-    "토론토": ["토론토 국제공항"],
-  },
-  "독일": {
-    "프랑크푸르트": ["프랑크푸르트 국제공항"],
-    "브레멘": ["브레멘 국제공항"],
-  }
-};
+// const allAirport = {
+//   "미국": {
+//     "워싱턴 DC": ["델러스 국제공항", "로널드 레이건 워싱턴 국제공항"],
+//     "뉴욕": ["JFK 국제공항", "시러큐스 핸콕 국제공항", "스튜어트 국제공항", "롱아일랜드 아이슬립 맥아더 공항", "라구아디아 공항"],
+//   },
+//   "캐나다": {
+//     "밴쿠버": ["밴쿠버 국제공항"],
+//     "토론토": ["토론토 국제공항"],
+//   },
+//   "독일": {
+//     "프랑크푸르트": ["프랑크푸르트 국제공항"],
+//     "브레멘": ["브레멘 국제공항"],
+//   }
+// };
 
-const DropdownAirport = ({ currCountry, currAirport, setCurrAirport }) => {
+const DropdownAirport = ({ currCountry, currAirport, setCurrAirport, allAirport }) => {
   const dropdownRef = useRef(null);
   const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
   const [airport, setAirport] = useState('');
@@ -127,7 +127,7 @@ const DropdownAirport = ({ currCountry, currAirport, setCurrAirport }) => {
   useEffect(() => {
     setAirport(allAirport[currCountry]);
     setCurrAirport('');
-  }, [currCountry, setCurrAirport]);
+  }, [currCountry, setCurrAirport, allAirport]);
 
   return (
     <Menu.Container>

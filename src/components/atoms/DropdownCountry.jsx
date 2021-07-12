@@ -77,7 +77,7 @@ const Menu = {
   `,
 };
 
-const DropdownCountry = ({ currCountry, setCurrCountry }) => {
+const DropdownCountry = ({ currCountry, setCurrCountry, country }) => {
   const dropdownRef = useRef(null);
   const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
 
@@ -85,7 +85,7 @@ const DropdownCountry = ({ currCountry, setCurrCountry }) => {
     setIsActive(!isActive);
   };
 
-  const country = ["미국", "캐나다", "독일", "프랑스", "네덜란드"];
+  // const country = ["미국", "캐나다", "독일", "프랑스", "네덜란드"];
 
   return (
     <Menu.Container>

@@ -47,20 +47,28 @@ const Search = {
 const Searchbar = () => {
   const [currCountry, setCurrCountry] = useState('');
   const [currAirport, setCurrAirport] = useState('');
-  const [country, setCountry] = useState(null);
+  const [country, setCountry] = useState([]);
+  const [allAirport, setAllAirport] = useState('');
 
   useEffect(() => {
-    const data = getCountry();
-    setCountry(data);
-    console.log(country,"country");
+    (async () => {
+      const data = await getCountry();
+      setCountry(Object.keys(data).splice(1));
+      setAllAirport(data);
+    })();
   }, []);
 
   return (
     <Search.TotalContainer>
       <Search.Container>
         <Search.Dropdown>
-          <DropdownCountry currCountry={currCountry} setCurrCountry={setCurrCountry} />
-          <DropdownAirport currCountry={currCountry} currAirport={currAirport} setCurrAirport={setCurrAirport} />
+          <DropdownCountry currCountry={currCountry} setCurrCountry={setCurrCountry} country={country} />
+          <DropdownAirport
+            currCountry={currCountry}
+            currAirport={currAirport}
+            setCurrAirport={setCurrAirport}
+            allAirport={allAirport}
+          />
         </Search.Dropdown>
         <Search.Button>
           <Button primary font="button_middle" padding="1.9rem 1.5rem 1.9rem 1.4rem">
