@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef, useCallback } from "react";
 import { useLocation, useHistory } from "react-router";
+import { Link } from 'react-router-dom';
 import styled from "styled-components";
 
 import { ReactComponent as LogoBlack } from "../../assets/img/ic_logo_wordmark_black_small.svg";
@@ -19,6 +20,12 @@ const Head = {
       color: ${({ theme }) => theme.color.white};
       text-decoration: underline;
       height: 3.6rem;
+
+      a {
+        &:hover {
+          cursor: pointer;
+        }
+      }
     }
 
     .inner {
@@ -106,7 +113,7 @@ const Header = () => {
       {location.pathname !== "/login" && (
         <Head.Wrap isScrolling={isScrolling} isLogin={isLogin} location={location.pathname}>
           <aside className="aside">
-            회원가입을 하시면 대상견 등록이 가능합니다:)
+            <Link to="login" >회원가입을 하시면 대상견 등록이 가능합니다:)</Link>
           </aside>
           <div className="inner">
             <LogoBlack

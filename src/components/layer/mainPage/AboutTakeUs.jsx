@@ -8,7 +8,6 @@ import SearchImg from 'assets/img/img_search.svg';
 
 const Styled = {
   Wrapper: styled.div`
-    margin-bottom: 19.7rem;
     .title {
       font: ${({ theme }) => theme.font.headline};
       text-align: center;

@@ -4,6 +4,9 @@ import reset from "styled-reset";
 const GlobalStyle = createGlobalStyle`
   ${reset}
 
+  a { color: #fff; text-decoration: none; outline: none }
+  a:hover, a:active { text-decoration: none; color:#fff; background-color: transparent; }
+
   * {
     box-sizing: border-box;
   }
