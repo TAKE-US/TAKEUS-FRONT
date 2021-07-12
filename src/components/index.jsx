@@ -50,5 +50,6 @@ export { default as PaginationNav } from "./layer/dogSearch/PaginationNav";
 // layer/review
 export { default as ReviewPostInfo } from './layer/review/ReviewPostInfo';
 export { default as ReviewPrecaution } from './layer/review/ReviewPrecaution';
+export { default as ReviewSearch } from './layer/review/ReviewSearch';
 
 // layer/login

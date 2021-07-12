@@ -9,7 +9,6 @@ import SearchImgHover from '../../assets/img/btn_search_hover.svg';
 
 const Search = {
   TotalContainer: styled.div`
-    width: 100%;
   `,
 
   Container: styled.div`
