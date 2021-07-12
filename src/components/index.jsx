@@ -32,7 +32,7 @@ export { default as CarouselReviewContainer } from "./layer/mainPage/CarouselRev
 export { default as MainNavigation } from "./layer/mainPage/MainNavigation";
 
 // layer/aboutUs
-export { default as ContactUs } from './layer/aboutUs/ContactUs';
+export { default as ContactUs } from "./layer/aboutUs/ContactUs";
 export { default as AboutUsTop } from "./layer/aboutUs/AboutUsTop";
 export { default as AboutUsMission } from "./layer/aboutUs/AboutUsMission";
 export { default as AboutUsTeam } from "./layer/aboutUs/AboutUsTeam";
@@ -47,14 +47,15 @@ export { default as DogSearchNavigation } from "./layer/dogSearch/DogSearchNavig
 export { default as DogCardContainer } from "./layer/dogSearch/DogCardContainer";
 export { default as PaginationNav } from "./layer/dogSearch/PaginationNav";
 
-// layer/dogDetail 
+// layer/dogDetail
 export { default as DogDetail } from "./layer/dogDetail/DogDetail";
 
 // layer/info
 
 // layer/review
-export { default as ReviewPostInfo } from './layer/review/ReviewPostInfo';
-export { default as ReviewPrecaution } from './layer/review/ReviewPrecaution';
-export { default as ReviewSearch } from './layer/review/ReviewSearch';
+export { default as ReviewPostInfo } from "./layer/review/ReviewPostInfo";
+export { default as ReviewPrecaution } from "./layer/review/ReviewPrecaution";
+export { default as ReviewSearch } from "./layer/review/ReviewSearch";
+export { default as ReviewCardContainer } from "./layer/review/ReviewCardContainer";
 
 // layer/login

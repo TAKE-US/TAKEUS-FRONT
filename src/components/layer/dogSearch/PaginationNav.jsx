@@ -4,9 +4,10 @@ import styled from "styled-components";
 import leftBtnIcon from "../../../assets/img/ic_arrow_left_24.svg";
 import rightBtnIcon from "../../../assets/img/ic_arrow_right_black_24.svg";
 
-const PaginationNav = ({ pageNum, setPageNum, totalPage }) => {
-  const pageNums = [];
-  for (var i = 1; i <= totalPage / 16; i++) {
+const PaginationNav = ({ pageNum, setPageNum, totalPage, review }) => {
+  const pageNums = [1];
+  const denominator = review ? 7 : 16;
+  for (var i = 2; i <= totalPage / denominator; i++) {
     pageNums.push(i);
   }
 

@@ -44,3 +44,20 @@ export const getPageDogs = async num => {
     return null;
   }
 };
+
+export const getReviews = async num => {
+  try {
+    const data = await instance.get("/api/reviews", {
+      params: {
+        order: "latest",
+        page: num,
+      },
+    });
+    console.log(data.data.totalNum);
+    console.log("[SUCCESS] GET review data");
+    return [data.data.data, data.data.totalNum];
+  } catch (e) {
+    console.log("[FAIL] GET review data");
+    return null;
+  }
+};

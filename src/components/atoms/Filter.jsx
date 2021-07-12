@@ -8,7 +8,7 @@ import upIcon from "../../assets/icon/ic_arrow_top_18.svg";
 
 const Wrapper = styled.section`
   display: flex;
-  min-width: 108rem;
+  width: 108rem;
 `;
 
 const FilterWrap = styled.section`
@@ -20,7 +20,6 @@ const SelectedFilter = styled.button`
   justify-content: center;
   align-items: center;
   width: 9rem;
-  margin-top: 3.6rem;
   background: ${({ theme }) => theme.color.bg_gray};
   border: 1px solid #dfdfdf;
   border-radius: 1.7rem;

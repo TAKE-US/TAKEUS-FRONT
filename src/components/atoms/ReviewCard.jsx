@@ -3,7 +3,7 @@ import styled from "styled-components";
 //components
 import { Hashtag } from "components";
 //img
-import dogImage from "assets/img/ReviewCard_sample.png";
+// import dogImage from "assets/img/ReviewCard_sample.png";
 
 const Styled = {
   Wrapper: styled.div`
@@ -15,6 +15,9 @@ const Styled = {
     .text {
       .tags {
         display: flex;
+        .hashtag {
+          margin-right: 0.9rem;
+        }
       }
       article {
         padding: 1.8rem 0 2.5rem 0;
@@ -50,43 +53,44 @@ const Styled = {
       }
     }
     .image {
+      max-width: 21.2rem;
+      min-width: 21.2rem;
+      height: 21.2rem;
+      object-fit: cover;
       margin-left: 2.4rem;
       border-radius: 0.6rem;
     }
   `,
 };
 
-const ReviewCard = () => {
+const ReviewCard = ({ review }) => {
   return (
     <Styled.Wrapper>
       <section className="text">
         <section className="tags">
-          {tags.map(tag => (
-            <Hashtag key={tag} tag={tag} primary />
+          {review.hashtags.map(tag => (
+            <div className="hashtag" key={tag}>
+              <Hashtag tag={tag} primary />
+            </div>
           ))}
         </section>
         <article>
-          <h1>[시카고 공항 정보 공유] 보람 있는 징징이 이동봉사 후기 공유합니다</h1>
-          <p>
-            징징이를 LA공항에 데려다 주었어요. 이렇게 데려다 주니 기분이 어쩌고 저쩌고 그랬고 뿌듯함을 많이 느꼈어요.
-            다음에 또 어쩌고 공항 정보는 어쩌고 언제 도착하는게 좋구요 대기 시간은 이정도가 소요되었구요 어쩌고 저쩌고
-            어쩌고 저...
-          </p>
+          <h1>{review.title}</h1>
+          <p>{review.crawlingData[0].desc}</p>
         </article>
         <section className="description">
-          <p>작성일ㅣ2021.06.24 &nbsp;&nbsp;지역ㅣ시카고 &nbsp;&nbsp;봉사단체ㅣ웰컴독코리아</p>
+          <p>
+            작성일ㅣ{review.writeDate} &nbsp;&nbsp;지역ㅣ시카고 &nbsp;&nbsp;봉사단체ㅣ{review.institutionName}
+          </p>
           <div className="button-wrap">
             <button className="button-wrap__edit">수정</button>
             <button>삭제</button>
           </div>
         </section>
       </section>
-      <img className="image" src={dogImage} alt="review_img" />
+      <img className="image" src={review.crawlingData[0].image} alt="review_img" />
     </Styled.Wrapper>
   );
 };
-
-//mock data
-const tags = ["이동봉사과정", "도착공항정보", "봉사국가", "봉사국가"];
 
 export default ReviewCard;
