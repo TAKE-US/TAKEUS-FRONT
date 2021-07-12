@@ -1,15 +1,15 @@
 import React  from 'react';
 import { withRouter } from 'react-router-dom'; 
 import styled from "styled-components";
-import { ReactComponent as DeleteIcon } from '../../assets/img/ic_delete.svg';
-import { ReactComponent as EditIcon }  from '../../assets/img/ic_edit.svg';
+import { ReactComponent as DeleteIcon } from 'assets/img/ic_delete.svg';
+import { ReactComponent as EditIcon }  from 'assets/img/ic_edit.svg';
  
-import { Swiper, DogDetailInfo, CopyLinkButton } from "../"; 
+import { Swiper, DogDetailInfo, CopyLinkButton } from "../.."; 
  
 const DogDetailWrap = styled.div`
  display: flex;
  flex-direction: column;
- width: 75%;
+ width: 100%;
  
  .goBack {
    width: 14%;
@@ -29,6 +29,7 @@ const DogDetailWrap = styled.div`
  
  header {
    display: flex;
+   width: 100%;
    flex-direction: row;
    justify-content: space-between;
  }
@@ -95,7 +96,7 @@ const DogDetailWrap = styled.div`
    }
  
    &--detail {
-     width: 101.6rem;
+     width: 100%;
      height: 17.6rem;
      padding: 2.4rem 3.2rem;
      margin-bottom: 4rem;

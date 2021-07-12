@@ -1,25 +1,25 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { ReactComponent as LocationIcon } from "../../assets/icon/ic_location_24.svg";
-import { ReactComponent as CallIcon } from "../../assets/icon/ic_Call.svg";
-import { ReactComponent as InstagramIcon }  from "../../assets/icon/ic_Instagram.svg";
-import { ReactComponent as KakaotalkIcon } from "../../assets/icon/ic_Kakaotalk.svg";
-import { ReactComponent as TwitterIcon } from "../../assets/icon/ic_Twitter.svg";
-import { ReactComponent as FacebookIcon }  from "../../assets/icon/ic_Facebook.svg";
+import { ReactComponent as LocationIcon } from "assets/icon/ic_location_24.svg";
+import { ReactComponent as CallIcon } from "assets/icon/ic_Call.svg";
+import { ReactComponent as InstagramIcon }  from "assets/icon/ic_Instagram.svg";
+import { ReactComponent as KakaotalkIcon } from "assets/icon/ic_Kakaotalk.svg";
+import { ReactComponent as TwitterIcon } from "assets/icon/ic_Twitter.svg";
+import { ReactComponent as FacebookIcon }  from "assets/icon/ic_Facebook.svg";
 
 const Styled = {
   Wrapper: styled.div`
     display: flex;
     flex-direction: column;
-    width: 43%;
-    margin: 0rem 0rem 3.2rem 5.5rem;
+    width: 56.5%;
+    margin-left: 5.5%
   `,
 
   Departure: styled.section`
     display: flex;
     flex-direction: column;
-    margin-bottom: 10%;
+    margin-bottom: 5.5%;
 
     p {
       height: 2.3rem;
@@ -43,7 +43,7 @@ const Styled = {
   `,
 
   DogInfo: styled.section`
-    margin-bottom: 10%;
+    margin-bottom: 5.5%;
 
     p {
       height: 2.3rem;
@@ -52,6 +52,7 @@ const Styled = {
     }
 
     .info--main {
+      width: 100%;
       display: grid;
       grid-template-columns: repeat(2,1fr);
     }
@@ -74,7 +75,7 @@ const Styled = {
   `,
 
   Contact: styled.section`
-    margin-bottom: 10%;
+    margin-bottom: 5.5%;
 
     p {
       height: 2.3rem;
@@ -152,7 +153,7 @@ function DogDetailInfo({ dog }) {
           {dog.kakaotalkId && 
             (
               <Styled.ContactRow>
-                <KakaotalkIcon width="21" height="21"/>
+                <KakaotalkIcon width="21" height="21" fill="black"/>
                 <p>{dog.kakaotalkId}</p>
               </Styled.ContactRow>
             )}
