@@ -87,10 +87,6 @@ const Styled = {
       right: 1rem;
     }
 
-    .kakaotalkIcon {
-      right: 1rem;
-    }
-
     .naverIcon {
       right: 2.4rem;
     }
