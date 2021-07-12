@@ -7,15 +7,22 @@ import { ReactComponent as LogoBlack } from "../../assets/img/ic_logo_wordmark_b
 const Head = {
   Wrap: styled.nav`
     position: sticky;
-    top: 0;
+    top: -3.6rem;
     z-index: 15;
 
+    .aside {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: ${({ theme }) => theme.color.darkgray1};
+      font: ${({ theme }) => theme.font.caption};
+      color: ${({ theme }) => theme.color.white};
+      text-decoration: underline;
+      height: 3.6rem;
+    }
+
     .inner {
-      margin-top: 3.8rem;
-      padding-left: 18rem;
-      padding-right: 18rem;
-      padding-top: 2.3rem;
-      padding-bottom: 2.3rem;
+      padding: 2.3rem 9.2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -33,8 +40,8 @@ const Head = {
       .gnb {
         display: flex;
         justify-content: space-between;
-        margin-left: 10.3rem;
-        margin-right: 13.1rem;
+        margin-left: 12.7rem;
+        margin-right: 42.2rem;
         width: 58.6rem;
       }
     }
@@ -81,7 +88,7 @@ const Header = () => {
   const [isScrolling, setIsScrolling] = useState(false);
   const [imgHover, setImgHover] = useState(false);
 
-  const scrollHandler = e => {
+  const scrollHandler = () => {
     if (window.scrollY >= 38) {
       setIsScrolling(true);
     } else {
@@ -97,6 +104,9 @@ const Header = () => {
     <>
       {location.pathname !== "/login" && (
         <Head.Wrap isScrolling={isScrolling}>
+          <aside className="aside">
+            회원가입을 하시면 대상견 등록이 가능합니다:)
+          </aside>
           <div className="inner">
             <LogoBlack
               onClick={() => {
@@ -126,14 +136,6 @@ const Header = () => {
                 }}
               >
                 대상견 찾기
-              </Head.Content>
-              <Head.Content
-                isSelect={location.pathname === "/dogEnroll" ? true : false}
-                onClick={() => {
-                  history.push("/dogEnroll");
-                }}
-              >
-                대상견 등록
               </Head.Content>
               <Head.Content
                 isSelect={location.pathname === "/review" ? true : false}
