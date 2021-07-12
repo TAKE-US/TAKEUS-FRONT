@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+/* eslint-disable arrow-parens */
+import React, { useState, useRef } from "react";
 import styled from "styled-components";
 import AddDogCard from "components/atoms/AddDogCard";
 
@@ -6,52 +7,61 @@ const Styled = {
   Wrapper: styled.section`
     width: 100%;
     display: flex;
-    max-width: 120rem;
-
-    .card {
-      display: flex;
-      align-items: center;
-      width: 20rem;
-      height: 20rem;
-      border-radius: 1rem;
-      background-color: #f8f8f8;
-      margin-right: 1.5rem;
-      img {
-        width: 20rem;
-        height: 20rem;
-        border-radius: 1rem;
-      }
-      p {
-        z-index: 0;
-      }
-      input {
-        width: 20rem;
-        height: 20rem;
-        opacity: 0;
-      }
-      input:hover {
-        cursor: pointer;
-      }
-    }
   `,
 };
 
 const AddDogCardContainer = () => {
-  const [count, setCount] = useState(0);
-  const full = Array.from({ length: count + 1 }, () => 0);
-  const empty = Array.from({ length: 4 - count }, () => 0);
+  const [photo, setPhoto] = useState(null);
+  const [photoArray, setPhotoArray] = useState([1, 0, 0, 0, 0]);
+  function photoHandle(e) {
+    const newFile = e.target.files;
+    (async () => {
+      setPhoto(newFile);
+    })();
+    (async () => {
+      arrayHandle(newFile);
+    })();
+  }
+
+  const nextId = useRef(0);
+  function arrayHandle(photo) {
+    const idPhoto = {
+      id: nextId.current,
+      photo,
+    };
+    if (photo !== null) {
+      setPhotoArray([idPhoto, ...photoArray]);
+    }
+    nextId.current += 1;
+  }
+
+  function deleteHandle(e) {
+    const deletedKey = e.target.nextSibling.dataset.key;
+    const filteredArray = photoArray.filter(
+      (photo) => parseInt(photo.id, 10) !== parseInt(deletedKey, 10)
+    );
+    setPhotoArray(filteredArray);
+  }
+
+  console.log(photoArray);
+  console.log(photo);
+  // useEffect(() => {
+
+  // }, [photo]);
 
   return (
     <Styled.Wrapper>
       <>
-        {full.map((_, i) =>
-          full.length !== 6 || i !== 5 ? (
-            <AddDogCard key={i} count={count} setCount={setCount} />
+        {photoArray.map((value, i) =>
+          i < 5 ? (
+            <AddDogCard
+              key={i}
+              value={value}
+              photoHandle={photoHandle}
+              deleteHandle={deleteHandle}
+            />
           ) : null
         )}
-        {empty.map((_, i) => (
-          <div className="card" key={i}></div>
-        ))}
       </>
     </Styled.Wrapper>
   );

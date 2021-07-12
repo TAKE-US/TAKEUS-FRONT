@@ -57,8 +57,7 @@ const CarouselDogContainer = () => {
   useEffect(() => {
     (async () => {
       const data = await getDogs();
-      setDogs(data);
-      console.log(data);
+      data && setDogs(data.slice(0, 8));
     })();
   }, []);
 
@@ -73,7 +72,10 @@ const CarouselDogContainer = () => {
       </article>
       <article className="container-bottom">
         <div className="container-bottom__cards" ref={listRef}>
-          {dogs.length && dogs.map((dog, i) => <DogCard key={dog._id} id={dog._id} dog={dog} />)}
+          {dogs.length &&
+            dogs.map((dog, i) => (
+              <DogCard key={dog._id} id={dog._id} dog={dog} />
+            ))}
         </div>
       </article>
     </ContainerWrap>
