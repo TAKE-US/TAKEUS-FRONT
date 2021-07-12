@@ -12,6 +12,7 @@ const Styled = {
     border: 1px solid #c4c4c4;
     padding: 2.8rem 3.5rem;
     border-radius: 1rem;
+    cursor: pointer;
     .text {
       .tags {
         display: flex;
@@ -65,7 +66,7 @@ const Styled = {
 
 const ReviewCard = ({ review }) => {
   return (
-    <Styled.Wrapper>
+    <Styled.Wrapper onClick={() => window.open(review.crawlingData[0].link)}>
       <section className="text">
         <section className="tags">
           {review.hashtags.map(tag => (
