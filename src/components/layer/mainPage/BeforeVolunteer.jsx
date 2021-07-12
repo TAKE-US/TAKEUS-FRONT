@@ -31,7 +31,7 @@ const BeforeVolunteer = () => {
       <p className="desc">해외 이동 봉사, 처음이라 걱정 되신다구요? 걱정하지마세요!<br />
         해외이동봉사 정보와 주의사항, 테이커스가 차근차근 알려드릴게요.
       </p>
-      <Button primary rounded padding="1.2rem 3rem">자세히보기</Button>
+      <Button black rounded padding="1.2rem 3rem">자세히보기</Button>
     </Styled.Wrapper>
   );
 };
