@@ -16,6 +16,7 @@ const Styled = {
 
     .img {
       background: url(${backgroundImg}) center;
+      background-size: cover;
       height: 24rem;
       width: 100vw;
       margin-left: calc(-50vw + 50%);

@@ -7,7 +7,6 @@ import { ReactComponent as SearchImg } from 'assets/icon/ic_search_white_24.svg'
 
 const Search = {
   TotalContainer: styled.div`
-    width: 100%;
   `,
 
   Container: styled.div`
