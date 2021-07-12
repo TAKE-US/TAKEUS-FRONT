@@ -57,7 +57,7 @@ const CarouselDogContainer = () => {
   useEffect(() => {
     (async () => {
       const data = await getDogs();
-      setDogs(data.slice(0, 8));
+      data && setDogs(data.slice(0, 8));
     })();
   }, []);
 

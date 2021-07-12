@@ -14,24 +14,32 @@ const Styled = {
     background-color: #f8f8f8;
     margin-right: 1.5rem;
     .card {
+      width: 20rem;
+      height: 20rem;
       position: relative;
       &__img {
         position: absolute;
+        top: 5rem;
         left: 3.8rem;
-        max-width: 2rem;
-        max-height: 2rem;
+        width: 2rem;
+        height: 2rem;
+        /* max-width: 2rem;
+        max-height: 2rem; */
       }
       &__content {
         position: absolute;
         width: 12rem;
-        left: 6.2rem;
+        left: 5rem;
+        top: 9.5rem;
         font: ${({ theme }) => theme.font.button};
         color: ${({ theme }) => theme.color.primary};
       }
       &__input {
         position: absolute;
-        width: 100%;
-        height: 100%;
+        top: 0;
+        left: 0;
+        width: 20rem;
+        height: 20rem;
         opacity: 0;
         :hover {
           cursor: pointer;
