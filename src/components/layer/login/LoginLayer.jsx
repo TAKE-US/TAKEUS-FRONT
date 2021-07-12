@@ -1,9 +1,11 @@
+/* eslint-disable arrow-parens */
 import React from "react";
 import styled from "styled-components";
 import LoginImg from "../../../assets/img/img_Login.png";
 import KakaotalkIcon from "../../../assets/img/ic_kakaotalk.svg";
 import NaverIcon from "../../../assets/img/ic_naver.svg";
 import GoogleIcon from "../../../assets/img/ic_google.svg";
+import KakaoLogin from "components/atoms/LoginKakao";
 import { GoogleLogin } from "react-google-login";
 
 const Styled = {
@@ -48,7 +50,7 @@ const Styled = {
   Button: styled.button`
     width: 45.2rem;
     height: 4.8rem;
-    background-color: ${props => props.color};
+    background-color: ${(props) => props.color};
     border-radius: 2.1rem;
     padding-left: 1rem;
     margin-bottom: 1.7rem;
@@ -77,7 +79,7 @@ const Styled = {
 };
 
 const LoginLayer = () => {
-  const handleSuccess = async response => {
+  const handleSuccess = async (response) => {
     console.log(response);
     localStorage.setItem("token", response.accessToken);
     // let token = {
@@ -93,7 +95,7 @@ const LoginLayer = () => {
   };
 
   // 로그인 실패 시
-  const handleFailure = error => {
+  const handleFailure = (error) => {
     console.log(error);
   };
   return (
@@ -105,6 +107,7 @@ const LoginLayer = () => {
         <Styled.Button type="button" color={"#FEE500"}>
           <img className="kakaotalkIcon" src={KakaotalkIcon} alt="kakakotalk" />
           카카오톡으로 시작하기
+          <KakaoLogin />
         </Styled.Button>
         <Styled.Button type="button" color={"#1EC800"}>
           <img className="naverIcon" src={NaverIcon} alt="naver" />
@@ -112,8 +115,13 @@ const LoginLayer = () => {
         </Styled.Button>
         <GoogleLogin
           clientId={process.env.REACT_APP_GOOGLE_CLIENTID}
-          render={renderProps => (
-            <Styled.Button className="google" type="button" color={"white"} onClick={renderProps.onClick}>
+          render={(renderProps) => (
+            <Styled.Button
+              className="google"
+              type="button"
+              color={"white"}
+              onClick={renderProps.onClick}
+            >
               <img className="googleIcon" src={GoogleIcon} alt="google" />
               구글로 시작하기
             </Styled.Button>
