@@ -17,7 +17,6 @@ export const getDogs = async () => {
   }
 };
 
-<<<<<<< Updated upstream
 export const getCountry = async () => {
   try {
     const data = await instance.get("/api/airports/country");
@@ -26,7 +25,9 @@ export const getCountry = async () => {
     return data.data;
   } catch (e) {
     console.log("[FAIL] GET country data");
-=======
+  }
+};
+
 export const getPageDogs = async num => {
   try {
     const data = await instance.get("/api/dogs", {
@@ -40,7 +41,6 @@ export const getPageDogs = async num => {
     return [data.data.data, data.data.totalNum];
   } catch (e) {
     console.log("[FAIL] GET dogs data");
->>>>>>> Stashed changes
     return null;
   }
 };
