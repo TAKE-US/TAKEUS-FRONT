@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import { useLocation, useHistory } from "react-router";
 import styled from "styled-components";
 
@@ -81,8 +81,8 @@ const Header = () => {
   const [imgHover, setImgHover] = useState(false);
   const isLogin = localStorage.getItem("token");
 
-  const scrollHandler = () => {
-    if (isLogin || location !== "/") {
+  const scrollHandler = useCallback(() => {
+    if (isLogin || location.pathname !== "/") {
       if (window.scrollY !== 0) {
         setIsScrolling(true);
       } else {
@@ -95,11 +95,11 @@ const Header = () => {
         setIsScrolling(false);
       }
     }
-  };
+  }, [isLogin, location.pathname]);
 
   useEffect(() => {
     window.addEventListener("scroll", scrollHandler);
-  }, []);
+  }, [scrollHandler]);
 
   return (
     <>

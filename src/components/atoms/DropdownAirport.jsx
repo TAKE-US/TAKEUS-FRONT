@@ -67,7 +67,7 @@ const Menu = {
     width: 100%;
     list-style: none;
     padding: 0;
-    margin: 0;
+    /* margin: 0; */
 
     div {
       margin: 0.8rem;
@@ -80,7 +80,6 @@ const Menu = {
         font: ${({ theme }) => theme.font.caption};
         color: ${({ theme }) => theme.color.gray1};
         padding-left: 1.2rem;
-        margin-bottom : 1.8rem;
       }
     }
   `,
