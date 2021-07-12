@@ -7,3 +7,4 @@ export { default as LoginPage } from "./login/LoginPage";
 export { default as ReviewPage } from "./review/ReviewPage";
 export { default as ReviewPostPage } from "./review/ReviewPostPage";
 export { default as MainPage } from "./MainPage";
+export { default as MyPage } from "./my/MyPage";

@@ -1,9 +1,10 @@
-import React from 'react';
-import styled from 'styled-components';
-import LoginImg from '../../../assets/img/img_Login.png';
-import KakaotalkIcon from '../../../assets/img/ic_kakaotalk.svg';
-import NaverIcon from '../../../assets/img/ic_naver.svg';
-import GoogleIcon from '../../../assets/img/ic_google.svg';
+import React from "react";
+import styled from "styled-components";
+import LoginImg from "../../../assets/img/img_Login.png";
+import KakaotalkIcon from "../../../assets/img/ic_kakaotalk.svg";
+import NaverIcon from "../../../assets/img/ic_naver.svg";
+import GoogleIcon from "../../../assets/img/ic_google.svg";
+import { GoogleLogin } from "react-google-login";
 
 const Styled = {
   Wrapper: styled.div`
@@ -40,7 +41,7 @@ const Styled = {
     }
 
     .google {
-      border: 1px solid #DFDFDF;
+      border: 1px solid #dfdfdf;
     }
   `,
 
@@ -72,28 +73,54 @@ const Styled = {
     .googleIcon {
       right: 3.1rem;
     }
-  `
+  `,
 };
 
 const LoginLayer = () => {
+  const handleSuccess = async response => {
+    console.log(response);
+    localStorage.setItem("token", response.accessToken);
+    // let token = {
+    //   "x-access-token": response.accessToken,
+    // };
+    // let data = {
+    //   name: response.profileObj.name,
+    //   email: response.profileObj.email,
+    //   googleId: response.profileObj.googleId,
+    //   profileImage: response.profileObj.imageUrl,
+    // };
+    window.open("http://localhost:3000", "_self");
+  };
+
+  // 로그인 실패 시
+  const handleFailure = error => {
+    console.log(error);
+  };
   return (
     <Styled.Wrapper>
       <Styled.Image src={LoginImg} alt="dogs" />
       <Styled.Section>
         <h1>Takeus 시작하기</h1>
         <h2>SNS 계정으로 손쉽게 가입하고 Takers가 될 수 있어요 :)</h2>
-        <Styled.Button type="button" color={'#FEE500'}>
+        <Styled.Button type="button" color={"#FEE500"}>
           <img className="kakaotalkIcon" src={KakaotalkIcon} alt="kakakotalk" />
           카카오톡으로 시작하기
         </Styled.Button>
-        <Styled.Button type="button" color={'#1EC800'}>
+        <Styled.Button type="button" color={"#1EC800"}>
           <img className="naverIcon" src={NaverIcon} alt="naver" />
           네이버로 시작하기
         </Styled.Button>
-        <Styled.Button className="google" type="button" color={'white'}>
-          <img className="googleIcon" src={GoogleIcon} alt="google" />
-          구글로 시작하기
-        </Styled.Button>
+        <GoogleLogin
+          clientId={process.env.REACT_APP_GOOGLE_CLIENTID}
+          render={renderProps => (
+            <Styled.Button className="google" type="button" color={"white"} onClick={renderProps.onClick}>
+              <img className="googleIcon" src={GoogleIcon} alt="google" />
+              구글로 시작하기
+            </Styled.Button>
+          )}
+          onSuccess={handleSuccess}
+          onFailure={handleFailure}
+        />
       </Styled.Section>
     </Styled.Wrapper>
   );

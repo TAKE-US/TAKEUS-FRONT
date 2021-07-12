@@ -155,13 +155,23 @@ const Header = () => {
                 About us
               </Head.Content>
             </div>
-            <Head.Login
-              onClick={() => {
-                history.push("/login");
-              }}
-            >
-              로그인·회원가입
-            </Head.Login>
+            {isLogin ? (
+              <Head.Login
+                onClick={() => {
+                  history.push("/mypage");
+                }}
+              >
+                내가 작성한 글
+              </Head.Login>
+            ) : (
+              <Head.Login
+                onClick={() => {
+                  history.push("/login");
+                }}
+              >
+                로그인·회원가입
+              </Head.Login>
+            )}
           </div>
         </Head.Wrap>
       )}
