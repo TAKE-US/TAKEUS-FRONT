@@ -7,11 +7,11 @@ import { ReactComponent as LogoBlack } from "../../assets/img/ic_logo_wordmark_b
 const Head = {
   Wrap: styled.nav`
     position: sticky;
-    top: ${props => props.isLogin ? '0' : '-3.6rem'};
+    top: ${props => ( props.isLogin || props.location !== "/") ? '0' : '-3.6rem'};
     z-index: 15;
 
     .aside {
-      display: ${props => props.isLogin ? 'none' : 'flex'};
+      display: ${props => ( props.isLogin || props.location !== "/") ? 'none' : 'flex'};
       justify-content: center;
       align-items: center;
       background-color: ${({ theme }) => theme.color.darkgray1};
@@ -29,18 +29,10 @@ const Head = {
       background: ${props => (props.isScrolling ? "#ffffff" : "none")};
       box-shadow: ${props => props.isScrolling && "0rem 0rem 1.6rem 0.1rem rgba(0, 0, 0, 0.08)"};
 
-      img {
-        width: 14.4rem;
-        height: 4.2rem;
-        &:hover {
-          cursor: pointer;
-        }
-      }
-
       .gnb {
         display: flex;
         justify-content: space-between;
-        margin-left: 12.7rem;
+        margin-left: 18rem;
         margin-right: 42.2rem;
         width: 58.6rem;
       }
@@ -90,7 +82,7 @@ const Header = () => {
   const isLogin = localStorage.getItem("token");
 
   const scrollHandler = () => {
-    if (isLogin) {
+    if (isLogin || location !== "/") {
       if (window.scrollY !== 0) {
         setIsScrolling(true);
       } else {
@@ -112,7 +104,7 @@ const Header = () => {
   return (
     <>
       {location.pathname !== "/login" && (
-        <Head.Wrap isScrolling={isScrolling} isLogin={isLogin}>
+        <Head.Wrap isScrolling={isScrolling} isLogin={isLogin} location={location.pathname}>
           <aside className="aside">
             회원가입을 하시면 대상견 등록이 가능합니다:)
           </aside>

@@ -15,7 +15,7 @@ const Search = {
     border-radius: 1rem;
     box-shadow: 0rem 0rem 2rem 0.1rem rgba(0,0,0,0.05);
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     margin: 0 auto;
 
