@@ -53,7 +53,7 @@ export const getReviews = async num => {
         page: num,
       },
     });
-    console.log(data.data.totalNum);
+    console.log(data);
     console.log("[SUCCESS] GET review data");
     return [data.data.data, data.data.totalNum];
   } catch (e) {
