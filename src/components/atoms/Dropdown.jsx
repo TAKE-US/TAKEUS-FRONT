@@ -3,7 +3,6 @@ import styled from 'styled-components';
 
 import { useDetectOutsideClick } from '../../hooks/useDetectOutsideClick';
 import Arrow_Bottom from '../../assets/img/ic_arrow_bottom_black_24.svg';
-// import Arrow_Top from '../../assets/img/ic_arrow_top_black_24.svg';
 
 const Styled = {
   Container: styled.div`

@@ -11,13 +11,17 @@ const Search = {
 
   Container: styled.div`
     background-color: ${({ theme }) => theme.color.white};
-    width: 77.4rem;
+    width: 72.6rem;
     border-radius: 1rem;
     box-shadow: 0rem 0rem 2rem 0.1rem rgba(0,0,0,0.05);
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin: 0 auto;
+
+    .text {
+      margin-right: 0.3rem;
+    }
   `,
 
   Dropdown: styled.div`
@@ -27,13 +31,14 @@ const Search = {
     justify-content: space-between;
   `,
 
-  Button: styled.button`
-    border: none;
-    background-color: ${({ theme }) => theme.color.white};
-
-    img {
-      width: 100%;
-      height: 100%;
+  Button: styled.div`
+    width: 9.4rem;
+    height: 6.2rem;
+    background-color: ${({ theme }) => theme.color.primary};
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    &:hover {
+      background-color: ${({ theme }) => theme.color.primary_light};
     }
   `,
 };
@@ -51,8 +56,8 @@ const Searchbar = () => {
           <DropdownAirport currCountry={currCountry} currAirport={currAirport} setCurrAirport={setCurrAirport} />
         </Search.Dropdown>
         <Search.Button>
-          <Button primary font="button_middle" padding="1.9rem">
-            <span>검색</span>
+          <Button primary font="button_middle" padding="1.9rem 1.5rem 1.9rem 1.4rem">
+            <span className="text">검색</span>
             <SearchImg />
           </Button>
         </Search.Button>

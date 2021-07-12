@@ -8,11 +8,11 @@ const Styled = {
   Wrapper: styled.div`
     width: 100vw;
     margin-left: calc(-50vw + 50%);
-    height: 60.1rem;
+    height: 63.7rem;
     background-image: url(${backgroundBeachImg});
     background-size: cover;
     background-position: bottom center;
-    padding-top: 19rem;
+    padding-top: 17.3rem;
   `,
 };
 
