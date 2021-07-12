@@ -25,6 +25,7 @@ const Styled = {
       background-color: ${({ theme }) => theme.color.primary};
       &:hover {
         background-color: ${({ theme }) => theme.color.primary_light};
+        border-color: ${({ theme }) => theme.color.primary_light};
       }
     }
 
@@ -34,7 +35,7 @@ const Styled = {
       border-color: ${({ theme }) => theme.color.darkgray2};
       &:hover {
         background-color: ${({ theme }) => theme.color.darkgray1};
-      border-color: ${({ theme }) => theme.color.darkgray1};
+        border-color: ${({ theme }) => theme.color.darkgray1};
       }
     }
   `
