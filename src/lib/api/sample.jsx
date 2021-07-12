@@ -2,7 +2,7 @@ import axios from "axios";
 
 const instance = axios.create({
   baseURL: "",
-  timeout: 1000,
+  timeout: 2000,
 });
 
 export const getDogs = async () => {
@@ -13,7 +13,7 @@ export const getDogs = async () => {
     return data.data.data;
   } catch (e) {
     console.log("[FAIL] GET dogs data");
-    return null;
+    throw e;
   }
 };
 
@@ -25,6 +25,6 @@ export const getCountry = async () => {
     return data.data;
   } catch (e) {
     console.log("[FAIL] GET country data");
-    return null;
+    throw e;
   }
 };

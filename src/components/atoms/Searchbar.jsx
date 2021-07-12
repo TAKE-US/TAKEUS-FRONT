@@ -51,9 +51,16 @@ const Searchbar = () => {
 
   useEffect(() => {
     (async () => {
-      const data = await getCountry();
-      setCountry(Object.keys(data).splice(1));
-      setAllAirport(data);
+      try {
+        const data = await getCountry();
+        console.warn(data);
+
+        setCountry(Object.keys(data).splice(1));
+        setAllAirport(data);
+      } catch (e) {
+        // TODO
+        // error 처리 필요!
+      }
     })();
   }, []);
 
