@@ -1,7 +1,8 @@
 /* eslint-disable arrow-parens */
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import KakaotalkIcon from "assets/img/ic_kakaotalk.svg";
+import { withRouter, useHistory } from "react-router-dom";
 
 const Styled = {
   Wrapper: styled.div`
@@ -37,20 +38,43 @@ const Styled = {
 };
 
 const LoginKakao = () => {
-  const kakaoApi = `https://kauth.kakao.com/oauth/authorize?response_
-  type=code&client_id=f67ac346de494c1931b31d6ec8ea192e&redirect_uri=
-  http://localhost:3000/signin`;
-
-  const kakaoLoginHandler = () => {
-    window.location.assign(kakaoApi);
+  const { Kakao } = window;
+  const [isLogin, setLogin] = useState(false);
+  const history = useHistory();
+  console.log(isLogin);
+  const LoginClickHandler = () => {
+    try {
+      return new Promise((resolve, reject) => {
+        if (!Kakao) {
+          reject("There is No instance");
+        }
+        Kakao.Auth.login({
+          success: (res) => {
+            localStorage.setItem("token", res.access_token);
+            setLogin(true);
+            history.push("/");
+          },
+          fail: (err) => {
+            console.error(err);
+          },
+        });
+      });
+    } catch (err) {
+      console.error(err);
+    }
   };
+  useEffect(() => {
+    if (Kakao.Auth.getAccessToken()) {
+      setLogin(true);
+    }
+  }, [Kakao.Auth]);
 
   return (
     <Styled.Button type="button" color={"#FEE500"}>
       <img
         className="kakaotalkIcon"
         src={KakaotalkIcon}
-        onClick={kakaoLoginHandler}
+        onClick={LoginClickHandler}
         alt="kakakotalk"
       />
       카카오톡으로 시작하기
@@ -58,4 +82,4 @@ const LoginKakao = () => {
   );
 };
 
-export default LoginKakao;
+export default withRouter(LoginKakao);
