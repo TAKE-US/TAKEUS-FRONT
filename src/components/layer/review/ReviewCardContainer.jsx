@@ -16,8 +16,8 @@ const Styled = {
 const ReviewCardContainer = ({ reviews }) => {
   return (
     <Styled.Wrapper>
-      {reviews?.map(review => (
-        <ReviewCard key={review} review={review} />
+      {reviews?.map((review, id) => (
+        <ReviewCard key={id} review={review} />
       ))}
     </Styled.Wrapper>
   );
