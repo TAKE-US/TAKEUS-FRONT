@@ -16,3 +16,15 @@ export const getDogs = async () => {
     return null;
   }
 };
+
+export const getCountry = async () => {
+  try {
+    const data = await instance.get("/api/airports/country");
+    console.log(data.data);
+    console.log("[SUCCESS] GET country data");
+    return data.data;
+  } catch (e) {
+    console.log("[FAIL] GET country data");
+    return null;
+  }
+};

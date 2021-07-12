@@ -3,7 +3,6 @@ import styled from 'styled-components';
 
 import { useDetectOutsideClick } from '../../hooks/useDetectOutsideClick';
 import Arrow_Bottom from '../../assets/img/ic_arrow_bottom_black_24.svg';
-import Arrow_Top from '../../assets/img/ic_arrow_top_black_24.svg';
 
 const Menu = {
   Container: styled.div`
@@ -13,21 +12,19 @@ const Menu = {
       display: block;
       float: left;
       background-color: ${({ theme }) => theme.color.gray1};
-      width: 0.2rem;
+      width: 0.1rem;
       height: 3.6rem;
       position: relative;
-      top: 2.3rem;
+      top: 0.8rem;
     }
   `,
 
   Button: styled.button`
-    width: 42rem;
-    height: 8.2rem;
-    font: ${({ theme }) => theme.font.subheading};
+    width: 39rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 2.6rem;
+    padding: 0.8rem 2.6rem;
     border-radius: 10px;
     border: none;
     background-color: #FFFFFF;
@@ -49,6 +46,9 @@ const Menu = {
         color: ${props => props.currAirport ? "#3D3D3D" : "#C1C1C1"};
       }
     }
+    .arrowImg {
+        transform: ${props => props.isActive && 'rotate(180deg)' };
+      }
   `,
 
   Nav: styled.nav`
@@ -67,7 +67,7 @@ const Menu = {
     width: 100%;
     list-style: none;
     padding: 0;
-    margin: 0;
+    /* margin: 0; */
 
     div {
       margin: 0.8rem;
@@ -80,7 +80,6 @@ const Menu = {
         font: ${({ theme }) => theme.font.caption};
         color: ${({ theme }) => theme.color.gray1};
         padding-left: 1.2rem;
-        margin-bottom : 1.8rem;
       }
     }
   `,
@@ -101,26 +100,25 @@ const Menu = {
   `,
 };
 
-const allAirport = {
-  "미국": {
-    "워싱턴 DC": ["델러스 국제공항", "로널드 레이건 워싱턴 국제공항"],
-    "뉴욕": ["JFK 국제공항", "시러큐스 핸콕 국제공항", "스튜어트 국제공항", "롱아일랜드 아이슬립 맥아더 공항", "라구아디아 공항"],
-  },
-  "캐나다": {
-    "밴쿠버": ["밴쿠버 국제공항"],
-    "토론토": ["토론토 국제공항"],
-  },
-  "독일": {
-    "프랑크푸르트": ["프랑크푸르트 국제공항"],
-    "브레멘": ["브레멘 국제공항"],
-  }
-};
+// const allAirport = {
+//   "미국": {
+//     "워싱턴 DC": ["델러스 국제공항", "로널드 레이건 워싱턴 국제공항"],
+//     "뉴욕": ["JFK 국제공항", "시러큐스 핸콕 국제공항", "스튜어트 국제공항", "롱아일랜드 아이슬립 맥아더 공항", "라구아디아 공항"],
+//   },
+//   "캐나다": {
+//     "밴쿠버": ["밴쿠버 국제공항"],
+//     "토론토": ["토론토 국제공항"],
+//   },
+//   "독일": {
+//     "프랑크푸르트": ["프랑크푸르트 국제공항"],
+//     "브레멘": ["브레멘 국제공항"],
+//   }
+// };
 
-const DropdownAirport = ({ currCountry, currAirport, setCurrAirport }) => {
+const DropdownAirport = ({ currCountry, currAirport, setCurrAirport, allAirport }) => {
   const dropdownRef = useRef(null);
   const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
   const [airport, setAirport] = useState('');
-  // const [airport, setAirport] = useState('');
 
   const onClick = () => {
     setIsActive(!isActive);
@@ -129,11 +127,13 @@ const DropdownAirport = ({ currCountry, currAirport, setCurrAirport }) => {
   useEffect(() => {
     setAirport(allAirport[currCountry]);
     setCurrAirport('');
-  }, [currCountry, setCurrAirport]);
+  }, [currCountry, setCurrAirport, allAirport]);
 
   return (
     <Menu.Container>
-      <Menu.Button onClick={onClick} currAirport={currAirport} disabled={currCountry ? false : true}>
+      <Menu.Button
+        onClick={onClick} currAirport={currAirport} disabled={currCountry ? false : true} isActive={isActive}
+      >
         <div className="destination">
           <span className="name">공항명</span>
           <span className="text">
@@ -141,7 +141,8 @@ const DropdownAirport = ({ currCountry, currAirport, setCurrAirport }) => {
           </span>
         </div>
         <img
-          src={isActive ? Arrow_Top : Arrow_Bottom}
+          className="arrowImg"
+          src={Arrow_Bottom}
           alt=""
         />
       </Menu.Button>

@@ -3,7 +3,6 @@ import styled from 'styled-components';
 
 import { useDetectOutsideClick } from '../../hooks/useDetectOutsideClick';
 import Arrow_Bottom from '../../assets/img/ic_arrow_bottom_black_24.svg';
-import Arrow_Top from '../../assets/img/ic_arrow_top_black_24.svg';
 
 const Menu = {
   Container: styled.div`
@@ -11,13 +10,11 @@ const Menu = {
   `,
 
   Button: styled.button`
-    width: 20rem;
-    height: 8.2rem;
-    font: ${({ theme }) => theme.font.subheading};
+    width: 24.2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 2.6rem;
+    padding: 0.8rem 2.9rem 0.8rem 2.6rem;
     border-radius: 10px;
     border: none;
     background-color: #FFFFFF;
@@ -39,6 +36,9 @@ const Menu = {
         color: ${props => props.currCountry ? "#3D3D3D" : "#C1C1C1"};
       }
     }
+    .arrowImg {
+        transform: ${props => props.isActive && 'rotate(180deg)' };
+      }
   `,
 
   Nav: styled.nav`
@@ -77,7 +77,7 @@ const Menu = {
   `,
 };
 
-const DropdownCountry = ({ currCountry, setCurrCountry }) => {
+const DropdownCountry = ({ currCountry, setCurrCountry, country }) => {
   const dropdownRef = useRef(null);
   const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
 
@@ -85,11 +85,11 @@ const DropdownCountry = ({ currCountry, setCurrCountry }) => {
     setIsActive(!isActive);
   };
 
-  const country = ["미국", "캐나다", "독일", "프랑스", "네덜란드"];
+  // const country = ["미국", "캐나다", "독일", "프랑스", "네덜란드"];
 
   return (
     <Menu.Container>
-      <Menu.Button onClick={onClick} currCountry={currCountry}>
+      <Menu.Button onClick={onClick} currCountry={currCountry} isActive={isActive}>
         <div className="destination">
           <span className="name">국가</span>
           <span className="text">
@@ -97,7 +97,8 @@ const DropdownCountry = ({ currCountry, setCurrCountry }) => {
           </span>
         </div>
         <img
-          src={isActive ? Arrow_Top : Arrow_Bottom}
+          className="arrowImg"
+          src={Arrow_Bottom}
           alt=""
         />
       </Menu.Button>
@@ -119,7 +120,7 @@ const DropdownCountry = ({ currCountry, setCurrCountry }) => {
           ))}
         </Menu.Ul>
       </Menu.Nav>
-    </Menu.Container >
+    </Menu.Container>
   );
 };
 
