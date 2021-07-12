@@ -1,3 +1,4 @@
+/* eslint-disable arrow-parens */
 import React from "react";
 import styled from "styled-components";
 import LoginImg from "assets/img/img_Login.png";
@@ -72,7 +73,7 @@ const Styled = {
   Button: styled.button`
     width: 45.2rem;
     height: 4.8rem;
-    background-color: ${props => props.color};
+    background-color: ${(props) => props.color};
     border-radius: 2.1rem;
     padding-left: 1rem;
     margin-bottom: 1.7rem;
@@ -101,14 +102,14 @@ const Styled = {
 };
 
 const LoginLayer = () => {
-  const handleSuccess = async response => {
+  const handleSuccess = async (response) => {
     console.log(response);
     localStorage.setItem("token", response.accessToken);
     // window.open("http://localhost:3000", "_self");
   };
 
   // 로그인 실패 시
-  const handleFailure = error => {
+  const handleFailure = (error) => {
     console.log(error);
   };
   return (
