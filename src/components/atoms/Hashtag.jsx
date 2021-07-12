@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 const Styled = {
@@ -31,8 +31,14 @@ const Styled = {
 //<Hashtag tag={tag} primary rounded> 리뷰 등록 노란색 해시태그
 //<Hashtag tag={tag} rounded> 리뷰 등록 회색 해시태그
 const Hashtag = ({ tag, primary, rounded }) => {
+  const [isSelected, setIsSelected] = useState(false);
   return (
-    <Styled.Wrapper className={primary ? "primary" : "reverse"} rounded={rounded}>
+    <Styled.Wrapper
+      className={primary || isSelected ? "primary" : "reverse"}
+      rounded={rounded}
+      isSelected={isSelected}
+      onClick={() => setIsSelected(!isSelected)}
+    >
       <p>{tag}</p>
     </Styled.Wrapper>
   );
