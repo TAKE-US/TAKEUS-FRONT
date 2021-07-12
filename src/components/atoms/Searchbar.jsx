@@ -1,11 +1,8 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import DropdownCountry from './DropdownCountry';
-import DropdownAirport from './DropdownAirport';
-import SearchImgDefault from '../../assets/img/btn_search_Default.svg';
-import SearchImgHover from '../../assets/img/btn_search_hover.svg';
-
+import { DropdownCountry, DropdownAirport, Button } from 'components';
+import { ReactComponent as SearchImg } from 'assets/icon/ic_search_white_24.svg';
 
 const Search = {
   TotalContainer: styled.div`
@@ -42,7 +39,6 @@ const Search = {
 };
 
 const Searchbar = () => {
-  const buttonRef = useRef();
   const [currCountry, setCurrCountry] = useState('');
   const [currAirport, setCurrAirport] = useState('');
 
@@ -55,13 +51,10 @@ const Searchbar = () => {
           <DropdownAirport currCountry={currCountry} currAirport={currAirport} setCurrAirport={setCurrAirport} />
         </Search.Dropdown>
         <Search.Button>
-          <img
-            src={SearchImgDefault}
-            alt=""
-            onMouseEnter={() => { buttonRef.current.src = SearchImgHover; }}
-            onMouseLeave={() => { buttonRef.current.src = SearchImgDefault; }}
-            ref={buttonRef}
-          />
+          <Button primary font="button_middle" padding="1.9rem">
+            <span>검색</span>
+            <SearchImg />
+          </Button>
         </Search.Button>
       </Search.Container>
     </Search.TotalContainer>
