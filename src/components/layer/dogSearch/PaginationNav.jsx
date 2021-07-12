@@ -1,27 +1,29 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 //assets
 import leftBtnIcon from "../../../assets/img/ic_arrow_left_24.svg";
 import rightBtnIcon from "../../../assets/img/ic_arrow_right_black_24.svg";
 
-const PaginationNav = () => {
-  const pageNums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-  const [selectPage, setSelectPage] = useState(1);
+const PaginationNav = ({ pageNum, setPageNum, totalPage }) => {
+  const pageNums = [];
+  for (var i = 1; i <= totalPage / 16; i++) {
+    pageNums.push(i);
+  }
 
   //page 이동 함수
   const nextPageHandler = () => {
-    if (selectPage !== pageNums.length) {
-      setSelectPage(prev => prev + 1);
+    if (pageNum !== pageNums.length) {
+      setPageNum(prev => prev + 1);
     }
   };
   const prevPageHandler = () => {
-    if (selectPage !== 1) {
-      setSelectPage(prev => prev - 1);
+    if (pageNum !== 1) {
+      setPageNum(prev => prev - 1);
     }
   };
 
   return (
-    <NavWrap selectNum={selectPage}>
+    <NavWrap pageNum={pageNum}>
       <PageMoveButton bg={leftBtnIcon} onClick={prevPageHandler} />
       <article>
         {pageNums.map((num, key) => (
@@ -29,9 +31,9 @@ const PaginationNav = () => {
             key={key}
             isSelect={
               //선택된 page에서는 색 변함
-              num === selectPage ? true : false
+              num === pageNum ? true : false
             }
-            onClick={() => setSelectPage(num)}
+            onClick={() => setPageNum(num)}
           >
             {num}
           </PageBtn>
