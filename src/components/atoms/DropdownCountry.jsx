@@ -13,7 +13,6 @@ const Menu = {
   Button: styled.button`
     width: 20rem;
     height: 8.2rem;
-    font: ${({ theme }) => theme.font.subheading};
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -119,7 +118,7 @@ const DropdownCountry = ({ currCountry, setCurrCountry }) => {
           ))}
         </Menu.Ul>
       </Menu.Nav>
-    </Menu.Container >
+    </Menu.Container>
   );
 };
 

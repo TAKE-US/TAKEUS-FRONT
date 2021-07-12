@@ -23,7 +23,6 @@ const Menu = {
   Button: styled.button`
     width: 42rem;
     height: 8.2rem;
-    font: ${({ theme }) => theme.font.subheading};
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -120,7 +119,6 @@ const DropdownAirport = ({ currCountry, currAirport, setCurrAirport }) => {
   const dropdownRef = useRef(null);
   const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
   const [airport, setAirport] = useState('');
-  // const [airport, setAirport] = useState('');
 
   const onClick = () => {
     setIsActive(!isActive);

@@ -18,6 +18,7 @@ export { default as ContactUsDetails } from "./atoms/ContactUsDetails";
 export { default as Button } from "./atoms/Button";
 export { default as DropdownCountry } from "./atoms/DropdownCountry";
 export { default as DropdownAirport } from "./atoms/DropdownAirport";
+export { default as Dropdown } from "./atoms/Dropdown";
 
 // layer
 export { default as Header } from "./layer/Header";
