@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 //asset
 import { ReactComponent as Sample } from "assets/img/mypage_sample.svg";
 //layer
 import { DogCardContainer, ReviewCardContainer, Filter } from "components";
+//api
+import { getMyDogs } from "lib/api/sample";
 
 const Styled = {
   Wrapper: styled.div`
@@ -61,12 +63,21 @@ const MypageHeader = () => {
     { value: "이동봉사 모집글", select: true },
     { value: "이동봉사 후기글", select: false },
   ]);
+  const [dogs, setDogs] = useState(null);
   const contents = ["미완료순", "완료순", "최신순", "오래된순"];
 
   const selectHandler = t => {
     const newTabs = tabs.map(tab => (tab === t ? { ...tab, select: true } : { ...tab, select: false }));
     setTabs(newTabs);
   };
+
+  useEffect(() => {
+    (async () => {
+      const data = await getMyDogs();
+      console.log(dogs, data[0]);
+      setDogs(data[0]);
+    })();
+  }, []);
   return (
     <Styled.Wrapper>
       <Styled.Header>
@@ -89,7 +100,7 @@ const MypageHeader = () => {
       </Styled.Header>
       <Styled.Content>
         <Filter contents={contents} />
-        {tabs[0].select ? <DogCardContainer /> : <ReviewCardContainer />}
+        {tabs[0].select ? <DogCardContainer dogs={dogs} /> : <ReviewCardContainer />}
       </Styled.Content>
     </Styled.Wrapper>
   );

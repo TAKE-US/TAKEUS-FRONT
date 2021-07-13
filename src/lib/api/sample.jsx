@@ -61,3 +61,20 @@ export const getReviews = async num => {
     return null;
   }
 };
+
+export const getMyDogs = async num => {
+  try {
+    const data = await instance.get("/api/dogs/my", {
+      headers: {
+        "Content-Type": "application/json",
+        "x-auth-token": process.env.REACT_APP_MY_TOKEN,
+      },
+    });
+    console.log(data);
+    console.log("[SUCCESS] GET my dog data");
+    return [data.data.data, data.data.totalNum];
+  } catch (e) {
+    console.log("[FAIL] GET my dog data");
+    return null;
+  }
+};
