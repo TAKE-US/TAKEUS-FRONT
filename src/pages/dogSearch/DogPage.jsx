@@ -11,8 +11,6 @@ const mapStateToProps = state => {
     dogData: state.dogData,
   };
 };
-
-const DogPage = ({ dogData }) => {
 const Styled = {
   Wrapper: styled.section`
     .container {
@@ -20,8 +18,7 @@ const Styled = {
     }
   `,
 };
-
-const DogPage = () => {
+const DogPage = ({ dogData }) => {
   const [dogs, setDogs] = useState([]);
   const [pageNum, setPageNum] = useState(1);
   const [totalPage, setTotalPage] = useState(0);
