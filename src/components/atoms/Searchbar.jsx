@@ -6,12 +6,8 @@ import { DropdownCountry, DropdownAirport, Button } from "components";
 import { ReactComponent as SearchImg } from "assets/icon/ic_search_white_24.svg";
 import { connect } from "react-redux";
 import { setDogs } from "redux/actions";
+import { useLocation, useHistory } from "react-router";
 
-// const mapStateToProps = state => {
-//   return {
-//     articles: state.articles,
-//   };
-// };
 const mapDispatchToProps = dispatch => {
   return {
     setDogs: dog => dispatch(setDogs(dog)),
@@ -61,22 +57,25 @@ const Searchbar = ({ setDogs }) => {
   const [currCity, setCurrCity] = useState("");
   const [country, setCountry] = useState([]);
   const [allAirport, setAllAirport] = useState("");
+  const location = useLocation();
+  const history = useHistory();
 
   useEffect(() => {
     (async () => {
       const data = await getCountry();
       setCountry(Object.keys(data).splice(1));
       setAllAirport(data);
-      console.log(data);
     })();
   }, []);
 
   const searchHandler = async () => {
-    console.log("click");
     if (currCity) {
       const data = await getSearchDogs(currCity);
       console.log(data[0]);
       setDogs(data[0]);
+      if (location.pathname === "/") {
+        history.push("/dogSearch");
+      }
     }
   };
 

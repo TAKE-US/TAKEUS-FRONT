@@ -28,7 +28,7 @@ const DogPage = () => {
   const contents = ["최신순", "오래된순"];
 
   useEffect(() => {
-    if (dogData.length < 0) {
+    if (dogData.length !== 0) {
       setDogs(dogData);
       setTotalPage(dogData.length);
       console.log("dogdata exist");
@@ -40,7 +40,7 @@ const DogPage = () => {
         console.log("dogdata none");
       })();
     }
-  }, [pageNum]);
+  }, [pageNum, dogData]);
 
   return (
     <Styled.Wrapper>
