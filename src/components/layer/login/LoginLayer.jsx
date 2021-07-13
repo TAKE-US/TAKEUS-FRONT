@@ -2,10 +2,11 @@
 import React from "react";
 import styled from "styled-components";
 import LoginImg from "../../../assets/img/img_Login.png";
-import NaverIcon from "../../../assets/img/ic_naver.svg";
 import GoogleIcon from "../../../assets/img/ic_google.svg";
 import KakaoLogin from "components/atoms/LoginKakao";
+import NaverLogin from "components/atoms/LoginNaver";
 import { GoogleLogin } from "react-google-login";
+
 //api
 import { postToken } from "lib/api/sample";
 
@@ -51,7 +52,7 @@ const Styled = {
   Button: styled.button`
     width: 45.2rem;
     height: 4.8rem;
-    background-color: ${props => props.color};
+    background-color: ${(props) => props.color};
     border-radius: 2.1rem;
     padding-left: 1rem;
     margin-bottom: 1.7rem;
@@ -84,7 +85,7 @@ const LoginLayer = () => {
   };
 
   // 로그인 실패 시
-  const handleFailure = error => {
+  const handleFailure = (error) => {
     console.log(error);
   };
   return (
@@ -94,19 +95,21 @@ const LoginLayer = () => {
         <h1>Takeus 시작하기</h1>
         <h2>SNS 계정으로 손쉽게 가입하고 Takers가 될 수 있어요 :)</h2>
         <KakaoLogin handleSuccess={handleSuccess} />
-        <Styled.Button type="button" color={"#1EC800"}>
-          <img className="naverIcon" src={NaverIcon} alt="naver" />
-          네이버로 시작하기
-        </Styled.Button>
+        <NaverLogin handleSuccess={handleSuccess} />
         <GoogleLogin
           clientId={process.env.REACT_APP_GOOGLE_CLIENTID}
-          render={renderProps => (
-            <Styled.Button className="google" type="button" color={"white"} onClick={renderProps.onClick}>
+          render={(renderProps) => (
+            <Styled.Button
+              className="google"
+              type="button"
+              color={"white"}
+              onClick={renderProps.onClick}
+            >
               <img className="googleIcon" src={GoogleIcon} alt="google" />
               구글로 시작하기
             </Styled.Button>
           )}
-          onSuccess={res => handleSuccess(res.accessToken, "google")}
+          onSuccess={(res) => handleSuccess(res.accessToken, "google")}
           onFailure={handleFailure}
         />
       </Styled.Section>

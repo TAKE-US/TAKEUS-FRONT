@@ -19,6 +19,7 @@ export { default as DropdownCountry } from "./atoms/DropdownCountry";
 export { default as DropdownAirport } from "./atoms/DropdownAirport";
 export { default as Dropdown } from "./atoms/Dropdown";
 export { default as LoginKakao } from "./atoms/LoginKakao";
+export { default as LoginNaver } from "./atoms/LoginNaver";
 
 // layer
 export { default as Header } from "./layer/Header";

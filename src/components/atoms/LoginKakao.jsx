@@ -17,7 +17,7 @@ const Styled = {
   Button: styled.button`
     width: 45.2rem;
     height: 4.8rem;
-    background-color: ${props => props.color};
+    background-color: ${(props) => props.color};
     border-radius: 2.1rem;
     padding-left: 1rem;
     margin-bottom: 1.7rem;
@@ -46,12 +46,12 @@ const LoginKakao = ({ handleSuccess }) => {
           reject("There is No instance");
         }
         Kakao.Auth.login({
-          success: res => {
+          success: (res) => {
             console.log("token", res);
             handleSuccess(res.access_token, "kakao");
             // history.push("/");
           },
-          fail: err => {
+          fail: (err) => {
             console.error(err);
           },
         });
@@ -63,7 +63,12 @@ const LoginKakao = ({ handleSuccess }) => {
 
   return (
     <Styled.Button type="button" color={"#FEE500"}>
-      <img className="kakaotalkIcon" src={KakaotalkIcon} onClick={LoginClickHandler} alt="kakakotalk" />
+      <img
+        className="kakaotalkIcon"
+        src={KakaotalkIcon}
+        onClick={LoginClickHandler}
+        alt="kakakotalk"
+      />
       카카오톡으로 시작하기
     </Styled.Button>
   );
