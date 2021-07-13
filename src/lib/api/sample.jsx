@@ -8,11 +8,11 @@ const instance = axios.create({
 export const getDogs = async () => {
   try {
     const data = await instance.get("/api/dogs");
-    console.log(data);
-    console.log("[SUCCESS] GET dogs data");
+    // console.log(data);
+    // console.log("[SUCCESS] GET dogs data");
     return data.data.data;
   } catch (e) {
-    console.log("[FAIL] GET dogs data");
+    // console.log("[FAIL] GET dogs data");
     return null;
   }
 };
@@ -37,11 +37,11 @@ export const postMail = async (name, email, text) => {
 export const getCountry = async () => {
   try {
     const data = await instance.get("/api/airports/country");
-    console.log(data.data);
-    console.log("[SUCCESS] GET country data");
+    // console.log(data.data);
+    // console.log("[SUCCESS] GET country data");
     return data.data;
   } catch (e) {
-    console.log("[FAIL] GET country data");
+    // console.log("[FAIL] GET country data");
   }
 };
 
@@ -53,11 +53,11 @@ export const getPageDogs = async num => {
         page: num,
       },
     });
-    console.log(data);
-    console.log("[SUCCESS] GET dogs data");
+    // console.log(data);
+    // console.log("[SUCCESS] GET dogs data");
     return [data.data.data, data.data.totalNum];
   } catch (e) {
-    console.log("[FAIL] GET dogs data");
+    // console.log("[FAIL] GET dogs data");
     return null;
   }
 };
@@ -70,8 +70,8 @@ export const getReviews = async num => {
         page: num,
       },
     });
-    console.log(data);
-    console.log("[SUCCESS] GET review data");
+    // console.log(data);
+    // console.log("[SUCCESS] GET review data");
     return [data.data.data, data.data.totalNum];
   } catch (e) {
     console.log("[FAIL] GET review data");
@@ -126,6 +126,16 @@ export const getMyReviews = async num => {
     return [data.data.data, data.data.totalNum];
   } catch (e) {
     console.log("[FAIL] GET my review data");
+    return null;
+  }
+};
+
+export const getReviewsWithTags = async hashtag => {
+  try {
+    const data = await instance.get(`/api/reviews/${hashtag}`);
+    return [data.data.data];
+  } catch (e) {
+    console.log("[FAIL] GET review data hashtag");
     return null;
   }
 };
