@@ -51,6 +51,9 @@ export { default as PaginationNav } from "./layer/dogSearch/PaginationNav";
 export { default as DogDetail } from "./layer/dogDetail/DogDetail";
 
 // layer/info
+export { default as InfoHeader } from './layer/info/InfoHeader';
+export { default as InfoBenefit } from './layer/info/InfoBenefit';
+export { default as InfoWarning } from './layer/info/InfoWarning';
 
 // layer/review
 export { default as ReviewPostInfo } from "./layer/review/ReviewPostInfo";
