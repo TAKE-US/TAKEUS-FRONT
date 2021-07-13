@@ -11,7 +11,7 @@ const Card = styled.article`
   border: 0.1rem solid #DFDFDF;
   border-radius: 1rem;
   img {
-    width: 34.2rem;
+    width: 34.6rem;
     height: 25rem;
     border-radius: 1rem 1rem 0 0;
   }
@@ -20,20 +20,19 @@ const Card = styled.article`
     flex-direction: column;
     margin-top: 1.6rem;
     
-      &__title {
-        font: ${({ theme }) => theme.font.title1};
-        width: 30rem;
-        height: 3rem;
-        margin-right: 0.6rem;
-        margin-bottom: 1.2rem;
-      }
-      &__content {
-        font: ${({ theme }) => theme.font.body2};
-        width: 30rem;
-        height: 10rem;
-        margin-right: 0.6rem;
-        line-height: 2.6rem;
-      }
+    &__title {
+      font: ${({ theme }) => theme.font.title1};
+      width: 30rem;
+      height: 3rem;
+      margin-right: 0.6rem;
+      margin-bottom: 1.2rem;
+    }
+    &__content {
+      font: ${({ theme }) => theme.font.body2};
+      width: 30rem;
+      height: 10rem;
+      margin-right: 0.6rem;
+      line-height: 2.6rem;
     }
   }
 `;

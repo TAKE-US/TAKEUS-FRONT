@@ -1,26 +1,20 @@
 import React, { useState } from "react";
-import rightarrow from "assets/img/btn_round_arrow_right_40.svg";
-import leftarrow from "assets/img/btn_round_arrow_left_40.svg";
+import { ReactComponent as RightArrow } from "assets/icon/btn_round_arrow_right_40.svg";
+import { ReactComponent as LeftArrow } from "assets/icon/btn_round_arrow_left_40.svg";
 import styled from "styled-components";
 
 const Styled = {
   Wrapper: styled.section`
-    position: relative;
     display: flex;
+    justify-content: space-between;
     width: 10rem;
     .left {
-      all: unset;
-      left: 0;
       width: 4rem;
       height: 3.5rem;
-      position: absolute;
     }
     .right {
-      all: unset;
-      right: 0;
       width: 4rem;
       height: 3.5rem;
-      position: absolute;
     }
   `,
 };
@@ -44,6 +38,7 @@ const Carousel = ({ listRef, movingValue }) => {
   };
 
   const RightScroll = () => {
+    console.log(listRef.current.clientWidth);
     if (position < 1361) {
       setPosition(position + movingValue);
     } else {
@@ -61,10 +56,10 @@ const Carousel = ({ listRef, movingValue }) => {
   return (
     <Styled.Wrapper>
       <div className="left" onClick={LeftScroll}>
-        <img src={leftarrow} alt="leftarrow" />
+        <LeftArrow />
       </div>
       <div className="right" onClick={RightScroll}>
-        <img src={rightarrow} alt="rightarrow" />
+        <RightArrow />
       </div>
     </Styled.Wrapper>
   );

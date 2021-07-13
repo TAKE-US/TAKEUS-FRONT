@@ -1,14 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import { withRouter } from "react-router-dom";
-//img
-// import sampleImg from "../../assets/img/img_card_sample.svg";
 import locationIcon from "../../assets/img/ic_location_blue_18.svg";
 
 const CardWrap = styled.article`
   display: flex;
   flex-direction: column;
-  width: 25.5rem;
   cursor: pointer;
   img {
     width: 25.5rem;
@@ -16,7 +13,7 @@ const CardWrap = styled.article`
     border-radius: 1rem;
     object-fit: cover;
   }
-  .cardInfo {
+  .card-info {
     display: flex;
     flex-direction: column;
     margin-top: 1.6rem;
@@ -24,7 +21,6 @@ const CardWrap = styled.article`
       display: flex;
       justify-content: center;
       &__name {
-        //text 넘어가면 ...으로 처리
         max-width: 11.2rem;
         white-space: nowrap;
         overflow: hidden;
@@ -68,22 +64,22 @@ const CardWrap = styled.article`
   }
 `;
 
-const DogCard = ({ id, dog, history }) => {
+const DogCard = ({ dog, history }) => {
   const cardClickHandler = () => {
     history.push(`/dogSearch/${dog._id}`);
   };
   return (
     <CardWrap onClick={cardClickHandler}>
       <img src={dog.photos[0]} alt="" />
-      <section className="cardInfo">
-        <article className="cardInfo-main">
-          <p className="cardInfo-main__name">{dog.name}</p>
-          <div className="cardInfo-main__location">
+      <section className="card-info">
+        <article className="card-info-main">
+          <p className="card-info-main__name">{dog.name}</p>
+          <div className="card-info-main__location">
             <img src={locationIcon} alt="card_image" />
             <p>{dog.endingAirport}</p>
           </div>
         </article>
-        <article className="cardInfo-sub">
+        <article className="card-info-sub">
           <p>단체 | {dog.institutionName}</p>
         </article>
       </section>
