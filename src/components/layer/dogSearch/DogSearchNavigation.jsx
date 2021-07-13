@@ -11,7 +11,7 @@ const Styled = {
   Wrapper: styled.section`
     .empty {
       background-color: ${({ theme }) => theme.color.white};
-      height: 14.6rem;
+      height: 8.8rem;
     }
 
     .img {
