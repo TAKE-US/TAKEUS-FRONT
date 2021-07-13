@@ -4,9 +4,6 @@ import reset from "styled-reset";
 const GlobalStyle = createGlobalStyle`
   ${reset}
 
-  a { color: #fff; text-decoration: none; outline: none }
-  a:hover, a:active { text-decoration: none; color:#fff; background-color: transparent; }
-
   * {
     box-sizing: border-box;
   }
@@ -26,7 +23,7 @@ const GlobalStyle = createGlobalStyle`
     }
   }
 
-  body{
+  body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     
@@ -41,30 +38,23 @@ const GlobalStyle = createGlobalStyle`
     -ms-overflow-style: none;
     
     ::-webkit-scrollbar {
-      width: 8px;
+      width: 6px;
     }
     ::-webkit-scrollbar-thumb {
       border-radius: 6px;
-      background: #ccc;
-      
+      background-color: rgba(223, 223, 223, 0.6);
+    
       &:hover {
-        background: #aaa;
+        background-color: rgba(193, 193, 193, 0.6);
       }
     }
 
   };
 
-  button{
-    outline: none;
-    background: none;
-    border: none;
-    cursor: pointer;
-  };
-
-  input {
-    border: none;
-    outline: none;
-  }
+  a { color: #fff; text-decoration: none; outline: none }
+  a:hover, a:active { text-decoration: none; color:#fff; background-color: transparent; }
+  button{ outline: none; background: none; border: none; cursor: pointer; };
+  input { border: none; outline: none; }
 `;
 
 export default GlobalStyle;

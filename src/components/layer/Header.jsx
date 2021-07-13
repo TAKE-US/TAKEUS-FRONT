@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, useCallback } from "react";
+import React, { useEffect, useState, useCallback, useRef } from "react";
 import { useLocation, useHistory } from "react-router";
 import { Link } from 'react-router-dom';
 import styled from "styled-components";
@@ -6,36 +6,44 @@ import styled from "styled-components";
 import { ReactComponent as LogoBlack } from "../../assets/img/ic_logo_wordmark_black_small.svg";
 
 const Head = {
-  Wrap: styled.nav`
-    position: sticky;
-    top: ${props => ( props.isLogin || props.location !== "/") ? '0' : '-3.6rem'};
-    z-index: 15;
+  Notice: styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: ${({ theme }) => theme.color.darkgray1};
+    font: ${({ theme }) => theme.font.caption};
+    color: ${({ theme }) => theme.color.white};
+    text-decoration: underline;
+    height: 3.6rem;
 
-    .aside {
-      display: ${props => ( props.isLogin || props.location !== "/") ? 'none' : 'flex'};
-      justify-content: center;
-      align-items: center;
-      background-color: ${({ theme }) => theme.color.darkgray1};
-      font: ${({ theme }) => theme.font.caption};
-      color: ${({ theme }) => theme.color.white};
-      text-decoration: underline;
-      height: 3.6rem;
-
-      a {
-        &:hover {
-          cursor: pointer;
-        }
+    a {
+      &:hover {
+        cursor: pointer;
       }
     }
+  `,
+
+  Wrap: styled.nav`
+    position: sticky;
+    top: 0px;
+    z-index: 15;
+    height: 8.8rem;
 
     .inner {
-      padding: 2.3rem 9.2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: ${props => (props.isScrolling ? "#ffffff" : "none")};
+      height: 100%;
+      padding: 0 9.2rem;
+      background: ${props => (props.isScrolling ? "#FFFFFF" : "transparent")};
       box-shadow: ${props => props.isScrolling && "0rem 0rem 1.6rem 0.1rem rgba(0, 0, 0, 0.08)"};
 
+      svg {
+        &:hover {
+          fill: #FDCB02;
+          cursor: pointer;
+        }
+      }
       .gnb {
         display: flex;
         justify-content: space-between;
@@ -46,33 +54,36 @@ const Head = {
     }
   `,
 
-  Content: styled.span`
+  Content: styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
     font: ${({ theme }) => theme.font.gnb};
+    color: ${props => props.isSelect && "#FDCB02"};
+    
     &:hover {
       cursor: pointer;
       color: ${({ theme }) => theme.color.primary};
     }
-    color: ${props => props.isSelect && "#FDCB02"};
-    ::after {
+
+    &::after {
       content: "";
-      display: ${props => (props.isSelect ? "block" : "none")};
-      background-color: ${({ theme }) => theme.color.primary};
-      width: 0.4rem;
-      height: 0.4rem;
-      border-radius: 50%;
       position: relative;
       top: 0.5rem;
+      display: ${props => (props.isSelect ? "block" : "none")};
+      width: 0.4rem;
+      height: 0.4rem;
+      background-color: ${({ theme }) => theme.color.primary};
+      border-radius: 50%;
     }
   `,
 
-  Login: styled.span`
-    font: ${({ theme }) => theme.font.gnb};
+  Login: styled.div`
     display: flex;
     align-items: center;
+    font: ${({ theme }) => theme.font.gnb};
     white-space: nowrap;
+    
     &:hover {
       cursor: pointer;
       color: ${({ theme }) => theme.color.primary};
@@ -81,107 +92,101 @@ const Head = {
 };
 
 const Header = () => {
+  const noticeElement = useRef();
   const location = useLocation();
   const history = useHistory();
-  const hoverImg = useRef();
   const [isScrolling, setIsScrolling] = useState(false);
-  const [imgHover, setImgHover] = useState(false);
   const isLogin = localStorage.getItem("token");
 
   const scrollHandler = useCallback(() => {
-    if (isLogin || location.pathname !== "/") {
-      if (window.scrollY !== 0) {
+    if (isLogin) {
+      if (window.scrollY > 0) {
         setIsScrolling(true);
       } else {
         setIsScrolling(false);
       }
     } else {
-      if (window.scrollY >= 38) {
+      if (window.scrollY > noticeElement.current.clientHeight) {
         setIsScrolling(true);
       } else {
         setIsScrolling(false);
       }
     }
-  }, [isLogin, location.pathname]);
+  }, [isLogin]);
 
   useEffect(() => {
     window.addEventListener("scroll", scrollHandler);
   }, [scrollHandler]);
 
+
+  if (location.pathname === '/login') return '';
+  
   return (
     <>
-      {location.pathname !== "/login" && (
-        <Head.Wrap isScrolling={isScrolling} isLogin={isLogin} location={location.pathname}>
-          <aside className="aside">
-            <Link to="login" >회원가입을 하시면 대상견 등록이 가능합니다:)</Link>
-          </aside>
-          <div className="inner">
-            <LogoBlack
+      {!isLogin &&
+        <Head.Notice ref={noticeElement}>
+          <Link to="login" >회원가입을 하시면 대상견 등록이 가능합니다:)</Link>
+        </Head.Notice>
+      }
+      
+      <Head.Wrap isScrolling={isScrolling} isLogin={isLogin}>
+        <div className="inner">
+          <Link to="/">
+            <LogoBlack fill={(isScrolling || location.pathname !== "/") ? "#FDCB02" : "#1A1A1A"} />
+          </Link>
+          <div className="gnb">
+            <Head.Content
+              isSelect={location.pathname === "/info"}
               onClick={() => {
-                history.push("/");
+                history.push("/info");
               }}
-              fill={(isScrolling || imgHover || location.pathname !== "/") ? "#FDCB02" : "#1A1A1A"}
-              onMouseEnter={() => {
-                setImgHover(true);
-                hoverImg.current.style.cursor = "pointer";
+            >
+              이동봉사정보
+            </Head.Content>
+            <Head.Content
+              isSelect={location.pathname === "/dogSearch"}
+              onClick={() => {
+                history.push("/dogSearch");
               }}
-              onMouseLeave={() => setImgHover(false)}
-              ref={hoverImg}
-            />
-            <div className="gnb">
-              <Head.Content
-                isSelect={location.pathname === "/info" ? true : false}
-                onClick={() => {
-                  history.push("/info");
-                }}
-              >
-                이동봉사정보
-              </Head.Content>
-              <Head.Content
-                isSelect={location.pathname === "/dogSearch" ? true : false}
-                onClick={() => {
-                  history.push("/dogSearch");
-                }}
-              >
-                대상견 찾기
-              </Head.Content>
-              <Head.Content
-                isSelect={location.pathname === "/review" ? true : false}
-                onClick={() => {
-                  history.push("/review");
-                }}
-              >
-                이동봉사 후기
-              </Head.Content>
-              <Head.Content
-                isSelect={location.pathname === "/about" ? true : false}
-                onClick={() => {
-                  history.push("/about");
-                }}
-              >
-                About us
-              </Head.Content>
-            </div>
-            {isLogin ? (
-              <Head.Login
-                onClick={() => {
-                  history.push("/mypage");
-                }}
-              >
-                내가 작성한 글
-              </Head.Login>
-            ) : (
-              <Head.Login
-                onClick={() => {
-                  history.push("/login");
-                }}
-              >
-                로그인·회원가입
-              </Head.Login>
-            )}
+            >
+              대상견 찾기
+            </Head.Content>
+            <Head.Content
+              isSelect={location.pathname === "/review"}
+              onClick={() => {
+                history.push("/review");
+              }}
+            >
+              이동봉사 후기
+            </Head.Content>
+            <Head.Content
+              isSelect={location.pathname === "/about"}
+              onClick={() => {
+                history.push("/about");
+              }}
+            >
+              About us
+            </Head.Content>
           </div>
-        </Head.Wrap>
-      )}
+          {isLogin ? (
+            <Head.Login
+              onClick={() => {
+                history.push("/mypage");
+              }}
+            >
+              내가 작성한 글
+            </Head.Login>
+          ) : (
+            <Head.Login
+              onClick={() => {
+                history.push("/login");
+              }}
+            >
+              로그인·회원가입
+            </Head.Login>
+          )}
+        </div>
+      </Head.Wrap>
     </>
   );
 };

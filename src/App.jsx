@@ -26,6 +26,7 @@ const Styled = {
 };
 
 function App() {
+
   return (
     <>
       <GlobalStyle />
