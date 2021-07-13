@@ -16,11 +16,11 @@ const Styled = {
     left: 0rem;
     width: 100vw;
     height: 132%;
+  `,
 
-    div {
-      width: 45.347%;
-      background-img: cover;
-    }
+  ImageContainer: styled.div`
+    width: 45.347%;
+    background-img: cover;
   `,
 
   Image: styled.img`
@@ -43,30 +43,30 @@ const Styled = {
     display: flex;
     justify-content: center;
     align-items: center;
+  `,
 
-    div {
-      display: flex;
-      flex-direction: column;
+  SectionContainer: styled.div`
+    display: flex;
+    flex-direction: column;
 
-      h1 {
-        height: 4.9rem;
-        margin-bottom: 0.7rem;
-        font: ${({ theme }) => theme.font.display2};
-        color: ${({ theme }) => theme.color.black};
-      }
-  
-      h2 {
-        height: 2.2rem;
-        margin-bottom: 7rem;
-        font: ${({ theme }) => theme.font.body1};
-        color: ${({ theme }) => theme.color.gray3};
-      }
-  
-      .google {
-        border: 0.1rem solid #dfdfdf;
-      }
-
+    h1 {
+      height: 4.9rem;
+      margin-bottom: 0.7rem;
+      font: ${({ theme }) => theme.font.display2};
+      color: ${({ theme }) => theme.color.black};
     }
+
+    h2 {
+      height: 2.2rem;
+      margin-bottom: 7rem;
+      font: ${({ theme }) => theme.font.body1};
+      color: ${({ theme }) => theme.color.gray3};
+    }
+
+    .google {
+      border: 0.1rem solid #dfdfdf;
+    }
+  }
   `,
 
   Button: styled.button`
@@ -122,15 +122,15 @@ const LoginLayer = () => {
   };
   return (
     <Styled.Wrapper>
-      <div>
+      <Styled.ImageContainer>
         <Styled.Title>
-          <Title margin-bottom="2.1rem"/>
-          <SubTitle />
+          <Title/>
+          <SubTitle style={{marginTop:"2.1rem"}} />
         </Styled.Title>   
         <Styled.Image src={LoginImg} alt="dogs" />
-      </div>
+      </Styled.ImageContainer>
       <Styled.Section>
-        <div>
+        <Styled.SectionContainer>
           <h1>Takeus 시작하기</h1>
           <h2>SNS 계정으로 손쉽게 가입하고 Takers가 될 수 있어요 :)</h2>
           <Styled.Button type="button" color={"#FEE500"}>
@@ -152,7 +152,7 @@ const LoginLayer = () => {
             onSuccess={handleSuccess}
             onFailure={handleFailure}
             />
-          </div>
+          </Styled.SectionContainer>
       </Styled.Section>
     </Styled.Wrapper>
   );
