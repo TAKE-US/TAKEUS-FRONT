@@ -3,7 +3,16 @@ import styled from "styled-components";
 import { DogCardContainer, PaginationNav, DogSearchNavigation, Filter } from "../../components";
 //api
 import { getPageDogs } from "lib/api/sample";
+//redux
+import { connect } from "react-redux";
 
+const mapStateToProps = state => {
+  return {
+    dogData: state.dogData,
+  };
+};
+
+const DogPage = ({ dogData }) => {
 const Styled = {
   Wrapper: styled.section`
     .container {
@@ -19,11 +28,18 @@ const DogPage = () => {
   const contents = ["최신순", "오래된순"];
 
   useEffect(() => {
-    (async () => {
-      const data = await getPageDogs(pageNum);
-      setDogs(data[0]);
-      setTotalPage(data[1]);
-    })();
+    if (dogData.length < 0) {
+      setDogs(dogData);
+      setTotalPage(dogData.length);
+      console.log("dogdata exist");
+    } else {
+      (async () => {
+        const data = await getPageDogs(pageNum);
+        setDogs(data[0]);
+        setTotalPage(data[1]);
+        console.log("dogdata none");
+      })();
+    }
   }, [pageNum]);
 
   return (
@@ -38,4 +54,4 @@ const DogPage = () => {
   );
 };
 
-export default DogPage;
+export default connect(mapStateToProps)(DogPage);

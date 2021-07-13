@@ -1,13 +1,13 @@
 import { SET_DOGS } from "./action-types";
 
 const initialState = {
-  articles: [],
+  dogData: [],
 };
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_DOGS:
-      return action.payload;
+      return { ...state, dogData: action.payload };
     default:
       return state;
   }
