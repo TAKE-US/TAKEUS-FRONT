@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import { Input, Button } from 'components';
 import useInput from "hooks/useInput";
+import { postMail } from 'lib/api/sample';
 
 const Styled = {
   Wrapper: styled.section`
@@ -62,7 +63,13 @@ const Styled = {
 };
 
 const ContactUsInput = () => {
+  const [name, setName] = useInput("");
+  const [email, setEmail] = useInput("");
   const [text, setText] = useInput("");
+
+  const onClickHandler = async () => {
+    await postMail(name, email, text);
+  };
 
   return (
     <Styled.Wrapper>
@@ -71,6 +78,8 @@ const ContactUsInput = () => {
           <Input
             placeholder="이름을 입력해주세요."
             font="body2"
+            value={name}
+            onChange={setName}
           >
             <span className="name">name</span>
           </Input>
@@ -79,6 +88,8 @@ const ContactUsInput = () => {
           <Input
             placeholder="이메일을 입력해주세요."
             font="body2"
+            value={email}
+            onChange={setEmail}
             >
             <span className="email">e-mail</span>
           </Input>
@@ -91,7 +102,9 @@ const ContactUsInput = () => {
         >
           {text}
         </textarea>
-        <button>
+        <div
+          onClick={onClickHandler}
+        >
           <Button
             primary
             rounded
@@ -100,7 +113,7 @@ const ContactUsInput = () => {
           >
             TAKEUS에 보내기
           </Button>
-        </button>
+        </div>
       </div>
     </Styled.Wrapper>
   );
