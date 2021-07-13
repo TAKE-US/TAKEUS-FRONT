@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import MailImg from 'assets/img/ic_mail_black_40.svg';
-import CallImg from 'assets/img/ic_call_black_40.svg';
-import InstaImg from 'assets/img/ic_instagram_black_40.svg';
-import KakaoImg from 'assets/img/ic_kakao_black_40.svg';
+import { ReactComponent as NaverMail }from 'assets/img/ic_mail_n_black_40.svg';
+import { ReactComponent as GoogleMail }from 'assets/img/ic_mail_g_black_40.svg';
+import { ReactComponent as InstaImg } from 'assets/img/ic_instagram_black_40.svg';
+import { ReactComponent as KakaoImg } from 'assets/img/ic_kakao_black_40.svg';
 
 const Styled = {
   Details: styled.section`
@@ -86,23 +86,23 @@ const ContactUsDetails = () => {
         </div>
         <div className="call">
           <Styled.Communication>
-            <img src={MailImg} alt="email" />
-            <span>takeus2125@gmail.com</span>
+            <NaverMail />
+            <span>takeus28@naver.com</span>
           </Styled.Communication>
           <Styled.Communication>
-            <img src={CallImg} alt="call" />
-            <span>010 1234 5678</span>
+            <GoogleMail />
+            <span>takeus28@gmail.com</span>
           </Styled.Communication>
         </div>
         <div className="line"></div>
         <div className="sns">
           <Styled.Communication>
-            <img src={InstaImg} alt="insta" />
-            <span>takeus2125</span>
+            <InstaImg />
+            <span>takeus_2125</span>
           </Styled.Communication>
           <Styled.Communication>
-            <img src={KakaoImg} alt="kakao" />
-            <span>takeus2125</span>
+            <KakaoImg />
+            <span>TAKEUS</span>
           </Styled.Communication>
         </div>
       </div>
