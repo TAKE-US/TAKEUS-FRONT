@@ -61,11 +61,11 @@ const ReviewSearch = () => {
 
   useEffect(() => {
     (async () => {
-      const reviewData = await getReviewsWithTags(activeHashtag);
+      const reviewData = await getReviewsWithTags(activeHashtag, pageNum);
       setReviews(reviewData[0]);
       setTotalPage(reviewData[1]);
     })();
-  }, [activeHashtag]);
+  }, [activeHashtag, pageNum]);
 
   return (
     <Styled.Wrapper>
