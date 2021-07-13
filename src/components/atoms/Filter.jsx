@@ -7,19 +7,19 @@ import downIcon from "../../assets/icon/ic_arrow_bottom_18.svg";
 import upIcon from "../../assets/icon/ic_arrow_top_18.svg";
 
 const Wrapper = styled.section`
-  min-width: 108rem;
+  display: flex;
+  width: 108rem;
 `;
 
 const FilterWrap = styled.section`
   position: relative;
-  left: calc(100% - 8.5rem);
+  margin-left: auto;
 `;
 const SelectedFilter = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
   width: 9rem;
-  margin-top: 3.6rem;
   background: ${({ theme }) => theme.color.bg_gray};
   border: 1px solid #dfdfdf;
   border-radius: 1.7rem;

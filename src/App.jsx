@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import GlobalStyle from "./styles/GlobalStyle";
-import styled from 'styled-components';
+import styled from "styled-components";
 
 import { Header, Footer } from "./components/index";
 import {
@@ -14,13 +14,14 @@ import {
   DogEnrollPage,
   ReviewPage,
   ReviewPostPage,
+  MyPage,
 } from "./pages";
 
 const Styled = {
   ContentWrapper: styled.main`
     max-width: 1080px;
     margin: 0 auto;
-    margin-top: -14rem;
+    margin-top: -8.8rem;
   `,
 };
 
@@ -58,6 +59,9 @@ function App() {
             </Route>
             <Route path="/review/post" exact>
               <ReviewPostPage />
+            </Route>
+            <Route path="/mypage" exact>
+              <MyPage />
             </Route>
           </Switch>
         </Styled.ContentWrapper>

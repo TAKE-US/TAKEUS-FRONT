@@ -11,11 +11,12 @@ const Styled = {
   Wrapper: styled.section`
     .empty {
       background-color: ${({ theme }) => theme.color.white};
-      height: 14.6rem;
+      height: 8.8rem;
     }
 
     .img {
       background: url(${backgroundImg}) center;
+      background-size: cover;
       height: 24rem;
       width: 100vw;
       margin-left: calc(-50vw + 50%);

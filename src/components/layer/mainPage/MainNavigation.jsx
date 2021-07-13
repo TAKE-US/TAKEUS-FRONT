@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Searchbar from 'components/atoms/Searchbar';
+import { Searchbar } from 'components';
 import backgroundBeachImg from 'assets/img/img_main_dogonthebeach.png';
 
 const Styled = {
@@ -12,15 +12,7 @@ const Styled = {
     background-image: url(${backgroundBeachImg});
     background-size: cover;
     background-position: bottom center;
-    padding-top: 19rem;
-
-    .text {
-      text-align: center;
-      font: ${({ theme }) => theme.font.body2};
-      color: ${({ theme }) => theme.color.gray3};
-      margin-top: 3.6rem;
-      line-height: 2.6rem;
-    }
+    padding-top: 13.7rem;
   `,
 };
 
@@ -28,10 +20,6 @@ const MainNavigation = () => {
   return (
     <Styled.Wrapper>
       <Searchbar />
-      <p className="text">
-        새로운 삶을 찾아 먼 바다를 건너야하는 생명에게 <br />
-        새로운 삶을 선물해주는 이들을 우리는 Takers라고 부릅니다.
-      </p>
     </Styled.Wrapper>
   );
 };

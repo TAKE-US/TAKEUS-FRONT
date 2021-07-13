@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const Styled = {
   Button: styled.button`
-    margin-top: 1.6rem;
+    margin-top: 3%;
     width: 40.3rem;
     height: 4.8rem;
     font: ${({ theme }) => theme.font.body2};

@@ -1,26 +1,27 @@
-import React, { useRef, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
-import DropdownCountry from './DropdownCountry';
-import DropdownAirport from './DropdownAirport';
-import SearchImgDefault from '../../assets/img/btn_search_Default.svg';
-import SearchImgHover from '../../assets/img/btn_search_hover.svg';
-
+import { getCountry } from 'lib/api/sample';
+import { DropdownCountry, DropdownAirport, Button } from 'components';
+import { ReactComponent as SearchImg } from 'assets/icon/ic_search_white_24.svg';
 
 const Search = {
   TotalContainer: styled.div`
-    width: 100%;
   `,
 
   Container: styled.div`
     background-color: ${({ theme }) => theme.color.white};
-    width: 77.4rem;
+    width: 72.6rem;
     border-radius: 1rem;
     box-shadow: 0rem 0rem 2rem 0.1rem rgba(0,0,0,0.05);
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     margin: 0 auto;
+
+    .text {
+      margin-right: 0.3rem;
+    }
   `,
 
   Dropdown: styled.div`
@@ -30,38 +31,49 @@ const Search = {
     justify-content: space-between;
   `,
 
-  Button: styled.button`
-    border: none;
-    background-color: ${({ theme }) => theme.color.white};
-
-    img {
-      width: 100%;
-      height: 100%;
+  Button: styled.div`
+    width: 9.4rem;
+    height: 6.2rem;
+    background-color: ${({ theme }) => theme.color.primary};
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    &:hover {
+      background-color: ${({ theme }) => theme.color.primary_light};
     }
   `,
 };
 
 const Searchbar = () => {
-  const buttonRef = useRef();
   const [currCountry, setCurrCountry] = useState('');
   const [currAirport, setCurrAirport] = useState('');
+  const [country, setCountry] = useState([]);
+  const [allAirport, setAllAirport] = useState('');
 
+  useEffect(() => {
+    (async () => {
+      const data = await getCountry();
+      setCountry(Object.keys(data).splice(1));
+      setAllAirport(data);
+    })();
+  }, []);
 
   return (
     <Search.TotalContainer>
       <Search.Container>
         <Search.Dropdown>
-          <DropdownCountry currCountry={currCountry} setCurrCountry={setCurrCountry} />
-          <DropdownAirport currCountry={currCountry} currAirport={currAirport} setCurrAirport={setCurrAirport} />
+          <DropdownCountry currCountry={currCountry} setCurrCountry={setCurrCountry} country={country} />
+          <DropdownAirport
+            currCountry={currCountry}
+            currAirport={currAirport}
+            setCurrAirport={setCurrAirport}
+            allAirport={allAirport}
+          />
         </Search.Dropdown>
         <Search.Button>
-          <img
-            src={SearchImgDefault}
-            alt=""
-            onMouseEnter={() => { buttonRef.current.src = SearchImgHover; }}
-            onMouseLeave={() => { buttonRef.current.src = SearchImgDefault; }}
-            ref={buttonRef}
-          />
+          <Button primary font="button_middle" padding="1.9rem 1.5rem 1.9rem 1.4rem">
+            <span className="text">검색</span>
+            <SearchImg />
+          </Button>
         </Search.Button>
       </Search.Container>
     </Search.TotalContainer>

@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import Arrow from './Arrow';
 import PaginationDot from './PaginationDot';
+import LeftArrow from 'assets/img/btn_round_arrow_left_40.svg';
+import RightArrow from 'assets/img/btn_round_arrow_right_40.svg';
 
 const SwiperContentWrap = styled.div`
   position: absolute;
@@ -28,15 +30,19 @@ const Slide = styled.div`
   }
 `;
 
-function SwiperContent({ index, images, handleClickPrev, handleClickNext }) {
+function SwiperContent({ index, images, handleClickPrev, handleClickNext, onClick }) {
   return (
     <SwiperContentWrap>
       <Slide>
         {images.map((img, i) => (
-          (i === index) && <img src={img} key={i} alt="" />
+          (i === index) && <img src={img} key={i} alt="" onClick={onClick} />
         ))}
         </Slide>
       <Arrow
+        leftArrow={LeftArrow}
+        rightArrow={RightArrow}
+        top={50}
+        height={10}
         handleClickPrev={handleClickPrev}
         handleClickNext={handleClickNext}
       />

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import SwiperContent from './SwiperContent';
+import ImageModal from 'components/layer/dogDetail/ImageModal';
 
 const SwiperWrap = styled.div`
   position: relative;
@@ -10,18 +11,18 @@ const SwiperWrap = styled.div`
 
 const Swiper = ({ images }) => {
   const [index, setIndex] = useState(0);
+  const [displayModal, setDisplayModal] = useState(false);
 
   const handleClickPrev = () => {
-    if (index === 0) return;
-    setIndex(index - 1);
+    (index === 0) ? setIndex(images.length - 1) : setIndex(index - 1);
   };
 
   const handleClickNext = () => {
-    if (index === images.length - 1) {
-      setIndex(0);
-    } else {
-      setIndex(index + 1);
-    }
+    (index === images.length - 1) ? setIndex(0) : setIndex(index + 1);
+  };
+
+  const handleOnClick = () => {
+    (displayModal) ? setDisplayModal(false) : setDisplayModal(true);
   };
 
   return (
@@ -31,7 +32,16 @@ const Swiper = ({ images }) => {
         images={images}
         handleClickPrev={handleClickPrev}
         handleClickNext={handleClickNext}
+        onClick={handleOnClick}
       />
+      {displayModal && (
+        <ImageModal
+          onClick={handleOnClick}
+          img={images[index]}
+          handleClickPrev={handleClickPrev}
+          handleClickNext={handleClickNext}
+        />
+      )}
     </SwiperWrap>
   );
 };

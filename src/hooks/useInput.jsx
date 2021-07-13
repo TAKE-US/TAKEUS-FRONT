@@ -1,10 +1,10 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback } from "react";
 
 function useInput(initialForm) {
   const [form, setForm] = useState(initialForm);
   // change
-  const onChange = useCallback(e => {
-    setForm(e.target.value);
+  const onChange = useCallback(evt => {
+    setForm(evt.target.value);
   }, []);
   return [form, onChange];
 }
