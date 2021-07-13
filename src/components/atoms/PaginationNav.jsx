@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 //assets
-import leftBtnIcon from "../../../assets/img/ic_arrow_left_24.svg";
-import rightBtnIcon from "../../../assets/img/ic_arrow_right_black_24.svg";
+import leftBtnIcon from "assets/img/ic_arrow_left_24.svg";
+import rightBtnIcon from "assets/img/ic_arrow_right_black_24.svg";
 
 const PaginationNav = ({ pageNum, setPageNum, totalPage, review }) => {
   const pageNums = [1];

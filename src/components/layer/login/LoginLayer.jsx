@@ -80,16 +80,7 @@ const LoginLayer = () => {
   const handleSuccess = async response => {
     console.log(response);
     localStorage.setItem("token", response.accessToken);
-    // let token = {
-    //   "x-access-token": response.accessToken,
-    // };
-    // let data = {
-    //   name: response.profileObj.name,
-    //   email: response.profileObj.email,
-    //   googleId: response.profileObj.googleId,
-    //   profileImage: response.profileObj.imageUrl,
-    // };
-    window.open("http://localhost:3000", "_self");
+    // window.open("http://localhost:3000", "_self");
   };
 
   // 로그인 실패 시
