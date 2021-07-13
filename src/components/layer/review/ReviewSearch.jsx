@@ -1,9 +1,11 @@
-import React from 'react';
-import { useHistory } from 'react-router';
-import styled from 'styled-components';
+import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router";
+import styled from "styled-components";
 
-import { Searchbar } from 'components';
-import { ReactComponent as RegisterBtn } from 'assets/img/btn_register.svg';
+import { Searchbar, Filter, PaginationNav, ReviewCardContainer, Hashtag } from "components";
+import { ReactComponent as RegisterBtn } from "assets/img/btn_register.svg";
+//api
+import { getReviews } from "lib/api/sample";
 
 const Styled = {
   Wrapper: styled.div`
@@ -23,7 +25,7 @@ const Styled = {
       text-align: center;
       font: ${({ theme }) => theme.font.display1};
       span {
-        color: ${({theme}) => theme.color.primary};
+        color: ${({ theme }) => theme.color.primary};
       }
     }
 
@@ -33,27 +35,72 @@ const Styled = {
       padding-top: 2.4rem;
     }
   `,
+  Option: styled.section`
+    display: flex;
+    margin-top: 6.7rem;
+    .tags {
+      display: flex;
+      .hashtag {
+        margin-right: 1.1rem;
+      }
+    }
+  `,
 };
 
 const ReviewSearch = () => {
   const history = useHistory();
+  const contents = ["최신순", "오래된순"];
+  const [reviews, setReviews] = useState(null);
+  const [pageNum, setPageNum] = useState(1);
+  const [totalPage, setTotalPage] = useState(0);
+
+  useEffect(() => {
+    (async () => {
+      const reviewData = await getReviews(pageNum);
+      setReviews(reviewData[0]);
+      setTotalPage(reviewData[1]);
+    })();
+  }, [pageNum]);
 
   return (
     <Styled.Wrapper>
       <div className="empty"></div>
       <Styled.Search>
-        <h1 className="header">봉사자들의 생생한 <span>이동 봉사 후기</span>를 만나보세요</h1>
+        <h1 className="header">
+          봉사자들의 생생한 <span>이동 봉사 후기</span>를 만나보세요
+        </h1>
         <div className="search">
           <Searchbar />
           <button className="button">
-            <RegisterBtn
-              onClick={() => history.push('/review/post')}
-            />
+            <RegisterBtn onClick={() => history.push("/review/post")} />
           </button>
         </div>
       </Styled.Search>
+      <Styled.Option>
+        <section className="tags">
+          {tags.map(tag => (
+            <div className="hashtag" key={tag}>
+              <Hashtag tag={tag} />
+            </div>
+          ))}
+        </section>
+        <Filter contents={contents} />
+      </Styled.Option>
+      <ReviewCardContainer reviews={reviews} />
+      <PaginationNav totalPage={totalPage} pageNum={pageNum} setPageNum={setPageNum} review />
     </Styled.Wrapper>
   );
 };
+const tags = [
+  "이동봉사과정",
+  "도착공항정보",
+  "보호단체관련",
+  "이동봉사준비",
+  "봉사국가",
+  "주의사항",
+  "입국심사",
+  "대상견케어",
+  "기타정보",
+];
 
 export default ReviewSearch;
