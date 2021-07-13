@@ -1,7 +1,16 @@
-// rootReducer
+import { SET_DOGS } from "./action-types";
 
-//ui를 제외한 모든 state
-//user, plugin
-//2 depth, 3 depth..... 어려움
+const initialState = {
+  articles: [],
+};
 
-//어렵다.......
+const rootReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case SET_DOGS:
+      return action.payload;
+    default:
+      return state;
+  }
+};
+
+export default rootReducer;

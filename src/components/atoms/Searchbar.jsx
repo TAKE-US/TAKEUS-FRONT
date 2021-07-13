@@ -4,6 +4,19 @@ import styled from "styled-components";
 import { getCountry, getSearchDogs } from "lib/api/sample";
 import { DropdownCountry, DropdownAirport, Button } from "components";
 import { ReactComponent as SearchImg } from "assets/icon/ic_search_white_24.svg";
+import { connect } from "react-redux";
+import { setDogs } from "redux/actions";
+
+// const mapStateToProps = state => {
+//   return {
+//     articles: state.articles,
+//   };
+// };
+const mapDispatchToProps = dispatch => {
+  return {
+    setDogs: dog => dispatch(setDogs(dog)),
+  };
+};
 
 const Search = {
   TotalContainer: styled.div``,
@@ -42,7 +55,7 @@ const Search = {
   `,
 };
 
-const Searchbar = () => {
+const Searchbar = ({ setDogs }) => {
   const [currCountry, setCurrCountry] = useState("");
   const [currAirport, setCurrAirport] = useState("");
   const [currCity, setCurrCity] = useState("");
@@ -63,6 +76,7 @@ const Searchbar = () => {
     if (currCity) {
       const data = await getSearchDogs(currCity);
       console.log(data[0]);
+      setDogs(data[0]);
     }
   };
 
@@ -90,4 +104,4 @@ const Searchbar = () => {
   );
 };
 
-export default Searchbar;
+export default connect(null, mapDispatchToProps)(Searchbar);
