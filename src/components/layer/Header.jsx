@@ -35,7 +35,7 @@ const Head = {
       align-items: center;
       height: 100%;
       padding: 0 9.2rem;
-      background: ${props => (props.isScrolling ? "#FFFFFF" : "transparent")};
+      background-color: ${props => (props.isScrolling ? "#FFFFFF" : "transparent")};
       box-shadow: ${props => props.isScrolling && "0rem 0rem 1.6rem 0.1rem rgba(0, 0, 0, 0.08)"};
       transition: background-color .6s;
       svg {
