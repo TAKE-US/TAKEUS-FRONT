@@ -2,33 +2,25 @@ import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 
 import { useDetectOutsideClick } from '../../hooks/useDetectOutsideClick';
-import Arrow_Bottom from '../../assets/img/ic_arrow_bottom_black_24.svg';
+import { ReactComponent as Arrow } from '../../assets/img/ic_arrow_bottom_black_24.svg';
 
 const Menu = {
   Container: styled.div`
     position: relative;
-    ::before {
-      content: "";
-      display: block;
-      float: left;
-      background-color: ${({ theme }) => theme.color.gray1};
-      width: 0.1rem;
-      height: 3.6rem;
-      position: relative;
-      top: 0.8rem;
-    }
+    width: 100%;
+    height: 100%;
   `,
-
   Button: styled.button`
-    width: 39rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.8rem 2.6rem;
-    border-radius: 10px;
-    border: none;
+    width: 100%;
+    height: 100%;
     background-color: #FFFFFF;
-    cursor: pointer;
+
+    &:hover {
+      cursor: pointer;
+    }
 
     .destination {
       display: flex;
@@ -46,9 +38,12 @@ const Menu = {
         color: ${props => props.currAirport ? "#3D3D3D" : "#C1C1C1"};
       }
     }
-    .arrowImg {
-        transform: ${props => props.isActive && 'rotate(180deg)' };
-      }
+    svg {
+      width: 2.2rem;
+      margin-left: 4.4rem;
+      transform: ${props => props.isActive && 'rotate(-180deg)' };
+      transition: transform .3s;
+    }
   `,
 
   Nav: styled.nav`
@@ -65,9 +60,6 @@ const Menu = {
 
   Ul: styled.ul`
     width: 100%;
-    list-style: none;
-    padding: 0;
-    /* margin: 0; */
 
     div {
       margin: 0.8rem;
@@ -92,7 +84,7 @@ const Menu = {
     color: ${props => props.selected ? "#FDCB02" : "#3D3D3D"};
     display: flex;
     align-items: center;
-    border-radius: 1rem;
+    border-radius: 10px;
     &:hover {
       cursor: pointer;
       background-color: ${({ theme }) => theme.color.bg_yellow};
@@ -140,22 +132,18 @@ const DropdownAirport = ({ currCountry, currAirport, setCurrAirport, allAirport 
             {currAirport ? currAirport : "도착 공항은 어디인가요?"}
           </span>
         </div>
-        <img
-          className="arrowImg"
-          src={Arrow_Bottom}
-          alt=""
-        />
+        <Arrow />
       </Menu.Button>
       <Menu.Nav ref={dropdownRef} isActive={isActive}>
         <Menu.Ul>
           {airport && Object.keys(airport).map((city, index) => (
-            <div key={index}>
+            <div key={`country-${index}`}>
               <span>
                 {city}
               </span>
               {airport[city].map((value, index) => (
                 <Menu.Li
-                  key={index}
+                  key={`airport-${index}`}
                   selected={
                     currAirport === value ? true : false
                   }
@@ -171,7 +159,7 @@ const DropdownAirport = ({ currCountry, currAirport, setCurrAirport, allAirport 
           ))}
         </Menu.Ul>
       </Menu.Nav>
-    </Menu.Container >
+    </Menu.Container>
   );
 };
 

@@ -6,40 +6,50 @@ import { DropdownCountry, DropdownAirport, Button } from 'components';
 import { ReactComponent as SearchImg } from 'assets/icon/ic_search_white_24.svg';
 
 const Search = {
-  TotalContainer: styled.div`
-  `,
-
   Container: styled.div`
-    background-color: ${({ theme }) => theme.color.white};
-    width: 72.6rem;
-    border-radius: 1rem;
-    box-shadow: 0rem 0rem 2rem 0.1rem rgba(0,0,0,0.05);
     display: flex;
-    justify-content: center;
-    align-items: center;
+    
+    width: 72.6rem;
+    height: 6.2rem;
     margin: 0 auto;
+    background-color: ${({ theme }) => theme.color.white};
+    box-shadow: 0rem 0rem 2rem 0.1rem rgba(0, 0, 0, 0.05);
+    border-radius: 1rem;
 
-    .text {
-      margin-right: 0.3rem;
+    & > button {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+
+    .dropdown {
+      margin: 0 2.6rem;
+
+      &__country {
+        width: 24.2rem;
+      }
+
+      &__airport {
+        position: relative;
+        flex: 1;
+        &:before {
+          position: absolute;
+          content: '';
+          top: 0;
+          left: -2.6rem;
+          height: 3.6rem;
+          margin: 1.3rem 0;
+          border-right: solid 1px ${({ theme }) => theme.color.gray1};
+        }
+      }
     }
   `,
 
   Dropdown: styled.div`
-    width: 64rem;
+    flex: 1;
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-  `,
-
-  Button: styled.div`
-    width: 9.4rem;
-    height: 6.2rem;
-    background-color: ${({ theme }) => theme.color.primary};
-    border-top-right-radius: 1rem;
-    border-bottom-right-radius: 1rem;
-    &:hover {
-      background-color: ${({ theme }) => theme.color.primary_light};
-    }
+    align-items: center;
+    height: 100%;
+    border: solid 1px;
   `,
 };
 
@@ -65,25 +75,25 @@ const Searchbar = () => {
   }, []);
 
   return (
-    <Search.TotalContainer>
+    <>
       <Search.Container>
-        <Search.Dropdown>
+        <div className="dropdown dropdown__country">
           <DropdownCountry currCountry={currCountry} setCurrCountry={setCurrCountry} country={country} />
+        </div>
+        <div className="dropdown dropdown__airport">
           <DropdownAirport
-            currCountry={currCountry}
-            currAirport={currAirport}
-            setCurrAirport={setCurrAirport}
-            allAirport={allAirport}
+              currCountry={currCountry}
+              currAirport={currAirport}
+              setCurrAirport={setCurrAirport}
+              allAirport={allAirport}
           />
-        </Search.Dropdown>
-        <Search.Button>
-          <Button primary font="button_middle" padding="1.9rem 1.5rem 1.9rem 1.4rem">
-            <span className="text">검색</span>
-            <SearchImg />
-          </Button>
-        </Search.Button>
+        </div>
+        <Button primary font="button_middle" padding="1.9rem 1.5rem 1.9rem 1.4rem">
+          <span className="text">검색</span>
+          <SearchImg />
+        </Button>
       </Search.Container>
-    </Search.TotalContainer>
+    </>
   );
 };
 
