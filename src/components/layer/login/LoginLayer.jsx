@@ -8,6 +8,8 @@ import GoogleIcon from "assets/img/ic_google.svg";
 import { ReactComponent as Title } from "assets/icon/ic_logo_wordmark_middle.svg";
 import { ReactComponent as SubTitle } from "assets/icon/Group.svg";
 import { GoogleLogin } from "react-google-login";
+//api
+import { postToken } from "lib/api/sample";
 
 const Styled = {
   Wrapper: styled.div`
@@ -73,7 +75,7 @@ const Styled = {
   Button: styled.button`
     width: 45.2rem;
     height: 4.8rem;
-    background-color: ${(props) => props.color};
+    background-color: ${props => props.color};
     border-radius: 2.1rem;
     padding-left: 1rem;
     margin-bottom: 1.7rem;
@@ -98,14 +100,15 @@ const Styled = {
 };
 
 const LoginLayer = () => {
-  const handleSuccess = async (response) => {
-    console.log(response);
-    localStorage.setItem("token", response.accessToken);
+  const handleSuccess = async (token, social) => {
+    console.log(token);
+    const data = await postToken(token, social);
+    localStorage.setItem("token", data);
     // window.open("http://localhost:3000", "_self");
   };
 
   // 로그인 실패 시
-  const handleFailure = (error) => {
+  const handleFailure = error => {
     console.log(error);
   };
   return (
