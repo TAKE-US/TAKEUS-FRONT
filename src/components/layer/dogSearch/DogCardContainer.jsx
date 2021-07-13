@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 //components
-import { DogCard, Filter } from "components";
+import { DogCard } from "components";
 
 const Wrapper = styled.div`
   display: flex;
@@ -19,10 +19,8 @@ const Container = styled.section`
 `;
 
 const DogCardContainer = ({ dogs }) => {
-  const contents = ["최신순", "오래된순"];
   return (
     <Wrapper>
-      <Filter contents={contents} />
       <Container>
         {dogs?.map(dog => (
           <DogCard key={dog.id} id={dog.id} dog={dog} />
