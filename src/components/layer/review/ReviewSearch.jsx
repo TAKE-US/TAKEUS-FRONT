@@ -55,7 +55,7 @@ const ReviewSearch = () => {
   const [totalPage, setTotalPage] = useState(0);
 
   useEffect(async () => {
-    const reviewData = await getReviews();
+    const reviewData = await getReviews(pageNum);
     setReviews(reviewData[0]);
     setTotalPage(reviewData[1]);
   }, [pageNum]);
