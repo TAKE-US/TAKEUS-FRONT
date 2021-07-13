@@ -1,19 +1,27 @@
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
 
-import { getCountry } from 'lib/api/sample';
-import { DropdownCountry, DropdownAirport, Button } from 'components';
-import { ReactComponent as SearchImg } from 'assets/icon/ic_search_white_24.svg';
+import { getCountry, getSearchDogs } from "lib/api/sample";
+import { DropdownCountry, DropdownAirport, Button } from "components";
+import { ReactComponent as SearchImg } from "assets/icon/ic_search_white_24.svg";
+import { connect } from "react-redux";
+import { setDogs } from "redux/actions";
+import { useLocation, useHistory } from "react-router";
+
+const mapDispatchToProps = dispatch => {
+  return {
+    setDogs: dog => dispatch(setDogs(dog)),
+  };
+};
 
 const Search = {
-  TotalContainer: styled.div`
-  `,
+  TotalContainer: styled.div``,
 
   Container: styled.div`
     background-color: ${({ theme }) => theme.color.white};
     width: 72.6rem;
     border-radius: 1rem;
-    box-shadow: 0rem 0rem 2rem 0.1rem rgba(0,0,0,0.05);
+    box-shadow: 0rem 0rem 2rem 0.1rem rgba(0, 0, 0, 0.05);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -43,11 +51,14 @@ const Search = {
   `,
 };
 
-const Searchbar = () => {
-  const [currCountry, setCurrCountry] = useState('');
-  const [currAirport, setCurrAirport] = useState('');
+const Searchbar = ({ setDogs }) => {
+  const [currCountry, setCurrCountry] = useState("");
+  const [currAirport, setCurrAirport] = useState("");
+  const [currCity, setCurrCity] = useState("");
   const [country, setCountry] = useState([]);
-  const [allAirport, setAllAirport] = useState('');
+  const [allAirport, setAllAirport] = useState("");
+  const location = useLocation();
+  const history = useHistory();
 
   useEffect(() => {
     (async () => {
@@ -56,6 +67,17 @@ const Searchbar = () => {
       setAllAirport(data);
     })();
   }, []);
+
+  const searchHandler = async () => {
+    if (currCity) {
+      const data = await getSearchDogs(currCity);
+      console.log(data[0]);
+      setDogs(data[0]);
+      if (location.pathname === "/") {
+        history.push("/dogSearch");
+      }
+    }
+  };
 
   return (
     <Search.TotalContainer>
@@ -66,10 +88,11 @@ const Searchbar = () => {
             currCountry={currCountry}
             currAirport={currAirport}
             setCurrAirport={setCurrAirport}
+            setCurrCity={setCurrCity}
             allAirport={allAirport}
           />
         </Search.Dropdown>
-        <Search.Button>
+        <Search.Button onClick={searchHandler}>
           <Button primary font="button_middle" padding="1.9rem 1.5rem 1.9rem 1.4rem">
             <span className="text">검색</span>
             <SearchImg />
@@ -80,4 +103,4 @@ const Searchbar = () => {
   );
 };
 
-export default Searchbar;
+export default connect(null, mapDispatchToProps)(Searchbar);

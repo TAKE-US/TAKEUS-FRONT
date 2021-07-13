@@ -62,6 +62,23 @@ export const getReviews = async num => {
   }
 };
 
+export const getSearchDogs = async location => {
+  try {
+    const data = await instance.get(`/api/dogs/search/${location}`, {
+      params: {
+        order: "latest",
+        page: 1,
+      },
+    });
+    console.log(data);
+    console.log("[SUCCESS] GET dog search data");
+    return [data.data.data, data.data.totalNum];
+  } catch (e) {
+    console.log("[FAIL] GET dog search data");
+    return null;
+  }
+};
+
 export const getMyDogs = async num => {
   try {
     const data = await instance.get("/api/dogs/my", {

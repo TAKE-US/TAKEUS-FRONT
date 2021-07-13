@@ -2,6 +2,8 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import GlobalStyle from "./styles/GlobalStyle";
 import styled from "styled-components";
+import store from "redux/store";
+import { setDogs } from "redux/actions";
 
 import { Header, Footer } from "./components/index";
 import {
@@ -16,6 +18,9 @@ import {
   ReviewPostPage,
   MyPage,
 } from "./pages";
+
+window.store = store;
+window.setDogs = setDogs;
 
 const Styled = {
   ContentWrapper: styled.main`
