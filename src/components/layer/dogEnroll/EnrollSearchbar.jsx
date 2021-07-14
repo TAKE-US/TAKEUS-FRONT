@@ -18,6 +18,7 @@ const Search = {
   Container: styled.div`
     display: flex;
     .dropdown {
+      margin-right: 0.8rem;
       &__country {
         width: 17.4rem;
         height: 3.2rem;

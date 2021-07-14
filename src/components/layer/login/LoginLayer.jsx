@@ -23,7 +23,7 @@ const Styled = {
 
   ImageContainer: styled.div`
     width: 45.347%;
-    background-img: cover;
+    background-image: cover;
   `,
 
   Image: styled.img`
@@ -71,7 +71,7 @@ const Styled = {
   Button: styled.button`
     width: 45.2rem;
     height: 4.8rem;
-    background-color: ${(props) => props.color};
+    background-color: ${props => props.color};
     border-radius: 2.1rem;
     padding-left: 1rem;
     margin-bottom: 1.7rem;
@@ -104,7 +104,7 @@ const LoginLayer = () => {
   };
 
   // 로그인 실패 시
-  const handleFailure = (error) => {
+  const handleFailure = error => {
     console.log(error);
   };
   return (
@@ -127,18 +127,13 @@ const LoginLayer = () => {
           </Styled.Button>
           <GoogleLogin
             clientId={process.env.REACT_APP_GOOGLE_CLIENTID}
-            render={(renderProps) => (
-              <Styled.Button
-                className="google"
-                type="button"
-                color={"white"}
-                onClick={renderProps.onClick}
-              >
+            render={renderProps => (
+              <Styled.Button className="google" type="button" color={"white"} onClick={renderProps.onClick}>
                 <img className="googleIcon" src={GoogleIcon} alt="google" />
                 구글로 시작하기
               </Styled.Button>
             )}
-            onSuccess={(res) => handleSuccess(res.accessToken, "google")}
+            onSuccess={res => handleSuccess(res.accessToken, "google")}
             onFailure={handleFailure}
           />
         </Styled.SectionContainer>
