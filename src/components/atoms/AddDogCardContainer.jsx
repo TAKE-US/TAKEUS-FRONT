@@ -37,17 +37,13 @@ const AddDogCardContainer = () => {
 
   function deleteHandle(e) {
     const deletedKey = e.target.nextSibling.dataset.key;
-    const filteredArray = photoArray.filter(
-      (photo) => parseInt(photo.id, 10) !== parseInt(deletedKey, 10)
+    console.log(deletedKey);
+    setPhotoArray(
+      photoArray.filter((photo) => photo.id !== parseInt(deletedKey, 10))
     );
-    setPhotoArray(filteredArray);
   }
 
-  console.log(photoArray);
   console.log(photo);
-  // useEffect(() => {
-
-  // }, [photo]);
 
   return (
     <Styled.Wrapper>

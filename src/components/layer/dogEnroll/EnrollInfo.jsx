@@ -1,8 +1,17 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { RadioButton, Counter, TextField, AddDogLayer, Input, Button, EnrollSearchbar } from "components";
+import {
+  RadioButton,
+  Counter,
+  TextField,
+  AddDogLayer,
+  Input,
+  Button,
+  EnrollSearchbar,
+} from "components";
 // import { DogEnrollInput } from 'components';
 import { ReactComponent as Plus } from "assets/icon/ic_plus_24.svg";
+import useEnrollData from "hooks/useEnrollData";
 
 const EnrollInfoWrap = styled.section`
   .wrap {
@@ -63,21 +72,29 @@ const EnrollInfoWrap = styled.section`
 
 const EnrollInfo = () => {
   const [contacts, setContacts] = useState([{ type: "phone" }]);
-
+  const [enrollData, setEnrollData] = useEnrollData({});
   const addContact = () => {
     setContacts(contacts.concat({ type: "kakaotalk" }));
   };
 
+  console.log(enrollData);
   return (
     <EnrollInfoWrap>
       <AddDogLayer />
       <div className="wrap wrap--flex">
         <label>출국정보</label>
-        <EnrollSearchbar enroll />
+        <EnrollSearchbar enroll setEnrollData={setEnrollData} />
+        {/* setDogs, enroll, setEnrollData */}
       </div>
       <div className="wrap wrap--flex">
         <label>대상견 이름</label>
-        <Input placeholder="ex 멍멍이" maxLength={30} caption="30자 이내로 적어주세요." />
+        <Input
+          placeholder="ex 멍멍이"
+          maxLength={30}
+          caption="30자 이내로 적어주세요."
+          setEnrollData={setEnrollData}
+          name="name"
+        />
       </div>
       <div className="wrap wrap--flex">
         <label>대상견 성별</label>
@@ -87,12 +104,18 @@ const EnrollInfo = () => {
             { value: "남", select: false },
             { value: "선택안함", select: false },
           ]}
+          setEnrollData={setEnrollData}
+          name="gender"
         />
       </div>
       <div className="wrap wrap--flex">
         <label>대상견 나이</label>
         {/* <DogEnrollInput placeholder="ex 1살 , 2개월 등" maxLength="10" /> */}
-        <Input placeholder="ex 멍멍이" maxLength={10} caption="10자 이내로 적어주세요." />
+        <Input
+          placeholder="ex 멍멍이"
+          maxLength={10}
+          caption="10자 이내로 적어주세요."
+        />
       </div>
       <div className="wrap wrap--flex">
         <label>대상견 무게</label>
@@ -110,7 +133,11 @@ const EnrollInfo = () => {
       <div className="wrap wrap--flex">
         <label>건강상태</label>
         {/* <DogEnrollInput placeholder="ex 접종내역, 건강상태, 유의할 점 등" maxLength="50" /> */}
-        <Input placeholder="ex 멍멍이" maxLength={50} caption="50자 이내로 적어주세요." />
+        <Input
+          placeholder="ex 멍멍이"
+          maxLength={50}
+          caption="50자 이내로 적어주세요."
+        />
       </div>
       <div className="wrap wrap--flex">
         <label>소속여부</label>
@@ -121,7 +148,11 @@ const EnrollInfo = () => {
           ]}
         />
         {/* <DogEnrollInput placeholder="단체명을 입력해주세요." maxLength="15" /> */}
-        <Input placeholder="ex 멍멍이" maxLength={15} caption="15자 이내로 적어주세요." />
+        <Input
+          placeholder="ex 멍멍이"
+          maxLength={15}
+          caption="15자 이내로 적어주세요."
+        />
       </div>
       <div className="wrap contact">
         <label>연락처</label>

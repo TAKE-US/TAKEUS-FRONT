@@ -1,3 +1,4 @@
+/* eslint-disable arrow-parens */
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
@@ -8,9 +9,9 @@ import { connect } from "react-redux";
 import { setDogs } from "redux/actions";
 import { useLocation, useHistory } from "react-router";
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    setDogs: dog => dispatch(setDogs(dog)),
+    setDogs: (dog) => dispatch(setDogs(dog)),
   };
 };
 
@@ -73,6 +74,7 @@ const Searchbar = ({ setDogs, enroll, setEnrollData }) => {
       }
     }
   };
+
   useEffect(() => {
     setEnrollData("endingCountry", currCountry);
     setEnrollData("endingAirport", currAirport);
@@ -82,7 +84,12 @@ const Searchbar = ({ setDogs, enroll, setEnrollData }) => {
     <>
       <Search.Container>
         <div className="dropdown dropdown__country">
-          <DropdownCountry enroll currCountry={currCountry} setCurrCountry={setCurrCountry} country={country} />
+          <DropdownCountry
+            enroll
+            currCountry={currCountry}
+            setCurrCountry={setCurrCountry}
+            country={country}
+          />
         </div>
         <div className="dropdown dropdown__airport">
           <DropdownAirport
@@ -96,7 +103,11 @@ const Searchbar = ({ setDogs, enroll, setEnrollData }) => {
         </div>
         {!enroll && (
           <div className="button" onClick={() => searchHandler()}>
-            <Button primary font="button_middle" padding="1.9rem 1.5rem 1.9rem 1.4rem">
+            <Button
+              primary
+              font="button_middle"
+              padding="1.9rem 1.5rem 1.9rem 1.4rem"
+            >
               <span className="text">검색</span>
               <SearchImg />
             </Button>
