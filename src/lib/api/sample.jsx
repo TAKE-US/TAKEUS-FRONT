@@ -17,6 +17,23 @@ export const getDogs = async () => {
   }
 };
 
+export const postMail = async (name, email, text) => {
+  try {
+    const data = await axios.post("/api/email", {
+      body: {
+        "name": name,
+        "email": email,
+        "text": text,
+      }
+    });
+    console.log(data);
+    console.log("{SUCCESS] POST email");
+  } catch (e) {
+    console.log("[FAIL] POST email");
+    return null;
+  }
+};
+
 export const getCountry = async () => {
   try {
     const data = await instance.get("/api/airports/country");
