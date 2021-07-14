@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import styled from "styled-components";
-import CarouselReviewCard from "../../atoms/CarouselReviewCard";
-import Carousel from "components/atoms/Carousel";
+import { CarouselReviewCard } from "components";
+import { Carousel } from "components";
 
 const ContainerWrap = styled.article`
   height: 100%;
