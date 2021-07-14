@@ -38,6 +38,7 @@ const Styled = {
 };
 
 const LoginNaver = ({ handleSuccess }) => {
+  const API = "http://13.124.44.122";
   const { naver } = window;
   const Makelogin = () => {
     Naver();
@@ -63,19 +64,18 @@ const LoginNaver = ({ handleSuccess }) => {
       const location = window.location.href.split("=")[1];
       const token = location.split("&")[0];
       console.log("token :", token);
-      //   fetch(`${API}/account/sign-in`, {
-      //     method: "GET",
-      //     headers: {
-      //       "Content-type": "application/json",
-      //       Authorization: token,
-      //     },
-      //   })
-      //     .then((res) => res.json())
-      //     .then((res) => {
-      //       localStorage.setItem("access_token", res.token);
-      //     })
-      //     .catch((err) => console.log("err : ", err));
-      // }
+      fetch(`${API}/account/sign-in`, {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: token,
+        },
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          localStorage.setItem("access_token", res.token);
+        })
+        .catch((err) => console.log("err : ", err));
     }
   };
 
@@ -84,7 +84,7 @@ const LoginNaver = ({ handleSuccess }) => {
       <img
         className="NaverIcon"
         src={NaverIcon}
-        onClick={Makelogin}
+        // onClick={Makelogin}
         alt="Naver"
       />
       네이버로 시작하기
