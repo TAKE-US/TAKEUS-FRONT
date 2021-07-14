@@ -186,10 +186,10 @@ export const postReview = async data => {
       },
     });
     console.log(data);
-    console.log("[SUCCESS] POST token");
+    console.log("[SUCCESS] POST reviews");
     return data;
   } catch (e) {
-    console.log("[FAIL] POST token");
+    console.log("[FAIL] POST reviews");
     return e;
   }
 };
