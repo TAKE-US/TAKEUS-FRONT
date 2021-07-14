@@ -62,6 +62,22 @@ export const getPageDogs = async num => {
   }
 };
 
+export const getDogDetail = async id => {
+  try {
+    const data = await instance.get(`/api/dogs/detail/${id}`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    console.log(data);
+    console.log("[SUCCESS] GET dog detail data");
+    return data.data.data;
+  } catch (e) {
+    console.log("[FAIL] GET dog detail data");
+    return null;
+  }
+};
+
 export const getReviews = async num => {
   try {
     const data = await instance.get("/api/reviews", {
