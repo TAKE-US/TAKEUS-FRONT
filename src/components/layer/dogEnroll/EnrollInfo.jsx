@@ -3,6 +3,12 @@ import styled from "styled-components";
 import { RadioButton, Counter, TextField, AddDogLayer, Input, Button } from "components";
 // import { DogEnrollInput } from 'components';
 import { ReactComponent as Plus } from 'assets/icon/ic_plus_24.svg';
+import { Dropdown } from "components";
+import { ReactComponent as Kakao } from 'assets/icon/ic_kakao_24.svg';
+import { ReactComponent as Call } from 'assets/icon/ic_call_24.svg';
+import { ReactComponent as Instagram } from 'assets/icon/ic_instar_24.svg';
+import { ReactComponent as Twitter } from 'assets/icon/ic_twitter_24.svg';
+import { ReactComponent as Facebook } from 'assets/icon/ic_facebook_24.svg';
 
 const EnrollInfoWrap = styled.section`
   .wrap {
@@ -48,6 +54,7 @@ const EnrollInfoWrap = styled.section`
   }
   .dropdown {
     position: relative;
+    display: flex;
     font: ${({ theme }) => theme.font.button};
     color: ${({ theme }) => theme.color.gray3};
     &::after {
@@ -61,11 +68,34 @@ const EnrollInfoWrap = styled.section`
   }
 `;
 
+const ContactsList = [
+  {
+    img: <Kakao />,
+    type: '카카오톡',
+  },
+  {
+    img: <Call />,
+    type: '전화번호',
+  },
+  {
+    img: <Instagram />,
+    type: '인스타그램',
+  },
+  {
+    img: <Twitter />,
+    type: '트위터',
+  },
+  {
+    img: <Facebook />,
+    type: '페이스북',
+  }
+];
+
 const EnrollInfo = () => {
-  const [contacts, setContacts] = useState([{ type: 'phone' }]);
+  const [contacts, setContacts] = useState([{ type: 'phone', value: '' }]);
 
   const addContact = () => {
-    setContacts(contacts.concat({ type: 'kakaotalk' }));
+    setContacts(contacts.concat({ type: 'kakaotalk', value: '' }));
   };
 
   return (
@@ -127,8 +157,16 @@ const EnrollInfo = () => {
         <label>연락처</label>
         <div className="contact-layer">
           {contacts.map((contact, i) => (
-            <Input placeholder={"연락처를 입력해 주세요"} key={`contact-${i}`}>
-              <div className="dropdown">{contact.type}</div>
+            <Input placeholder={"연락처를 입력해 주세요"} key={`contact-${i}`} font="body3">
+              <div className="dropdown">
+                <Dropdown
+                  item={ContactsList}
+                  placeholder="연락처"
+                  rounded
+                  small
+                  font="body3"
+                />
+              </div>
             </Input>
           ))}
           <div className="contact__btn" onClick={addContact}>
