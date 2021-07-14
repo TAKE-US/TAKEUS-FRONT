@@ -1,10 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router";
-import { ReactComponent as DeleteIcon } from "assets/img/ic_delete.svg";
+// import { ReactComponent as DeleteIcon } from "assets/img/ic_delete.svg";
 import { ReactComponent as EditIcon } from "assets/img/ic_edit.svg";
 
 import { Swiper, DogDetailInfo, CopyLinkButton } from "../..";
+import DeleteModal from './DeleteModal';
 
 const DogDetailWrap = styled.div`
   display: flex;
@@ -129,10 +130,11 @@ const DogDetail = ({ dog }) => {
             <EditIcon width="20" height="20" />
             <div>수정</div>
           </button>
-          <button className="delete">
+          {/* <button className="delete">
             <DeleteIcon width="20" height="20" />
             <div>삭제</div>
-          </button>
+          </button> */}
+          <DeleteModal />
         </div>
       </header>
       <section className="dog--images">
