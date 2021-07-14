@@ -26,12 +26,13 @@ const RadioBtn = styled.button`
   background-size: 100% 100%;
 `;
 
-const RadioButton = ({ items }) => {
+const RadioButton = ({ items, setEnrollData, name }) => {
   const [itemState, setItemState] = useState(items);
 
   const selectHandler = i => {
     const newItem = itemState.map(item => (i === item ? { ...item, select: true } : { ...item, select: false }));
     setItemState(newItem);
+    setEnrollData(name, i.value);
   };
   return (
     <RadioBtnWrap>

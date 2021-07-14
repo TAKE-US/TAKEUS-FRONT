@@ -45,6 +45,7 @@ export { default as AboutUsTeam } from "./layer/aboutUs/AboutUsTeam";
 export { default as EnrollPrecaution } from "./layer/dogEnroll/EnrollPrecaution";
 export { default as EnrollInfo } from "./layer/dogEnroll/EnrollInfo.jsx";
 export { default as AddDogLayer } from "./layer/dogEnroll/AddDogLayer";
+export { default as EnrollSearchbar } from "./layer/dogEnroll/EnrollSearchbar";
 
 // layer/dogSearch
 export { default as DogSearchNavigation } from "./layer/dogSearch/DogSearchNavigation";
