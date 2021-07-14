@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 import { Input, Button, Hashtag, RadioButton, TextField, EnrollSearchbar } from "components";
 import useEnrollData from "hooks/useEnrollData";
+import { postReview } from "lib/api/sample";
 
 const ReviewInfoStyle = styled.section`
   .wrap {
@@ -126,7 +127,7 @@ const ReviewPostInfo = () => {
           name="content"
         />
       </div>
-      <div className="wrap" onClick={() => console.log(enrollData)}>
+      <div className="wrap" onClick={() => postReview(enrollData)}>
         <Button full rounded padding="15px 0" font="headline">
           후기 등록하기
         </Button>

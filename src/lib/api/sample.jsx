@@ -175,3 +175,21 @@ export const postToken = async (token, social) => {
     return null;
   }
 };
+
+export const postReview = async data => {
+  const body = data;
+  try {
+    const data = await instance.post("/api/reviews", body, {
+      headers: {
+        "Content-Type": "application/json",
+        "x-auth-token": localStorage.getItem("token"),
+      },
+    });
+    console.log(data);
+    console.log("[SUCCESS] POST token");
+    return data;
+  } catch (e) {
+    console.log("[FAIL] POST token");
+    return e;
+  }
+};
