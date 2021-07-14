@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 //hooks
 import useInput from "hooks/useInput";
@@ -41,16 +41,24 @@ const TextFieldWrap = styled.section`
   }
 `;
 
-const TextField = ({label, maxLength, placeholder}) => {
+const TextField = ({ label, maxLength, placeholder, setEnrollData, name }) => {
   const [text, setText] = useInput("");
-  useEffect(() => console.log(text), [text]);
+  const onBlurHandler = () => {
+    setEnrollData(name, text);
+  };
   return (
     <TextFieldWrap hasTitle={label || maxLength}>
       <article>
-        {label ? <label>{label}</label> : ''}
-        {maxLength ? <div className="count">{text.length}/<span className="count--gray">{maxLength}</span></div> : ''}
+        {label ? <label>{label}</label> : ""}
+        {maxLength ? (
+          <div className="count">
+            {text.length}/<span className="count--gray">{maxLength}</span>
+          </div>
+        ) : (
+          ""
+        )}
       </article>
-      <textarea placeholder={placeholder} onChange={setText} />
+      <textarea placeholder={placeholder} onChange={setText} onBlurCapture={onBlurHandler} />
     </TextFieldWrap>
   );
 };
