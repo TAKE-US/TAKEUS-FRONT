@@ -20,10 +20,10 @@ export const postMail = async (name, email, text) => {
   try {
     const data = await axios.post("/api/email", {
       body: {
-        "name": name,
-        "email": email,
-        "text": text,
-      }
+        name: name,
+        email: email,
+        text: text,
+      },
     });
     console.log(data);
     console.log("{SUCCESS] POST email");
@@ -125,6 +125,23 @@ export const getMyReviews = async num => {
     return [data.data.data, data.data.totalNum];
   } catch (e) {
     console.log("[FAIL] GET my review data");
+    return null;
+  }
+};
+
+export const getReviewsWithTags = async (hashtag, num) => {
+  try {
+    const data = await instance.get(`/api/reviews/${hashtag}`, {
+      params: {
+        order: "latest",
+        page: num,
+      },
+    });
+    console.log(data);
+    console.log("[SUCCESS] GET review data with hashtag");
+    return [data.data.data];
+  } catch (e) {
+    console.log("[FAIL] GET review data hashtag");
     return null;
   }
 };

@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { Searchbar, Filter, PaginationNav, ReviewCardContainer, Hashtag } from "components";
 import { ReactComponent as RegisterBtn } from "assets/img/btn_register.svg";
 //api
-import { getReviews } from "lib/api/sample";
+import { getReviewsWithTags } from "lib/api/sample";
 
 const Styled = {
   Wrapper: styled.div`
@@ -53,14 +53,19 @@ const ReviewSearch = () => {
   const [reviews, setReviews] = useState(null);
   const [pageNum, setPageNum] = useState(1);
   const [totalPage, setTotalPage] = useState(0);
+  const [activeHashtag, setActiveHashtag] = useState('');
+
+  const toggleHashtag = tagName => {
+    activeHashtag === tagName ? setActiveHashtag('') : setActiveHashtag(tagName);
+  };
 
   useEffect(() => {
     (async () => {
-      const reviewData = await getReviews(pageNum);
+      const reviewData = await getReviewsWithTags(activeHashtag, pageNum);
       setReviews(reviewData[0]);
       setTotalPage(reviewData[1]);
     })();
-  }, [pageNum]);
+  }, [activeHashtag, pageNum]);
 
   return (
     <Styled.Wrapper>
@@ -79,7 +84,7 @@ const ReviewSearch = () => {
       <Styled.Option>
         <section className="tags">
           {tags.map(tag => (
-            <div className="hashtag" key={tag}>
+            <div className="hashtag" key={tag} onClick={() => toggleHashtag(tag)}>
               <Hashtag tag={tag} />
             </div>
           ))}
@@ -91,6 +96,7 @@ const ReviewSearch = () => {
     </Styled.Wrapper>
   );
 };
+
 const tags = [
   "이동봉사과정",
   "도착공항정보",
