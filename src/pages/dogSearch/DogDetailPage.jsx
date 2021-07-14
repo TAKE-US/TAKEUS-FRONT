@@ -1,32 +1,35 @@
 import React, { useState, useEffect } from "react";
-import { DogDetail } from '../../components';
-import { getDogs } from "lib/api/sample";
+import { DogDetail } from "../../components";
+import { getDogDetail } from "lib/api/sample";
 import styled from "styled-components";
+import { useRouteMatch } from "react-router";
 
 const Styled = {
   Wrapper: styled.div`
     width: 108rem;
     margin: 18rem auto;
     display: flex;
-    justify-content: center; 
-  `
+    justify-content: center;
+  `,
 };
- 
+
 const DogDetailPage = () => {
-  const [dogs, setDogs] = useState([]);
+  const [dog, setDog] = useState([]);
+  const match = useRouteMatch();
 
   useEffect(() => {
     (async () => {
-      const data = await getDogs();
-      setDogs(data);
+      const data = await getDogDetail(match.params.id);
+      setDog(data);
+      console.log(dog);
     })();
   }, []);
 
- return (
-   <Styled.Wrapper>
-     <DogDetail dogs={dogs} />
-   </Styled.Wrapper>
- );
+  return (
+    <Styled.Wrapper>
+      <DogDetail dog={dog} />
+    </Styled.Wrapper>
+  );
 };
- 
+
 export default DogDetailPage;
