@@ -21,10 +21,10 @@ export const postMail = async (name, email, text) => {
   try {
     const data = await axios.post("/api/email", {
       body: {
-        "name": name,
-        "email": email,
-        "text": text,
-      }
+        name: name,
+        email: email,
+        text: text,
+      },
     });
     console.log(data);
     console.log("{SUCCESS] POST email");
