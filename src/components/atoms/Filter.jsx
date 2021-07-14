@@ -1,10 +1,9 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import styled from "styled-components";
 //hooks
 import { useDetectOutsideClick } from "hooks/useDetectOutsideClick";
 //asset
 import downIcon from "../../assets/icon/ic_arrow_bottom_18.svg";
-import upIcon from "../../assets/icon/ic_arrow_top_18.svg";
 
 const Wrapper = styled.section`
   display: flex;
@@ -26,6 +25,10 @@ const SelectedFilter = styled.button`
   p {
     font: ${({ theme }) => theme.font.button_small};
     line-height: 2.5rem;
+  }
+  img {
+    transform: ${props => props.isOpen && "rotate(180deg)"};
+    transition: transform 0.3s;
   }
 `;
 const DropDownWrap = styled.div`
@@ -68,17 +71,16 @@ const DropDownWrap = styled.div`
   }
 `;
 
-const Filter = ({ contents }) => {
+const Filter = ({ contents, selectedFilter, setSelectedFilter }) => {
   const dropDownRef = useRef(null);
-  const [selectedFilter, setSelectedFilter] = useState(contents[0]);
   const [isOpen, setIsOpen] = useDetectOutsideClick(dropDownRef, false);
 
   return (
     <Wrapper>
       <FilterWrap>
-        <SelectedFilter onClick={() => setIsOpen(!isOpen)}>
+        <SelectedFilter onClick={() => setIsOpen(!isOpen)} isOpen={isOpen}>
           <p>{selectedFilter}</p>
-          <img src={isOpen ? upIcon : downIcon} alt="downIcon" />
+          <img src={downIcon} alt="downIcon" />
         </SelectedFilter>
         {isOpen && (
           <DropDownWrap ref={dropDownRef}>

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: ""
+  baseURL: "",
 });
 
 export const getDogs = async () => {
@@ -42,11 +42,12 @@ export const getCountry = async () => {
   }
 };
 
-export const getPageDogs = async num => {
+export const getPageDogs = async (num, selectedFilter) => {
   try {
+    const filter = selectedFilter === "최신순" ? "latest" : "oldest";
     const data = await instance.get("/api/dogs", {
       params: {
-        order: "latest",
+        order: filter,
         page: num,
       },
     });
@@ -111,7 +112,7 @@ export const getMyDogs = async num => {
     const data = await instance.get("/api/dogs/my", {
       headers: {
         "Content-Type": "application/json",
-        "x-auth-token": process.env.REACT_APP_MY_TOKEN,
+        "x-auth-token": localStorage.getItem("token"),
       },
     });
     console.log("[SUCCESS] GET my dog data");
@@ -127,7 +128,7 @@ export const getMyReviews = async num => {
     const data = await instance.get("/api/reviews/list/my", {
       headers: {
         "Content-Type": "application/json",
-        "x-auth-token": process.env.REACT_APP_MY_TOKEN,
+        "x-auth-token": localStorage.getItem("token"),
       },
     });
     console.log("[SUCCESS] GET my review data");

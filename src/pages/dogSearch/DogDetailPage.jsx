@@ -22,7 +22,7 @@ const DogDetailPage = () => {
       const data = await getDogDetail(match.params.id);
       setDog(data);
     })();
-  }, [dog, match.params.id]);
+  }, []);
 
   return (
     dog &&

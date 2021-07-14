@@ -55,22 +55,27 @@ const Styled = {
 const ReviewSearch = () => {
   const history = useHistory();
   const contents = ["최신순", "오래된순"];
+  const [selectedFilter, setSelectedFilter] = useState(contents[0]);
   const [reviews, setReviews] = useState(null);
   const [pageNum, setPageNum] = useState(1);
   const [totalPage, setTotalPage] = useState(0);
-  const [activeHashtag, setActiveHashtag] = useState('');
+  const [activeHashtag, setActiveHashtag] = useState("");
 
   const toggleHashtag = tagName => {
-    activeHashtag === tagName ? setActiveHashtag('') : setActiveHashtag(tagName);
+    activeHashtag === tagName ? setActiveHashtag("") : setActiveHashtag(tagName);
   };
 
   useEffect(() => {
     (async () => {
       const reviewData = await getReviewsWithTags(activeHashtag, pageNum);
-      setReviews(reviewData[0]);
+      if (selectedFilter === "최신순") {
+        setReviews(reviewData[0]);
+      } else {
+        setReviews([...reviewData[0]].reverse());
+      }
       setTotalPage(reviewData[1]);
     })();
-  }, [activeHashtag, pageNum]);
+  }, [activeHashtag, pageNum, selectedFilter]);
 
   return (
     <Styled.Wrapper>
@@ -94,7 +99,7 @@ const ReviewSearch = () => {
             </div>
           ))}
         </section>
-        <Filter contents={contents} />
+        <Filter contents={contents} setSelectedFilter={setSelectedFilter} selectedFilter={selectedFilter} />
       </Styled.Option>
       <ReviewCardContainer reviews={reviews} />
       <PaginationNav totalPage={totalPage} pageNum={pageNum} setPageNum={setPageNum} review />

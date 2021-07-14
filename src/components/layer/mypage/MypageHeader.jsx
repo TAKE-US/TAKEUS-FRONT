@@ -66,6 +66,7 @@ const MypageHeader = () => {
   const [dogs, setDogs] = useState(null);
   const [reviews, setReviews] = useState(null);
   const contents = ["미완료순", "완료순", "최신순", "오래된순"];
+  const [selectedFilter, setSelectedFilter] = useState(contents[0]);
 
   const selectHandler = t => {
     const newTabs = tabs.map(tab => (tab === t ? { ...tab, select: true } : { ...tab, select: false }));
@@ -104,7 +105,7 @@ const MypageHeader = () => {
         <Sample className="image" />
       </Styled.Header>
       <Styled.Content>
-        <Filter contents={contents} />
+        <Filter contents={contents} selectedFilter={selectedFilter} setSelectedFilter={setSelectedFilter} />
         {tabs[0].select ? <DogCardContainer dogs={dogs} /> : <ReviewCardContainer reviews={reviews} />}
       </Styled.Content>
     </Styled.Wrapper>

@@ -23,27 +23,30 @@ const DogPage = ({ dogData }) => {
   const [pageNum, setPageNum] = useState(1);
   const [totalPage, setTotalPage] = useState(0);
   const contents = ["최신순", "오래된순"];
+  const [selectedFilter, setSelectedFilter] = useState(contents[0]);
 
   useEffect(() => {
     if (dogData.length !== 0) {
-      setDogs(dogData);
+      if (selectedFilter === "최신순") {
+        setDogs(dogData);
+      } else {
+        setDogs([...dogData].reverse());
+      }
       setTotalPage(dogData.length);
-      console.log("dogdata exist");
     } else {
       (async () => {
-        const data = await getPageDogs(pageNum);
+        const data = await getPageDogs(pageNum, selectedFilter);
         setDogs(data[0]);
         setTotalPage(data[1]);
-        console.log("dogdata none");
       })();
     }
-  }, [pageNum, dogData]);
+  }, [pageNum, dogs, dogData, selectedFilter]);
 
   return (
     <Styled.Wrapper>
       <DogSearchNavigation />
       <div className="container">
-        <Filter contents={contents} />
+        <Filter contents={contents} selectedFilter={selectedFilter} setSelectedFilter={setSelectedFilter} />
         <DogCardContainer dogs={dogs} />
       </div>
       <PaginationNav pageNum={pageNum} setPageNum={setPageNum} totalPage={totalPage} />
