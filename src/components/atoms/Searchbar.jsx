@@ -29,7 +29,7 @@ const Search = {
     box-shadow: 0rem 0rem 2rem 0.1rem rgba(0, 0, 0, 0.05);
     border-radius: 1rem;
 
-    & > button {
+    & > .button > button {
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
     }
@@ -55,14 +55,6 @@ const Search = {
         }
       }
     }
-  `,
-
-  Dropdown: styled.div`
-    flex: 1;
-    display: flex;
-    align-items: center;
-    height: 100%;
-    border: solid 1px;
   `,
 };
 
@@ -116,19 +108,12 @@ const Searchbar = ({ setDogs }) => {
             allAirport={allAirport}
           />
         </div>
-        <div onClick={searchHandler}>
+        <div className="button" onClick={searchHandler}>
           <Button primary font="button_middle" padding="1.9rem 1.5rem 1.9rem 1.4rem">
             <span className="text">검색</span>
             <SearchImg />
           </Button>
         </div>
-
-        {/* <Search.Button >
-          <Button primary font="button_middle" padding="1.9rem 1.5rem 1.9rem 1.4rem">
-            <span className="text">검색</span>
-            <SearchImg />
-          </Button>
-        </Search.Button> */}
       </Search.Container>
     </>
   );

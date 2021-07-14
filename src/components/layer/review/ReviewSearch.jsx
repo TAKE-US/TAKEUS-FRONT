@@ -15,13 +15,18 @@ const Styled = {
   `,
 
   Search: styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
     width: 100vw;
     margin-left: calc(-50vw + 50%);
-    height: 24rem;
+    padding-top: 6rem;
+    padding-bottom: 3rem;
     background: linear-gradient(92.22deg, rgba(255, 239, 175, 0.31) 28%, rgba(255, 239, 175, 0.17) 73.01%);
 
     .header {
-      padding-top: 5.4rem;
       text-align: center;
       font: ${({ theme }) => theme.font.display1};
       span {
@@ -32,7 +37,7 @@ const Styled = {
     .search {
       display: flex;
       justify-content: center;
-      padding-top: 2.4rem;
+      margin-top: 2.4rem;
     }
   `,
   Option: styled.section`
