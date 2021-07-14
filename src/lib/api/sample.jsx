@@ -153,3 +153,24 @@ export const getReviewsWithTags = async (hashtag, num) => {
     throw e;
   }
 };
+
+export const postToken = async (token, social) => {
+  const body = {
+    token: token,
+    social: social,
+  };
+  console.log("body", body);
+  try {
+    const data = await instance.post("/api/login", body, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    console.log(data);
+    console.log("[SUCCESS] POST token");
+    return data.data.token;
+  } catch (e) {
+    console.log("[FAIL] POST token");
+    return null;
+  }
+};
