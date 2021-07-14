@@ -18,6 +18,7 @@ export { default as Button } from "./atoms/Button";
 export { default as DropdownCountry } from "./atoms/DropdownCountry";
 export { default as DropdownAirport } from "./atoms/DropdownAirport";
 export { default as Dropdown } from "./atoms/Dropdown";
+export { default as PaginationNav } from "./atoms/PaginationNav";
 
 // layer
 export { default as Header } from "./layer/Header";
@@ -45,8 +46,6 @@ export { default as AddDogLayer } from "./layer/dogEnroll/AddDogLayer";
 // layer/dogSearch
 export { default as DogSearchNavigation } from "./layer/dogSearch/DogSearchNavigation";
 export { default as DogCardContainer } from "./layer/dogSearch/DogCardContainer";
-export { default as PaginationNav } from "./layer/dogSearch/PaginationNav";
-
 // layer/dogDetail
 export { default as DogDetail } from "./layer/dogDetail/DogDetail";
 
@@ -59,3 +58,6 @@ export { default as ReviewSearch } from "./layer/review/ReviewSearch";
 export { default as ReviewCardContainer } from "./layer/review/ReviewCardContainer";
 
 // layer/login
+
+// layer/mypage
+export { default as MypageHeader } from "./layer/mypage/MypageHeader";

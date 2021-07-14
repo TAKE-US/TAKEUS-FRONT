@@ -78,3 +78,54 @@ export const getReviews = async num => {
     return null;
   }
 };
+
+export const getSearchDogs = async location => {
+  try {
+    const data = await instance.get(`/api/dogs/search/${location}`, {
+      params: {
+        order: "latest",
+        page: 1,
+      },
+    });
+    console.log(data);
+    console.log("[SUCCESS] GET dog search data");
+    return [data.data.data, data.data.totalNum];
+  } catch (e) {
+    console.log("[FAIL] GET dog search data");
+    return null;
+  }
+};
+
+export const getMyDogs = async num => {
+  try {
+    const data = await instance.get("/api/dogs/my", {
+      headers: {
+        "Content-Type": "application/json",
+        "x-auth-token": process.env.REACT_APP_MY_TOKEN,
+      },
+    });
+    console.log(data);
+    console.log("[SUCCESS] GET my dog data");
+    return [data.data.data, data.data.totalNum];
+  } catch (e) {
+    console.log("[FAIL] GET my dog data");
+    return null;
+  }
+};
+
+export const getMyReviews = async num => {
+  try {
+    const data = await instance.get("/api/reviews/list/my", {
+      headers: {
+        "Content-Type": "application/json",
+        "x-auth-token": process.env.REACT_APP_MY_TOKEN,
+      },
+    });
+    console.log(data.data.data);
+    console.log("[SUCCESS] GET my review data");
+    return [data.data.data, data.data.totalNum];
+  } catch (e) {
+    console.log("[FAIL] GET my review data");
+    return null;
+  }
+};
