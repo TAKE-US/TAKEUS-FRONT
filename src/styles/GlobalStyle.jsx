@@ -3,23 +3,25 @@ import reset from "styled-reset";
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
+
   * {
     box-sizing: border-box;
   }
+
   html{
     font-size: 10px;
 
   }
-@media screen and (max-width: 1440px) {
-  html {
-    font-size: 8px;
+  @media screen and (max-width: 1440px) {
+    html {
+      font-size: 8px;
+    }
   }
-}
-@media screen and (max-width: 1024px) {
-  html {
-    font-size: 6px;
+  @media screen and (max-width: 1024px) {
+    html {
+      font-size: 6px;
+    }
   }
-}
 
   body{
     -webkit-font-smoothing: antialiased;
