@@ -21,7 +21,7 @@ const Search = {
     border-radius: 1rem;
     box-shadow: 0rem 0rem 2rem 0.1rem rgba(0, 0, 0, 0.05);
     display: flex;
-    
+
     width: 72.6rem;
     height: 6.2rem;
     margin: 0 auto;
@@ -46,7 +46,7 @@ const Search = {
         flex: 1;
         &:before {
           position: absolute;
-          content: '';
+          content: "";
           top: 0;
           left: -2.6rem;
           height: 3.6rem;
@@ -83,6 +83,7 @@ const Searchbar = ({ setDogs }) => {
   }, []);
 
   const searchHandler = async () => {
+    console.log("click", currCity);
     if (currCity) {
       const data = await getSearchDogs(currCity);
       console.log(data[0]);
@@ -108,7 +109,7 @@ const Searchbar = ({ setDogs }) => {
             allAirport={allAirport}
           />
         </div>
-        <div className="button" onClick={searchHandler}>
+        <div className="button" onClick={() => searchHandler()}>
           <Button primary font="button_middle" padding="1.9rem 1.5rem 1.9rem 1.4rem">
             <span className="text">검색</span>
             <SearchImg />

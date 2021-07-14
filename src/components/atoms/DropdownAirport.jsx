@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
-import { useDetectOutsideClick } from '../../hooks/useDetectOutsideClick';
-import { ReactComponent as Arrow } from '../../assets/img/ic_arrow_bottom_black_24.svg';
+import { useDetectOutsideClick } from "../../hooks/useDetectOutsideClick";
+import { ReactComponent as Arrow } from "../../assets/img/ic_arrow_bottom_black_24.svg";
 
 const Menu = {
   Container: styled.div`
@@ -16,7 +16,7 @@ const Menu = {
     align-items: center;
     width: 100%;
     height: 100%;
-    background-color: #FFFFFF;
+    background-color: #ffffff;
 
     &:hover {
       cursor: pointer;
@@ -42,8 +42,8 @@ const Menu = {
     svg {
       width: 2.2rem;
       margin-left: 4.4rem;
-      transform: ${props => props.isActive && 'rotate(-180deg)' };
-      transition: transform .3s;
+      transform: ${props => props.isActive && "rotate(-180deg)"};
+      transition: transform 0.3s;
     }
   `,
 
@@ -123,27 +123,25 @@ const DropdownAirport = ({ currCountry, currAirport, setCurrAirport, allAirport,
       </Menu.Button>
       <Menu.Nav ref={dropdownRef} isActive={isActive}>
         <Menu.Ul>
-          {airport && Object.keys(airport).map((city, index) => (
-            <div key={`country-${index}`}>
-              <span>
-                {city}
-              </span>
-              {airport[city].map((value, index) => (
-                <Menu.Li
-                  key={`airport-${index}`}
-                  selected={
-                    currAirport === value ? true : false
-                  }
-                  onClick={() => {
-                    setCurrAirport(value);
-                    setIsActive(!isActive);
-                  }}
-                >
-                  {value}
-                </Menu.Li>
-              ))}
-            </div>
-          ))}
+          {airport &&
+            Object.keys(airport).map((city, index) => (
+              <div key={`country-${index}`}>
+                <span>{city}</span>
+                {airport[city].map((value, index) => (
+                  <Menu.Li
+                    key={`airport-${index}`}
+                    selected={currAirport === value ? true : false}
+                    onClick={() => {
+                      setCurrAirport(value);
+                      setIsActive(!isActive);
+                      setCurrCity(city);
+                    }}
+                  >
+                    {value}
+                  </Menu.Li>
+                ))}
+              </div>
+            ))}
         </Menu.Ul>
       </Menu.Nav>
     </Menu.Container>
