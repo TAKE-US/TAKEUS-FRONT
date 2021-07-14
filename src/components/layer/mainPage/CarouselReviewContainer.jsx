@@ -1,11 +1,10 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import styled from "styled-components";
-import leftarrow from "../../../assets/img/btn_round_arrow_left_40.svg";
-import rightarrow from "../../../assets/img/btn_round_arrow_right_40.svg";
 import CarouselReviewCard from "../../atoms/CarouselReviewCard";
+import Carousel from "components/atoms/Carousel";
 
 const ContainerWrap = styled.article`
-  height: 48rem;
+  height: 100%;
   .container-top {
     display: flex;
     justify-content: space-between;
@@ -17,54 +16,45 @@ const ContainerWrap = styled.article`
         font-size: 3.2rem;
       }
     }
-    &__btns {
-      display: flex;
-      justify-content: space-between;
-      width: 10.4rem;
-      &__left {
-        width: 4rem;
-        height: 4rem;
-      }
-      &__right {
-        width: 4rem;
-        height: 4rem;
-      }
-    }
   }
 
+  /* slide-container */
   .container-bottom {
+    width: 100%;
     display: flex;
-    & > * {
-      margin-right: 2.1rem;
+    &__cards {
+      display: flex;
+      overflow-y: hidden;
+      & > * {
+        margin-right: 1.8rem;
+      }
+    }
+    &__cards::-webkit-scrollbar {
+      display: none;
     }
   }
 `;
 
 const CarouselReviewContainer = () => {
+  const [review, setReview] = useState([]);
+  const listRef = useRef(null);
+  const movingValue = 272;
+
   return (
     <ContainerWrap>
-      <article className='container-top'>
-        <section className='container-top__title'>
-          <p className='container-top__title__number'>1622</p>
+      <article className="container-top">
+        <section className="container-top__title">
+          <p className="container-top__title__number">1622</p>
           명이 TAKEUS와 함께하고 있습니다.
         </section>
-        <div className='container-top__btns'>
-          <img
-            className='container-top__btns__left'
-            src={leftarrow}
-            alt='leftarrow'
-          />
-          <img
-            className='container-top__btns__right'
-            src={rightarrow}
-            alt='rightarrow'
-          />
-        </div>
+        <Carousel listRef={listRef} movingValue={movingValue} />
       </article>
-      <article className='container-bottom'>
-        <CarouselReviewCard />
-        <CarouselReviewCard />
-        <CarouselReviewCard />
+      <article className="container-bottom">
+        <div className="container-bottom__cards" ref={listRef}>
+          <CarouselReviewCard />
+          <CarouselReviewCard />
+          <CarouselReviewCard />
+        </div>
       </article>
     </ContainerWrap>
   );
