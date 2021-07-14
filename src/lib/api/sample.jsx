@@ -1,8 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "",
-  timeout: 2000,
+  baseURL: ""
 });
 
 export const getDogs = async () => {
@@ -13,7 +12,24 @@ export const getDogs = async () => {
     return data.data.data;
   } catch (e) {
     console.log("[FAIL] GET dogs data");
-    throw e;
+    return null;
+  }
+};
+
+export const postMail = async (name, email, text) => {
+  try {
+    const data = await axios.post("/api/email", {
+      body: {
+        "name": name,
+        "email": email,
+        "text": text,
+      }
+    });
+    console.log(data);
+    console.log("{SUCCESS] POST email");
+  } catch (e) {
+    console.log("[FAIL] POST email");
+    return null;
   }
 };
 
@@ -25,7 +41,6 @@ export const getCountry = async () => {
     return data.data;
   } catch (e) {
     console.log("[FAIL] GET country data");
-    throw e;
   }
 };
 

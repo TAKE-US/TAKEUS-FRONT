@@ -81,12 +81,33 @@ const Head = {
   Login: styled.div`
     display: flex;
     align-items: center;
-    font: ${({ theme }) => theme.font.gnb};
-    white-space: nowrap;
+
+    .login {
+      font: ${({ theme }) => theme.font.gnb};
+      color: ${({ theme }) => theme.color.darkgray1};
+      white-space: nowrap;
+      
+      &:hover {
+        cursor: pointer;
+        color: ${({ theme }) => theme.color.primary};
+      }
+    }
     
-    &:hover {
-      cursor: pointer;
-      color: ${({ theme }) => theme.color.primary};
+
+    .enroll {
+      font: ${({ theme }) => theme.font.gnb};
+      color: ${({ theme }) => theme.color.white};
+      padding: 0.8rem 1.2rem;
+      background: ${({theme}) => theme.color.darkgray2};
+      white-space: nowrap;
+      margin-right: 2.4rem;
+      border-radius: 0.6rem;
+      border: 0.1rem solid ${({theme}) => theme.color.darkgray2};
+
+      &:hover {
+        color: ${({ theme }) => theme.color.darkgray2};
+        background: ${({ theme }) => theme.color.white};
+      }
     }
   `,
 };
@@ -169,20 +190,13 @@ const Header = () => {
             </Head.Content>
           </div>
           {isLogin ? (
-            <Head.Login
-              onClick={() => {
-                history.push("/mypage");
-              }}
-            >
-              내가 작성한 글
+            <Head.Login>
+              <Link className="enroll" to="/dogEnroll">대상견 등록</Link>
+              <Link className="login" to="/mypage">내가 쓴 글</Link>
             </Head.Login>
           ) : (
-            <Head.Login
-              onClick={() => {
-                history.push("/login");
-              }}
-            >
-              로그인·회원가입
+            <Head.Login>
+              <Link className="login" to="/login">로그인·회원가입</Link>
             </Head.Login>
           )}
         </div>
