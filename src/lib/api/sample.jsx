@@ -12,31 +12,29 @@ export const getDogs = async () => {
     return data.data.data;
   } catch (e) {
     console.log("[FAIL] GET dogs data");
-    return null;
+    throw e;
   }
 };
 
 export const postMail = async (name, email, text) => {
   try {
-    const data = await axios.post("/api/email", {
+    await axios.post("/api/email", {
       body: {
         name: name,
         email: email,
         text: text,
       },
     });
-    console.log(data);
     console.log("{SUCCESS] POST email");
   } catch (e) {
     console.log("[FAIL] POST email");
-    return null;
+    throw e;
   }
 };
 
 export const getCountry = async () => {
   try {
     const data = await instance.get("/api/airports/country");
-    console.log(data.data);
     console.log("[SUCCESS] GET country data");
     return data.data;
   } catch (e) {
@@ -52,12 +50,11 @@ export const getPageDogs = async num => {
         page: num,
       },
     });
-    console.log(data);
     console.log("[SUCCESS] GET dogs data");
     return [data.data.data, data.data.totalNum];
   } catch (e) {
     console.log("[FAIL] GET dogs data");
-    return null;
+    throw e;
   }
 };
 
@@ -69,12 +66,11 @@ export const getReviews = async num => {
         page: num,
       },
     });
-    console.log(data);
     console.log("[SUCCESS] GET review data");
     return [data.data.data, data.data.totalNum];
   } catch (e) {
     console.log("[FAIL] GET review data");
-    return null;
+    throw e;
   }
 };
 
@@ -86,12 +82,11 @@ export const getSearchDogs = async location => {
         page: 1,
       },
     });
-    console.log(data);
     console.log("[SUCCESS] GET dog search data");
     return [data.data.data, data.data.totalNum];
   } catch (e) {
     console.log("[FAIL] GET dog search data");
-    return null;
+    throw e;
   }
 };
 
@@ -103,12 +98,11 @@ export const getMyDogs = async num => {
         "x-auth-token": process.env.REACT_APP_MY_TOKEN,
       },
     });
-    console.log(data);
     console.log("[SUCCESS] GET my dog data");
     return [data.data.data, data.data.totalNum];
   } catch (e) {
     console.log("[FAIL] GET my dog data");
-    return null;
+    throw e;
   }
 };
 
@@ -120,12 +114,11 @@ export const getMyReviews = async num => {
         "x-auth-token": process.env.REACT_APP_MY_TOKEN,
       },
     });
-    console.log(data.data.data);
     console.log("[SUCCESS] GET my review data");
     return [data.data.data, data.data.totalNum];
   } catch (e) {
     console.log("[FAIL] GET my review data");
-    return null;
+    throw e;
   }
 };
 
@@ -137,11 +130,10 @@ export const getReviewsWithTags = async (hashtag, num) => {
         page: num,
       },
     });
-    console.log(data);
     console.log("[SUCCESS] GET review data with hashtag");
     return [data.data.data];
   } catch (e) {
     console.log("[FAIL] GET review data hashtag");
-    return null;
+    throw e;
   }
 };
