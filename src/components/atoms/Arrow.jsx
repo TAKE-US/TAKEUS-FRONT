@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 const ArrowWrap = styled.img`
   position: absolute;
+  z-index: ${props => props.zIndex};
   top: ${props => props.top}%;
   height: ${props => props.height}%;
   cursor: pointer;
@@ -11,12 +12,13 @@ const ArrowWrap = styled.img`
 `;
 
 
-function Arrow({ leftArrow, rightArrow, height, top, handleClickPrev, handleClickNext }) {
+function Arrow({ leftArrow, rightArrow, height, top, zIndex, handleClickPrev, handleClickNext }) {
   return (
     <>
       <ArrowWrap
         height={height}
         top={top}
+        zIndex={zIndex}
         src={leftArrow}
         side="prev"
         onClick={handleClickPrev}
@@ -24,6 +26,7 @@ function Arrow({ leftArrow, rightArrow, height, top, handleClickPrev, handleClic
       <ArrowWrap
         height={height}
         top={top}
+        zIndex={zIndex}
         src={rightArrow}
         side="next"
         onClick={handleClickNext}
