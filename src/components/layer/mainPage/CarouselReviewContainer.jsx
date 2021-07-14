@@ -1,7 +1,8 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import styled from "styled-components";
 import { CarouselReviewCard } from "components";
 import { Carousel } from "components";
+import { getReviewsWithTags } from "lib/api/sample";
 
 const ContainerWrap = styled.article`
   height: 100%;
@@ -39,6 +40,14 @@ const CarouselReviewContainer = () => {
   const [review, setReview] = useState([]);
   const listRef = useRef(null);
   const movingValue = 272;
+
+  useEffect(() => {
+    (async () => {
+      const data = await getReviewsWithTags();
+      data && setReview(data.slice(0, 9));
+    })();
+  }, []);
+  console.log(review);
 
   return (
     <ContainerWrap>
