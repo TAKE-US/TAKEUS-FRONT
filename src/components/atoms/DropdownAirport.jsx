@@ -16,8 +16,6 @@ const Menu = {
     align-items: center;
     width: 100%;
     height: 100%;
-    background-color: #ffffff;
-
     &:hover {
       cursor: pointer;
     }
@@ -45,6 +43,14 @@ const Menu = {
       transform: ${props => props.isActive && "rotate(-180deg)"};
       transition: transform 0.3s;
     }
+    &.enroll {
+      .destination {
+        padding: 0 1.4rem;
+      }
+      .text {
+        margin-top: 0;
+      }
+    }
   `,
 
   Nav: styled.nav`
@@ -56,7 +62,11 @@ const Menu = {
     border-radius: 1rem;
     margin-left: 1rem;
     margin-top: 1.6rem;
-    background-color: ${({ theme }) => theme.color.white};
+    background-color: ${props => (props.enroll ? props.theme.color.black : props.theme.color.white)};
+    &.enroll {
+      width: 49rem;
+      z-index: 10;
+    }
   `,
 
   Ul: styled.ul`
@@ -90,6 +100,9 @@ const Menu = {
       cursor: pointer;
       background-color: ${({ theme }) => theme.color.bg_yellow};
     }
+    &.enroll {
+      width: 46rem;
+    }
   `,
 };
 
@@ -108,12 +121,13 @@ const DropdownAirport = ({ currCountry, currAirport, setCurrAirport, allAirport,
   }, [currCountry, setCurrAirport, allAirport]);
 
   return (
-    <Menu.Container className={enroll ? "enroll" : ""}>
+    <Menu.Container enroll={enroll}>
       <Menu.Button
         onClick={onClick}
         currAirport={currAirport}
         disabled={currCountry ? false : true}
         isActive={isActive}
+        className={enroll ? "enroll" : ""}
       >
         <div className="destination">
           {!enroll && <span className="name">공항명</span>}
@@ -121,7 +135,7 @@ const DropdownAirport = ({ currCountry, currAirport, setCurrAirport, allAirport,
         </div>
         <Arrow />
       </Menu.Button>
-      <Menu.Nav ref={dropdownRef} isActive={isActive}>
+      <Menu.Nav ref={dropdownRef} isActive={isActive} className={enroll ? "enroll" : ""}>
         <Menu.Ul>
           {airport &&
             Object.keys(airport).map((city, index) => (
@@ -129,6 +143,7 @@ const DropdownAirport = ({ currCountry, currAirport, setCurrAirport, allAirport,
                 <span>{city}</span>
                 {airport[city].map((value, index) => (
                   <Menu.Li
+                    className={enroll ? "enroll" : ""}
                     key={`airport-${index}`}
                     selected={currAirport === value ? true : false}
                     onClick={() => {

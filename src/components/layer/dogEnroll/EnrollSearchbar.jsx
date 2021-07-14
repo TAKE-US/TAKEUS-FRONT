@@ -15,7 +15,26 @@ const mapDispatchToProps = dispatch => {
 };
 
 const Search = {
-  Container: styled.div``,
+  Container: styled.div`
+    display: flex;
+    .dropdown {
+      &__country {
+        width: 17.4rem;
+        height: 3.2rem;
+        border: 1px solid #dfdfdf;
+        border-radius: 41rem;
+      }
+      &__airport {
+        width: 50.6rem;
+        border: 1px solid #dfdfdf;
+        border-radius: 41rem;
+      }
+      ::after {
+        content: "";
+        display: none;
+      }
+    }
+  `,
 };
 
 const Searchbar = ({ setDogs, enroll }) => {
@@ -56,18 +75,13 @@ const Searchbar = ({ setDogs, enroll }) => {
 
   return (
     <>
-      <Search.Container className={enroll ? "enroll" : ""}>
+      <Search.Container>
         <div className="dropdown dropdown__country">
-          <DropdownCountry
-            enroll={enroll ? enroll : ""}
-            currCountry={currCountry}
-            setCurrCountry={setCurrCountry}
-            country={country}
-          />
+          <DropdownCountry enroll currCountry={currCountry} setCurrCountry={setCurrCountry} country={country} />
         </div>
         <div className="dropdown dropdown__airport">
           <DropdownAirport
-            enroll={enroll ? enroll : ""}
+            enroll
             currCountry={currCountry}
             currAirport={currAirport}
             setCurrAirport={setCurrAirport}

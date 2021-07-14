@@ -43,6 +43,14 @@ const Menu = {
       transform: ${props => props.isActive && "rotate(-180deg)"};
       transition: transform 0.3s;
     }
+    &.enroll {
+      .destination {
+        padding: 0 1.4rem;
+      }
+      .text {
+        margin-top: 0;
+      }
+    }
   `,
 
   List: styled.div`
@@ -54,6 +62,10 @@ const Menu = {
     border-radius: 1rem;
     margin-top: 1.6rem;
     background-color: ${({ theme }) => theme.color.white};
+    &.enroll {
+      width: 15.8rem;
+      z-index: 10;
+    }
   `,
 
   Ul: styled.ul`
@@ -75,6 +87,11 @@ const Menu = {
         background-color: ${({ theme }) => theme.color.bg_yellow};
       }
     }
+    &.enroll {
+      li {
+        width: 14.8rem;
+      }
+    }
   `,
 };
 
@@ -88,15 +105,15 @@ const DropdownCountry = ({ currCountry, setCurrCountry, country, enroll }) => {
 
   return (
     <Menu.Container>
-      <Menu.Button onClick={onClick} currCountry={currCountry} isActive={isActive}>
+      <Menu.Button onClick={onClick} currCountry={currCountry} isActive={isActive} className={enroll ? "enroll" : ""}>
         <div className="destination">
           {!enroll && <span className="name">국가</span>}
           <span className="text">{currCountry ? currCountry : enroll ? "국가" : "어디로 가시나요?"}</span>
         </div>
         <Arrow />
       </Menu.Button>
-      <Menu.List ref={dropdownRef} isActive={isActive}>
-        <Menu.Ul>
+      <Menu.List ref={dropdownRef} isActive={isActive} className={enroll ? "enroll" : ""}>
+        <Menu.Ul className={enroll ? "enroll" : ""}>
           {country.map((country, index) => (
             <li
               key={`country-dropdown-${index}`}
