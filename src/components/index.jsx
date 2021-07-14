@@ -20,6 +20,8 @@ export { default as DropdownAirport } from "./atoms/DropdownAirport";
 export { default as Dropdown } from "./atoms/Dropdown";
 export { default as PaginationNav } from "./atoms/PaginationNav";
 export { default as LoginKakao } from "./atoms/LoginKakao";
+export { default as CarouselReviewCard } from "./atoms/CarouselReviewCard";
+export { default as Carousel } from "./atoms/Carousel";
 
 // layer
 export { default as Header } from "./layer/Header";
@@ -51,9 +53,9 @@ export { default as DogCardContainer } from "./layer/dogSearch/DogCardContainer"
 export { default as DogDetail } from "./layer/dogDetail/DogDetail";
 
 // layer/info
-export { default as InfoHeader } from './layer/info/InfoHeader';
-export { default as InfoBenefit } from './layer/info/InfoBenefit';
-export { default as InfoWarning } from './layer/info/InfoWarning';
+export { default as InfoHeader } from "./layer/info/InfoHeader";
+export { default as InfoBenefit } from "./layer/info/InfoBenefit";
+export { default as InfoWarning } from "./layer/info/InfoWarning";
 
 // layer/review
 export { default as ReviewPostInfo } from "./layer/review/ReviewPostInfo";
