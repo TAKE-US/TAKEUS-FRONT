@@ -1,14 +1,14 @@
-import React from 'react';
-import styled from 'styled-components';
-import Arrow from './Arrow';
-import PaginationDot from './PaginationDot';
-import LeftArrow from 'assets/img/btn_round_arrow_left_40.svg';
-import RightArrow from 'assets/img/btn_round_arrow_right_40.svg';
+import React from "react";
+import styled from "styled-components";
+import Arrow from "./Arrow";
+import PaginationDot from "./PaginationDot";
+import LeftArrow from "assets/img/btn_round_arrow_left_40.svg";
+import RightArrow from "assets/img/btn_round_arrow_right_40.svg";
 
 const SwiperContentWrap = styled.div`
   position: absolute;
   width: 100%;
-  height: 100%; 
+  height: 100%;
   overflow: hidden;
   border-radius: 10px;
   display: flex;
@@ -16,7 +16,7 @@ const SwiperContentWrap = styled.div`
 `;
 
 const Slide = styled.div`
-  width: 100%
+  width: 100%;
   height: auto;
   border-radius: 10px;
   display: flex;
@@ -33,11 +33,7 @@ const Slide = styled.div`
 function SwiperContent({ index, images, handleClickPrev, handleClickNext, onClick }) {
   return (
     <SwiperContentWrap>
-      <Slide>
-        {images.map((img, i) => (
-          (i === index) && <img src={img} key={i} alt="" onClick={onClick} />
-        ))}
-        </Slide>
+      <Slide>{images?.map((img, i) => i === index && <img src={img} key={i} alt="" onClick={onClick} />)}</Slide>
       <Arrow
         leftArrow={LeftArrow}
         rightArrow={RightArrow}
@@ -46,11 +42,8 @@ function SwiperContent({ index, images, handleClickPrev, handleClickNext, onClic
         handleClickPrev={handleClickPrev}
         handleClickNext={handleClickNext}
       />
-      <PaginationDot
-        index={index}
-        imagesLength={images.length}
-      />
-    </SwiperContentWrap >
+      <PaginationDot index={index} imagesLength={images?.length} />
+    </SwiperContentWrap>
   );
 }
 

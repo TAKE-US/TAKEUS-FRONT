@@ -1,7 +1,14 @@
 import React from "react";
+import { InfoHeader, InfoBenefit, InfoWarning } from 'components';
 
 const InfoPage = () => {
-  return <div>이동봉사란?</div>;
+  return (
+    <>
+      <InfoHeader />
+      <InfoBenefit />
+      <InfoWarning />
+    </>
+  );
 };
 
 export default InfoPage;

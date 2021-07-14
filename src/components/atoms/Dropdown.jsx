@@ -122,7 +122,7 @@ const Dropdown = ({ item, placeholder, rounded, font, caption, small }) => {
         <img
           className="arrowimg"
           src={Arrow_Bottom}
-          alt=""
+          alt="arrow"
         />
       </Styled.Button>
       <Styled.Nav ref={dropdownRef} isActive={isActive}>

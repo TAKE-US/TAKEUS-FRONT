@@ -12,30 +12,39 @@ const Styled = {
     border-radius: ${props => props.rounded ? '50px' : '8px'};
     font: ${({ theme, fontStyle }) => fontStyle ? theme.font[fontStyle] : theme.font.button};
     
+    color: ${({ theme }) => theme.color.primary};
+    background-color: ${({ theme }) => theme.color.white};
+    border: solid 1px ${({ theme }) => theme.color.primary};
+    &:hover {
+      color: ${({ theme }) => theme.color.white};
+      background-color: ${({ theme }) => theme.color.primary};
+    }
+
     &.primary {
       color: ${({ theme }) => theme.color.white};
       background-color: ${({ theme }) => theme.color.primary};
       &:hover {
         background-color: ${({ theme }) => theme.color.primary_light};
+        border-color: ${({ theme }) => theme.color.primary_light};
       }
     }
 
-    &.reverse {
-      color: ${({ theme }) => theme.color.primary};
-      background-color: ${({ theme }) => theme.color.white};
-      border: solid 1px ${({ theme }) => theme.color.primary};
+    &.black {
+      color: ${({ theme }) => theme.color.white};
+      background-color: ${({ theme }) => theme.color.darkgray2};
+      border-color: ${({ theme }) => theme.color.darkgray2};
       &:hover {
-        color: ${({ theme }) => theme.color.white};
-        background-color: ${({ theme }) => theme.color.primary};
+        background-color: ${({ theme }) => theme.color.darkgray1};
+        border-color: ${({ theme }) => theme.color.darkgray1};
       }
     }
   `
 };
 
-const Button = ({ children, primary, padding, rounded, full, font }) => {
+const Button = ({ children, primary, black, padding, rounded, full, font }) => {
   return (
     <Styled.Button
-      className={primary ? 'primary' : 'reverse'}
+      className={`${primary && 'primary'} ${black && 'black'}`}
       padding={padding}
       rounded={rounded}
       full={full}

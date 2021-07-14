@@ -9,8 +9,9 @@ const Styled = {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-top: 19.7rem;
+    padding: 8rem 0;
     background-color: ${({ theme }) => theme.color.bg_gray};
-    padding: 80px 0;
     
     font-size: 1.2rem;
     font-family: 'Spoqa Han Sans Neo';
