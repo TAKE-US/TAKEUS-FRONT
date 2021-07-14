@@ -16,7 +16,7 @@ const SwiperContentWrap = styled.div`
 `;
 
 const Slide = styled.div`
-  width: 100%
+  width: 100%;
   height: auto;
   border-radius: 10px;
   display: flex;
