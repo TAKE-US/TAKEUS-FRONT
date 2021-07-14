@@ -65,8 +65,8 @@ export const getDogDetail = async id => {
         "Content-Type": "application/json",
       },
     });
-    console.log(data);
     console.log("[SUCCESS] GET dog detail data");
+    console.log(data);
     return data.data.data;
   } catch (e) {
     console.log("[FAIL] GET dog detail data");
@@ -111,7 +111,7 @@ export const getMyDogs = async num => {
     const data = await instance.get("/api/dogs/my", {
       headers: {
         "Content-Type": "application/json",
-        "x-auth-token": process.env.REACT_APP_MY_TOKEN,
+        "x-auth-token": localStorage.getItem("token"),
       },
     });
     console.log("[SUCCESS] GET my dog data");
@@ -172,5 +172,20 @@ export const postToken = async (token, social) => {
   } catch (e) {
     console.log("[FAIL] POST token");
     return null;
+  }
+};
+
+export const deleteDog = async id => {
+  try {
+    const data = await axios.delete(`/api/dogs/detail/${id}`, {
+      headers: {
+        "x-auth-token": localStorage.getItem("token"),
+      },
+    });
+    console.log(data);
+    console.log("[SUCESS] DELETE dog detail");
+  } catch (e) {
+    console.log("[FAIL] DELETE dog detail");
+    throw e;
   }
 };

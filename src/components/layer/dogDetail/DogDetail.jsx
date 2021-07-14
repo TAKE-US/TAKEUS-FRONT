@@ -3,9 +3,7 @@ import styled from "styled-components";
 import { useHistory } from "react-router";
 
 import { ReactComponent as EditIcon } from "assets/img/ic_edit.svg";
-import { Swiper, DogDetailInfo, CopyLinkButton } from "components";
-import { DeleteModal } from "components";
-// import { ReportModal } from "components";
+import { Swiper, DogDetailInfo, CopyLinkButton, DeleteModal, ReportModal } from "components";
 
 const DogDetailWrap = styled.div`
   display: flex;
@@ -117,6 +115,10 @@ const DogDetailWrap = styled.div`
 
 const DogDetail = ({ dog }) => {
   const history = useHistory();
+  // const [myPost, setMyPost] = useState(false);
+  // const isLogin = localStorage.getItem("token");
+  const isLogin = true;
+  const myPost = true;
 
   return (
     <DogDetailWrap>
@@ -129,14 +131,21 @@ const DogDetail = ({ dog }) => {
           <h1>{dog.name}</h1>
           <h2>단체 | {dog.institutionName}</h2>
         </div>
-        <div className="dog--post">
-          <button className="edit">
-            <EditIcon width="20" height="20" />
-            <div>수정</div>
-          </button>
-          <DeleteModal />
-          {/* <ReportModal /> */}
-        </div>
+        {isLogin &&
+          (myPost ? (
+            <div className="dog--post">
+              <button className="edit">
+                <EditIcon width="20" height="20" />
+                <div>수정</div>
+              </button>
+            <DeleteModal id={dog._id}/>
+            </div>
+          ) : (
+            <div className="dog--post">
+              <ReportModal/>
+            </div>)
+          )
+        }
       </header>
       <section className="dog--images">
         <div className="swiperAndLink">

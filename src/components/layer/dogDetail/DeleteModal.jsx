@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { Modal } from 'components';
 import { ReactComponent as DeleteIcon } from "assets/img/ic_delete.svg";
 import { ReactComponent as DeleteModalIcon } from "assets/img/img_delete.svg";
+import { deleteDog } from "lib/api/sample";
 
 const Styled = {
   Wrapper: styled.div`
@@ -71,7 +72,7 @@ const Styled = {
   `,
 };
 
-const ReportModal = () => {
+const ReportModal = ({ id }) => {
   const [modalOpen, setModalOpen] = useState(false);
 
   const openModal = () => {
@@ -80,6 +81,10 @@ const ReportModal = () => {
 
   const closeModal = () => {
     setModalOpen(false);
+  };
+
+  const deleteClick = async () => {
+    await deleteDog(id);
   };
 
   return (
@@ -100,7 +105,7 @@ const ReportModal = () => {
           </div>
           <div className="button">
             <button className="cancelbtn" onClick={closeModal}>취소</button>
-            <button className="deletebtn">삭제</button>
+            <button className="deletebtn" onClick={deleteClick}>삭제</button>
           </div>
         </Styled.Content>
       </Modal>

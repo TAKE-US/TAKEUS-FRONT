@@ -13,7 +13,7 @@ const Styled = {
     display: flex;
     flex-direction: column;
     width: 56.5%;
-    margin-left: 5.5%
+    margin-left: 5.5%;
   `,
 
   Departure: styled.section`
