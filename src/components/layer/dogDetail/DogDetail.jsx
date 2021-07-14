@@ -4,7 +4,7 @@ import { useHistory } from "react-router";
 // import { ReactComponent as DeleteIcon } from "assets/img/ic_delete.svg";
 import { ReactComponent as EditIcon } from "assets/img/ic_edit.svg";
 
-import { Swiper, DogDetailInfo, CopyLinkButton } from "../..";
+import { Swiper, DogDetailInfo, CopyLinkButton } from "components";
 import DeleteModal from './DeleteModal';
 
 const DogDetailWrap = styled.div`

@@ -8,10 +8,40 @@ const Styled = {
     display: ${props => props.open ? 'flex' : 'none'};
     align-items: center;
     justify-content: center;
+    transition: display .6s;
+    background-color: rgba(0,0,0,0.5);
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 20;
   `,
 
   Section: styled.section`
-  
+    display: flex;
+    flex-direction: column;
+    width: 36rem;
+    height: 42.6rem;
+    border-radius: 1rem;
+    background: ${({ theme }) => theme.color.white};
+
+    .header {
+      position: relative;
+      top: 1.8rem;
+      left: 31.8rem;
+
+      .button {
+        border: none;
+        width: 1.8rem;
+        height: 1.8rem;
+        padding: 0;
+      }
+    }
+
+    .main {
+
+    }
   `,
 };
 
