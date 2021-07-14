@@ -93,7 +93,7 @@ const Menu = {
   `,
 };
 
-const DropdownAirport = ({ currCountry, currAirport, setCurrAirport, allAirport, setCurrCity }) => {
+const DropdownAirport = ({ currCountry, currAirport, setCurrAirport, allAirport, setCurrCity, enroll }) => {
   const dropdownRef = useRef(null);
   const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
   const [airport, setAirport] = useState("");
@@ -108,7 +108,7 @@ const DropdownAirport = ({ currCountry, currAirport, setCurrAirport, allAirport,
   }, [currCountry, setCurrAirport, allAirport]);
 
   return (
-    <Menu.Container>
+    <Menu.Container className={enroll ? "enroll" : ""}>
       <Menu.Button
         onClick={onClick}
         currAirport={currAirport}
@@ -116,8 +116,8 @@ const DropdownAirport = ({ currCountry, currAirport, setCurrAirport, allAirport,
         isActive={isActive}
       >
         <div className="destination">
-          <span className="name">공항명</span>
-          <span className="text">{currAirport ? currAirport : "도착 공항은 어디인가요?"}</span>
+          {!enroll && <span className="name">공항명</span>}
+          <span className="text">{currAirport ? currAirport : enroll ? "공항명" : "도착 공항은 어디인가요?"}</span>
         </div>
         <Arrow />
       </Menu.Button>
