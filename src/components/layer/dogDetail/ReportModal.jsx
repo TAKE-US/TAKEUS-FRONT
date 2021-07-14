@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import { Modal } from 'components';
-import { ReactComponent as DeleteIcon } from "assets/img/ic_delete.svg";
-import { ReactComponent as DeleteModalIcon } from "assets/img/img_delete.svg";
+import { ReactComponent as ReportIcon } from "assets/img/ic_report_24.svg";
+import { ReactComponent as ReportModalIcon } from "assets/img/img_report.svg";
 
 const Styled = {
   Wrapper: styled.div`
-    .delete {
-      width: 8.6rem;
+    .report {
+      width: 11.1rem;
       height: 4rem;
       display: flex;
       padding: 0.7rem 1.5rem 0.7rem 1.1rem;
@@ -25,8 +25,8 @@ const Styled = {
       }
 
       :hover {
-          background: ${({theme}) => theme.color.lightgray1};
-        }
+        background: ${({theme}) => theme.color.lightgray1};
+      }
     }
   `,
 
@@ -34,11 +34,11 @@ const Styled = {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 4.9rem;
+    padding-top: 8rem;
 
     .text {
       text-align: center;
-      margin-top: 0.5rem;
+      margin-top: 1.6rem;
 
       h1 {
         font: ${({ theme }) => theme.font.title2};
@@ -63,9 +63,9 @@ const Styled = {
         font: ${({ theme }) => theme.font.button};
         color: ${({theme}) => theme.color.gray1};
       }
-      .deletebtn {
+      .reportbtn {
         font: ${({ theme }) => theme.font.button};
-        color: ${({theme}) => theme.color.primary_dark};
+        color: ${({theme}) => theme.color.error_red};
       }
     }
   `,
@@ -84,23 +84,23 @@ const ReportModal = () => {
 
   return (
     <Styled.Wrapper>
-      <button className="delete" onClick={openModal}>
-        <DeleteIcon />
-        <span className="text">삭제</span>
+      <button className="report" onClick={openModal}>
+        <ReportIcon />
+        <span className="text">신고하기</span>
       </button>
       <Modal open={modalOpen} close={closeModal}>
         <Styled.Content>
-          <DeleteModalIcon />
+          <ReportModalIcon />
           <div className="text">
-            <h1>정말 신고하시겠어요?</h1>
+            <h1>정말 삭제하시겠어요?</h1>
             <p>
-              삭제한 게시물은 복구가 불가능해요!<br />
-              신중하게 검토한 후 삭제해 주세요.
+              허위 내용 및 광고성 게시글은 신고가 가능합니다.<br />
+              해당 게시물은 관리자의 검토 후 필요에 따라 삭제처리됩니다.
             </p>
           </div>
           <div className="button">
             <button className="cancelbtn" onClick={closeModal}>취소</button>
-            <button className="deletebtn">삭제</button>
+            <button className="reportbtn">신고</button>
           </div>
         </Styled.Content>
       </Modal>
