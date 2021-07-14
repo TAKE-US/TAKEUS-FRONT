@@ -48,25 +48,21 @@ const Styled = {
   SectionContainer: styled.div`
     display: flex;
     flex-direction: column;
-
     h1 {
       height: 4.9rem;
       margin-bottom: 0.7rem;
       font: ${({ theme }) => theme.font.display2};
       color: ${({ theme }) => theme.color.black};
     }
-
     h2 {
       height: 2.2rem;
       margin-bottom: 7rem;
       font: ${({ theme }) => theme.font.body1};
       color: ${({ theme }) => theme.color.gray3};
     }
-
     .google {
       border: 0.1rem solid #dfdfdf;
     }
-  }
   `,
 
   Button: styled.button`
@@ -115,9 +111,9 @@ const LoginLayer = () => {
     <Styled.Wrapper>
       <Styled.ImageContainer>
         <Styled.Title>
-          <Title/>
-          <SubTitle style={{marginTop:"2.1rem"}} />
-        </Styled.Title>   
+          <Title />
+          <SubTitle style={{ marginTop: "2.1rem" }} />
+        </Styled.Title>
         <Styled.Image src={LoginImg} alt="dogs" />
       </Styled.ImageContainer>
       <Styled.Section>
@@ -142,8 +138,8 @@ const LoginLayer = () => {
             )}
             onSuccess={handleSuccess}
             onFailure={handleFailure}
-            />
-          </Styled.SectionContainer>
+          />
+        </Styled.SectionContainer>
       </Styled.Section>
     </Styled.Wrapper>
   );

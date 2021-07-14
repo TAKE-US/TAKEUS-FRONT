@@ -112,7 +112,7 @@ export const getMyDogs = async num => {
     const data = await instance.get("/api/dogs/my", {
       headers: {
         "Content-Type": "application/json",
-        "x-auth-token": process.env.REACT_APP_MY_TOKEN,
+        "x-auth-token": localStorage.getItem("token"),
       },
     });
     console.log("[SUCCESS] GET my dog data");
@@ -128,7 +128,7 @@ export const getMyReviews = async num => {
     const data = await instance.get("/api/reviews/list/my", {
       headers: {
         "Content-Type": "application/json",
-        "x-auth-token": process.env.REACT_APP_MY_TOKEN,
+        "x-auth-token": localStorage.getItem("token"),
       },
     });
     console.log("[SUCCESS] GET my review data");
