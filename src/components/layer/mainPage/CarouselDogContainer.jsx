@@ -6,17 +6,13 @@ import Carousel from "components/atoms/Carousel";
 import { getDogs } from "lib/api/sample";
 
 const ContainerWrap = styled.article`
-  display: flex;
-  flex-direction: column;
   width: 100%;
-  height: 48rem;
   .container-top {
     display: flex;
     justify-content: space-between;
     width: 100%;
     height: 6rem;
     &__title {
-      width: 52.3rem;
       font: ${({ theme }) => theme.font.title1};
       &__number {
         display: inline-block;
@@ -29,15 +25,10 @@ const ContainerWrap = styled.article`
   .container-bottom {
     width: 100%;
     display: flex;
-    /* max-width: 100%; */
-    overflow-y: auto;
-    /* items-container */
     &__cards {
-      display: grid;
-      grid-template-columns: repeat(30, 25.5rem);
-      grid-gap: 1.75rem;
+      display: flex;
       overflow-y: hidden;
-      article {
+      & > * {
         margin-right: 1.8rem;
       }
     }
@@ -45,15 +36,13 @@ const ContainerWrap = styled.article`
       display: none;
     }
   }
-  .container-bottom::-webkit-scrollbar {
-    display: none;
-  }
 `;
 
 const CarouselDogContainer = () => {
   const [dogs, setDogs] = useState([]);
   const listRef = useRef(null);
   const movingValue = 272;
+
   useEffect(() => {
     (async () => {
       const data = await getDogs();
@@ -73,8 +62,8 @@ const CarouselDogContainer = () => {
       <article className="container-bottom">
         <div className="container-bottom__cards" ref={listRef}>
           {dogs.length &&
-            dogs.map((dog, i) => (
-              <DogCard key={dog._id} id={dog._id} dog={dog} />
+            dogs.map(dog => (
+              <DogCard key={dog._id} dog={dog} />
             ))}
         </div>
       </article>

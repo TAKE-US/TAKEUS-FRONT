@@ -15,38 +15,45 @@ const mapDispatchToProps = dispatch => {
 };
 
 const Search = {
-  TotalContainer: styled.div``,
-
   Container: styled.div`
     background-color: ${({ theme }) => theme.color.white};
     width: 72.6rem;
     border-radius: 1rem;
     box-shadow: 0rem 0rem 2rem 0.1rem rgba(0, 0, 0, 0.05);
     display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto;
-
-    .text {
-      margin-right: 0.3rem;
-    }
-  `,
-
-  Dropdown: styled.div`
-    width: 64rem;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-  `,
-
-  Button: styled.div`
-    width: 9.4rem;
+    
+    width: 72.6rem;
     height: 6.2rem;
-    background-color: ${({ theme }) => theme.color.primary};
-    border-top-right-radius: 1rem;
-    border-bottom-right-radius: 1rem;
-    &:hover {
-      background-color: ${({ theme }) => theme.color.primary_light};
+    margin: 0 auto;
+    background-color: ${({ theme }) => theme.color.white};
+    box-shadow: 0rem 0rem 2rem 0.1rem rgba(0, 0, 0, 0.05);
+    border-radius: 1rem;
+
+    & > .button > button {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+
+    .dropdown {
+      margin: 0 2.6rem;
+
+      &__country {
+        width: 24.2rem;
+      }
+
+      &__airport {
+        position: relative;
+        flex: 1;
+        &:before {
+          position: absolute;
+          content: '';
+          top: 0;
+          left: -2.6rem;
+          height: 3.6rem;
+          margin: 1.3rem 0;
+          border-right: solid 1px ${({ theme }) => theme.color.gray1};
+        }
+      }
     }
   `,
 };
@@ -62,9 +69,16 @@ const Searchbar = ({ setDogs }) => {
 
   useEffect(() => {
     (async () => {
-      const data = await getCountry();
-      setCountry(Object.keys(data).splice(1));
-      setAllAirport(data);
+      try {
+        const data = await getCountry();
+        console.warn(data);
+
+        setCountry(Object.keys(data).splice(1));
+        setAllAirport(data);
+      } catch (e) {
+        // TODO
+        // error 처리 필요!
+      }
     })();
   }, []);
 
@@ -80,10 +94,12 @@ const Searchbar = ({ setDogs }) => {
   };
 
   return (
-    <Search.TotalContainer>
+    <>
       <Search.Container>
-        <Search.Dropdown>
+        <div className="dropdown dropdown__country">
           <DropdownCountry currCountry={currCountry} setCurrCountry={setCurrCountry} country={country} />
+        </div>
+        <div className="dropdown dropdown__airport">
           <DropdownAirport
             currCountry={currCountry}
             currAirport={currAirport}
@@ -91,15 +107,15 @@ const Searchbar = ({ setDogs }) => {
             setCurrCity={setCurrCity}
             allAirport={allAirport}
           />
-        </Search.Dropdown>
-        <Search.Button onClick={searchHandler}>
+        </div>
+        <div className="button" onClick={searchHandler}>
           <Button primary font="button_middle" padding="1.9rem 1.5rem 1.9rem 1.4rem">
             <span className="text">검색</span>
             <SearchImg />
           </Button>
-        </Search.Button>
+        </div>
       </Search.Container>
-    </Search.TotalContainer>
+    </>
   );
 };
 

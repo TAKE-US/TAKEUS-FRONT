@@ -1,34 +1,26 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
-import { useDetectOutsideClick } from "../../hooks/useDetectOutsideClick";
-import Arrow_Bottom from "../../assets/img/ic_arrow_bottom_black_24.svg";
+import { useDetectOutsideClick } from '../../hooks/useDetectOutsideClick';
+import { ReactComponent as Arrow } from '../../assets/img/ic_arrow_bottom_black_24.svg';
 
 const Menu = {
   Container: styled.div`
     position: relative;
-    ::before {
-      content: "";
-      display: block;
-      float: left;
-      background-color: ${({ theme }) => theme.color.gray1};
-      width: 0.1rem;
-      height: 3.6rem;
-      position: relative;
-      top: 0.8rem;
-    }
+    width: 100%;
+    height: 100%;
   `,
-
   Button: styled.button`
-    width: 39rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.8rem 2.6rem;
-    border-radius: 10px;
-    border: none;
-    background-color: #ffffff;
-    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    background-color: #FFFFFF;
+
+    &:hover {
+      cursor: pointer;
+    }
 
     .destination {
       display: flex;
@@ -46,8 +38,12 @@ const Menu = {
         color: ${props => (props.currAirport ? "#3D3D3D" : "#C1C1C1")};
       }
     }
-    .arrowImg {
-      transform: ${props => props.isActive && "rotate(180deg)"};
+
+    svg {
+      width: 2.2rem;
+      margin-left: 4.4rem;
+      transform: ${props => props.isActive && 'rotate(-180deg)' };
+      transition: transform .3s;
     }
   `,
 
@@ -65,9 +61,6 @@ const Menu = {
 
   Ul: styled.ul`
     width: 100%;
-    list-style: none;
-    padding: 0;
-    /* margin: 0; */
 
     div {
       margin: 0.8rem;
@@ -92,28 +85,13 @@ const Menu = {
     color: ${props => (props.selected ? "#FDCB02" : "#3D3D3D")};
     display: flex;
     align-items: center;
-    border-radius: 1rem;
+    border-radius: 10px;
     &:hover {
       cursor: pointer;
       background-color: ${({ theme }) => theme.color.bg_yellow};
     }
   `,
 };
-
-// const allAirport = {
-//   "미국": {
-//     "워싱턴 DC": ["델러스 국제공항", "로널드 레이건 워싱턴 국제공항"],
-//     "뉴욕": ["JFK 국제공항", "시러큐스 핸콕 국제공항", "스튜어트 국제공항", "롱아일랜드 아이슬립 맥아더 공항", "라구아디아 공항"],
-//   },
-//   "캐나다": {
-//     "밴쿠버": ["밴쿠버 국제공항"],
-//     "토론토": ["토론토 국제공항"],
-//   },
-//   "독일": {
-//     "프랑크푸르트": ["프랑크푸르트 국제공항"],
-//     "브레멘": ["브레멘 국제공항"],
-//   }
-// };
 
 const DropdownAirport = ({ currCountry, currAirport, setCurrAirport, allAirport, setCurrCity }) => {
   const dropdownRef = useRef(null);
@@ -141,29 +119,31 @@ const DropdownAirport = ({ currCountry, currAirport, setCurrAirport, allAirport,
           <span className="name">공항명</span>
           <span className="text">{currAirport ? currAirport : "도착 공항은 어디인가요?"}</span>
         </div>
-        <img className="arrowImg" src={Arrow_Bottom} alt="" />
+        <Arrow />
       </Menu.Button>
       <Menu.Nav ref={dropdownRef} isActive={isActive}>
         <Menu.Ul>
-          {airport &&
-            Object.keys(airport).map((city, index) => (
-              <div key={index}>
-                <span>{city}</span>
-                {airport[city].map((value, index) => (
-                  <Menu.Li
-                    key={index}
-                    selected={currAirport === value ? true : false}
-                    onClick={() => {
-                      setCurrAirport(value);
-                      setIsActive(!isActive);
-                      setCurrCity(city);
-                    }}
-                  >
-                    {value}
-                  </Menu.Li>
-                ))}
-              </div>
-            ))}
+          {airport && Object.keys(airport).map((city, index) => (
+            <div key={`country-${index}`}>
+              <span>
+                {city}
+              </span>
+              {airport[city].map((value, index) => (
+                <Menu.Li
+                  key={`airport-${index}`}
+                  selected={
+                    currAirport === value ? true : false
+                  }
+                  onClick={() => {
+                    setCurrAirport(value);
+                    setIsActive(!isActive);
+                  }}
+                >
+                  {value}
+                </Menu.Li>
+              ))}
+            </div>
+          ))}
         </Menu.Ul>
       </Menu.Nav>
     </Menu.Container>
