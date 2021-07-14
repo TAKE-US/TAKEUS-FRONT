@@ -1,3 +1,4 @@
+/* eslint-disable arrow-parens */
 import React, { useRef, useState, useEffect } from "react";
 import styled from "styled-components";
 import { CarouselReviewCard } from "components";
@@ -37,17 +38,16 @@ const ContainerWrap = styled.article`
 `;
 
 const CarouselReviewContainer = () => {
-  const [review, setReview] = useState([]);
+  const [reviews, setReview] = useState([]);
   const listRef = useRef(null);
-  const movingValue = 272;
+  const movingValue = 360;
 
   useEffect(() => {
     (async () => {
-      const data = await getReviewsWithTags();
-      data && setReview(data.slice(0, 9));
+      const { 0: data } = await getReviewsWithTags("이동봉사과정", 1);
+      data && setReview(data.slice(0, 6));
     })();
   }, []);
-  console.log(review);
 
   return (
     <ContainerWrap>
@@ -60,9 +60,10 @@ const CarouselReviewContainer = () => {
       </article>
       <article className="container-bottom">
         <div className="container-bottom__cards" ref={listRef}>
-          <CarouselReviewCard />
-          <CarouselReviewCard />
-          <CarouselReviewCard />
+          {reviews.length &&
+            reviews.map((review) => (
+              <CarouselReviewCard key={review._id} review={review} />
+            ))}
         </div>
       </article>
     </ContainerWrap>
