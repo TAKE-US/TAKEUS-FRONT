@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import backgroundImg from 'assets/img/img_before_volunteer.png';
+import { Button } from 'components';
 
 const Styled = {
   Wrapper: styled.section`
@@ -30,7 +31,7 @@ const BeforeVolunteer = () => {
       <p className="desc">해외 이동 봉사, 처음이라 걱정 되신다구요? 걱정하지마세요!<br />
         해외이동봉사 정보와 주의사항, 테이커스가 차근차근 알려드릴게요.
       </p>
-      <button>자세히보기 - 버튼은 컴포넌트!</button>
+      <Button black rounded padding="1.2rem 3rem">자세히보기</Button>
     </Styled.Wrapper>
   );
 };

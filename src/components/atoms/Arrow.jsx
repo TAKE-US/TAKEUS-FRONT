@@ -1,22 +1,33 @@
 import React from 'react';
 import styled from 'styled-components';
-import leftArrow from '../../assets/img/arrow_circle_left.svg';
-import rightArrow from '../../assets/img/arrow_circle_right.svg';
 
 const ArrowWrap = styled.img`
   position: absolute;
-  top: 50%;
+  top: ${props => props.top}%;
+  height: ${props => props.height}%;
   cursor: pointer;
-  left: ${props => props.side === 'prev' && 10}px;
-  right: ${props => props.side === 'next' && 10}px;
+  left: ${props => props.side === 'prev' && 5}%;
+  right: ${props => props.side === 'next' && 5}%;
 `;
 
 
-function Arrow({ handleClickPrev, handleClickNext }) {
+function Arrow({ leftArrow, rightArrow, height, top, handleClickPrev, handleClickNext }) {
   return (
     <>
-      <ArrowWrap src={leftArrow} side="prev" onClick={handleClickPrev} />
-      <ArrowWrap src={rightArrow} side="next" onClick={handleClickNext} />
+      <ArrowWrap
+        height={height}
+        top={top}
+        src={leftArrow}
+        side="prev"
+        onClick={handleClickPrev}
+      />
+      <ArrowWrap
+        height={height}
+        top={top}
+        src={rightArrow}
+        side="next"
+        onClick={handleClickNext}
+      />
     </>
   );
 }

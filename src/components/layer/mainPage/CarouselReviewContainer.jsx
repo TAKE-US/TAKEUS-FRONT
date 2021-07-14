@@ -5,18 +5,12 @@ import rightarrow from "../../../assets/img/btn_round_arrow_right_40.svg";
 import CarouselReviewCard from "../../atoms/CarouselReviewCard";
 
 const ContainerWrap = styled.article`
-  display: flex;
-  flex-direction: column;
-  align-items: space-around;
-  width: 108rem;
   height: 48rem;
   .container-top {
     display: flex;
     justify-content: space-between;
-    width: 108rem;
     height: 6rem;
     &__title {
-      width: 52.3rem;
       font: ${({ theme }) => theme.font.title1};
       &__number {
         display: inline-block;
@@ -37,11 +31,12 @@ const ContainerWrap = styled.article`
       }
     }
   }
+
   .container-bottom {
     display: flex;
-    justify-content: space-between;
-    width: 108rem;
-    height: 10rem;
+    & > * {
+      margin-right: 2.1rem;
+    }
   }
 `;
 
@@ -51,7 +46,7 @@ const CarouselReviewContainer = () => {
       <article className='container-top'>
         <section className='container-top__title'>
           <p className='container-top__title__number'>1622</p>
-          마리의 대상견이 이동 봉사를 기다리고 있습니다.
+          명이 TAKEUS와 함께하고 있습니다.
         </section>
         <div className='container-top__btns'>
           <img

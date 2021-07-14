@@ -6,17 +6,12 @@ import FullDot from '../../assets/img/img_fullDot.svg';
 
 const DotWrap = styled.div`
   position: absolute;
-  top: 30rem;
-  z-index: 10;
-  left: 13rem;
-  right: 0;
-  margin: 0 auto;
+  top: 90%;
 `;
 
 const DotRow = styled.div`
   display: flex;
   flex-direction: row;
-  align-self: center;
   img {
     width: 0.886rem;
     height: 0.886rem;

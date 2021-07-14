@@ -1,28 +1,37 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import GlobalStyle from "./styles/GlobalStyle";
+import styled from "styled-components";
+import store from "redux/store";
+import { setDogs } from "redux/actions";
+
 import { Header, Footer } from "./components/index";
 import {
   LoginPage,
   DogPage,
   InfoPage,
-  AboutPage,
+  AboutUsPage,
   MainPage,
   DogDetailPage,
   DogEnrollPage,
   ReviewPage,
+  ReviewPostPage,
+  MyPage,
 } from "./pages";
-import styled from 'styled-components';
+
+window.store = store;
+window.setDogs = setDogs;
 
 const Styled = {
   ContentWrapper: styled.main`
     max-width: 1080px;
     margin: 0 auto;
-    padding: 0 180px;
+    margin-top: -8.8rem;
   `,
 };
 
 function App() {
+
   return (
     <>
       <GlobalStyle />
@@ -49,16 +58,21 @@ function App() {
               <InfoPage />
             </Route>
             <Route path="/about" exact>
-              <AboutPage />
+              <AboutUsPage />
             </Route>
             <Route path="/review" exact>
               <ReviewPage />
+            </Route>
+            <Route path="/review/post" exact>
+              <ReviewPostPage />
+            </Route>
+            <Route path="/mypage" exact>
+              <MyPage />
             </Route>
           </Switch>
         </Styled.ContentWrapper>
         <Footer />
       </Router>
-
     </>
   );
 }
