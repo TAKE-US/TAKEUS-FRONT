@@ -99,8 +99,7 @@ const Header = () => {
   const hoverImg = useRef();
   const [isScrolling, setIsScrolling] = useState(false);
   const [imgHover, setImgHover] = useState(false);
-  // const isLogin = localStorage.getItem("token");
-  const isLogin = true;
+  const isLogin = localStorage.getItem("token");
 
   const scrollHandler = useCallback(() => {
     if (isLogin || location.pathname !== "/") {
