@@ -61,14 +61,34 @@ const Head = {
     }
   `,
 
-  Login: styled.span`
-    font: ${({ theme }) => theme.font.gnb};
+  Login: styled.div`
     display: flex;
-    align-items: center;
-    white-space: nowrap;
-    &:hover {
-      cursor: pointer;
-      color: ${({ theme }) => theme.color.primary};
+
+    .enrollbutton {
+      font: ${({ theme }) => theme.font.gnb};
+      color: ${({ theme }) => theme.color.white};
+      padding: 0.8rem 1.2rem;
+      background: ${({theme}) => theme.color.darkgray2};
+      white-space: nowrap;
+      margin-right: 2.4rem;
+      border-radius: 0.6rem;
+      border: 0.1rem solid ${({theme}) => theme.color.darkgray2};
+
+      :hover {
+        color: ${({ theme }) => theme.color.darkgray2};
+        background: ${({ theme }) => theme.color.white};
+      }
+    }
+  
+    .login {
+      font: ${({ theme }) => theme.font.gnb};
+      display: flex;
+      align-items: center;
+      white-space: nowrap;
+      &:hover {
+        cursor: pointer;
+        color: ${({ theme }) => theme.color.primary};
+      }
     }
   `,
 };
@@ -79,7 +99,8 @@ const Header = () => {
   const hoverImg = useRef();
   const [isScrolling, setIsScrolling] = useState(false);
   const [imgHover, setImgHover] = useState(false);
-  const isLogin = localStorage.getItem("token");
+  // const isLogin = localStorage.getItem("token");
+  const isLogin = true;
 
   const scrollHandler = useCallback(() => {
     if (isLogin || location.pathname !== "/") {
@@ -155,23 +176,30 @@ const Header = () => {
                 About us
               </Head.Content>
             </div>
-            {isLogin ? (
-              <Head.Login
-                onClick={() => {
-                  history.push("/mypage");
-                }}
-              >
-                내가 작성한 글
-              </Head.Login>
+            <Head.Login>
+              {isLogin ? (
+                <>
+                  <button className="enrollbutton">
+                    대상견 등록
+                  </button>
+                  <span className="login"
+                    onClick={() => {
+                      history.push("/mypage");
+                    }}
+                  >
+                    내가 작성한 글
+                  </span>
+                </>
             ) : (
-              <Head.Login
+              <span className="login"
                 onClick={() => {
                   history.push("/login");
                 }}
               >
                 로그인·회원가입
+              </span>
+              )}
               </Head.Login>
-            )}
           </div>
         </Head.Wrap>
       )}
