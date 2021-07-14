@@ -7,26 +7,19 @@ import Arrow from 'components/atoms/Arrow';
 
 const Styled = {
   Wrapper: styled.div`
-    position: absolute;
-    top: -100%;
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100vw;
-    height: 360%;
+    height: 100vh;
     z-index: 15;
-
-    @media screen and (max-width: 1440px) {
-      left: -90%;
-    }
-
-    @media screen and (min-width: 1441px) and (max-width: 1920px) {
-      left: -105%;
-    }
 
     button {
       position: absolute;
       display: flex;
       flex-direction: row;
       align-items: center;
-      top: 12%;
+      top: 20%;
       left: 70%;
       width: 4.4%;
       height: 1.65%;
@@ -36,10 +29,10 @@ const Styled = {
   `,
 
   ImageWrapper: styled.div`
-    top: 15%;
+    top: 23%;
     right: 0%;
-    width: 100vw;
-    height: 40%;
+    width: 100%;
+    height: 50%;
     display: flex;
     justify-content: center;
     position: absolute;
@@ -80,9 +73,9 @@ function ImageModal({ onClick, img, handleClickPrev, handleClickNext }) {
       <Arrow
         leftArrow={LeftArrow}
         rightArrow={RightArrow}
-        top={30}
+        top={42}
         zIndex={19}
-        height={5}
+        height={6}
         handleClickPrev={handleClickPrev}
         handleClickNext={handleClickNext}
       />
