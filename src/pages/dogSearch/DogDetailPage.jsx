@@ -21,14 +21,16 @@ const DogDetailPage = () => {
     (async () => {
       const data = await getDogDetail(match.params.id);
       setDog(data);
-      console.log(dog);
     })();
   }, [dog, match.params.id]);
 
   return (
-    <Styled.Wrapper>
-      <DogDetail dog={dog} />
-    </Styled.Wrapper>
+    dog &&
+    (
+      <Styled.Wrapper>
+        <DogDetail dog={dog} />
+      </Styled.Wrapper>
+    )
   );
 };
 

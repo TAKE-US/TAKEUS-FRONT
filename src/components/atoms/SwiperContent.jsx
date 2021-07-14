@@ -38,6 +38,7 @@ function SwiperContent({ index, images, handleClickPrev, handleClickNext, onClic
         leftArrow={LeftArrow}
         rightArrow={RightArrow}
         top={50}
+        zIndex={1}
         height={10}
         handleClickPrev={handleClickPrev}
         handleClickNext={handleClickNext}

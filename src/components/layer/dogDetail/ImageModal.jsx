@@ -11,7 +11,7 @@ const Styled = {
     top: -100%;
     width: 100vw;
     height: 360%;
-    z-index: 16;
+    z-index: 15;
 
     @media screen and (max-width: 1440px) {
       left: -90%;
@@ -33,12 +33,29 @@ const Styled = {
       font: ${({ theme }) => theme.font.body2};
       color: white;
     }
+  `,
+
+  ImageWrapper: styled.div`
+    top: 15%;
+    right: 0%;
+    width: 100vw;
+    height: 40%;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    z-index: 15;
+
+    .imageContainer {
+      width: 45%;
+      display: flex;
+      justify-content: center;
+      background-color: black;
+    }
 
     .dogImage {
-      position: absolute;
-      height: 36.1%;
-      left: 30%;
-      top: 15%;
+      display: block;
+      width: auto;
+      height: auto;
     }
   `,
 
@@ -55,11 +72,16 @@ function ImageModal({ onClick, img, handleClickPrev, handleClickNext }) {
     <Styled.Wrapper>
       <Styled.Background />
       <button onClick={onClick}>닫기<CloseIcon /></button>
-      <img className="dogImage" src={img} alt="dog" />
+      <Styled.ImageWrapper>
+        <div className="imageContainer">
+          <img className="dogImage" src={img} alt="dog" />
+        </div>
+      </Styled.ImageWrapper>
       <Arrow
         leftArrow={LeftArrow}
         rightArrow={RightArrow}
         top={30}
+        zIndex={19}
         height={5}
         handleClickPrev={handleClickPrev}
         handleClickNext={handleClickNext}
