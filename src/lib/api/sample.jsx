@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: ""
+  baseURL: "",
 });
 
 export const getDogs = async () => {
@@ -42,11 +42,12 @@ export const getCountry = async () => {
   }
 };
 
-export const getPageDogs = async num => {
+export const getPageDogs = async (num, selectedFilter) => {
   try {
+    const filter = selectedFilter === "최신순" ? "latest" : "oldest";
     const data = await instance.get("/api/dogs", {
       params: {
-        order: "latest",
+        order: filter,
         page: num,
       },
     });

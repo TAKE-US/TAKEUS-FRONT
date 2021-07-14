@@ -1,8 +1,9 @@
 import React, { useEffect, useState, useCallback, useRef } from "react";
 import { useLocation, useHistory } from "react-router";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import styled from "styled-components";
-
+import { connect } from "react-redux";
+import { setDogs } from "redux/actions";
 import { ReactComponent as LogoBlack } from "../../assets/img/ic_logo_wordmark_black_small.svg";
 
 const Head = {
@@ -37,10 +38,10 @@ const Head = {
       padding: 0 9.2rem;
       background-color: ${props => (props.isScrolling ? "#FFFFFF" : "transparent")};
       box-shadow: ${props => props.isScrolling && "0rem 0rem 1.6rem 0.1rem rgba(0, 0, 0, 0.08)"};
-      transition: background-color .6s;
+      transition: background-color 0.6s;
       svg {
         &:hover {
-          fill: #FDCB02;
+          fill: #fdcb02;
           cursor: pointer;
         }
       }
@@ -60,7 +61,7 @@ const Head = {
     align-items: center;
     font: ${({ theme }) => theme.font.gnb};
     color: ${props => props.isSelect && "#FDCB02"};
-    
+
     &:hover {
       cursor: pointer;
       color: ${({ theme }) => theme.color.primary};
@@ -86,23 +87,22 @@ const Head = {
       font: ${({ theme }) => theme.font.gnb};
       color: ${({ theme }) => theme.color.darkgray1};
       white-space: nowrap;
-      
+
       &:hover {
         cursor: pointer;
         color: ${({ theme }) => theme.color.primary};
       }
     }
-    
 
     .enroll {
       font: ${({ theme }) => theme.font.gnb};
       color: ${({ theme }) => theme.color.white};
       padding: 0.8rem 1.2rem;
-      background: ${({theme}) => theme.color.darkgray2};
+      background: ${({ theme }) => theme.color.darkgray2};
       white-space: nowrap;
       margin-right: 2.4rem;
       border-radius: 0.6rem;
-      border: 0.1rem solid ${({theme}) => theme.color.darkgray2};
+      border: 0.1rem solid ${({ theme }) => theme.color.darkgray2};
 
       &:hover {
         color: ${({ theme }) => theme.color.darkgray2};
@@ -112,7 +112,13 @@ const Head = {
   `,
 };
 
-const Header = () => {
+const mapDispatchToProps = dispatch => {
+  return {
+    setDogs: dog => dispatch(setDogs(dog)),
+  };
+};
+
+const Header = ({ setDogs }) => {
   const noticeElement = useRef();
   const location = useLocation();
   const history = useHistory();
@@ -139,21 +145,20 @@ const Header = () => {
     window.addEventListener("scroll", scrollHandler);
   }, [scrollHandler]);
 
+  if (location.pathname === "/login") return "";
 
-  if (location.pathname === '/login') return '';
-  
   return (
     <>
-      {!isLogin &&
+      {!isLogin && (
         <Head.Notice ref={noticeElement}>
-          <Link to="login" >회원가입을 하시면 대상견 등록이 가능합니다:)</Link>
+          <Link to="login">회원가입을 하시면 대상견 등록이 가능합니다:)</Link>
         </Head.Notice>
-      }
-      
+      )}
+
       <Head.Wrap isScrolling={isScrolling} isLogin={isLogin}>
         <div className="inner">
           <Link to="/">
-            <LogoBlack fill={(isScrolling || location.pathname !== "/") ? "#FDCB02" : "#1A1A1A"} />
+            <LogoBlack fill={isScrolling || location.pathname !== "/" ? "#FDCB02" : "#1A1A1A"} />
           </Link>
           <div className="gnb">
             <Head.Content
@@ -168,6 +173,8 @@ const Header = () => {
               isSelect={location.pathname === "/dogSearch"}
               onClick={() => {
                 history.push("/dogSearch");
+                const empty = [];
+                setDogs(empty);
               }}
             >
               대상견 찾기
@@ -191,12 +198,18 @@ const Header = () => {
           </div>
           {isLogin ? (
             <Head.Login>
-              <Link className="enroll" to="/dogEnroll">대상견 등록</Link>
-              <Link className="login" to="/mypage">내가 쓴 글</Link>
+              <Link className="enroll" to="/dogEnroll">
+                대상견 등록
+              </Link>
+              <Link className="login" to="/mypage">
+                내가 쓴 글
+              </Link>
             </Head.Login>
           ) : (
             <Head.Login>
-              <Link className="login" to="/login">로그인·회원가입</Link>
+              <Link className="login" to="/login">
+                로그인·회원가입
+              </Link>
             </Head.Login>
           )}
         </div>
@@ -205,4 +218,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default connect(null, mapDispatchToProps)(Header);
