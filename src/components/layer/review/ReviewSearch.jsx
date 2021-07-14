@@ -68,10 +68,14 @@ const ReviewSearch = () => {
   useEffect(() => {
     (async () => {
       const reviewData = await getReviewsWithTags(activeHashtag, pageNum);
-      setReviews(reviewData[0]);
+      if (selectedFilter === "최신순") {
+        setReviews(reviewData[0]);
+      } else {
+        setReviews([...reviewData[0]].reverse());
+      }
       setTotalPage(reviewData[1]);
     })();
-  }, [activeHashtag, pageNum]);
+  }, [activeHashtag, pageNum, selectedFilter]);
 
   return (
     <Styled.Wrapper>
