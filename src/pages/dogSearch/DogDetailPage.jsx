@@ -23,7 +23,7 @@ const DogDetailPage = () => {
       setDog(data);
       console.log(dog);
     })();
-  }, []);
+  });
 
   return (
     <Styled.Wrapper>
