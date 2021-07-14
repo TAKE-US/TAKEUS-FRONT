@@ -62,13 +62,8 @@ const LoginKakao = ({ handleSuccess }) => {
   };
 
   return (
-    <Styled.Button type="button" color={"#FEE500"}>
-      <img
-        className="kakaotalkIcon"
-        src={KakaotalkIcon}
-        onClick={LoginClickHandler}
-        alt="kakakotalk"
-      />
+    <Styled.Button type="button" color={"#FEE500"} onClick={LoginClickHandler}>
+      <img className="kakaotalkIcon" src={KakaotalkIcon} alt="kakakotalk" />
       카카오톡으로 시작하기
     </Styled.Button>
   );

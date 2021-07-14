@@ -1,5 +1,5 @@
 /* eslint-disable arrow-parens */
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import NaverIcon from "../../assets/img/ic_naver.svg";
 import { withRouter } from "react-router-dom";
@@ -38,35 +38,53 @@ const Styled = {
 };
 
 const LoginNaver = ({ handleSuccess }) => {
-  // const { Kakao } = window;
-  // const LoginClickHandler = () => {
-  //   try {
-  //     return new Promise((resolve, reject) => {
-  //       if (!Kakao) {
-  //         reject("There is No instance");
-  //       }
-  //       Kakao.Auth.login({
-  //         success: (res) => {
-  //           console.log("token", res);
-  //           handleSuccess(res.access_token, "kakao");
-  //           // history.push("/");
-  //         },
-  //         fail: (err) => {
-  //           console.error(err);
-  //         },
-  //       });
-  //     });
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // };
+  const { naver } = window;
+  const Makelogin = () => {
+    Naver();
+    UserProfile();
+  };
+
+  useEffect(Makelogin, []);
+
+  const Naver = () => {
+    const naverLogin = new naver.LoginWithNaverId({
+      clientId: "6R8wLk9Dd9xVp9RDilRh",
+      callbackUrl: "http://localhost:3000/",
+      isPopup: true,
+      loginButton: { color: "green", type: 1, height: 30 },
+      callbackHandle: true,
+    });
+    naverLogin.init();
+  };
+
+  const UserProfile = () => {
+    window.location.href.includes("access_token") && GetUser();
+    function GetUser() {
+      const location = window.location.href.split("=")[1];
+      const token = location.split("&")[0];
+      console.log("token :", token);
+      //   fetch(`${API}/account/sign-in`, {
+      //     method: "GET",
+      //     headers: {
+      //       "Content-type": "application/json",
+      //       Authorization: token,
+      //     },
+      //   })
+      //     .then((res) => res.json())
+      //     .then((res) => {
+      //       localStorage.setItem("access_token", res.token);
+      //     })
+      //     .catch((err) => console.log("err : ", err));
+      // }
+    }
+  };
 
   return (
     <Styled.Button type="button" color={"#1EC800"}>
       <img
         className="NaverIcon"
         src={NaverIcon}
-        // onClick={LoginClickHandler}
+        onClick={Makelogin}
         alt="Naver"
       />
       네이버로 시작하기
