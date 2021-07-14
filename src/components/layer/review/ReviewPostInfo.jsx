@@ -32,7 +32,7 @@ const ReviewInfoStyle = styled.section`
 const ReviewPostInfo = () => {
   const [enrollData, setEnrollData] = useEnrollData({});
   const [hashtags, setHashtags] = useState([
-    { tag: "이동봉사과정", active: true },
+    { tag: "이동봉사과정", active: false },
     { tag: "도착공항정보", active: false },
     { tag: "보호단체관련", active: false },
     { tag: "이동봉사준비", active: false },
@@ -41,11 +41,23 @@ const ReviewPostInfo = () => {
     { tag: "입국심사", active: false },
     { tag: "대상견케어", active: false },
   ]);
+  const [selectedHashtags, setSelectedHashtags] = useState([]);
 
   const toggleHashtag = idx => {
     setHashtags(
       [...hashtags].map((hashtag, i) => (i !== idx ? hashtag : Object.assign(hashtag, { active: !hashtag.active })))
     );
+  };
+
+  const addHashtag = hashtag => {
+    if (hashtag.active) {
+      selectedHashtags.push(hashtag.tag);
+      setSelectedHashtags(selectedHashtags);
+    } else {
+      selectedHashtags.splice(selectedHashtags.indexOf(hashtag.tag), 1);
+      setSelectedHashtags(selectedHashtags);
+    }
+    setEnrollData("hashtags", selectedHashtags);
   };
 
   return (
@@ -70,8 +82,15 @@ const ReviewPostInfo = () => {
         <label>해시 태그</label>
         <div className="wrap--flex">
           {hashtags.map((hashtag, i) => (
-            <div className="hashtag" onClick={() => toggleHashtag(i)} key={`hashtag-${i}`}>
-              <Hashtag tag={hashtag.tag} primary={hashtag.active} rounded setEnrollData={setEnrollData} />
+            <div
+              className="hashtag"
+              onClick={() => {
+                toggleHashtag(i);
+                addHashtag(hashtag);
+              }}
+              key={`hashtag-${i}`}
+            >
+              <Hashtag tag={hashtag.tag} primary={hashtag.active} rounded />
             </div>
           ))}
         </div>
