@@ -38,7 +38,7 @@ const Search = {
   `,
 };
 
-const Searchbar = ({ setDogs, enroll }) => {
+const Searchbar = ({ setDogs, enroll, setEnrollData }) => {
   const [currCountry, setCurrCountry] = useState("");
   const [currAirport, setCurrAirport] = useState("");
   const [currCity, setCurrCity] = useState("");
@@ -73,6 +73,10 @@ const Searchbar = ({ setDogs, enroll }) => {
       }
     }
   };
+  useEffect(() => {
+    setEnrollData("endingCountry", currCountry);
+    setEnrollData("endingAirport", currAirport);
+  }, [currCountry, currAirport, setEnrollData]);
 
   return (
     <>
