@@ -60,13 +60,19 @@ const ReviewSearch = () => {
   const [pageNum, setPageNum] = useState(1);
   const [totalPage, setTotalPage] = useState(0);
   const [activeHashtag, setActiveHashtag] = useState("");
-
-  const toggleHashtag = tagName => {
-    activeHashtag === tagName ? setActiveHashtag("") : setActiveHashtag(tagName);
-  };
+  const [hashtags, setHashtags] = useState([
+    { tag: '이동봉사과정', active: false },
+    { tag: '도착공항정보', active: false },
+    { tag: '보호단체관련', active: false },
+    { tag: '이동봉사준비', active: false },
+    { tag: '봉사국가', active: false },
+    { tag: '주의사항', active: false },
+    { tag: '입국심사', active: false }, 
+    { tag: '대상견케어', active: false }
+  ]);
 
   useEffect(() => {
-    (async () => {
+     (async () => {
       const reviewData = await getReviewsWithTags(activeHashtag, pageNum);
       if (selectedFilter === "최신순") {
         setReviews(reviewData[0]);
@@ -75,7 +81,23 @@ const ReviewSearch = () => {
       }
       setTotalPage(reviewData[1]);
     })();
-  }, [activeHashtag, pageNum, selectedFilter]);
+  }, [activeHashtag, pageNum, selectedFilter, hashtags]);
+
+  const toggleHashtag = tagName => {
+    setHashtags(
+      hashtags.map(hashtag => (
+        hashtag.tag === "이동봉사과정" ? console.log(hashtag.active) : console.log("??") ,
+        hashtag.tag === tagName && activeHashtag !== tagName
+          ? Object.assign(hashtag, { active: true })
+          : Object.assign(hashtag, { active: false })
+      ))
+    );
+
+    let newActiveHashtag = hashtags.filter(hashtag => hashtag.active);
+    newActiveHashtag.length !== 0 
+      ? setActiveHashtag(newActiveHashtag[0].tag)
+      : setActiveHashtag('');
+  };
 
   return (
     <Styled.Wrapper>
@@ -93,9 +115,13 @@ const ReviewSearch = () => {
       </Styled.Search>
       <Styled.Option>
         <section className="tags">
-          {tags.map(tag => (
-            <div className="hashtag" key={tag} onClick={() => toggleHashtag(tag)}>
-              <Hashtag tag={tag} />
+          {hashtags.map((hashtag, i) => (
+            <div className="hashtag" key={i} onClick={() => toggleHashtag(hashtag.tag)}>
+              <Hashtag
+                tag={hashtag.tag}
+                primary={hashtag.active} 
+                isActiveHashtag={activeHashtag.tag === hashtag.tag}
+              />
             </div>
           ))}
         </section>
@@ -106,17 +132,5 @@ const ReviewSearch = () => {
     </Styled.Wrapper>
   );
 };
-
-const tags = [
-  "이동봉사과정",
-  "도착공항정보",
-  "보호단체관련",
-  "이동봉사준비",
-  "봉사국가",
-  "주의사항",
-  "입국심사",
-  "대상견케어",
-  "기타정보",
-];
 
 export default ReviewSearch;
