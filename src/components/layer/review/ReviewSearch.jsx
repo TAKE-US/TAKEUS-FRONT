@@ -2,10 +2,16 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import styled from "styled-components";
 
-import { Searchbar, Filter, PaginationNav, ReviewCardContainer, Hashtag } from "components";
+import {
+  ReviewSearchbar,
+  Filter,
+  PaginationNav,
+  ReviewCardContainer,
+  Hashtag,
+} from "components";
 import { ReactComponent as RegisterBtn } from "assets/img/btn_register.svg";
 //api
-import { getReviewsWithTags } from "lib/api/sample";
+import { getReviewsWithTags, getReviewsSearch } from "lib/api/sample";
 
 const Styled = {
   Wrapper: styled.div`
@@ -24,7 +30,11 @@ const Styled = {
     margin-left: calc(-50vw + 50%);
     padding-top: 6rem;
     padding-bottom: 3rem;
-    background: linear-gradient(92.22deg, rgba(255, 239, 175, 0.31) 28%, rgba(255, 239, 175, 0.17) 73.01%);
+    background: linear-gradient(
+      92.22deg,
+      rgba(255, 239, 175, 0.31) 28%,
+      rgba(255, 239, 175, 0.17) 73.01%
+    );
 
     .header {
       text-align: center;
@@ -60,22 +70,36 @@ const ReviewSearch = () => {
   const [pageNum, setPageNum] = useState(1);
   const [totalPage, setTotalPage] = useState(0);
   const [activeHashtag, setActiveHashtag] = useState("");
+  const [searchState, setSearchState] = useState("");
 
   const toggleHashtag = tagName => {
-    activeHashtag === tagName ? setActiveHashtag("") : setActiveHashtag(tagName);
+    activeHashtag === tagName
+      ? setActiveHashtag("")
+      : setActiveHashtag(tagName);
   };
 
   useEffect(() => {
     (async () => {
-      const reviewData = await getReviewsWithTags(activeHashtag, pageNum);
-      if (selectedFilter === "최신순") {
-        setReviews(reviewData[0]);
+      if (searchState) {
+        const searchData = await getReviewsSearch(
+          activeHashtag,
+          pageNum,
+          selectedFilter,
+          searchState
+        );
+        setReviews(searchData.data);
+        setTotalPage(searchData.totalNum);
       } else {
-        setReviews([...reviewData[0]].reverse());
+        const reviewData = await getReviewsWithTags(
+          activeHashtag,
+          pageNum,
+          selectedFilter
+        );
+        setReviews(reviewData.data);
+        setTotalPage(reviewData.totalNum);
       }
-      setTotalPage(reviewData[1]);
     })();
-  }, [activeHashtag, pageNum, selectedFilter]);
+  }, [activeHashtag, pageNum, selectedFilter, searchState]);
 
   return (
     <Styled.Wrapper>
@@ -85,7 +109,7 @@ const ReviewSearch = () => {
           봉사자들의 생생한 <span>이동 봉사 후기</span>를 만나보세요
         </h1>
         <div className="search">
-          <Searchbar />
+          <ReviewSearchbar setSearchState={setSearchState} />
           <button className="button">
             <RegisterBtn onClick={() => history.push("/review/post")} />
           </button>
@@ -94,15 +118,28 @@ const ReviewSearch = () => {
       <Styled.Option>
         <section className="tags">
           {tags.map(tag => (
-            <div className="hashtag" key={tag} onClick={() => toggleHashtag(tag)}>
+            <div
+              className="hashtag"
+              key={tag}
+              onClick={() => toggleHashtag(tag)}
+            >
               <Hashtag tag={tag} />
             </div>
           ))}
         </section>
-        <Filter contents={contents} setSelectedFilter={setSelectedFilter} selectedFilter={selectedFilter} />
+        <Filter
+          contents={contents}
+          setSelectedFilter={setSelectedFilter}
+          selectedFilter={selectedFilter}
+        />
       </Styled.Option>
       <ReviewCardContainer reviews={reviews} />
-      <PaginationNav totalPage={totalPage} pageNum={pageNum} setPageNum={setPageNum} review />
+      <PaginationNav
+        totalPage={totalPage}
+        pageNum={pageNum}
+        setPageNum={setPageNum}
+        review
+      />
     </Styled.Wrapper>
   );
 };

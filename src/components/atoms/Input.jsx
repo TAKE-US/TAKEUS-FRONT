@@ -35,8 +35,7 @@ const Styled = {
   Input: styled.input`
     flex: 1;
     padding: 0.8rem 0 0.8rem 1rem;
-    font: ${({ theme, fontStyle }) =>
-      fontStyle ? theme.font[fontStyle] : theme.font.button};
+    font: ${({ theme, fontStyle }) => (fontStyle ? theme.font[fontStyle] : theme.font.button)};
     color: ${({ theme }) => theme.color.darkgray1};
     line-height: 2.6rem;
     &::placeholder {
@@ -61,6 +60,7 @@ const isValidLength = (text, maxLength) => {
 
   return text.length > maxLength ? false : true;
 };
+
 
 const Input = ({
   children,
@@ -91,7 +91,8 @@ const Input = ({
   useEffect(() => {
     if (isValid) setError(false);
     else setError(true);
-  }, [isValid]);
+    if (initial) setValue(initial);
+  }, [isValid, initial]);
 
   const changeValue = (evt) => {
     const newValue = evt.target.value;

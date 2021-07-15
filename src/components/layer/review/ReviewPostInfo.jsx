@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import { useRouteMatch } from "react-router";
 
 import { Input, Button, Hashtag, RadioButton, TextField, EnrollSearchbar } from "components";
 import useEnrollData from "hooks/useEnrollData";
-import { postReview } from "lib/api/sample";
+import { postReview, getReviewDetail, putReview } from "lib/api/sample";
 
 const ReviewInfoStyle = styled.section`
   .wrap {
@@ -30,7 +31,7 @@ const ReviewInfoStyle = styled.section`
   }
 `;
 
-const ReviewPostInfo = () => {
+const ReviewPostInfo = ({ edit }) => {
   const [enrollData, setEnrollData] = useEnrollData({});
   const [hashtags, setHashtags] = useState([
     { tag: "이동봉사과정", active: false },
@@ -42,13 +43,25 @@ const ReviewPostInfo = () => {
     { tag: "입국심사", active: false },
     { tag: "대상견케어", active: false },
   ]);
+  const [initial, setInitial] = useState();
   const [selectedHashtags, setSelectedHashtags] = useState([]);
+  const match = useRouteMatch();
 
   const toggleHashtag = idx => {
     setHashtags(
       [...hashtags].map((hashtag, i) => (i !== idx ? hashtag : Object.assign(hashtag, { active: !hashtag.active })))
     );
   };
+
+  useEffect(() => {
+    if (match.params.id) {
+      (async () => {
+        const data = await getReviewDetail(match.params.id);
+        console.log(data);
+        setInitial(data);
+      })();
+    }
+  }, [match.params.id]);
 
   const addHashtag = hashtag => {
     if (hashtag.active) {
@@ -71,6 +84,7 @@ const ReviewPostInfo = () => {
           maxLength={30}
           setEnrollData={setEnrollData}
           name="title"
+          initial={initial?.title}
         />
       </div>
 
@@ -115,6 +129,7 @@ const ReviewPostInfo = () => {
             maxLength={15}
             setEnrollData={setEnrollData}
             name="institutionName"
+            initial={initial?.institutionName}
           />
         </div>
       </div>
@@ -125,9 +140,19 @@ const ReviewPostInfo = () => {
           placeholder="블로그나 카페 혹은 페이스북 링크 등 후기 글의 링크를 ctrl+c, ctrl+v 하여 붙여넣기 해주세요 :)"
           setEnrollData={setEnrollData}
           name="content"
+          initial={initial?.content}
         />
       </div>
-      <div className="wrap" onClick={() => postReview(enrollData)}>
+      <div
+        className="wrap"
+        onClick={() => {
+          if (initial) {
+            putReview(match.params.id, enrollData);
+          } else {
+            postReview(enrollData);
+          }
+        }}
+      >
         <Button full rounded padding="15px 0" font="headline">
           후기 등록하기
         </Button>

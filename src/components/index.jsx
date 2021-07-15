@@ -20,13 +20,15 @@ export { default as DropdownAirport } from "./atoms/DropdownAirport";
 export { default as Dropdown } from "./atoms/Dropdown";
 export { default as PaginationNav } from "./atoms/PaginationNav";
 export { default as LoginKakao } from "./atoms/LoginKakao";
+export { default as Modal } from "./atoms/Modal";
 export { default as CarouselReviewCard } from "./atoms/CarouselReviewCard";
 export { default as Carousel } from "./atoms/Carousel";
+export { default as ReviewSearchbar } from "./atoms/ReviewSearchbar";
 
 // layer
 export { default as Header } from "./layer/Header";
 export { default as Footer } from "./layer/Footer";
-export { default as LoginLayer } from "./layer/login/LoginLayer";
+export { default as Empty } from "./layer/Empty";
 
 // layer/mainPage
 export { default as AboutTakeUs } from "./layer/mainPage/AboutTakeUs";
@@ -52,6 +54,8 @@ export { default as DogSearchNavigation } from "./layer/dogSearch/DogSearchNavig
 export { default as DogCardContainer } from "./layer/dogSearch/DogCardContainer";
 // layer/dogDetail
 export { default as DogDetail } from "./layer/dogDetail/DogDetail";
+export { default as DeleteModal } from "./layer/dogDetail/DeleteModal";
+export { default as ReportModal } from "./layer/dogDetail/ReportModal";
 
 // layer/info
 export { default as InfoHeader } from "./layer/info/InfoHeader";
@@ -63,8 +67,10 @@ export { default as ReviewPostInfo } from "./layer/review/ReviewPostInfo";
 export { default as ReviewPrecaution } from "./layer/review/ReviewPrecaution";
 export { default as ReviewSearch } from "./layer/review/ReviewSearch";
 export { default as ReviewCardContainer } from "./layer/review/ReviewCardContainer";
+export { default as ReviewDeleteModal } from "./layer/review/ReviewDeleteModal";
 
 // layer/login
+export { default as LoginLayer } from "./layer/login/LoginLayer";
 
 // layer/mypage
 export { default as MypageHeader } from "./layer/mypage/MypageHeader";
