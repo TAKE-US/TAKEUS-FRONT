@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import React, { useState } from "react";
+import { useHistory } from "react-router";
+import styled from "styled-components";
 
-import { Modal } from 'components';
+import { Modal } from "components";
 import { ReactComponent as ReportIcon } from "assets/img/ic_report_24.svg";
 import { ReactComponent as ReportModalIcon } from "assets/img/img_report.svg";
 
@@ -25,7 +26,7 @@ const Styled = {
       }
 
       :hover {
-        background: ${({theme}) => theme.color.lightgray1};
+        background: ${({ theme }) => theme.color.lightgray1};
       }
     }
   `,
@@ -58,14 +59,14 @@ const Styled = {
       display: flex;
       justify-content: space-between;
       margin-top: 4.2rem;
-      
+
       .cancelbtn {
         font: ${({ theme }) => theme.font.button};
-        color: ${({theme}) => theme.color.gray1};
+        color: ${({ theme }) => theme.color.gray1};
       }
       .reportbtn {
         font: ${({ theme }) => theme.font.button};
-        color: ${({theme}) => theme.color.error_red};
+        color: ${({ theme }) => theme.color.error_red};
       }
     }
   `,
@@ -73,6 +74,7 @@ const Styled = {
 
 const ReportModal = () => {
   const [modalOpen, setModalOpen] = useState(false);
+  const history = useHistory();
 
   const openModal = () => {
     setModalOpen(true);
@@ -80,6 +82,11 @@ const ReportModal = () => {
 
   const closeModal = () => {
     setModalOpen(false);
+  };
+
+  const reportClick = () => {
+    closeModal();
+    history.goBack();
   };
 
   return (
@@ -94,13 +101,18 @@ const ReportModal = () => {
           <div className="text">
             <h1>정말 삭제하시겠어요?</h1>
             <p>
-              허위 내용 및 광고성 게시글은 신고가 가능합니다.<br />
+              허위 내용 및 광고성 게시글은 신고가 가능합니다.
+              <br />
               해당 게시물은 관리자의 검토 후 필요에 따라 삭제처리됩니다.
             </p>
           </div>
           <div className="button">
-            <button className="cancelbtn" onClick={closeModal}>취소</button>
-            <button className="reportbtn">신고</button>
+            <button className="cancelbtn" onClick={closeModal}>
+              취소
+            </button>
+            <button className="reportbtn" onClick={reportClick}>
+              신고
+            </button>
           </div>
         </Styled.Content>
       </Modal>
