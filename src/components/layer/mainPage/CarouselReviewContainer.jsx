@@ -44,8 +44,8 @@ const CarouselReviewContainer = () => {
 
   useEffect(() => {
     (async () => {
-      const { 0: data } = await getReviewsWithTags("이동봉사과정", 1);
-      data && setReview(data.slice(0, 6));
+      const data = await getReviewsWithTags("이동봉사과정", 1);
+      data.data && setReview(data.data.slice(0, 6));
     })();
   }, []);
 
@@ -60,10 +60,7 @@ const CarouselReviewContainer = () => {
       </article>
       <article className="container-bottom">
         <div className="container-bottom__cards" ref={listRef}>
-          {reviews.length &&
-            reviews.map((review) => (
-              <CarouselReviewCard key={review._id} review={review} />
-            ))}
+          {reviews.length && reviews.map(review => <CarouselReviewCard key={review._id} review={review} />)}
         </div>
       </article>
     </ContainerWrap>

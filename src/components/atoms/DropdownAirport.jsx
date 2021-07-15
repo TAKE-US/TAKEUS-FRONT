@@ -106,7 +106,7 @@ const Menu = {
   `,
 };
 
-const DropdownAirport = ({ currCountry, currAirport, setCurrAirport, allAirport, setCurrCity, enroll }) => {
+const DropdownAirport = ({ currCountry, currAirport, setCurrAirport, allAirport, enroll }) => {
   const dropdownRef = useRef(null);
   const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
   const [airport, setAirport] = useState("");
@@ -149,7 +149,6 @@ const DropdownAirport = ({ currCountry, currAirport, setCurrAirport, allAirport,
                     onClick={() => {
                       setCurrAirport(value);
                       setIsActive(!isActive);
-                      setCurrCity(city);
                     }}
                   >
                     {value}

@@ -73,6 +73,7 @@ const Input = ({
   name,
   createdContact,
   setCreatedContact,
+  initial,
 }) => {
   const [value, setValue] = useState("");
   const [isError, setError] = useState(false);
@@ -91,9 +92,10 @@ const Input = ({
   useEffect(() => {
     if (isValid) setError(false);
     else setError(true);
-  }, [isValid]);
+    if (initial) setValue(initial);
+  }, [isValid, initial]);
 
-  const changeValue = (evt) => {
+  const changeValue = evt => {
     const newValue = evt.target.value;
 
     if (isValid) setValue(newValue);

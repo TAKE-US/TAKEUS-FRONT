@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router";
-import { ReactComponent as DeleteIcon } from "assets/img/ic_delete.svg";
-import { ReactComponent as EditIcon } from "assets/img/ic_edit.svg";
 
-import { Swiper, DogDetailInfo, CopyLinkButton } from "../..";
+import { ReactComponent as EditIcon } from "assets/img/ic_edit.svg";
+import {
+  Swiper,
+  DogDetailInfo,
+  CopyLinkButton,
+  DeleteModal,
+  ReportModal,
+} from "components";
 
 const DogDetailWrap = styled.div`
   display: flex;
@@ -58,7 +63,6 @@ const DogDetailWrap = styled.div`
       display: flex;
       flex-direction: row;
 
-      .delete,
       .edit {
         display: flex;
         flex-direction: row;
@@ -71,6 +75,10 @@ const DogDetailWrap = styled.div`
         box-sizing: border-box;
         border-radius: 0.8rem;
         font: ${({ theme }) => theme.font.button_middle};
+
+        :hover {
+          background: ${({ theme }) => theme.color.lightgray1};
+        }
 
         div {
           width: 3rem;
@@ -113,6 +121,14 @@ const DogDetailWrap = styled.div`
 
 const DogDetail = ({ dog }) => {
   const history = useHistory();
+  const [myPost, setMyPost] = useState(false);
+  const isLogin = localStorage.getItem("token");
+  const myId = localStorage.getItem("ID");
+
+  useEffect(() => {
+    if (myId === dog.user) setMyPost(true);
+  }, [dog.user, myId]);
+
   return (
     <DogDetailWrap>
       <button className="goBack" type="button" onClick={history.goBack}>
@@ -124,16 +140,20 @@ const DogDetail = ({ dog }) => {
           <h1>{dog.name}</h1>
           <h2>단체 | {dog.institutionName}</h2>
         </div>
-        <div className="dog--post">
-          <button className="edit">
-            <EditIcon width="20" height="20" />
-            <div>수정</div>
-          </button>
-          <button className="delete">
-            <DeleteIcon width="20" height="20" />
-            <div>삭제</div>
-          </button>
-        </div>
+        {isLogin &&
+          (myPost ? (
+            <div className="dog--post">
+              <button className="edit">
+                <EditIcon width="20" height="20" />
+                <div>수정</div>
+              </button>
+              <DeleteModal id={dog._id} />
+            </div>
+          ) : (
+            <div className="dog--post">
+              <ReportModal />
+            </div>
+          ))}
       </header>
       <section className="dog--images">
         <div className="swiperAndLink">

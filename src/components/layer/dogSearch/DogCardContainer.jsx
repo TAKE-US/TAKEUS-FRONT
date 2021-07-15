@@ -22,8 +22,8 @@ const DogCardContainer = ({ dogs }) => {
   return (
     <Wrapper>
       <Container>
-        {dogs?.map(dog => (
-          <DogCard key={dog.id} id={dog.id} dog={dog} />
+        {dogs?.map((dog, idx) => (
+          <DogCard key={idx} id={dog.id} dog={dog} />
         ))}
       </Container>
     </Wrapper>
