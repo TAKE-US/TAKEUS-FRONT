@@ -1,3 +1,4 @@
+/* eslint-disable arrow-parens */
 import axios from "axios";
 
 const instance = axios.create({
@@ -59,7 +60,7 @@ export const getPageDogs = async (num, selectedFilter) => {
   }
 };
 
-export const getDogDetail = async id => {
+export const getDogDetail = async (id) => {
   try {
     const data = await instance.get(`/api/dogs/detail/${id}`, {
       headers: {
@@ -75,7 +76,7 @@ export const getDogDetail = async id => {
   }
 };
 
-export const getReviews = async num => {
+export const getReviews = async (num) => {
   try {
     const data = await instance.get("/api/reviews", {
       params: {
@@ -91,7 +92,7 @@ export const getReviews = async num => {
   }
 };
 
-export const getSearchDogs = async location => {
+export const getSearchDogs = async (location) => {
   try {
     const data = await instance.get(`/api/dogs/search/${location}`, {
       params: {
@@ -107,7 +108,7 @@ export const getSearchDogs = async location => {
   }
 };
 
-export const getMyDogs = async num => {
+export const getMyDogs = async (num) => {
   try {
     const data = await instance.get("/api/dogs/my", {
       headers: {
@@ -123,7 +124,7 @@ export const getMyDogs = async num => {
   }
 };
 
-export const getMyReviews = async num => {
+export const getMyReviews = async (num) => {
   try {
     const data = await instance.get("/api/reviews/list/my", {
       headers: {
@@ -176,7 +177,7 @@ export const postToken = async (token, social) => {
   }
 };
 
-export const postReview = async data => {
+export const postReview = async (data) => {
   const body = data;
   try {
     const data = await instance.post("/api/reviews", body, {
@@ -190,6 +191,24 @@ export const postReview = async data => {
     return data;
   } catch (e) {
     console.log("[FAIL] POST reviews");
+    return e;
+  }
+};
+
+export const postEnroll = async (data) => {
+  const body = data;
+  try {
+    const data = await instance.post("/api/dogs", body, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        "x-auth-token": localStorage.getItem("token"),
+      },
+    });
+    console.log(data);
+    console.log("[SUCCESS] POST dogEnroll");
+    return data;
+  } catch (e) {
+    console.log("[FAIL] POST dogEnroll");
     return e;
   }
 };

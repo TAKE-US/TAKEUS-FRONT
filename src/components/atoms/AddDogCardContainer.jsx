@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable arrow-parens */
 import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
@@ -54,8 +55,6 @@ const AddDogCardContainer = ({ setEnrollData, name }) => {
       photoArray.filter((photo) => photo.id !== parseInt(deletedKey, 10))
     );
   }
-
-  console.log(photo);
 
   useEffect(() => {
     setEnrollData(name, photoFile);

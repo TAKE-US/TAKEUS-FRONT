@@ -1,4 +1,5 @@
 /* eslint-disable arrow-parens */
+
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import {
@@ -11,7 +12,6 @@ import {
   EnrollSearchbar,
   Dropdown,
 } from "components";
-// import { DogEnrollInput } from 'components';
 import { ReactComponent as Kakao } from "assets/icon/ic_kakao_24.svg";
 import { ReactComponent as Call } from "assets/icon/ic_call_24.svg";
 import { ReactComponent as Instagram } from "assets/icon/ic_instar_24.svg";
@@ -19,7 +19,7 @@ import { ReactComponent as Twitter } from "assets/icon/ic_twitter_24.svg";
 import { ReactComponent as Facebook } from "assets/icon/ic_facebook_24.svg";
 import { ReactComponent as Plus } from "assets/icon/ic_plus_24.svg";
 import useEnrollData from "hooks/useEnrollData";
-// import useInput from "hooks/useInput";
+import { postEnroll } from "lib/api/sample";
 
 //todo
 //* 1. useEnrollData 사용해서 Radio, Input 에 적용
@@ -141,7 +141,6 @@ const EnrollInfo = () => {
     }
   }, [createdContact]);
 
-  console.log(enrollData);
   return (
     <EnrollInfoWrap>
       <AddDogLayer setEnrollData={setEnrollData} name="photos" />
@@ -271,9 +270,11 @@ const EnrollInfo = () => {
         />
       </div>
       <div className="wrap">
-        <Button rounded full font="headline" padding="1.5rem">
-          대상견 등록하기
-        </Button>
+        <div className="wrap__button" onClick={() => postEnroll(enrollData)}>
+          <Button rounded full font="headline" padding="1.5rem">
+            대상견 등록하기
+          </Button>
+        </div>
       </div>
     </EnrollInfoWrap>
   );
