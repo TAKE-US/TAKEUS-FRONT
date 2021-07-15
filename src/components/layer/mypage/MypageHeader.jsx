@@ -112,7 +112,11 @@ const MypageHeader = () => {
       </Styled.Header>
       <Styled.Content>
         <Filter contents={contents} selectedFilter={selectedFilter} setSelectedFilter={setSelectedFilter} />
-        {tabs[0].select ? <DogCardContainer dogs={dogs} /> : <ReviewCardContainer reviews={reviews} />}
+        {tabs[0].select ? (
+          <DogCardContainer dogs={dogs} />
+        ) : (
+          <ReviewCardContainer reviews={reviews} setReviews={setReviews} />
+        )}
         {tabs[0].select ? (
           <PaginationNav pageNum={dogsPage} setPageNum={setDogsPage} totalPage={dogsTotalPage} />
         ) : (
