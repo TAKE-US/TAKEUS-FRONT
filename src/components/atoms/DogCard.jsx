@@ -93,7 +93,7 @@ const DogStateTag = styled.div`
   align-items: center;
   min-width: 4.8rem;
   font: ${({ theme }) => theme.font.body1};
-  background-color: ${props => (props.done ? "rgab(253,203,2,0.2)" : "rgba(115, 172, 255, 0.2)")};
+  background-color: ${props => (props.done ? "rgba(253,203,2,0.2)" : "rgba(115, 172, 255, 0.2)")};
   border-radius: 3.5rem;
   padding: 0 1.1rem;
   p {
