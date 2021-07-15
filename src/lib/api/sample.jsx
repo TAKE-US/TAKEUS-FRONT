@@ -222,6 +222,23 @@ export const postReview = async data => {
   }
 };
 
+export const deleteReview = async id => {
+  try {
+    const res = await instance.delete(`/api/reviews/detail/${id}`, {
+      headers: {
+        "Content-Type": "application/json",
+        "x-auth-token": localStorage.getItem("token"),
+      },
+    });
+    console.log(res);
+    console.log("[SUCCESS] DELETE review");
+    return res;
+  } catch (e) {
+    console.log("[FAIL] DELETE review");
+    return e;
+  }
+};
+
 export const deleteDog = async id => {
   try {
     const data = await axios.delete(`/api/dogs/detail/${id}`, {

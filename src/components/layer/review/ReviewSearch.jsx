@@ -104,7 +104,7 @@ const ReviewSearch = () => {
         </section>
         <Filter contents={contents} setSelectedFilter={setSelectedFilter} selectedFilter={selectedFilter} />
       </Styled.Option>
-      <ReviewCardContainer reviews={reviews} />
+      <ReviewCardContainer reviews={reviews} setReviews={setReviews} />
       <PaginationNav totalPage={totalPage} pageNum={pageNum} setPageNum={setPageNum} review />
     </Styled.Wrapper>
   );

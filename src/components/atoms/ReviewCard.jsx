@@ -2,8 +2,6 @@ import React from "react";
 import styled from "styled-components";
 //components
 import { Hashtag } from "components";
-//img
-// import dogImage from "assets/img/ReviewCard_sample.png";
 
 const Styled = {
   Wrapper: styled.div`
@@ -64,7 +62,7 @@ const Styled = {
   `,
 };
 
-const ReviewCard = ({ review }) => {
+const ReviewCard = ({ review, editHandler, deleteHandler }) => {
   return (
     <Styled.Wrapper onClick={() => window.open(review.crawlingData[0].link)}>
       <section className="text">
@@ -84,8 +82,10 @@ const ReviewCard = ({ review }) => {
             작성일ㅣ{review.writeDate} &nbsp;&nbsp;지역ㅣ시카고 &nbsp;&nbsp;봉사단체ㅣ{review.institutionName}
           </p>
           <div className="button-wrap">
-            <button className="button-wrap__edit">수정</button>
-            <button>삭제</button>
+            <button className="button-wrap__edit" onClick={evt => editHandler(evt)}>
+              수정
+            </button>
+            <button onClick={evt => deleteHandler(evt, review._id)}>삭제</button>
           </div>
         </section>
       </section>
