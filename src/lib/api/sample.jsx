@@ -1,3 +1,4 @@
+/* eslint-disable arrow-parens */
 import axios from "axios";
 
 const instance = axios.create({
@@ -182,15 +183,23 @@ export const getReviewsWithTags = async (hashtag, num, selectedFilter) => {
   }
 };
 
-export const getReviewsSearch = async (hashtag, num, selectedFilter, search) => {
+export const getReviewsSearch = async (
+  hashtag,
+  num,
+  selectedFilter,
+  search
+) => {
   try {
     const filter = selectedFilter === "최신순" ? "latest" : "oldest";
-    const data = await instance.get(`/api/reviews/${search}?hashtags=${hashtag}`, {
-      params: {
-        order: filter,
-        page: num,
-      },
-    });
+    const data = await instance.get(
+      `/api/reviews/${search}?hashtags=${hashtag}`,
+      {
+        params: {
+          order: filter,
+          page: num,
+        },
+      }
+    );
     console.log("[SUCCESS] GET review search data");
     return data.data;
   } catch (e) {
@@ -276,6 +285,24 @@ export const putReview = async (id, data) => {
     const data = await instance.put(`/api/reviews/detail/${id}`, body, {
       headers: {
         "Content-Type": "application/json",
+        "x-auth-token": localStorage.getItem("token"),
+      },
+    });
+    console.log(data);
+    console.log("[SUCCESS] PUT reviews");
+    return data;
+  } catch (e) {
+    console.log("[FAIL] PUT reviews");
+    return e;
+  }
+};
+
+export const postEnroll = async data => {
+  const body = data;
+  try {
+    const data = await instance.post("/api/dogs", body, {
+      headers: {
+        "Content-Type": "multipart/form-data",
         "x-auth-token": localStorage.getItem("token"),
       },
     });

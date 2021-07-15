@@ -1,5 +1,6 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable arrow-parens */
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import AddDogCard from "components/atoms/AddDogCard";
 
@@ -10,9 +11,11 @@ const Styled = {
   `,
 };
 
-const AddDogCardContainer = () => {
-  const [photo, setPhoto] = useState(null);
+const AddDogCardContainer = ({ setEnrollData, name }) => {
+  const [photo, setPhoto] = useState("");
+  const [urlArray, setUrlArray] = useState([]);
   const [photoArray, setPhotoArray] = useState([1, 0, 0, 0, 0]);
+  const [photoFile, setPhotoFile] = useState([]);
   function photoHandle(e) {
     const newFile = e.target.files;
     (async () => {
@@ -22,12 +25,20 @@ const AddDogCardContainer = () => {
       arrayHandle(newFile);
     })();
   }
+  console.log(urlArray, "urlArray");
+
+  function photoStore(e) {
+    const formData = new FormData();
+    formData.append("image", e.target.files);
+    setPhotoFile([...photoFile, formData]);
+  }
 
   const nextId = useRef(0);
   function arrayHandle(photo) {
     const idPhoto = {
       id: nextId.current,
-      photo,
+      photo: photo,
+      url: urlArray,
     };
     if (photo !== null) {
       setPhotoArray([idPhoto, ...photoArray]);
@@ -37,13 +48,14 @@ const AddDogCardContainer = () => {
 
   function deleteHandle(e) {
     const deletedKey = e.target.nextSibling.dataset.key;
-    console.log(deletedKey);
     setPhotoArray(
-      photoArray.filter((photo) => photo.id !== parseInt(deletedKey, 10))
+      photoArray.filter(photo => photo.id !== parseInt(deletedKey, 10))
     );
   }
 
-  console.log(photo);
+  useEffect(() => {
+    setEnrollData(name, photoFile);
+  }, [name, photoFile, setEnrollData]);
 
   return (
     <Styled.Wrapper>
@@ -55,6 +67,9 @@ const AddDogCardContainer = () => {
               value={value}
               photoHandle={photoHandle}
               deleteHandle={deleteHandle}
+              photoStore={photoStore}
+              urlArray={urlArray}
+              setUrlArray={setUrlArray}
             />
           ) : null
         )}

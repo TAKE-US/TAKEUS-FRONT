@@ -1,3 +1,4 @@
+/* eslint-disable arrow-parens */
 import React from "react";
 import styled from "styled-components";
 import AddDogCardContainer from "components/atoms/AddDogCardContainer";
@@ -21,11 +22,11 @@ const Styled = {
   `,
 };
 
-const AddDogLayer = () => {
+const AddDogLayer = ({ setEnrollData, name }) => {
   return (
     <Styled.Wrapper>
       <section className="title">대상견 사진을 올려주세요.(최대 5개)</section>
-      <AddDogCardContainer />
+      <AddDogCardContainer setEnrollData={setEnrollData} name={name} />
     </Styled.Wrapper>
   );
 };
