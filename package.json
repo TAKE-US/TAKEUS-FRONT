@@ -42,5 +42,5 @@
     "eslint": "^7.29.0",
     "eslint-plugin-react": "^7.24.0"
   },
-  "proxy": "http://takeus-backend-loadbalancer-5def40d9bdb60d9f.elb.ap-northeast-2.amazonaws.com:5000"
+  "proxy": "http://takeus-backend-loadbalancer-5def40d9bdb60d9f.elb.ap-northeast-2.amazonaws.com:5000/"
 }

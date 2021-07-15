@@ -137,142 +137,158 @@ const EnrollInfo = () => {
     }
   }, [createdContact, setEnrollData]);
 
-  console.log(enrollData);
+  const handleSubmit = async event => {
+    event.preventDefault();
+    const formData = new FormData();
+    for (let pair of Array.from(enrollData).entries()) {
+      if (pair[0] === "photo") {
+        formData.append("path", enrollData["photo"]);
+      } else {
+        let result = {};
+        result[pair[0]] = pair[1];
+        formData.append("json", JSON.stringify(result));
+      }
+    }
+    postEnroll(formData);
+  };
+
   return (
     <EnrollInfoWrap>
-      <AddDogLayer setEnrollData={setEnrollDataCallback} name="photos" />
-      <div className="wrap wrap--flex">
-        <label>출국정보</label>
-        <EnrollSearchbar enroll setEnrollData={setEnrollDataCallback} />
-        {/* setDogs, enroll, setEnrollData */}
-      </div>
-      <div className="wrap wrap--flex">
-        <label>대상견 이름</label>
-        <Input
-          placeholder="ex 멍멍이"
-          maxLength={30}
-          caption="30자 이내로 적어주세요."
-          setEnrollData={setEnrollDataCallback}
-          name="name"
-        />
-      </div>
-      <div className="wrap wrap--flex">
-        <label>대상견 성별</label>
-        <RadioButton
-          items={[
-            { value: "여", select: true },
-            { value: "남", select: false },
-            { value: "선택안함", select: false },
-          ]}
-          setEnrollData={setEnrollDataCallback}
-          name="gender"
-        />
-      </div>
-      <div className="wrap wrap--flex">
-        <label>대상견 나이</label>
-        {/* <DogEnrollInput placeholder="ex 1살 , 2개월 등" maxLength="10" /> */}
-        <Input
-          placeholder="ex 멍멍이"
-          maxLength={10}
-          caption="10자 이내로 적어주세요."
-          setEnrollData={setEnrollDataCallback}
-          name="age"
-        />
-      </div>
-      <div className="wrap wrap--flex">
-        <label>대상견 무게</label>
-        <Counter setEnrollData={setEnrollDataCallback} name="weight" />
-      </div>
-      <div className="wrap wrap--flex">
-        <label>중성화 여부</label>
-        <RadioButton
-          items={[
-            { value: "완료", select: true },
-            { value: "미완료", select: false },
-          ]}
-          setEnrollData={setEnrollDataCallback}
-          name="neutralization"
-        />
-      </div>
-      <div className="wrap wrap--flex">
-        <label>건강상태</label>
-        {/* <DogEnrollInput placeholder="ex 접종내역, 건강상태, 유의할 점 등" maxLength="50" /> */}
-        <Input
-          placeholder="ex 멍멍이"
-          maxLength={50}
-          caption="50자 이내로 적어주세요."
-          setEnrollData={setEnrollDataCallback}
-          name="health"
-        />
-      </div>
-      <div className="wrap wrap--flex">
-        <label>소속여부</label>
-        <RadioButton
-          items={[
-            { value: "개인구조자", select: true },
-            { value: "단체", select: false },
-          ]}
-          setEnrollData={setEnrollDataCallback}
-          name="isInstitution"
-        />
-        {/* <DogEnrollInput placeholder="단체명을 입력해주세요." maxLength="15" /> */}
-        <Input
-          placeholder="ex 멍멍이"
-          maxLength={15}
-          caption="15자 이내로 적어주세요."
-          setEnrollData={setEnrollDataCallback}
-          name="isInstitutionName"
-        />
-      </div>
-      <div className="wrap contact">
-        <label>연락처</label>
-        <div className="contact-layer">
-          {contacts.map((contact, i) => (
-            <Input
-              placeholder={"연락처를 입력해 주세요"}
-              key={`contact-${i}`}
-              font="body3"
-              name={dropArray[i]}
-              createdContact={createdContact}
-              setCreatedContact={setCreatedContact}
-            >
-              <div className="dropdown">
-                <Dropdown
-                  item={ContactsList}
-                  placeholder="연락처"
-                  rounded
-                  small
-                  font="body3"
-                  dropArray={dropArray}
-                  onDrop={onDrop}
-                  id={i}
-                />
-              </div>
-            </Input>
-          ))}
-          <div className="contact__btn" onClick={addContact}>
-            <Button rounded full padding="1rem 0">
-              <Plus />
-              연락처 추가하기
+      <form>
+        <AddDogLayer setEnrollData={setEnrollDataCallback} name="photos" />
+        <div className="wrap wrap--flex">
+          <label>출국정보</label>
+          <EnrollSearchbar enroll setEnrollData={setEnrollDataCallback} />
+          {/* setDogs, enroll, setEnrollData */}
+        </div>
+        <div className="wrap wrap--flex">
+          <label>대상견 이름</label>
+          <Input
+            placeholder="ex 멍멍이"
+            maxLength={30}
+            caption="30자 이내로 적어주세요."
+            setEnrollData={setEnrollDataCallback}
+            name="name"
+          />
+        </div>
+        <div className="wrap wrap--flex">
+          <label>대상견 성별</label>
+          <RadioButton
+            items={[
+              { value: "여", select: true },
+              { value: "남", select: false },
+              { value: "선택안함", select: false },
+            ]}
+            setEnrollData={setEnrollDataCallback}
+            name="gender"
+          />
+        </div>
+        <div className="wrap wrap--flex">
+          <label>대상견 나이</label>
+          {/* <DogEnrollInput placeholder="ex 1살 , 2개월 등" maxLength="10" /> */}
+          <Input
+            placeholder="ex 멍멍이"
+            maxLength={10}
+            caption="10자 이내로 적어주세요."
+            setEnrollData={setEnrollDataCallback}
+            name="age"
+          />
+        </div>
+        <div className="wrap wrap--flex">
+          <label>대상견 무게</label>
+          <Counter setEnrollData={setEnrollDataCallback} name="weight" />
+        </div>
+        <div className="wrap wrap--flex">
+          <label>중성화 여부</label>
+          <RadioButton
+            items={[
+              { value: "완료", select: true },
+              { value: "미완료", select: false },
+            ]}
+            setEnrollData={setEnrollDataCallback}
+            name="neutralization"
+          />
+        </div>
+        <div className="wrap wrap--flex">
+          <label>건강상태</label>
+          {/* <DogEnrollInput placeholder="ex 접종내역, 건강상태, 유의할 점 등" maxLength="50" /> */}
+          <Input
+            placeholder="ex 멍멍이"
+            maxLength={50}
+            caption="50자 이내로 적어주세요."
+            setEnrollData={setEnrollDataCallback}
+            name="health"
+          />
+        </div>
+        <div className="wrap wrap--flex">
+          <label>소속여부</label>
+          <RadioButton
+            items={[
+              { value: "개인구조자", select: true },
+              { value: "단체", select: false },
+            ]}
+            setEnrollData={setEnrollDataCallback}
+            name="isInstitution"
+          />
+          {/* <DogEnrollInput placeholder="단체명을 입력해주세요." maxLength="15" /> */}
+          <Input
+            placeholder="ex 멍멍이"
+            maxLength={15}
+            caption="15자 이내로 적어주세요."
+            setEnrollData={setEnrollDataCallback}
+            name="isInstitutionName"
+          />
+        </div>
+        <div className="wrap contact">
+          <label>연락처</label>
+          <div className="contact-layer">
+            {contacts.map((contact, i) => (
+              <Input
+                placeholder={"연락처를 입력해 주세요"}
+                key={`contact-${i}`}
+                font="body3"
+                name={dropArray[i]}
+                createdContact={createdContact}
+                setCreatedContact={setCreatedContact}
+              >
+                <div className="dropdown">
+                  <Dropdown
+                    item={ContactsList}
+                    placeholder="연락처"
+                    rounded
+                    small
+                    font="body3"
+                    dropArray={dropArray}
+                    onDrop={onDrop}
+                    id={i}
+                  />
+                </div>
+              </Input>
+            ))}
+            <div className="contact__btn" onClick={addContact}>
+              <Button rounded full padding="1rem 0">
+                <Plus />
+                연락처 추가하기
+              </Button>
+            </div>
+          </div>
+        </div>
+        <div className="wrap">
+          <TextField
+            label="내용을 작성해주세요"
+            maxLength={500}
+            setEnrollData={setEnrollDataCallback}
+            name="detail"
+          />
+        </div>
+        <div className="wrap">
+          <div className="wrap__button" onClick={handleSubmit}>
+            <Button rounded full font="headline" padding="1.5rem">
+              대상견 등록하기
             </Button>
           </div>
         </div>
-      </div>
-      <div className="wrap">
-        <TextField
-          label="내용을 작성해주세요"
-          maxLength={500}
-          setEnrollData={setEnrollDataCallback}
-          name="detail"
-        />
-      </div>
-      <div className="wrap">
-        <div className="wrap__button" onClick={() => postEnroll(enrollData)}>
-          <Button rounded full font="headline" padding="1.5rem">
-            대상견 등록하기
-          </Button>
-        </div>
-      </div>
+      </form>
     </EnrollInfoWrap>
   );
 };

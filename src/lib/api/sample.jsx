@@ -166,7 +166,7 @@ export const getReviewDetail = async id => {
   }
 };
 
-export const getReviewsWithTags = async (hashtag='', num, selectedFilter) => {
+export const getReviewsWithTags = async (hashtag = "", num, selectedFilter) => {
   try {
     const filter = selectedFilter === "최신순" ? "latest" : "oldest";
     const data = await instance.get(`/api/reviews/${hashtag}`, {
@@ -307,10 +307,10 @@ export const postEnroll = async data => {
       },
     });
     console.log(data);
-    console.log("[SUCCESS] PUT reviews");
+    console.log("[SUCCESS] Post Enroll");
     return data;
   } catch (e) {
-    console.log("[FAIL] PUT reviews");
+    console.log("[FAIL] Post Enroll");
     return e;
   }
 };
