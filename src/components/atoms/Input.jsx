@@ -1,3 +1,4 @@
+/* eslint-disable arrow-parens */
 import React, { useEffect, useMemo, useState } from "react";
 import styled from "styled-components";
 
@@ -34,7 +35,8 @@ const Styled = {
   Input: styled.input`
     flex: 1;
     padding: 0.8rem 0 0.8rem 1rem;
-    font: ${({ theme, fontStyle }) => fontStyle ? theme.font[fontStyle] : theme.font.button};
+    font: ${({ theme, fontStyle }) =>
+      fontStyle ? theme.font[fontStyle] : theme.font.button};
     color: ${({ theme }) => theme.color.darkgray1};
     line-height: 2.6rem;
     &::placeholder {
@@ -60,7 +62,18 @@ const isValidLength = (text, maxLength) => {
   return text.length > maxLength ? false : true;
 };
 
-const Input = ({ children, placeholder, caption, maxLength, font, disabled, setEnrollData, name }) => {
+const Input = ({
+  children,
+  placeholder,
+  caption,
+  maxLength,
+  font,
+  disabled,
+  setEnrollData,
+  name,
+  createdContact,
+  setCreatedContact,
+}) => {
   const [value, setValue] = useState("");
   const [isError, setError] = useState(false);
 
@@ -80,17 +93,29 @@ const Input = ({ children, placeholder, caption, maxLength, font, disabled, setE
     else setError(true);
   }, [isValid]);
 
-  const changeValue = evt => {
+  const changeValue = (evt) => {
     const newValue = evt.target.value;
 
     if (isValid) setValue(newValue);
     else {
       if (isValidLength(newValue, maxLength)) setValue(newValue);
-      else setValue(value.slice(0, maxLength).concat(newValue[newValue.length - 1]));
+      else
+        setValue(
+          value.slice(0, maxLength).concat(newValue[newValue.length - 1])
+        );
     }
   };
+
   const onBlurHandler = () => {
-    setEnrollData(name, value);
+    if (name["type"] !== undefined) {
+      // if (Object.keys(createdContact).includes[name["type"]]) {
+      const newVal = {};
+      newVal[name["type"]] = value;
+      // setCreatedContact(Array.from(createdContact).concat(newVal));
+      setCreatedContact(newVal);
+    } else {
+      setEnrollData(name, value);
+    }
   };
 
   return (
@@ -105,7 +130,9 @@ const Input = ({ children, placeholder, caption, maxLength, font, disabled, setE
           onChange={changeValue}
           onBlurCapture={onBlurHandler}
         />
-        <Styled.Caption className={isError ? "error" : ""}>{caption}</Styled.Caption>
+        <Styled.Caption className={isError ? "error" : ""}>
+          {caption}
+        </Styled.Caption>
       </Styled.InputWrapper>
     </>
   );

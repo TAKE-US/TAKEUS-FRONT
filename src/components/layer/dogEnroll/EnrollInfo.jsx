@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+/* eslint-disable arrow-parens */
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import {
   RadioButton,
@@ -18,14 +19,17 @@ import { ReactComponent as Twitter } from "assets/icon/ic_twitter_24.svg";
 import { ReactComponent as Facebook } from "assets/icon/ic_facebook_24.svg";
 import { ReactComponent as Plus } from "assets/icon/ic_plus_24.svg";
 import useEnrollData from "hooks/useEnrollData";
+// import useInput from "hooks/useInput";
 
 //todo
-// 1. useEnrollData 사용해서 Radio, Input 에 적용
+// * 1. useEnrollData 사용해서 Radio, Input 에 적용
 // 2. map 을 사용한 Input 에 적용
-// 3. counter, addogphotolayer
-// 4. 모아서 form data onSubmit
-// 5. api call
-// + kg 빠져있는거
+//*  3. counter
+// 4. addogphotolayer
+// 5. 모아서 form data onSubmit
+// 6. api call
+// * + kg 빠져있는거
+// + adddogphotolayer 삭제 기능 버그 수정
 
 const EnrollInfoWrap = styled.section`
   .wrap {
@@ -109,17 +113,38 @@ const ContactsList = [
 ];
 
 const EnrollInfo = () => {
-  const [contacts, setContacts] = useState([{ type: "phone", value: "" }]);
   const [enrollData, setEnrollData] = useEnrollData({});
-
+  const [dropArray, setDrop] = useState([]);
+  const [contacts, setContacts] = useState([{ type: "phone", value: "" }]);
+  const [createdContact, setCreatedContact] = useState({});
+  const onDrop = (dropArray, value, id) => {
+    if (dropArray.key === id) {
+      setDrop(
+        Array.from(dropArray).map((val) =>
+          val.id === id ? { key: id, type: value } : val
+        )
+      );
+    } else {
+      setDrop((dropArray) => dropArray.concat({ key: id, type: value }));
+    }
+  };
   const addContact = () => {
     setContacts(contacts.concat({ type: "kakaotalk", value: "" }));
   };
 
+  useEffect(() => {
+    if (Object.keys(createdContact).length !== 0) {
+      setEnrollData(
+        Object.keys(createdContact),
+        ...Object.values(createdContact)
+      );
+    }
+  }, [createdContact]);
+
   console.log(enrollData);
   return (
     <EnrollInfoWrap>
-      <AddDogLayer />
+      <AddDogLayer setEnrollData={setEnrollData} name="photos" />
       <div className="wrap wrap--flex">
         <label>출국정보</label>
         <EnrollSearchbar enroll setEnrollData={setEnrollData} />
@@ -160,7 +185,7 @@ const EnrollInfo = () => {
       </div>
       <div className="wrap wrap--flex">
         <label>대상견 무게</label>
-        <Counter />
+        <Counter setEnrollData={setEnrollData} name="weight" />
       </div>
       <div className="wrap wrap--flex">
         <label>중성화 여부</label>
@@ -211,6 +236,9 @@ const EnrollInfo = () => {
               placeholder={"연락처를 입력해 주세요"}
               key={`contact-${i}`}
               font="body3"
+              name={dropArray[i]}
+              createdContact={createdContact}
+              setCreatedContact={setCreatedContact}
             >
               <div className="dropdown">
                 <Dropdown
@@ -219,6 +247,9 @@ const EnrollInfo = () => {
                   rounded
                   small
                   font="body3"
+                  dropArray={dropArray}
+                  onDrop={onDrop}
+                  id={i}
                 />
               </div>
             </Input>

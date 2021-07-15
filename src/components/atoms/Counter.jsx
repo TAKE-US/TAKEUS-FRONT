@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+/* eslint-disable arrow-parens */
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 //assets
 import minus from "assets/icon/btn_round_minus_40.svg";
@@ -24,26 +25,33 @@ const CounterWrap = styled.section`
 const WeightBtn = styled.button`
   width: 4rem;
   height: 4rem;
-  background-image: url(${props => props.bg});
+  background-image: url(${(props) => props.bg});
   :hover {
-    background-image: url(${props => props.hover});
+    background-image: url(${(props) => props.hover});
   }
 `;
 
-const Counter = () => {
+const Counter = ({ name, setEnrollData }) => {
   const [num, setNum] = useState(0);
   const plusHandler = () => {
-    setNum(prev => prev + 1);
+    setNum((prev) => prev + 1);
   };
   const minusHandler = () => {
     if (num > 0) {
-      setNum(prev => prev - 1);
+      setNum((prev) => prev - 1);
     }
   };
+  useEffect(() => {
+    setEnrollData(name, num);
+  }, [num]);
   return (
     <CounterWrap>
-      <WeightBtn bg={minus} hover={minusHover} onClick={minusHandler}></WeightBtn>
-      <p>{num}</p>
+      <WeightBtn
+        bg={minus}
+        hover={minusHover}
+        onClick={minusHandler}
+      ></WeightBtn>
+      <p>{num} Kg</p>
       <WeightBtn bg={plus} hover={plusHover} onClick={plusHandler}></WeightBtn>
     </CounterWrap>
   );
