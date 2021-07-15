@@ -70,10 +70,13 @@ const AddDogCard = ({
   photoStore,
   urlArray,
   setUrlArray,
+  createImage,
+  setCreateImage,
 }) => {
   const [imgfile, setImage] = useState("");
   function createImagePreview(e) {
     const files = e.target.files;
+    setCreateImage(createImage.concat(e.target.files[0]));
     if (files.length) {
       setImageFromFile({
         file: files[0],
@@ -99,7 +102,7 @@ const AddDogCard = ({
         <div className="image__area">
           <img
             className="image__area-delete"
-            onClick={(e) => {
+            onClick={e => {
               deleteHandle(e);
             }}
             src={deleteBtn}
@@ -121,8 +124,7 @@ const AddDogCard = ({
             type="file"
             id="detail_image"
             accept="image/*"
-            onChange={(e) => {
-              photoStore(e);
+            onChange={e => {
               photoHandle(e);
               createImagePreview(e);
             }}

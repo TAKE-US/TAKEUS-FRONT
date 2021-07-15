@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable arrow-parens */
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import styled from "styled-components";
 import AddDogCard from "components/atoms/AddDogCard";
 
@@ -11,11 +11,10 @@ const Styled = {
   `,
 };
 
-const AddDogCardContainer = ({ setEnrollData, name }) => {
+const AddDogCardContainer = ({ name, createImage, setCreateImage }) => {
   const [photo, setPhoto] = useState("");
   const [urlArray, setUrlArray] = useState([]);
   const [photoArray, setPhotoArray] = useState([1, 0, 0, 0, 0]);
-  const [photoFile, setPhotoFile] = useState([]);
   function photoHandle(e) {
     const newFile = e.target.files;
     (async () => {
@@ -24,13 +23,6 @@ const AddDogCardContainer = ({ setEnrollData, name }) => {
     (async () => {
       arrayHandle(newFile);
     })();
-  }
-  console.log(urlArray, "urlArray");
-
-  function photoStore(e) {
-    const formData = new FormData();
-    formData.append("image", e.target.files);
-    setPhotoFile([...photoFile, formData]);
   }
 
   const nextId = useRef(0);
@@ -53,10 +45,6 @@ const AddDogCardContainer = ({ setEnrollData, name }) => {
     );
   }
 
-  useEffect(() => {
-    setEnrollData(name, photoFile);
-  }, [name, photoFile, setEnrollData]);
-
   return (
     <Styled.Wrapper>
       <>
@@ -67,9 +55,10 @@ const AddDogCardContainer = ({ setEnrollData, name }) => {
               value={value}
               photoHandle={photoHandle}
               deleteHandle={deleteHandle}
-              photoStore={photoStore}
               urlArray={urlArray}
               setUrlArray={setUrlArray}
+              createImage={createImage}
+              setCreateImage={setCreateImage}
             />
           ) : null
         )}

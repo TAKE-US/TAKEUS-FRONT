@@ -298,6 +298,7 @@ export const putReview = async (id, data) => {
 };
 
 export const postEnroll = async data => {
+  console.log(data);
   const body = data;
   try {
     const data = await instance.post("/api/dogs", body, {

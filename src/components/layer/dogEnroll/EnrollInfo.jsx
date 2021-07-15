@@ -107,6 +107,7 @@ const EnrollInfo = () => {
   const [dropArray, setDrop] = useState([]);
   const [contacts, setContacts] = useState([{ type: "phone", value: "" }]);
   const [createdContact, setCreatedContact] = useState({});
+  const [createImage, setCreateImage] = useState([]);
   const setEnrollDataCallback = useCallback(
     (name, value) => {
       setEnrollData(name, value);
@@ -139,23 +140,23 @@ const EnrollInfo = () => {
 
   const handleSubmit = async event => {
     event.preventDefault();
-    const formData = new FormData();
-    for (let pair of Array.from(enrollData).entries()) {
-      if (pair[0] === "photo") {
-        formData.append("path", enrollData["photo"]);
-      } else {
-        let result = {};
-        result[pair[0]] = pair[1];
-        formData.append("json", JSON.stringify(result));
-      }
+    let formData = new FormData();
+    formData.append("name", enrollData["name"]);
+    for (let i = 0; i < Array.from(createImage).length; i++) {
+      formData.append("photos", createImage[i]);
     }
     postEnroll(formData);
   };
 
   return (
     <EnrollInfoWrap>
-      <form>
-        <AddDogLayer setEnrollData={setEnrollDataCallback} name="photos" />
+      <form onSubmit={handleSubmit}>
+        <AddDogLayer
+          createImage={createImage}
+          setCreateImage={setCreateImage}
+          setEnrollData={setEnrollDataCallback}
+          name="photos"
+        />
         <div className="wrap wrap--flex">
           <label>출국정보</label>
           <EnrollSearchbar enroll setEnrollData={setEnrollDataCallback} />
