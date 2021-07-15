@@ -35,7 +35,8 @@ const Styled = {
   Input: styled.input`
     flex: 1;
     padding: 0.8rem 0 0.8rem 1rem;
-    font: ${({ theme, fontStyle }) => (fontStyle ? theme.font[fontStyle] : theme.font.button)};
+    font: ${({ theme, fontStyle }) =>
+      fontStyle ? theme.font[fontStyle] : theme.font.button};
     color: ${({ theme }) => theme.color.darkgray1};
     line-height: 2.6rem;
     &::placeholder {
@@ -61,10 +62,6 @@ const isValidLength = (text, maxLength) => {
   return text.length > maxLength ? false : true;
 };
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 74f1e6fedbabb498a18f93cfdb9f58c0b849536e
 const Input = ({
   children,
   placeholder,
@@ -80,7 +77,6 @@ const Input = ({
 }) => {
   const [value, setValue] = useState("");
   const [isError, setError] = useState(false);
-
   const isValid = useMemo(() => {
     switch (true) {
       case !isValidLength(value, maxLength):
@@ -88,7 +84,6 @@ const Input = ({
       default:
         return true;
     }
-
     return false;
   }, [value, maxLength]);
 
