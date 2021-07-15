@@ -2,7 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import styled from "styled-components";
 
-import { Searchbar, Filter, PaginationNav, ReviewCardContainer, Hashtag } from "components";
+import {
+  Searchbar,
+  Filter,
+  PaginationNav,
+  ReviewCardContainer,
+  Hashtag,
+} from "components";
 import { ReactComponent as RegisterBtn } from "assets/img/btn_register.svg";
 //api
 import { getReviewsWithTags } from "lib/api/sample";
@@ -24,7 +30,11 @@ const Styled = {
     margin-left: calc(-50vw + 50%);
     padding-top: 6rem;
     padding-bottom: 3rem;
-    background: linear-gradient(92.22deg, rgba(255, 239, 175, 0.31) 28%, rgba(255, 239, 175, 0.17) 73.01%);
+    background: linear-gradient(
+      92.22deg,
+      rgba(255, 239, 175, 0.31) 28%,
+      rgba(255, 239, 175, 0.17) 73.01%
+    );
 
     .header {
       text-align: center;
@@ -62,7 +72,9 @@ const ReviewSearch = () => {
   const [activeHashtag, setActiveHashtag] = useState("");
 
   const toggleHashtag = tagName => {
-    activeHashtag === tagName ? setActiveHashtag("") : setActiveHashtag(tagName);
+    activeHashtag === tagName
+      ? setActiveHashtag("")
+      : setActiveHashtag(tagName);
   };
 
   useEffect(() => {
@@ -94,15 +106,28 @@ const ReviewSearch = () => {
       <Styled.Option>
         <section className="tags">
           {tags.map(tag => (
-            <div className="hashtag" key={tag} onClick={() => toggleHashtag(tag)}>
+            <div
+              className="hashtag"
+              key={tag}
+              onClick={() => toggleHashtag(tag)}
+            >
               <Hashtag tag={tag} />
             </div>
           ))}
         </section>
-        <Filter contents={contents} setSelectedFilter={setSelectedFilter} selectedFilter={selectedFilter} />
+        <Filter
+          contents={contents}
+          setSelectedFilter={setSelectedFilter}
+          selectedFilter={selectedFilter}
+        />
       </Styled.Option>
       <ReviewCardContainer reviews={reviews} />
-      <PaginationNav totalPage={totalPage} pageNum={pageNum} setPageNum={setPageNum} review />
+      <PaginationNav
+        totalPage={totalPage}
+        pageNum={pageNum}
+        setPageNum={setPageNum}
+        review
+      />
     </Styled.Wrapper>
   );
 };

@@ -1,22 +1,21 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 //asset
-import { ReactComponent as Sample } from "assets/img/mypage_sample.svg";
+import DogPlane from "assets/img/img_dogswithplane.png";
+import DogHug from "assets/img/img_hugwithdog.png";
 //layer
 import { DogCardContainer, ReviewCardContainer, Filter } from "components";
 //api
 import { getMyDogs, getMyReviews } from "lib/api/sample";
 
 const Styled = {
-  Wrapper: styled.div`
-    margin-top: 14rem;
-  `,
+  Wrapper: styled.div``,
   Header: styled.div`
     display: flex;
     min-width: 100%;
     justify-content: space-between;
     .image {
-      width: 36rem;
+      /* width: 36rem; */
     }
     & > div {
       position: relative;
@@ -48,7 +47,8 @@ const Styled = {
   Tab: styled.button`
     width: 16.4rem;
     padding: 1.4rem 2.2rem;
-    background: ${props => (props.select ? props.theme.color.lightgray1 : props.theme.color.white)};
+    background: ${props =>
+      props.select ? props.theme.color.lightgray1 : props.theme.color.white};
     border-radius: 1rem;
     font: ${({ theme }) => theme.font.button};
     line-height: 2.2rem;
@@ -69,7 +69,9 @@ const MypageHeader = () => {
   const [selectedFilter, setSelectedFilter] = useState(contents[0]);
 
   const selectHandler = t => {
-    const newTabs = tabs.map(tab => (tab === t ? { ...tab, select: true } : { ...tab, select: false }));
+    const newTabs = tabs.map(tab =>
+      tab === t ? { ...tab, select: true } : { ...tab, select: false }
+    );
     setTabs(newTabs);
   };
 
@@ -90,7 +92,12 @@ const MypageHeader = () => {
         <div>
           <nav className="tab-wrapper">
             {tabs.map(tab => (
-              <Styled.Tab key={tab} className="tab_button" onClick={() => selectHandler(tab)} select={tab.select}>
+              <Styled.Tab
+                key={tab}
+                className="tab_button"
+                onClick={() => selectHandler(tab)}
+                select={tab.select}
+              >
                 {tab.value}
               </Styled.Tab>
             ))}
@@ -102,11 +109,23 @@ const MypageHeader = () => {
             <p>여러분의 도움으로 한 생명이 새로운 삶을 살게 되었어요 🙏🏻</p>
           </section>
         </div>
-        <Sample className="image" />
+        {tabs[0].select ? (
+          <img src={DogPlane} alt="" />
+        ) : (
+          <img src={DogHug} alt="" />
+        )}
       </Styled.Header>
       <Styled.Content>
-        <Filter contents={contents} selectedFilter={selectedFilter} setSelectedFilter={setSelectedFilter} />
-        {tabs[0].select ? <DogCardContainer dogs={dogs} /> : <ReviewCardContainer reviews={reviews} />}
+        <Filter
+          contents={contents}
+          selectedFilter={selectedFilter}
+          setSelectedFilter={setSelectedFilter}
+        />
+        {tabs[0].select ? (
+          <DogCardContainer dogs={dogs} />
+        ) : (
+          <ReviewCardContainer reviews={reviews} />
+        )}
       </Styled.Content>
     </Styled.Wrapper>
   );

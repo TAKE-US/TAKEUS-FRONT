@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { DogCardContainer, PaginationNav, DogSearchNavigation, Filter } from "../../components";
+import {
+  DogCardContainer,
+  PaginationNav,
+  DogSearchNavigation,
+  Filter,
+  Empty,
+} from "components";
 //api
 import { getPageDogs } from "lib/api/sample";
 //redux
@@ -55,10 +61,24 @@ const DogPage = ({ dogData }) => {
     <Styled.Wrapper>
       <DogSearchNavigation />
       <div className="container">
-        <Filter contents={contents} selectedFilter={selectedFilter} setSelectedFilter={setSelectedFilter} />
-        {!isEmpty && <DogCardContainer dogs={dogs} />}
+        {!isEmpty ? (
+          <>
+            <Filter
+              contents={contents}
+              selectedFilter={selectedFilter}
+              setSelectedFilter={setSelectedFilter}
+            />
+            <DogCardContainer dogs={dogs} />
+            <PaginationNav
+              pageNum={pageNum}
+              setPageNum={setPageNum}
+              totalPage={totalPage}
+            />
+          </>
+        ) : (
+          <Empty />
+        )}
       </div>
-      <PaginationNav pageNum={pageNum} setPageNum={setPageNum} totalPage={totalPage} />
     </Styled.Wrapper>
   );
 };
