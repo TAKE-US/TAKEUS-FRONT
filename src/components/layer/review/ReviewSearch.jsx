@@ -69,11 +69,11 @@ const ReviewSearch = () => {
     (async () => {
       const reviewData = await getReviewsWithTags(activeHashtag, pageNum);
       if (selectedFilter === "최신순") {
-        setReviews(reviewData[0]);
+        setReviews(reviewData.data);
       } else {
-        setReviews([...reviewData[0]].reverse());
+        setReviews([...reviewData.data].reverse());
       }
-      setTotalPage(reviewData[1]);
+      setTotalPage(reviewData.totalNum);
     })();
   }, [activeHashtag, pageNum, selectedFilter]);
 

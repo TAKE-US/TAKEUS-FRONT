@@ -148,7 +148,7 @@ export const getReviewsWithTags = async (hashtag, num) => {
       },
     });
     console.log("[SUCCESS] GET review data with hashtag");
-    return [data.data.data];
+    return data.data;
   } catch (e) {
     console.log("[FAIL] GET review data hashtag");
     throw e;
