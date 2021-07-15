@@ -1,6 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import { ReviewCard } from "components";
+import { useHistory } from "react-router";
+//api
+import { deleteReview } from "lib/api/sample";
 
 const Styled = {
   Wrapper: styled.section`
@@ -13,11 +16,31 @@ const Styled = {
   `,
 };
 
-const ReviewCardContainer = ({ reviews }) => {
+const ReviewCardContainer = ({ reviews, setReviews }) => {
+  const history = useHistory();
+  const editHandler = (e, id) => {
+    e.stopPropagation();
+    history.push(`/review/post/${id}`);
+  };
+  const deleteHandler = async (e, id) => {
+    e.stopPropagation();
+    try {
+      await deleteReview(id);
+    } catch {
+      return;
+    }
+    setReviews(reviews.filter(review => review._id !== id));
+  };
+
   return (
     <Styled.Wrapper>
       {reviews?.map((review, id) => (
-        <ReviewCard key={id} review={review} />
+        <ReviewCard
+          key={id}
+          review={review}
+          editHandler={editHandler}
+          deleteHandler={deleteHandler}
+        />
       ))}
     </Styled.Wrapper>
   );

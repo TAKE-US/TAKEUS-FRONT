@@ -1,34 +1,14 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router";
 import styled from "styled-components";
 
 import { Modal } from "components";
-import { ReactComponent as DeleteIcon } from "assets/img/ic_delete.svg";
 import { ReactComponent as DeleteModalIcon } from "assets/img/img_delete.svg";
-import { deleteDog } from "lib/api/sample";
 
 const Styled = {
   Wrapper: styled.div`
     .delete {
-      width: 8.6rem;
-      height: 4rem;
-      display: flex;
-      padding: 0.7rem 1.5rem 0.7rem 1.1rem;
-      align-items: center;
-      border: 0.1rem solid ${({ theme }) => theme.color.lightgray2};
-      font: ${({ theme }) => theme.font.button_middle};
-      color: ${({ theme }) => theme.color.darkgray1};
-      border-radius: 0.8rem;
-
-      .text {
-        width: 3rem;
-        margin-left: 0.4rem;
-        white-space: nowrap;
-      }
-
-      :hover {
-        background: ${({ theme }) => theme.color.lightgray1};
-      }
+      font: ${({ theme }) => theme.font.body1};
+      color: ${({ theme }) => theme.color.gray2};
     }
   `,
 
@@ -73,29 +53,21 @@ const Styled = {
   `,
 };
 
-const ReportModal = ({ id }) => {
+const ReviewDeleteModal = ({ deleteHandler, id }) => {
   const [modalOpen, setModalOpen] = useState(false);
-  const history = useHistory();
 
-  const openModal = () => {
+  const openModal = e => {
     setModalOpen(true);
   };
 
-  const closeModal = () => {
+  const closeModal = e => {
     setModalOpen(false);
-  };
-
-  const deleteClick = async () => {
-    await deleteDog(id);
-    closeModal();
-    history.goBack();
   };
 
   return (
     <Styled.Wrapper>
       <button className="delete" onClick={openModal}>
-        <DeleteIcon />
-        <span className="text">삭제</span>
+        삭제
       </button>
       <Modal open={modalOpen} close={closeModal}>
         <Styled.Content>
@@ -112,7 +84,13 @@ const ReportModal = ({ id }) => {
             <button className="cancelbtn" onClick={closeModal}>
               취소
             </button>
-            <button className="deletebtn" onClick={deleteClick}>
+            <button
+              className="deletebtn"
+              onClick={evt => {
+                deleteHandler(evt, id);
+                closeModal();
+              }}
+            >
               삭제
             </button>
           </div>
@@ -122,4 +100,4 @@ const ReportModal = ({ id }) => {
   );
 };
 
-export default ReportModal;
+export default ReviewDeleteModal;

@@ -31,7 +31,6 @@ const Styled = {
 };
 
 function App() {
-
   return (
     <>
       <GlobalStyle />
@@ -65,6 +64,9 @@ function App() {
             </Route>
             <Route path="/review/post" exact>
               <ReviewPostPage />
+            </Route>
+            <Route path="/review/post/:id" exact>
+              <ReviewPostPage edit />
             </Route>
             <Route path="/mypage" exact>
               <MyPage />

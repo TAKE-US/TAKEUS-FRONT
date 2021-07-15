@@ -1,15 +1,15 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
-import Delete from 'assets/icon/ic_delete_18.svg';
+import Delete from "assets/icon/ic_delete_18.svg";
 
 const Styled = {
   Wrapper: styled.div`
-    display: ${props => props.open ? 'flex' : 'none'};
+    display: ${props => (props.open ? "flex" : "none")};
     align-items: center;
     justify-content: center;
-    transition: display .6s;
-    background-color: rgba(0,0,0,0.5);
+    transition: display 0.6s;
+    background-color: rgba(0, 0, 0, 0.5);
     position: fixed;
     top: 0;
     right: 0;
@@ -27,6 +27,8 @@ const Styled = {
     background: ${({ theme }) => theme.color.white};
 
     .header {
+      display: flex;
+      justify-content: left;
       position: relative;
       top: 1.8rem;
       left: 31.8rem;
@@ -38,28 +40,22 @@ const Styled = {
         padding: 0;
       }
     }
-
-    .main {
-
-    }
   `,
 };
 
-const Modal = ({ open, close, children}) => {
+const Modal = ({ open, close, children }) => {
   return (
     <Styled.Wrapper open={open}>
-      { open ? (
-      <Styled.Section>
-        <header className="header">
-          <button className="button" onClick={close}>
-            <img src={Delete} alt="" />
-          </button>
-        </header>
-        <main className="main">
-          {children}
-        </main>
-      </Styled.Section>
-      ):null}
+      {open ? (
+        <Styled.Section>
+          <header className="header">
+            <button className="button" onClick={close}>
+              <img src={Delete} alt="" />
+            </button>
+          </header>
+          <main className="main">{children}</main>
+        </Styled.Section>
+      ) : null}
     </Styled.Wrapper>
   );
 };
