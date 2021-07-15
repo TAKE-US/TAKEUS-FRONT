@@ -35,7 +35,12 @@ const ReviewCardContainer = ({ reviews, setReviews }) => {
   return (
     <Styled.Wrapper>
       {reviews?.map((review, id) => (
-        <ReviewCard key={id} review={review} editHandler={editHandler} deleteHandler={deleteHandler} />
+        <ReviewCard
+          key={id}
+          review={review}
+          editHandler={editHandler}
+          deleteHandler={deleteHandler}
+        />
       ))}
     </Styled.Wrapper>
   );

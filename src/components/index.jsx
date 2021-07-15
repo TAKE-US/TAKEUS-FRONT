@@ -67,6 +67,7 @@ export { default as ReviewPostInfo } from "./layer/review/ReviewPostInfo";
 export { default as ReviewPrecaution } from "./layer/review/ReviewPrecaution";
 export { default as ReviewSearch } from "./layer/review/ReviewSearch";
 export { default as ReviewCardContainer } from "./layer/review/ReviewCardContainer";
+export { default as ReviewDeleteModal } from "./layer/review/ReviewDeleteModal";
 
 // layer/login
 
