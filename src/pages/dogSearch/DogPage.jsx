@@ -5,7 +5,8 @@ import {
   PaginationNav,
   DogSearchNavigation,
   Filter,
-} from "../../components";
+  Empty,
+} from "components";
 //api
 import { getPageDogs } from "lib/api/sample";
 //redux
@@ -27,10 +28,19 @@ const DogPage = ({ dogData }) => {
   const [dogs, setDogs] = useState([]);
   const [pageNum, setPageNum] = useState(1);
   const [totalPage, setTotalPage] = useState(0);
+  const [isEmpty, setIsEmpty] = useState(false);
   const contents = ["최신순", "오래된순"];
   const [selectedFilter, setSelectedFilter] = useState(contents[0]);
 
   useEffect(() => {
+    //강아지 검색결과 없을 때
+    if (dogData[0] === 0) {
+      setIsEmpty(true);
+      return;
+    } else {
+      setIsEmpty(false);
+    }
+    //강아지 검색을 하지 않았을때
     if (dogData.length !== 0) {
       if (selectedFilter === "최신순") {
         setDogs(dogData);
@@ -51,18 +61,24 @@ const DogPage = ({ dogData }) => {
     <Styled.Wrapper>
       <DogSearchNavigation />
       <div className="container">
-        <Filter
-          contents={contents}
-          selectedFilter={selectedFilter}
-          setSelectedFilter={setSelectedFilter}
-        />
-        <DogCardContainer dogs={dogs} />
+        {!isEmpty ? (
+          <>
+            <Filter
+              contents={contents}
+              selectedFilter={selectedFilter}
+              setSelectedFilter={setSelectedFilter}
+            />
+            <DogCardContainer dogs={dogs} />
+            <PaginationNav
+              pageNum={pageNum}
+              setPageNum={setPageNum}
+              totalPage={totalPage}
+            />
+          </>
+        ) : (
+          <Empty />
+        )}
       </div>
-      <PaginationNav
-        pageNum={pageNum}
-        setPageNum={setPageNum}
-        totalPage={totalPage}
-      />
     </Styled.Wrapper>
   );
 };

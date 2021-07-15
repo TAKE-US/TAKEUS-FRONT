@@ -4,7 +4,7 @@ import { MypageHeader } from "components";
 
 const Styled = {
   Wrapper: styled.div`
-    margin-top: 14rem;
+    margin-top: 8.8rem;
   `,
 };
 

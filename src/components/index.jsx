@@ -28,7 +28,7 @@ export { default as ReviewSearchbar } from "./atoms/ReviewSearchbar";
 // layer
 export { default as Header } from "./layer/Header";
 export { default as Footer } from "./layer/Footer";
-export { default as LoginLayer } from "./layer/login/LoginLayer";
+export { default as Empty } from "./layer/Empty";
 
 // layer/mainPage
 export { default as AboutTakeUs } from "./layer/mainPage/AboutTakeUs";
@@ -70,6 +70,7 @@ export { default as ReviewCardContainer } from "./layer/review/ReviewCardContain
 export { default as ReviewDeleteModal } from "./layer/review/ReviewDeleteModal";
 
 // layer/login
+export { default as LoginLayer } from "./layer/login/LoginLayer";
 
 // layer/mypage
 export { default as MypageHeader } from "./layer/mypage/MypageHeader";
