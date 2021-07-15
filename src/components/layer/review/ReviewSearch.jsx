@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import styled from "styled-components";
 
-import { Searchbar, Filter, PaginationNav, ReviewCardContainer, Hashtag } from "components";
+import { ReviewSearchbar, Filter, PaginationNav, ReviewCardContainer, Hashtag } from "components";
 import { ReactComponent as RegisterBtn } from "assets/img/btn_register.svg";
 //api
-import { getReviewsWithTags } from "lib/api/sample";
+import { getReviewsWithTags, getReviewsSearch } from "lib/api/sample";
 
 const Styled = {
   Wrapper: styled.div`
@@ -60,6 +60,7 @@ const ReviewSearch = () => {
   const [pageNum, setPageNum] = useState(1);
   const [totalPage, setTotalPage] = useState(0);
   const [activeHashtag, setActiveHashtag] = useState("");
+  const [searchState, setSearchState] = useState("");
   const [hashtags, setHashtags] = useState([
     { tag: "이동봉사과정", active: false },
     { tag: "도착공항정보", active: false },
@@ -73,16 +74,18 @@ const ReviewSearch = () => {
 
   useEffect(() => {
     (async () => {
-      const reviewData = await getReviewsWithTags(activeHashtag, pageNum);
-      if (selectedFilter === "최신순") {
-        setReviews(reviewData.data);
-        console.log(reviewData.data);
+      if (searchState) {
+        const searchData = await getReviewsSearch(activeHashtag, pageNum, selectedFilter, searchState);
+        console.log(searchState);
+        setReviews(searchData.data);
+        setTotalPage(searchData.totalNum);
       } else {
-        setReviews([...reviewData.data].reverse());
+        const reviewData = await getReviewsWithTags(activeHashtag, pageNum, selectedFilter);
+        setReviews(reviewData.data);
+        setTotalPage(reviewData.totalNum);
       }
-      setTotalPage(reviewData.totalNum);
     })();
-  }, [activeHashtag, pageNum, selectedFilter, hashtags]);
+  }, [activeHashtag, pageNum, selectedFilter, hashtags, searchState]);
 
   const toggleHashtag = tagName => {
     setHashtags(
@@ -105,7 +108,7 @@ const ReviewSearch = () => {
           봉사자들의 생생한 <span>이동 봉사 후기</span>를 만나보세요
         </h1>
         <div className="search">
-          <Searchbar />
+          <ReviewSearchbar setSearchState={setSearchState} />
           <button className="button">
             <RegisterBtn onClick={() => history.push("/review/post")} />
           </button>
