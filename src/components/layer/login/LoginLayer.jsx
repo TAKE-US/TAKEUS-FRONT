@@ -99,7 +99,8 @@ const LoginLayer = () => {
   const handleSuccess = async (token, social) => {
     console.log(token);
     const data = await postToken(token, social);
-    localStorage.setItem("token", data);
+    localStorage.setItem("token", data.token);
+    localStorage.setItem("ID", data.id);
     // window.open("http://localhost:3000", "_self");
   };
 

@@ -169,7 +169,7 @@ export const postToken = async (token, social) => {
     });
     console.log(data);
     console.log("[SUCCESS] POST token");
-    return data.data.token;
+    return data.data;
   } catch (e) {
     console.log("[FAIL] POST token");
     return null;
