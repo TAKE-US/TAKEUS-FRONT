@@ -107,12 +107,16 @@ export const getSearchDogs = async location => {
   }
 };
 
-export const getMyDogs = async num => {
+export const getMyDogs = async (num, filter) => {
   try {
     const data = await instance.get("/api/dogs/my", {
       headers: {
         "Content-Type": "application/json",
         "x-auth-token": localStorage.getItem("token"),
+      },
+      params: {
+        order: filter,
+        page: num,
       },
     });
     console.log("[SUCCESS] GET my dog data");
@@ -123,12 +127,16 @@ export const getMyDogs = async num => {
   }
 };
 
-export const getMyReviews = async num => {
+export const getMyReviews = async (num, filter) => {
   try {
     const data = await instance.get("/api/reviews/list/my", {
       headers: {
         "Content-Type": "application/json",
         "x-auth-token": localStorage.getItem("token"),
+      },
+      params: {
+        order: filter,
+        page: num,
       },
     });
     console.log("[SUCCESS] GET my review data");
