@@ -66,8 +66,8 @@ export const getDogDetail = async id => {
         "Content-Type": "application/json",
       },
     });
-    console.log(data);
     console.log("[SUCCESS] GET dog detail data");
+    console.log(data);
     return data.data.data;
   } catch (e) {
     console.log("[FAIL] GET dog detail data");
@@ -191,5 +191,20 @@ export const postReview = async data => {
   } catch (e) {
     console.log("[FAIL] POST reviews");
     return e;
+  }
+};
+
+export const deleteDog = async id => {
+  try {
+    const data = await axios.delete(`/api/dogs/detail/${id}`, {
+      headers: {
+        "x-auth-token": localStorage.getItem("token"),
+      },
+    });
+    console.log(data);
+    console.log("[SUCESS] DELETE dog detail");
+  } catch (e) {
+    console.log("[FAIL] DELETE dog detail");
+    throw e;
   }
 };

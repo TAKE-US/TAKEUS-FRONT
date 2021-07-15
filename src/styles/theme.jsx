@@ -27,6 +27,7 @@ const color = {
   mina_blue: "#296CE1",
   deep_blue: "#0E57E2",
   honest_blue: "#003089",
+  error_red: "#F2754E",
 };
 
 /**

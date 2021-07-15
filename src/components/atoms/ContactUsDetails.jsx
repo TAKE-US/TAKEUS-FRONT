@@ -1,10 +1,11 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
-import { ReactComponent as NaverMail }from 'assets/img/ic_mail_n_black_40.svg';
-import { ReactComponent as GoogleMail }from 'assets/img/ic_mail_g_black_40.svg';
-import { ReactComponent as InstaImg } from 'assets/img/ic_instagram_black_40.svg';
-import { ReactComponent as KakaoImg } from 'assets/img/ic_kakao_black_40.svg';
+// import { ReactComponent as NaverMail } from "assets/img/ic_mail_n_black_40.svg";
+import NaverMail from "assets/img/ic_mail_n_black_40.svg";
+import { ReactComponent as GoogleMail } from "assets/img/ic_mail_g_black_40.svg";
+import { ReactComponent as InstaImg } from "assets/img/ic_instagram_black_40.svg";
+import { ReactComponent as KakaoImg } from "assets/img/ic_kakao_black_40.svg";
 
 const Styled = {
   Details: styled.section`
@@ -30,7 +31,7 @@ const Styled = {
       }
 
       .detailtext {
-        margin-top: 2rem; 
+        margin-top: 2rem;
         font: ${({ theme }) => theme.font.body1};
         color: ${({ theme }) => theme.color.gray2};
         white-space: nowrap;
@@ -55,7 +56,7 @@ const Styled = {
     .line {
       height: 0;
       margin: 1rem 0;
-      border-top: solid 0.1rem ${({theme}) => theme.color.gray2};
+      border-top: solid 0.1rem ${({ theme }) => theme.color.gray2};
     }
   `,
 
@@ -66,7 +67,7 @@ const Styled = {
     align-items: center;
     font: ${({ theme }) => theme.font.body2};
     color: ${({ theme }) => theme.color.gray3};
-    & >span {
+    & > span {
       margin-left: 2.8rem;
     }
   `,
@@ -86,7 +87,8 @@ const ContactUsDetails = () => {
         </div>
         <div className="call">
           <Styled.Communication>
-            <NaverMail />
+            {/* <NaverMail /> */}
+            <img src={NaverMail} alt="" />
             <span>takeus28@naver.com</span>
           </Styled.Communication>
           <Styled.Communication>

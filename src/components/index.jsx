@@ -20,6 +20,7 @@ export { default as DropdownAirport } from "./atoms/DropdownAirport";
 export { default as Dropdown } from "./atoms/Dropdown";
 export { default as PaginationNav } from "./atoms/PaginationNav";
 export { default as LoginKakao } from "./atoms/LoginKakao";
+export { default as Modal } from "./atoms/Modal";
 export { default as CarouselReviewCard } from "./atoms/CarouselReviewCard";
 export { default as Carousel } from "./atoms/Carousel";
 
@@ -52,6 +53,8 @@ export { default as DogSearchNavigation } from "./layer/dogSearch/DogSearchNavig
 export { default as DogCardContainer } from "./layer/dogSearch/DogCardContainer";
 // layer/dogDetail
 export { default as DogDetail } from "./layer/dogDetail/DogDetail";
+export { default as DeleteModal } from "./layer/dogDetail/DeleteModal";
+export { default as ReportModal } from "./layer/dogDetail/ReportModal";
 
 // layer/info
 export { default as InfoHeader } from "./layer/info/InfoHeader";
