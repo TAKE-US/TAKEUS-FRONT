@@ -2,16 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import styled from "styled-components";
 
-import {
-  ReviewSearchbar,
-  Filter,
-  PaginationNav,
-  ReviewCardContainer,
-  Hashtag,
-} from "components";
+import { Searchbar, Filter, PaginationNav, ReviewCardContainer, Hashtag } from "components";
 import { ReactComponent as RegisterBtn } from "assets/img/btn_register.svg";
 //api
-import { getReviewsWithTags, getReviewsSearch } from "lib/api/sample";
+import { getReviewsWithTags } from "lib/api/sample";
 
 const Styled = {
   Wrapper: styled.div`
@@ -30,11 +24,7 @@ const Styled = {
     margin-left: calc(-50vw + 50%);
     padding-top: 6rem;
     padding-bottom: 3rem;
-    background: linear-gradient(
-      92.22deg,
-      rgba(255, 239, 175, 0.31) 28%,
-      rgba(255, 239, 175, 0.17) 73.01%
-    );
+    background: linear-gradient(92.22deg, rgba(255, 239, 175, 0.31) 28%, rgba(255, 239, 175, 0.17) 73.01%);
 
     .header {
       text-align: center;
@@ -70,36 +60,42 @@ const ReviewSearch = () => {
   const [pageNum, setPageNum] = useState(1);
   const [totalPage, setTotalPage] = useState(0);
   const [activeHashtag, setActiveHashtag] = useState("");
-  const [searchState, setSearchState] = useState("");
-
-  const toggleHashtag = tagName => {
-    activeHashtag === tagName
-      ? setActiveHashtag("")
-      : setActiveHashtag(tagName);
-  };
+  const [hashtags, setHashtags] = useState([
+    { tag: "이동봉사과정", active: false },
+    { tag: "도착공항정보", active: false },
+    { tag: "보호단체관련", active: false },
+    { tag: "이동봉사준비", active: false },
+    { tag: "봉사국가", active: false },
+    { tag: "주의사항", active: false },
+    { tag: "입국심사", active: false },
+    { tag: "대상견케어", active: false },
+  ]);
 
   useEffect(() => {
     (async () => {
-      if (searchState) {
-        const searchData = await getReviewsSearch(
-          activeHashtag,
-          pageNum,
-          selectedFilter,
-          searchState
-        );
-        setReviews(searchData.data);
-        setTotalPage(searchData.totalNum);
-      } else {
-        const reviewData = await getReviewsWithTags(
-          activeHashtag,
-          pageNum,
-          selectedFilter
-        );
+      const reviewData = await getReviewsWithTags(activeHashtag, pageNum);
+      if (selectedFilter === "최신순") {
         setReviews(reviewData.data);
-        setTotalPage(reviewData.totalNum);
+        console.log(reviewData.data);
+      } else {
+        setReviews([...reviewData.data].reverse());
       }
+      setTotalPage(reviewData.totalNum);
     })();
-  }, [activeHashtag, pageNum, selectedFilter, searchState]);
+  }, [activeHashtag, pageNum, selectedFilter, hashtags]);
+
+  const toggleHashtag = tagName => {
+    setHashtags(
+      hashtags.map(hashtag =>
+        hashtag.tag === tagName && activeHashtag !== tagName
+          ? Object.assign(hashtag, { active: true })
+          : Object.assign(hashtag, { active: false })
+      )
+    );
+
+    let newActiveHashtag = hashtags.filter(hashtag => hashtag.active);
+    newActiveHashtag.length !== 0 ? setActiveHashtag(newActiveHashtag[0].tag) : setActiveHashtag("");
+  };
 
   return (
     <Styled.Wrapper>
@@ -109,7 +105,7 @@ const ReviewSearch = () => {
           봉사자들의 생생한 <span>이동 봉사 후기</span>를 만나보세요
         </h1>
         <div className="search">
-          <ReviewSearchbar setSearchState={setSearchState} />
+          <Searchbar />
           <button className="button">
             <RegisterBtn onClick={() => history.push("/review/post")} />
           </button>
@@ -117,43 +113,18 @@ const ReviewSearch = () => {
       </Styled.Search>
       <Styled.Option>
         <section className="tags">
-          {tags.map(tag => (
-            <div
-              className="hashtag"
-              key={tag}
-              onClick={() => toggleHashtag(tag)}
-            >
-              <Hashtag tag={tag} />
+          {hashtags.map((hashtag, i) => (
+            <div className="hashtag" key={i} onClick={() => toggleHashtag(hashtag.tag)}>
+              <Hashtag tag={hashtag.tag} primary={hashtag.active} hasActiveHashtag={true} />
             </div>
           ))}
         </section>
-        <Filter
-          contents={contents}
-          setSelectedFilter={setSelectedFilter}
-          selectedFilter={selectedFilter}
-        />
+        <Filter contents={contents} setSelectedFilter={setSelectedFilter} selectedFilter={selectedFilter} />
       </Styled.Option>
       <ReviewCardContainer reviews={reviews} />
-      <PaginationNav
-        totalPage={totalPage}
-        pageNum={pageNum}
-        setPageNum={setPageNum}
-        review
-      />
+      <PaginationNav totalPage={totalPage} pageNum={pageNum} setPageNum={setPageNum} review />
     </Styled.Wrapper>
   );
 };
-
-const tags = [
-  "이동봉사과정",
-  "도착공항정보",
-  "보호단체관련",
-  "이동봉사준비",
-  "봉사국가",
-  "주의사항",
-  "입국심사",
-  "대상견케어",
-  "기타정보",
-];
 
 export default ReviewSearch;

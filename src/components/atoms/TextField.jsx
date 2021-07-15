@@ -42,7 +42,7 @@ const TextFieldWrap = styled.section`
 `;
 
 const TextField = ({ label, maxLength, placeholder, setEnrollData, name, initial }) => {
-  const [text, setText] = useInput(initial);
+  const [text, setText] = useInput(initial ? initial : "");
   const onBlurHandler = () => {
     setEnrollData(name, text);
   };
@@ -58,12 +58,7 @@ const TextField = ({ label, maxLength, placeholder, setEnrollData, name, initial
           ""
         )}
       </article>
-      <textarea
-        placeholder={placeholder}
-        value={initial ? initial : ""}
-        onChange={setText}
-        onBlurCapture={onBlurHandler}
-      />
+      <textarea placeholder={placeholder} onChange={setText} onBlurCapture={onBlurHandler} />
     </TextFieldWrap>
   );
 };
