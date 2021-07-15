@@ -307,9 +307,10 @@ export const postEnroll = async data => {
       },
     });
     console.log(data);
-    console.log("[SUCCESS] POST dogEnroll");
+    console.log("[SUCCESS] PUT reviews");
     return data;
   } catch (e) {
-    console.log("[FAIL] POST dogEnroll");
+    console.log("[FAIL] PUT reviews");
+    return e;
   }
 };
