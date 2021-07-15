@@ -30,7 +30,7 @@ const ReviewInfoStyle = styled.section`
   }
 `;
 
-const ReviewPostInfo = () => {
+const ReviewPostInfo = ({ edit }) => {
   const [enrollData, setEnrollData] = useEnrollData({});
   const [hashtags, setHashtags] = useState([
     { tag: "이동봉사과정", active: false },

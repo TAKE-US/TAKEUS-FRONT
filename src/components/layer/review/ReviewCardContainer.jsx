@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { ReviewCard } from "components";
+import { useHistory } from "react-router";
 //api
 import { deleteReview } from "lib/api/sample";
 
@@ -16,8 +17,10 @@ const Styled = {
 };
 
 const ReviewCardContainer = ({ reviews, setReviews }) => {
-  const editHandler = e => {
+  const history = useHistory();
+  const editHandler = (e, id) => {
     e.stopPropagation();
+    history.push(`/review/post/${id}`);
   };
   const deleteHandler = async (e, id) => {
     e.stopPropagation();

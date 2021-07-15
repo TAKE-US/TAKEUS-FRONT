@@ -84,7 +84,7 @@ const ReviewCard = ({ review, editHandler, deleteHandler }) => {
           </p>
           {isLogin && (
             <div className="button-wrap">
-              <button className="button-wrap__edit" onClick={evt => editHandler(evt)}>
+              <button className="button-wrap__edit" onClick={evt => editHandler(evt, review._id)}>
                 수정
               </button>
               <button onClick={evt => deleteHandler(evt, review._id)}>삭제</button>
