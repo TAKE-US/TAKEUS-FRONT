@@ -86,7 +86,6 @@ const ReviewSearch = () => {
   const toggleHashtag = tagName => {
     setHashtags(
       hashtags.map(hashtag => (
-        hashtag.tag === "이동봉사과정" ? console.log(hashtag.active) : console.log("??") ,
         hashtag.tag === tagName && activeHashtag !== tagName
           ? Object.assign(hashtag, { active: true })
           : Object.assign(hashtag, { active: false })
@@ -120,7 +119,7 @@ const ReviewSearch = () => {
               <Hashtag
                 tag={hashtag.tag}
                 primary={hashtag.active} 
-                isActiveHashtag={activeHashtag.tag === hashtag.tag}
+                hasActiveHashtag={true}
               />
             </div>
           ))}

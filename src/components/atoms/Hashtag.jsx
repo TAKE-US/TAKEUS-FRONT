@@ -30,14 +30,13 @@ const Styled = {
 //<Hashtag tag={tag}> 리뷰카드 회색 해시태그
 //<Hashtag tag={tag} primary rounded> 리뷰 등록 노란색 해시태그
 //<Hashtag tag={tag} rounded> 리뷰 등록 회색 해시태그
-const Hashtag = ({ tag, primary, rounded, isActiveHashtag }) => {
+const Hashtag = ({ tag, primary, rounded, hasActiveHashtag }) => {
   const [isSelected, setIsSelected] = useState(false);
-  
   return (
-    isActiveHashtag === null
+    hasActiveHashtag
     ? (
       <Styled.Wrapper
-        className={primary || isSelected ? "primary" : "reverse"}
+        className={primary && isSelected ? "primary" : "reverse"}
         rounded={rounded}
         isSelected={isSelected}
         onClick={() => setIsSelected(!isSelected)}
@@ -46,7 +45,7 @@ const Hashtag = ({ tag, primary, rounded, isActiveHashtag }) => {
       </Styled.Wrapper>
     ): (
       <Styled.Wrapper
-        className={primary && isSelected ? "primary" : "reverse"}
+        className={primary || isSelected ? "primary" : "reverse"}
         rounded={rounded}
         isSelected={isSelected}
         onClick={() => setIsSelected(!isSelected)}
@@ -60,5 +59,5 @@ const Hashtag = ({ tag, primary, rounded, isActiveHashtag }) => {
 export default Hashtag;
 
 Hashtag.defaultProps = {
-  isActiveHashtag: null
+  hasActiveHashtag: false
 };
