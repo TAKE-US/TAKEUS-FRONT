@@ -52,7 +52,6 @@ const Search = {
 const ReviewSearchbar = ({ setSearchState }) => {
   const [currCountry, setCurrCountry] = useState("");
   const [currAirport, setCurrAirport] = useState("");
-  const [currCity, setCurrCity] = useState("");
   const [country, setCountry] = useState([]);
   const [allAirport, setAllAirport] = useState("");
 
@@ -72,37 +71,26 @@ const ReviewSearchbar = ({ setSearchState }) => {
   }, []);
 
   const searchHandler = async () => {
-    console.log("click", currCity);
-    if (currCity) {
-      setSearchState(currAirport);
-    }
+    console.log("click", currAirport);
+    setSearchState(currAirport);
   };
 
   return (
     <>
       <Search.Container>
         <div className="dropdown dropdown__country">
-          <DropdownCountry
-            currCountry={currCountry}
-            setCurrCountry={setCurrCountry}
-            country={country}
-          />
+          <DropdownCountry currCountry={currCountry} setCurrCountry={setCurrCountry} country={country} />
         </div>
         <div className="dropdown dropdown__airport">
           <DropdownAirport
             currCountry={currCountry}
             currAirport={currAirport}
             setCurrAirport={setCurrAirport}
-            setCurrCity={setCurrCity}
             allAirport={allAirport}
           />
         </div>
         <div className="button" onClick={() => searchHandler()}>
-          <Button
-            primary
-            font="button_middle"
-            padding="1.9rem 1.5rem 1.9rem 1.4rem"
-          >
+          <Button primary font="button_middle" padding="1.9rem 1.5rem 1.9rem 1.4rem">
             <span className="text">검색</span>
             <SearchImg />
           </Button>
