@@ -12,9 +12,10 @@ const Styled = {
 };
 
 const AddDogCardContainer = ({ setEnrollData, name }) => {
-  const [photo, setPhoto] = useState(null);
-  const [photoFile, setPhotoFile] = useState([]);
+  const [photo, setPhoto] = useState("");
+  const [urlArray, setUrlArray] = useState([]);
   const [photoArray, setPhotoArray] = useState([1, 0, 0, 0, 0]);
+  const [photoFile, setPhotoFile] = useState([]);
   function photoHandle(e) {
     const newFile = e.target.files;
     (async () => {
@@ -24,6 +25,7 @@ const AddDogCardContainer = ({ setEnrollData, name }) => {
       arrayHandle(newFile);
     })();
   }
+  console.log(urlArray, "urlArray");
 
   function photoStore(e) {
     const formData = new FormData();
@@ -35,16 +37,11 @@ const AddDogCardContainer = ({ setEnrollData, name }) => {
   function arrayHandle(photo) {
     const idPhoto = {
       id: nextId.current,
-      photo,
+      photo: photo,
+      url: urlArray,
     };
     if (photo !== null) {
       setPhotoArray([idPhoto, ...photoArray]);
-      setEnrollData(
-        name,
-        [idPhoto, ...photoArray]
-          .filter((v) => isNaN(v))
-          .map((v) => console.log(v["photo"]["0"]["name"]))
-      );
     }
     nextId.current += 1;
   }
@@ -71,6 +68,8 @@ const AddDogCardContainer = ({ setEnrollData, name }) => {
               photoHandle={photoHandle}
               deleteHandle={deleteHandle}
               photoStore={photoStore}
+              urlArray={urlArray}
+              setUrlArray={setUrlArray}
             />
           ) : null
         )}

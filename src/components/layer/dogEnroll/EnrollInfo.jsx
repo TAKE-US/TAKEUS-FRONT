@@ -26,8 +26,8 @@ import { postEnroll } from "lib/api/sample";
 //* 2. map 을 사용한 Input 에 적용
 //* 3. counter
 //* 4. addogphotolayer
-// 5. 모아서 form data onSubmit
-// 6. api call
+// * 5. 모아서 form data onSubmit
+// * 6. api call
 // * + kg 빠져있는거
 // + adddogphotolayer 삭제 기능 버그 수정
 
@@ -141,6 +141,7 @@ const EnrollInfo = () => {
     }
   }, [createdContact]);
 
+  console.log(enrollData);
   return (
     <EnrollInfoWrap>
       <AddDogLayer setEnrollData={setEnrollData} name="photos" />
