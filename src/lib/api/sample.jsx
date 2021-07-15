@@ -166,7 +166,7 @@ export const getReviewDetail = async id => {
   }
 };
 
-export const getReviewsWithTags = async (hashtag, num, selectedFilter) => {
+export const getReviewsWithTags = async (hashtag='', num, selectedFilter) => {
   try {
     const filter = selectedFilter === "최신순" ? "latest" : "oldest";
     const data = await instance.get(`/api/reviews/${hashtag}`, {
