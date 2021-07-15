@@ -49,7 +49,7 @@ const TextField = ({
   name,
   initial,
 }) => {
-  const [text, setText] = useInput(initial);
+  const [text, setText] = useInput(initial?initial:"");
   const onBlurHandler = () => {
     setEnrollData(name, text);
   };
