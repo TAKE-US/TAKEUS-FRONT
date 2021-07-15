@@ -61,7 +61,6 @@ const Search = {
 const Searchbar = ({ setDogs }) => {
   const [currCountry, setCurrCountry] = useState("");
   const [currAirport, setCurrAirport] = useState("");
-  const [currCity, setCurrCity] = useState("");
   const [country, setCountry] = useState([]);
   const [allAirport, setAllAirport] = useState("");
   const location = useLocation();
@@ -83,9 +82,9 @@ const Searchbar = ({ setDogs }) => {
   }, []);
 
   const searchHandler = async () => {
-    console.log("click", currCity);
-    if (currCity) {
-      const data = await getSearchDogs(currCity);
+    console.log("click", currAirport);
+    if (currAirport) {
+      const data = await getSearchDogs(currAirport);
       console.log(data[0]);
       setDogs(data[0]);
       if (location.pathname === "/") {
@@ -105,7 +104,6 @@ const Searchbar = ({ setDogs }) => {
             currCountry={currCountry}
             currAirport={currAirport}
             setCurrAirport={setCurrAirport}
-            setCurrCity={setCurrCity}
             allAirport={allAirport}
           />
         </div>

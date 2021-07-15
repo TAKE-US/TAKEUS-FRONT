@@ -91,9 +91,9 @@ export const getReviews = async num => {
   }
 };
 
-export const getSearchDogs = async location => {
+export const getSearchDogs = async airport => {
   try {
-    const data = await instance.get(`/api/dogs/search/${location}`, {
+    const data = await instance.get(`/api/dogs/search/${airport}`, {
       params: {
         order: "latest",
         page: 1,
