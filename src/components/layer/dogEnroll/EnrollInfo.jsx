@@ -22,10 +22,10 @@ import useEnrollData from "hooks/useEnrollData";
 // import useInput from "hooks/useInput";
 
 //todo
-// * 1. useEnrollData 사용해서 Radio, Input 에 적용
-// 2. map 을 사용한 Input 에 적용
-//*  3. counter
-// 4. addogphotolayer
+//* 1. useEnrollData 사용해서 Radio, Input 에 적용
+//* 2. map 을 사용한 Input 에 적용
+//* 3. counter
+//* 4. addogphotolayer
 // 5. 모아서 form data onSubmit
 // 6. api call
 // * + kg 빠져있는거

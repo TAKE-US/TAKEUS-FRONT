@@ -1,5 +1,5 @@
 /* eslint-disable arrow-parens */
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import AddDogCard from "components/atoms/AddDogCard";
 
@@ -17,12 +17,6 @@ const AddDogCardContainer = ({ setEnrollData, name }) => {
   function photoHandle(e) {
     const newFile = e.target.files;
     (async () => {
-      const formData = new FormData();
-      console.log(formData, "formData");
-      formData.append("file", newFile[0]);
-      setPhotoFile(photoFile.concat(formData));
-    })();
-    (async () => {
       setPhoto(newFile);
     })();
     (async () => {
@@ -30,7 +24,12 @@ const AddDogCardContainer = ({ setEnrollData, name }) => {
     })();
   }
 
-  console.log(photoFile);
+  function photoStore(e) {
+    const formData = new FormData();
+    formData.append("image", e.target.files);
+    setPhotoFile([...photoFile, formData]);
+  }
+
   const nextId = useRef(0);
   function arrayHandle(photo) {
     const idPhoto = {
@@ -58,6 +57,10 @@ const AddDogCardContainer = ({ setEnrollData, name }) => {
 
   console.log(photo);
 
+  useEffect(() => {
+    setEnrollData(name, photoFile);
+  }, [photoFile]);
+
   return (
     <Styled.Wrapper>
       <>
@@ -68,6 +71,7 @@ const AddDogCardContainer = ({ setEnrollData, name }) => {
               value={value}
               photoHandle={photoHandle}
               deleteHandle={deleteHandle}
+              photoStore={photoStore}
             />
           ) : null
         )}

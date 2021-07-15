@@ -63,7 +63,7 @@ const Styled = {
   `,
 };
 
-const AddDogCard = ({ value, photoHandle, deleteHandle }) => {
+const AddDogCard = ({ value, photoHandle, deleteHandle, photoStore }) => {
   const [imgfile, setImage] = useState("");
   const [url, setUrl] = useState("");
   function createImagePreview(e) {
@@ -113,10 +113,10 @@ const AddDogCard = ({ value, photoHandle, deleteHandle }) => {
           <input
             className="card__input"
             type="file"
-            multiple
             id="detail_image"
             accept="image/*"
             onChange={(e) => {
+              photoStore(e);
               photoHandle(e);
               createImagePreview(e);
             }}
