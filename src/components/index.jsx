@@ -23,6 +23,7 @@ export { default as LoginKakao } from "./atoms/LoginKakao";
 export { default as Modal } from "./atoms/Modal";
 export { default as CarouselReviewCard } from "./atoms/CarouselReviewCard";
 export { default as Carousel } from "./atoms/Carousel";
+export { default as ReviewSearchbar } from "./atoms/ReviewSearchbar";
 
 // layer
 export { default as Header } from "./layer/Header";
@@ -66,6 +67,7 @@ export { default as ReviewPostInfo } from "./layer/review/ReviewPostInfo";
 export { default as ReviewPrecaution } from "./layer/review/ReviewPrecaution";
 export { default as ReviewSearch } from "./layer/review/ReviewSearch";
 export { default as ReviewCardContainer } from "./layer/review/ReviewCardContainer";
+export { default as ReviewDeleteModal } from "./layer/review/ReviewDeleteModal";
 
 // layer/login
 export { default as LoginLayer } from "./layer/login/LoginLayer";

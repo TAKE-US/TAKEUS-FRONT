@@ -99,7 +99,7 @@ const ReportModal = () => {
         <Styled.Content>
           <ReportModalIcon />
           <div className="text">
-            <h1>정말 삭제하시겠어요?</h1>
+            <h1>정말 신고하시겠어요?</h1>
             <p>
               허위 내용 및 광고성 게시글은 신고가 가능합니다.
               <br />

@@ -4,7 +4,12 @@ import styled from "styled-components";
 import DogPlane from "assets/img/img_dogswithplane.png";
 import DogHug from "assets/img/img_hugwithdog.png";
 //layer
-import { DogCardContainer, ReviewCardContainer, Filter } from "components";
+import {
+  DogCardContainer,
+  ReviewCardContainer,
+  Filter,
+  PaginationNav,
+} from "components";
 //api
 import { getMyDogs, getMyReviews } from "lib/api/sample";
 
@@ -65,7 +70,11 @@ const MypageHeader = () => {
   ]);
   const [dogs, setDogs] = useState(null);
   const [reviews, setReviews] = useState(null);
-  const contents = ["미완료순", "완료순", "최신순", "오래된순"];
+  const [dogsPage, setDogsPage] = useState(1);
+  const [dogsTotalPage, setDogsTotalPage] = useState(1);
+  const [reviewsPage, setReviewsPage] = useState(1);
+  const [reviewsTotalPage, setReviewsTotalPage] = useState(1);
+  const contents = ["최신순", "오래된순"];
   const [selectedFilter, setSelectedFilter] = useState(contents[0]);
 
   const selectHandler = t => {
@@ -77,15 +86,17 @@ const MypageHeader = () => {
 
   useEffect(() => {
     (async () => {
-      const data = await getMyDogs();
-      console.log(data[0]);
+      console.log(selectedFilter);
+      const data = await getMyDogs(dogsPage, selectedFilter);
       setDogs(data[0]);
+      setDogsTotalPage(data[1]);
       //review
-      const ReviewData = await getMyReviews();
-      console.log(ReviewData[0], ReviewData[1]);
+      const ReviewData = await getMyReviews(reviewsPage, selectedFilter);
       setReviews(ReviewData[0]);
+      setReviewsTotalPage(ReviewData[1]);
+      console.log(data, ReviewData);
     })();
-  }, []);
+  }, [dogsPage, reviewsPage, selectedFilter]);
   return (
     <Styled.Wrapper>
       <Styled.Header>
@@ -124,7 +135,21 @@ const MypageHeader = () => {
         {tabs[0].select ? (
           <DogCardContainer dogs={dogs} />
         ) : (
-          <ReviewCardContainer reviews={reviews} />
+          <ReviewCardContainer reviews={reviews} setReviews={setReviews} />
+        )}
+        {tabs[0].select ? (
+          <PaginationNav
+            pageNum={dogsPage}
+            setPageNum={setDogsPage}
+            totalPage={dogsTotalPage}
+          />
+        ) : (
+          <PaginationNav
+            pageNum={reviewsPage}
+            setPageNum={setReviewsPage}
+            totalPage={reviewsTotalPage}
+            review
+          />
         )}
       </Styled.Content>
     </Styled.Wrapper>
