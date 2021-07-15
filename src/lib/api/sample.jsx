@@ -149,6 +149,22 @@ export const getMyReviews = async (num, selectedFilter) => {
   }
 };
 
+export const getReviewDetail = async id => {
+  try {
+    const data = await instance.get(`/api/reviews/detail/${id}`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    console.log(data);
+    console.log("[SUCCESS] GET review detail data");
+    return data.data.data;
+  } catch (e) {
+    console.log("[FAIL] GET my review data");
+    throw e;
+  }
+};
+
 export const getReviewsWithTags = async (hashtag, num, selectedFilter) => {
   try {
     const filter = selectedFilter === "최신순" ? "latest" : "oldest";
@@ -251,5 +267,23 @@ export const deleteDog = async id => {
   } catch (e) {
     console.log("[FAIL] DELETE dog detail");
     throw e;
+  }
+};
+
+export const putReview = async (id, data) => {
+  const body = data;
+  try {
+    const data = await instance.put(`/api/reviews/detail/${id}`, body, {
+      headers: {
+        "Content-Type": "application/json",
+        "x-auth-token": localStorage.getItem("token"),
+      },
+    });
+    console.log(data);
+    console.log("[SUCCESS] PUT reviews");
+    return data;
+  } catch (e) {
+    console.log("[FAIL] PUT reviews");
+    return e;
   }
 };
