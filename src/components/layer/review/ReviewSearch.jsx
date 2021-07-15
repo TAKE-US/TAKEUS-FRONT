@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import styled from "styled-components";
 
-import { ReviewSearchbar, Filter, PaginationNav, ReviewCardContainer, Hashtag } from "components";
+import { ReviewSearchbar, Filter, PaginationNav, ReviewCardContainer, Hashtag, Empty } from "components";
 import { ReactComponent as RegisterBtn } from "assets/img/btn_register.svg";
 //api
 import { getReviewsWithTags, getReviewsSearch } from "lib/api/sample";
@@ -124,7 +124,7 @@ const ReviewSearch = () => {
         </section>
         <Filter contents={contents} setSelectedFilter={setSelectedFilter} selectedFilter={selectedFilter} />
       </Styled.Option>
-      <ReviewCardContainer reviews={reviews} />
+      {reviews?.length === 0 ? <Empty /> : <ReviewCardContainer reviews={reviews} />}
       <PaginationNav totalPage={totalPage} pageNum={pageNum} setPageNum={setPageNum} review />
     </Styled.Wrapper>
   );
