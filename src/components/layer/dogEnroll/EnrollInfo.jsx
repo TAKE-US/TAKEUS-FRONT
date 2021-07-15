@@ -8,16 +8,24 @@ import {
   Input,
   Button,
   EnrollSearchbar,
-  Dropdown
+  Dropdown,
 } from "components";
 // import { DogEnrollInput } from 'components';
-import { ReactComponent as Kakao } from 'assets/icon/ic_kakao_24.svg';
-import { ReactComponent as Call } from 'assets/icon/ic_call_24.svg';
-import { ReactComponent as Instagram } from 'assets/icon/ic_instar_24.svg';
-import { ReactComponent as Twitter } from 'assets/icon/ic_twitter_24.svg';
-import { ReactComponent as Facebook } from 'assets/icon/ic_facebook_24.svg';
+import { ReactComponent as Kakao } from "assets/icon/ic_kakao_24.svg";
+import { ReactComponent as Call } from "assets/icon/ic_call_24.svg";
+import { ReactComponent as Instagram } from "assets/icon/ic_instar_24.svg";
+import { ReactComponent as Twitter } from "assets/icon/ic_twitter_24.svg";
+import { ReactComponent as Facebook } from "assets/icon/ic_facebook_24.svg";
 import { ReactComponent as Plus } from "assets/icon/ic_plus_24.svg";
 import useEnrollData from "hooks/useEnrollData";
+
+//todo
+// 1. useEnrollData 사용해서 Radio, Input 에 적용
+// 2. map 을 사용한 Input 에 적용
+// 3. counter, addogphotolayer
+// 4. 모아서 form data onSubmit
+// 5. api call
+// + kg 빠져있는거
 
 const EnrollInfoWrap = styled.section`
   .wrap {
@@ -80,32 +88,32 @@ const EnrollInfoWrap = styled.section`
 const ContactsList = [
   {
     img: <Kakao />,
-    type: '카카오톡',
+    type: "카카오톡",
   },
   {
     img: <Call />,
-    type: '전화번호',
+    type: "전화번호",
   },
   {
     img: <Instagram />,
-    type: '인스타그램',
+    type: "인스타그램",
   },
   {
     img: <Twitter />,
-    type: '트위터',
+    type: "트위터",
   },
   {
     img: <Facebook />,
-    type: '페이스북',
-  }
+    type: "페이스북",
+  },
 ];
 
 const EnrollInfo = () => {
-  const [contacts, setContacts] = useState([{ type: 'phone', value: '' }]);
+  const [contacts, setContacts] = useState([{ type: "phone", value: "" }]);
   const [enrollData, setEnrollData] = useEnrollData({});
 
   const addContact = () => {
-    setContacts(contacts.concat({ type: 'kakaotalk', value: '' }));
+    setContacts(contacts.concat({ type: "kakaotalk", value: "" }));
   };
 
   console.log(enrollData);
@@ -146,6 +154,8 @@ const EnrollInfo = () => {
           placeholder="ex 멍멍이"
           maxLength={10}
           caption="10자 이내로 적어주세요."
+          setEnrollData={setEnrollData}
+          name="age"
         />
       </div>
       <div className="wrap wrap--flex">
@@ -159,6 +169,8 @@ const EnrollInfo = () => {
             { value: "완료", select: true },
             { value: "미완료", select: false },
           ]}
+          setEnrollData={setEnrollData}
+          name="neutralization"
         />
       </div>
       <div className="wrap wrap--flex">
@@ -168,6 +180,8 @@ const EnrollInfo = () => {
           placeholder="ex 멍멍이"
           maxLength={50}
           caption="50자 이내로 적어주세요."
+          setEnrollData={setEnrollData}
+          name="health"
         />
       </div>
       <div className="wrap wrap--flex">
@@ -177,19 +191,27 @@ const EnrollInfo = () => {
             { value: "개인구조자", select: true },
             { value: "단체", select: false },
           ]}
+          setEnrollData={setEnrollData}
+          name="isInstitution"
         />
         {/* <DogEnrollInput placeholder="단체명을 입력해주세요." maxLength="15" /> */}
         <Input
           placeholder="ex 멍멍이"
           maxLength={15}
           caption="15자 이내로 적어주세요."
+          setEnrollData={setEnrollData}
+          name="isInstitutionName"
         />
       </div>
       <div className="wrap contact">
         <label>연락처</label>
         <div className="contact-layer">
           {contacts.map((contact, i) => (
-            <Input placeholder={"연락처를 입력해 주세요"} key={`contact-${i}`} font="body3">
+            <Input
+              placeholder={"연락처를 입력해 주세요"}
+              key={`contact-${i}`}
+              font="body3"
+            >
               <div className="dropdown">
                 <Dropdown
                   item={ContactsList}
@@ -210,7 +232,12 @@ const EnrollInfo = () => {
         </div>
       </div>
       <div className="wrap">
-        <TextField label="내용을 작성해주세요" maxLength={500} />
+        <TextField
+          label="내용을 작성해주세요"
+          maxLength={500}
+          setEnrollData={setEnrollData}
+          name="detail"
+        />
       </div>
       <div className="wrap">
         <Button rounded full font="headline" padding="1.5rem">
