@@ -21,16 +21,6 @@ import { ReactComponent as Plus } from "assets/icon/ic_plus_24.svg";
 import useEnrollData from "hooks/useEnrollData";
 import { postEnroll } from "lib/api/sample";
 
-//todo
-//* 1. useEnrollData 사용해서 Radio, Input 에 적용
-//* 2. map 을 사용한 Input 에 적용
-//* 3. counter
-//* 4. addogphotolayer
-// * 5. 모아서 form data onSubmit
-// * 6. api call
-// * + kg 빠져있는거
-// + adddogphotolayer 삭제 기능 버그 수정
-
 const EnrollInfoWrap = styled.section`
   .wrap {
     margin-top: 6rem;
