@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import React, { useState } from "react";
+import { useHistory } from "react-router";
+import styled from "styled-components";
 
-import { Modal } from 'components';
+import { Modal } from "components";
 import { ReactComponent as DeleteIcon } from "assets/img/ic_delete.svg";
 import { ReactComponent as DeleteModalIcon } from "assets/img/img_delete.svg";
 import { deleteDog } from "lib/api/sample";
@@ -26,8 +27,8 @@ const Styled = {
       }
 
       :hover {
-          background: ${({theme}) => theme.color.lightgray1};
-        }
+        background: ${({ theme }) => theme.color.lightgray1};
+      }
     }
   `,
 
@@ -59,14 +60,14 @@ const Styled = {
       display: flex;
       justify-content: space-between;
       margin-top: 4.2rem;
-      
+
       .cancelbtn {
         font: ${({ theme }) => theme.font.button};
-        color: ${({theme}) => theme.color.gray1};
+        color: ${({ theme }) => theme.color.gray1};
       }
       .deletebtn {
         font: ${({ theme }) => theme.font.button};
-        color: ${({theme}) => theme.color.primary_dark};
+        color: ${({ theme }) => theme.color.primary_dark};
       }
     }
   `,
@@ -74,6 +75,7 @@ const Styled = {
 
 const ReportModal = ({ id }) => {
   const [modalOpen, setModalOpen] = useState(false);
+  const history = useHistory();
 
   const openModal = () => {
     setModalOpen(true);
@@ -85,6 +87,8 @@ const ReportModal = ({ id }) => {
 
   const deleteClick = async () => {
     await deleteDog(id);
+    closeModal();
+    history.goBack();
   };
 
   return (
@@ -99,13 +103,18 @@ const ReportModal = ({ id }) => {
           <div className="text">
             <h1>정말 신고하시겠어요?</h1>
             <p>
-              삭제한 게시물은 복구가 불가능해요!<br />
+              삭제한 게시물은 복구가 불가능해요!
+              <br />
               신중하게 검토한 후 삭제해 주세요.
             </p>
           </div>
           <div className="button">
-            <button className="cancelbtn" onClick={closeModal}>취소</button>
-            <button className="deletebtn" onClick={deleteClick}>삭제</button>
+            <button className="cancelbtn" onClick={closeModal}>
+              취소
+            </button>
+            <button className="deletebtn" onClick={deleteClick}>
+              삭제
+            </button>
           </div>
         </Styled.Content>
       </Modal>
