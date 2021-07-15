@@ -49,13 +49,13 @@ const AddDogCardContainer = ({ setEnrollData, name }) => {
   function deleteHandle(e) {
     const deletedKey = e.target.nextSibling.dataset.key;
     setPhotoArray(
-      photoArray.filter((photo) => photo.id !== parseInt(deletedKey, 10))
+      photoArray.filter(photo => photo.id !== parseInt(deletedKey, 10))
     );
   }
 
   useEffect(() => {
     setEnrollData(name, photoFile);
-  }, [photoFile]);
+  }, [name, photoFile, setEnrollData]);
 
   return (
     <Styled.Wrapper>

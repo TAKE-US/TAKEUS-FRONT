@@ -1,6 +1,6 @@
 /* eslint-disable arrow-parens */
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import styled from "styled-components";
 import {
   RadioButton,
@@ -107,15 +107,21 @@ const EnrollInfo = () => {
   const [dropArray, setDrop] = useState([]);
   const [contacts, setContacts] = useState([{ type: "phone", value: "" }]);
   const [createdContact, setCreatedContact] = useState({});
+  const setEnrollDataCallback = useCallback(
+    (name, value) => {
+      setEnrollData(name, value);
+    },
+    [setEnrollData]
+  );
   const onDrop = (dropArray, value, id) => {
     if (dropArray.key === id) {
       setDrop(
-        Array.from(dropArray).map((val) =>
+        Array.from(dropArray).map(val =>
           val.id === id ? { key: id, type: value } : val
         )
       );
     } else {
-      setDrop((dropArray) => dropArray.concat({ key: id, type: value }));
+      setDrop(dropArray => dropArray.concat({ key: id, type: value }));
     }
   };
   const addContact = () => {
@@ -129,12 +135,12 @@ const EnrollInfo = () => {
         ...Object.values(createdContact)
       );
     }
-  }, [createdContact]);
+  }, [createdContact, setEnrollData]);
 
   console.log(enrollData);
   return (
     <EnrollInfoWrap>
-      <AddDogLayer setEnrollData={setEnrollData} name="photos" />
+      <AddDogLayer setEnrollData={setEnrollDataCallback} name="photos" />
       <div className="wrap wrap--flex">
         <label>출국정보</label>
         <EnrollSearchbar enroll setEnrollData={setEnrollData} />

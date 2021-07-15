@@ -1,5 +1,5 @@
 /* eslint-disable arrow-parens */
-import React from "react";
+import React, { useCallback } from "react";
 import styled from "styled-components";
 import AddDogCardContainer from "components/atoms/AddDogCardContainer";
 
@@ -23,10 +23,16 @@ const Styled = {
 };
 
 const AddDogLayer = ({ setEnrollData, name }) => {
+  const setEnrollDataCallback = useCallback(
+    (name, value) => {
+      setEnrollData(name, value);
+    },
+    [setEnrollData]
+  );
   return (
     <Styled.Wrapper>
       <section className="title">대상견 사진을 올려주세요.(최대 5개)</section>
-      <AddDogCardContainer setEnrollData={setEnrollData} name={name} />
+      <AddDogCardContainer setEnrollData={setEnrollDataCallback} name={name} />
     </Styled.Wrapper>
   );
 };
