@@ -1,3 +1,4 @@
+/* eslint-disable arrow-parens */
 import axios from "axios";
 
 const instance = axios.create({
@@ -42,9 +43,9 @@ export const getCountry = async () => {
   }
 };
 
-export const getPageDogs = async (num, selectedFilter) => {
+export const getPageDogs = async (num, selected) => {
   try {
-    const filter = selectedFilter === "최신순" ? "latest" : "oldest";
+    const filter = selected === "최신순" ? "latest" : "oldest";
     const data = await instance.get("/api/dogs", {
       params: {
         order: filter,
@@ -91,9 +92,9 @@ export const getReviews = async num => {
   }
 };
 
-export const getSearchDogs = async location => {
+export const getSearchDogs = async airport => {
   try {
-    const data = await instance.get(`/api/dogs/search/${location}`, {
+    const data = await instance.get(`/api/dogs/search/${airport}`, {
       params: {
         order: "latest",
         page: 1,
@@ -107,12 +108,17 @@ export const getSearchDogs = async location => {
   }
 };
 
-export const getMyDogs = async num => {
+export const getMyDogs = async (num, selectedFilter) => {
+  const filter = selectedFilter === "최신순" ? "latest" : "oldest";
   try {
     const data = await instance.get("/api/dogs/my", {
       headers: {
         "Content-Type": "application/json",
         "x-auth-token": localStorage.getItem("token"),
+      },
+      params: {
+        order: filter,
+        page: num,
       },
     });
     console.log("[SUCCESS] GET my dog data");
@@ -123,12 +129,17 @@ export const getMyDogs = async num => {
   }
 };
 
-export const getMyReviews = async num => {
+export const getMyReviews = async (num, selectedFilter) => {
+  const filter = selectedFilter === "최신순" ? "latest" : "oldest";
   try {
     const data = await instance.get("/api/reviews/list/my", {
       headers: {
         "Content-Type": "application/json",
         "x-auth-token": localStorage.getItem("token"),
+      },
+      params: {
+        order: filter,
+        page: num,
       },
     });
     console.log("[SUCCESS] GET my review data");
@@ -139,18 +150,60 @@ export const getMyReviews = async num => {
   }
 };
 
-export const getReviewsWithTags = async (hashtag='', num) => {
+export const getReviewDetail = async id => {
   try {
+    const data = await instance.get(`/api/reviews/detail/${id}`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    console.log(data);
+    console.log("[SUCCESS] GET review detail data");
+    return data.data.data;
+  } catch (e) {
+    console.log("[FAIL] GET my review data");
+    throw e;
+  }
+};
+
+export const getReviewsWithTags = async (hashtag='', num, selectedFilter) => {
+  try {
+    const filter = selectedFilter === "최신순" ? "latest" : "oldest";
     const data = await instance.get(`/api/reviews/${hashtag}`, {
       params: {
-        order: "latest",
+        order: filter,
         page: num,
       },
     });
-    console.log("[SUCCESS] GET review data with hashtag");
-    return [data.data.data];
+    console.log("[SUCCESS] GET review data with hashtag", data);
+    return data.data;
   } catch (e) {
     console.log("[FAIL] GET review data hashtag");
+    throw e;
+  }
+};
+
+export const getReviewsSearch = async (
+  hashtag,
+  num,
+  selectedFilter,
+  search
+) => {
+  try {
+    const filter = selectedFilter === "최신순" ? "latest" : "oldest";
+    const data = await instance.get(
+      `/api/reviews/${search}?hashtags=${hashtag}`,
+      {
+        params: {
+          order: filter,
+          page: num,
+        },
+      }
+    );
+    console.log("[SUCCESS] GET review search data");
+    return data.data;
+  } catch (e) {
+    console.log("[FAIL] GET review search data");
     throw e;
   }
 };
@@ -194,6 +247,23 @@ export const postReview = async data => {
   }
 };
 
+export const deleteReview = async id => {
+  try {
+    const res = await instance.delete(`/api/reviews/detail/${id}`, {
+      headers: {
+        "Content-Type": "application/json",
+        "x-auth-token": localStorage.getItem("token"),
+      },
+    });
+    console.log(res);
+    console.log("[SUCCESS] DELETE review");
+    return res;
+  } catch (e) {
+    console.log("[FAIL] DELETE review");
+    return e;
+  }
+};
+
 export const deleteDog = async id => {
   try {
     const data = await axios.delete(`/api/dogs/detail/${id}`, {
@@ -206,5 +276,41 @@ export const deleteDog = async id => {
   } catch (e) {
     console.log("[FAIL] DELETE dog detail");
     throw e;
+  }
+};
+
+export const putReview = async (id, data) => {
+  const body = data;
+  try {
+    const data = await instance.put(`/api/reviews/detail/${id}`, body, {
+      headers: {
+        "Content-Type": "application/json",
+        "x-auth-token": localStorage.getItem("token"),
+      },
+    });
+    console.log(data);
+    console.log("[SUCCESS] PUT reviews");
+    return data;
+  } catch (e) {
+    console.log("[FAIL] PUT reviews");
+    return e;
+  }
+};
+
+export const postEnroll = async data => {
+  const body = data;
+  try {
+    const data = await instance.post("/api/dogs", body, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        "x-auth-token": localStorage.getItem("token"),
+      },
+    });
+    console.log(data);
+    console.log("[SUCCESS] PUT reviews");
+    return data;
+  } catch (e) {
+    console.log("[FAIL] PUT reviews");
+    return e;
   }
 };

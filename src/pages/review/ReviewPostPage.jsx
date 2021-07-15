@@ -1,18 +1,17 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
-import { ReviewPostInfo, ReviewPrecaution } from 'components';
+import { ReviewPostInfo, ReviewPrecaution } from "components";
 
 const PageStyle = styled.div`
   margin-top: 18.7rem;
 `;
 
-const ReviewPostPage = () => {
-
+const ReviewPostPage = ({ edit }) => {
   return (
     <PageStyle>
-      <ReviewPrecaution />
-      <ReviewPostInfo />
+      <ReviewPrecaution edit={edit ? true : false} />
+      <ReviewPostInfo edit={edit ? true : false} />
     </PageStyle>
   );
 };

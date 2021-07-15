@@ -63,9 +63,15 @@ const Styled = {
   `,
 };
 
-const AddDogCard = ({ value, photoHandle, deleteHandle }) => {
+const AddDogCard = ({
+  value,
+  photoHandle,
+  deleteHandle,
+  photoStore,
+  urlArray,
+  setUrlArray,
+}) => {
   const [imgfile, setImage] = useState("");
-  const [url, setUrl] = useState("");
   function createImagePreview(e) {
     const files = e.target.files;
     if (files.length) {
@@ -73,7 +79,7 @@ const AddDogCard = ({ value, photoHandle, deleteHandle }) => {
         file: files[0],
         setImageUrl: ({ result }) => {
           setImage(files[0]);
-          setUrl(result);
+          setUrlArray(urlArray.concat(result));
         },
       });
     }
@@ -102,7 +108,7 @@ const AddDogCard = ({ value, photoHandle, deleteHandle }) => {
           <img
             className="image__area-img"
             data-key={value.id}
-            src={url}
+            src={urlArray[value.id]}
             alt={imgfile.name}
           />
         </div>
@@ -113,10 +119,10 @@ const AddDogCard = ({ value, photoHandle, deleteHandle }) => {
           <input
             className="card__input"
             type="file"
-            multiple
             id="detail_image"
             accept="image/*"
             onChange={(e) => {
+              photoStore(e);
               photoHandle(e);
               createImagePreview(e);
             }}

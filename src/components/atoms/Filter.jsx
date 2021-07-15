@@ -85,8 +85,8 @@ const Filter = ({ contents, selectedFilter, setSelectedFilter }) => {
         {isOpen && (
           <DropDownWrap ref={dropDownRef}>
             <ul>
-              {contents?.map(content => (
-                <li key={content} onClick={() => setSelectedFilter(content)}>
+              {contents?.map((content, idx) => (
+                <li key={idx} onClick={() => setSelectedFilter(content)}>
                   {content}
                 </li>
               ))}

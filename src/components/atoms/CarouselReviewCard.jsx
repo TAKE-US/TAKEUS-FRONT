@@ -14,6 +14,7 @@ const Card = styled.article`
     width: 34.6rem;
     height: 25rem;
     border-radius: 1rem 1rem 0 0;
+    object-fit: cover;
   }
   .cardInfo {
     display: flex;
