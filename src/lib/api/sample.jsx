@@ -139,7 +139,7 @@ export const getMyReviews = async num => {
   }
 };
 
-export const getReviewsWithTags = async (hashtag='', num) => {
+export const getReviewsWithTags = async (hashtag, num) => {
   try {
     const data = await instance.get(`/api/reviews/${hashtag}`, {
       params: {
