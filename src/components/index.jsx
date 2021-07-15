@@ -21,6 +21,8 @@ export { default as Dropdown } from "./atoms/Dropdown";
 export { default as PaginationNav } from "./atoms/PaginationNav";
 export { default as LoginKakao } from "./atoms/LoginKakao";
 export { default as Modal } from "./atoms/Modal";
+export { default as CarouselReviewCard } from "./atoms/CarouselReviewCard";
+export { default as Carousel } from "./atoms/Carousel";
 
 // layer
 export { default as Header } from "./layer/Header";
@@ -44,6 +46,7 @@ export { default as AboutUsTeam } from "./layer/aboutUs/AboutUsTeam";
 export { default as EnrollPrecaution } from "./layer/dogEnroll/EnrollPrecaution";
 export { default as EnrollInfo } from "./layer/dogEnroll/EnrollInfo.jsx";
 export { default as AddDogLayer } from "./layer/dogEnroll/AddDogLayer";
+export { default as EnrollSearchbar } from "./layer/dogEnroll/EnrollSearchbar";
 
 // layer/dogSearch
 export { default as DogSearchNavigation } from "./layer/dogSearch/DogSearchNavigation";
@@ -54,9 +57,9 @@ export { default as DeleteModal } from "./layer/dogDetail/DeleteModal";
 export { default as ReportModal } from "./layer/dogDetail/ReportModal";
 
 // layer/info
-export { default as InfoHeader } from './layer/info/InfoHeader';
-export { default as InfoBenefit } from './layer/info/InfoBenefit';
-export { default as InfoWarning } from './layer/info/InfoWarning';
+export { default as InfoHeader } from "./layer/info/InfoHeader";
+export { default as InfoBenefit } from "./layer/info/InfoBenefit";
+export { default as InfoWarning } from "./layer/info/InfoWarning";
 
 // layer/review
 export { default as ReviewPostInfo } from "./layer/review/ReviewPostInfo";

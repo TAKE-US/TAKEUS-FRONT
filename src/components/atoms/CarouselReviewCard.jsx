@@ -6,9 +6,9 @@ const Card = styled.article`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 34rem;
+  width: 34.6rem;
   height: 45rem;
-  border: 0.1rem solid #DFDFDF;
+  border: 0.1rem solid #dfdfdf;
   border-radius: 1rem;
   img {
     width: 34.6rem;
@@ -19,13 +19,13 @@ const Card = styled.article`
     display: flex;
     flex-direction: column;
     margin-top: 1.6rem;
-    
+
     &__title {
       font: ${({ theme }) => theme.font.title1};
+      font-size: 1.7rem;
       width: 30rem;
       height: 3rem;
       margin-right: 0.6rem;
-      margin-bottom: 1.2rem;
     }
     &__content {
       font: ${({ theme }) => theme.font.body2};
@@ -37,15 +37,31 @@ const Card = styled.article`
   }
 `;
 
-const CarouselReviewCard = () => {
+const CarouselReviewCard = ({ review }) => {
+  const defaultText =
+    "그렇지 않아도 부족한 입양자 중에서 믹스견, 백구, 황구는 국내 입양자가 거의 없어 해외 입양이 유일한 방법이라고 합니다. 그런 이유로 제가...";
+
+  console.log(typeof review.title.length);
   return (
     <Card>
-      <img src={review_Img} alt='review_Img' />
-      <section className='cardInfo'>
-        <div className='cardInfo__title'>귀여운 강아지들 안녕</div>
-        <div className='cardInfo__content'>
-          그렇지 않아도 부족한 입양자 중에서 믹스견, 백구, 황구는 국내 입양자가
-          거의 없어 해외 입양이 유일한 방법이라고 합니다. 그런 이유로 제가...
+      <img
+        src={
+          review.crawlingData[0].image
+            ? review.crawlingData[0].image
+            : review_Img
+        }
+        alt="review_Img"
+      />
+      <section className="cardInfo">
+        <div className="cardInfo__title">
+          {review.title.length < 21
+            ? review.title
+            : review.title.slice(0, 21).concat("...")}
+        </div>
+        <div className="cardInfo__content">
+          {review.crawlingData[0].desc
+            ? review.crawlingData[0].desc
+            : defaultText}
         </div>
       </section>
     </Card>

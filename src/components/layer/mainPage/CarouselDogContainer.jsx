@@ -1,8 +1,9 @@
+/* eslint-disable arrow-parens */
 import React, { useRef, useState, useEffect } from "react";
 import styled from "styled-components";
 import { withRouter } from "react-router-dom";
-import DogCard from "../../atoms/DogCard";
-import Carousel from "components/atoms/Carousel";
+import { DogCard } from "components";
+import { Carousel } from "components";
 import { getDogs } from "lib/api/sample";
 
 const ContainerWrap = styled.article`
@@ -62,9 +63,7 @@ const CarouselDogContainer = () => {
       <article className="container-bottom">
         <div className="container-bottom__cards" ref={listRef}>
           {dogs.length &&
-            dogs.map(dog => (
-              <DogCard key={dog._id} dog={dog} />
-            ))}
+            dogs.map((dog) => <DogCard key={dog._id} dog={dog} />)}
         </div>
       </article>
     </ContainerWrap>

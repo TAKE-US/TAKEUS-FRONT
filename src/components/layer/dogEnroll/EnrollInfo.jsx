@@ -1,13 +1,28 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { RadioButton, Counter, TextField, AddDogLayer, Input, Button } from "components";
+import {
+  RadioButton,
+  Counter,
+  TextField,
+  AddDogLayer,
+  Input,
+  Button,
+  EnrollSearchbar,
+  Dropdown
+} from "components";
 // import { DogEnrollInput } from 'components';
-import { ReactComponent as Plus } from 'assets/icon/ic_plus_24.svg';
+import { ReactComponent as Kakao } from 'assets/icon/ic_kakao_24.svg';
+import { ReactComponent as Call } from 'assets/icon/ic_call_24.svg';
+import { ReactComponent as Instagram } from 'assets/icon/ic_instar_24.svg';
+import { ReactComponent as Twitter } from 'assets/icon/ic_twitter_24.svg';
+import { ReactComponent as Facebook } from 'assets/icon/ic_facebook_24.svg';
+import { ReactComponent as Plus } from "assets/icon/ic_plus_24.svg";
+import useEnrollData from "hooks/useEnrollData";
 
 const EnrollInfoWrap = styled.section`
   .wrap {
     margin-top: 6rem;
-    
+
     &:last-child {
       margin-top: 8rem;
       margin-bottom: 18rem;
@@ -21,7 +36,7 @@ const EnrollInfoWrap = styled.section`
       .contact-layer {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        grid-auto-rows: calc(4.2rem + .2rem);
+        grid-auto-rows: calc(4.2rem + 0.2rem);
         column-gap: 1.9rem;
         row-gap: 1.2rem;
         margin-top: 2.4rem;
@@ -48,10 +63,11 @@ const EnrollInfoWrap = styled.section`
   }
   .dropdown {
     position: relative;
+    display: flex;
     font: ${({ theme }) => theme.font.button};
     color: ${({ theme }) => theme.color.gray3};
     &::after {
-      content: '';
+      content: "";
       width: 0;
       top: 0;
       right: 0;
@@ -61,23 +77,55 @@ const EnrollInfoWrap = styled.section`
   }
 `;
 
+const ContactsList = [
+  {
+    img: <Kakao />,
+    type: '카카오톡',
+  },
+  {
+    img: <Call />,
+    type: '전화번호',
+  },
+  {
+    img: <Instagram />,
+    type: '인스타그램',
+  },
+  {
+    img: <Twitter />,
+    type: '트위터',
+  },
+  {
+    img: <Facebook />,
+    type: '페이스북',
+  }
+];
+
 const EnrollInfo = () => {
-  const [contacts, setContacts] = useState([{ type: 'phone' }]);
+  const [contacts, setContacts] = useState([{ type: 'phone', value: '' }]);
+  const [enrollData, setEnrollData] = useEnrollData({});
 
   const addContact = () => {
-    setContacts(contacts.concat({ type: 'kakaotalk' }));
+    setContacts(contacts.concat({ type: 'kakaotalk', value: '' }));
   };
 
+  console.log(enrollData);
   return (
     <EnrollInfoWrap>
       <AddDogLayer />
       <div className="wrap wrap--flex">
         <label>출국정보</label>
+        <EnrollSearchbar enroll setEnrollData={setEnrollData} />
+        {/* setDogs, enroll, setEnrollData */}
       </div>
       <div className="wrap wrap--flex">
         <label>대상견 이름</label>
-        {/* <DogEnrollInput placeholder="ex 멍멍이" maxLength="30" /> */}
-        <Input placeholder="ex 멍멍이" maxLength={30} caption="30자 이내로 적어주세요." />
+        <Input
+          placeholder="ex 멍멍이"
+          maxLength={30}
+          caption="30자 이내로 적어주세요."
+          setEnrollData={setEnrollData}
+          name="name"
+        />
       </div>
       <div className="wrap wrap--flex">
         <label>대상견 성별</label>
@@ -87,12 +135,18 @@ const EnrollInfo = () => {
             { value: "남", select: false },
             { value: "선택안함", select: false },
           ]}
+          setEnrollData={setEnrollData}
+          name="gender"
         />
       </div>
       <div className="wrap wrap--flex">
         <label>대상견 나이</label>
         {/* <DogEnrollInput placeholder="ex 1살 , 2개월 등" maxLength="10" /> */}
-        <Input placeholder="ex 멍멍이" maxLength={10} caption="10자 이내로 적어주세요." />
+        <Input
+          placeholder="ex 멍멍이"
+          maxLength={10}
+          caption="10자 이내로 적어주세요."
+        />
       </div>
       <div className="wrap wrap--flex">
         <label>대상견 무게</label>
@@ -110,7 +164,11 @@ const EnrollInfo = () => {
       <div className="wrap wrap--flex">
         <label>건강상태</label>
         {/* <DogEnrollInput placeholder="ex 접종내역, 건강상태, 유의할 점 등" maxLength="50" /> */}
-        <Input placeholder="ex 멍멍이" maxLength={50} caption="50자 이내로 적어주세요." />
+        <Input
+          placeholder="ex 멍멍이"
+          maxLength={50}
+          caption="50자 이내로 적어주세요."
+        />
       </div>
       <div className="wrap wrap--flex">
         <label>소속여부</label>
@@ -121,18 +179,33 @@ const EnrollInfo = () => {
           ]}
         />
         {/* <DogEnrollInput placeholder="단체명을 입력해주세요." maxLength="15" /> */}
-        <Input placeholder="ex 멍멍이" maxLength={15} caption="15자 이내로 적어주세요." />
+        <Input
+          placeholder="ex 멍멍이"
+          maxLength={15}
+          caption="15자 이내로 적어주세요."
+        />
       </div>
       <div className="wrap contact">
         <label>연락처</label>
         <div className="contact-layer">
           {contacts.map((contact, i) => (
-            <Input placeholder={"연락처를 입력해 주세요"} key={`contact-${i}`}>
-              <div className="dropdown">{contact.type}</div>
+            <Input placeholder={"연락처를 입력해 주세요"} key={`contact-${i}`} font="body3">
+              <div className="dropdown">
+                <Dropdown
+                  item={ContactsList}
+                  placeholder="연락처"
+                  rounded
+                  small
+                  font="body3"
+                />
+              </div>
             </Input>
           ))}
           <div className="contact__btn" onClick={addContact}>
-            <Button rounded full padding="1rem 0"><Plus />연락처 추가하기</Button>
+            <Button rounded full padding="1rem 0">
+              <Plus />
+              연락처 추가하기
+            </Button>
           </div>
         </div>
       </div>
@@ -140,7 +213,9 @@ const EnrollInfo = () => {
         <TextField label="내용을 작성해주세요" maxLength={500} />
       </div>
       <div className="wrap">
-        <Button rounded full font="headline" padding="1.5rem">대상견 등록하기</Button>
+        <Button rounded full font="headline" padding="1.5rem">
+          대상견 등록하기
+        </Button>
       </div>
     </EnrollInfoWrap>
   );

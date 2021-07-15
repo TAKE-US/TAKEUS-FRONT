@@ -25,8 +25,7 @@ const DogDetailPage = () => {
   }, [match.params.id]);
 
   return (
-    dog &&
-    (
+    dog && (
       <Styled.Wrapper>
         <DogDetail dog={dog} />
       </Styled.Wrapper>

@@ -17,7 +17,7 @@ const Styled = {
       &:hover {
         cursor: default;
       }
-      
+
       input {
         &::placeholder {
           color: ${({ theme }) => theme.color.gray1};
@@ -34,7 +34,7 @@ const Styled = {
   Input: styled.input`
     flex: 1;
     padding: 0.8rem 0 0.8rem 1rem;
-    font: ${({ theme }) => theme.font.button};
+    font: ${({ theme, fontStyle }) => fontStyle ? theme.font[fontStyle] : theme.font.button};
     color: ${({ theme }) => theme.color.darkgray1};
     line-height: 2.6rem;
     &::placeholder {
@@ -49,9 +49,9 @@ const Styled = {
     color: ${({ theme }) => theme.color.gray3};
 
     &.error {
-      color: #F2754E;
+      color: #f2754e;
     }
-  `
+  `,
 };
 
 const isValidLength = (text, maxLength) => {
@@ -60,8 +60,8 @@ const isValidLength = (text, maxLength) => {
   return text.length > maxLength ? false : true;
 };
 
-const Input = ({ children, placeholder, caption, maxLength, font, disabled }) => {
-  const [value, setValue] = useState('');
+const Input = ({ children, placeholder, caption, maxLength, font, disabled, setEnrollData, name }) => {
+  const [value, setValue] = useState("");
   const [isError, setError] = useState(false);
 
   const isValid = useMemo(() => {
@@ -89,10 +89,13 @@ const Input = ({ children, placeholder, caption, maxLength, font, disabled }) =>
       else setValue(value.slice(0, maxLength).concat(newValue[newValue.length - 1]));
     }
   };
+  const onBlurHandler = () => {
+    setEnrollData(name, value);
+  };
 
   return (
     <>
-      <Styled.InputWrapper className={disabled ? 'disabled' : ''}>
+      <Styled.InputWrapper className={disabled ? "disabled" : ""}>
         {children}
         <Styled.Input
           disabled={disabled}
@@ -100,6 +103,7 @@ const Input = ({ children, placeholder, caption, maxLength, font, disabled }) =>
           value={value}
           fontStyle={font}
           onChange={changeValue}
+          onBlurCapture={onBlurHandler}
         />
         <Styled.Caption className={isError ? "error" : ""}>{caption}</Styled.Caption>
       </Styled.InputWrapper>

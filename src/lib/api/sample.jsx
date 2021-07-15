@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: ""
+  baseURL: "",
 });
 
 export const getDogs = async () => {
@@ -42,11 +42,12 @@ export const getCountry = async () => {
   }
 };
 
-export const getPageDogs = async num => {
+export const getPageDogs = async (num, selectedFilter) => {
   try {
+    const filter = selectedFilter === "최신순" ? "latest" : "oldest";
     const data = await instance.get("/api/dogs", {
       params: {
-        order: "latest",
+        order: filter,
         page: num,
       },
     });
@@ -127,7 +128,7 @@ export const getMyReviews = async num => {
     const data = await instance.get("/api/reviews/list/my", {
       headers: {
         "Content-Type": "application/json",
-        "x-auth-token": process.env.REACT_APP_MY_TOKEN,
+        "x-auth-token": localStorage.getItem("token"),
       },
     });
     console.log("[SUCCESS] GET my review data");
@@ -168,10 +169,28 @@ export const postToken = async (token, social) => {
     });
     console.log(data);
     console.log("[SUCCESS] POST token");
-    return data.data.token;
+    return data.data;
   } catch (e) {
     console.log("[FAIL] POST token");
     return null;
+  }
+};
+
+export const postReview = async data => {
+  const body = data;
+  try {
+    const data = await instance.post("/api/reviews", body, {
+      headers: {
+        "Content-Type": "application/json",
+        "x-auth-token": localStorage.getItem("token"),
+      },
+    });
+    console.log(data);
+    console.log("[SUCCESS] POST reviews");
+    return data;
+  } catch (e) {
+    console.log("[FAIL] POST reviews");
+    return e;
   }
 };
 

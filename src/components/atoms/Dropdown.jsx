@@ -7,6 +7,7 @@ import Arrow_Bottom from '../../assets/img/ic_arrow_bottom_black_24.svg';
 const Styled = {
   Container: styled.div`
     position: relative;
+    width: 14.5rem;
   `,
 
   Button: styled.button`
@@ -14,7 +15,7 @@ const Styled = {
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    padding: ${props => props.small ? "0.8rem 2rem" : "2.4rem 2.6rem"};
+    padding: ${props => props.small ? "0" : "2.4rem 2.6rem"};
     border-radius: ${props => props.rounded ? '5.4rem' : '1rem'};
     border: none;
     background-color: ${({ theme }) => theme.color.white};
@@ -132,15 +133,15 @@ const Dropdown = ({ item, placeholder, rounded, font, caption, small }) => {
               <Styled.List
                 key={index}
                 selected={
-                  list === value["name"] ? true : false
+                  list === value["type"] ? true : false
                 }
                 onClick={() => {
-                  setList(value["name"]);
+                  setList(value["type"]);
                   setImage(value["img"]);
                   setIsActive(!isActive);
                 }}
               >
-                {value["name"]}
+                {value["type"]}
               </Styled.List>
             </>
           ))}

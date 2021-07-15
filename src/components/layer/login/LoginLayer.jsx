@@ -23,7 +23,7 @@ const Styled = {
 
   ImageContainer: styled.div`
     width: 45.347%;
-    background-img: cover;
+    background-image: cover;
   `,
 
   Image: styled.img`
@@ -51,31 +51,27 @@ const Styled = {
   SectionContainer: styled.div`
     display: flex;
     flex-direction: column;
-
     h1 {
       height: 4.9rem;
       margin-bottom: 0.7rem;
       font: ${({ theme }) => theme.font.display2};
       color: ${({ theme }) => theme.color.black};
     }
-
     h2 {
       height: 2.2rem;
       margin-bottom: 7rem;
       font: ${({ theme }) => theme.font.body1};
       color: ${({ theme }) => theme.color.gray3};
     }
-
     .google {
       border: 0.1rem solid #dfdfdf;
     }
-  }
   `,
 
   Button: styled.button`
     width: 45.2rem;
     height: 4.8rem;
-    background-color: ${(props) => props.color};
+    background-color: ${props => props.color};
     border-radius: 2.1rem;
     padding-left: 1rem;
     margin-bottom: 1.7rem;
@@ -103,12 +99,13 @@ const LoginLayer = () => {
   const handleSuccess = async (token, social) => {
     console.log(token);
     const data = await postToken(token, social);
-    localStorage.setItem("token", data);
+    localStorage.setItem("token", data.token);
+    localStorage.setItem("ID", data.id);
     // window.open("http://localhost:3000", "_self");
   };
 
   // 로그인 실패 시
-  const handleFailure = (error) => {
+  const handleFailure = error => {
     console.log(error);
   };
   return (
@@ -131,18 +128,13 @@ const LoginLayer = () => {
           </Styled.Button>
           <GoogleLogin
             clientId={process.env.REACT_APP_GOOGLE_CLIENTID}
-            render={(renderProps) => (
-              <Styled.Button
-                className="google"
-                type="button"
-                color={"white"}
-                onClick={renderProps.onClick}
-              >
+            render={renderProps => (
+              <Styled.Button className="google" type="button" color={"white"} onClick={renderProps.onClick}>
                 <img className="googleIcon" src={GoogleIcon} alt="google" />
                 구글로 시작하기
               </Styled.Button>
             )}
-            onSuccess={(res) => handleSuccess(res.accessToken, "google")}
+            onSuccess={res => handleSuccess(res.accessToken, "google")}
             onFailure={handleFailure}
           />
         </Styled.SectionContainer>
