@@ -63,6 +63,7 @@ const Styled = {
 };
 
 const ReviewCard = ({ review, editHandler, deleteHandler }) => {
+  const isLogin = review.user === localStorage.getItem("ID") ? true : false;
   return (
     <Styled.Wrapper onClick={() => window.open(review.crawlingData[0].link)}>
       <section className="text">
@@ -81,12 +82,14 @@ const ReviewCard = ({ review, editHandler, deleteHandler }) => {
           <p>
             작성일ㅣ{review.writeDate} &nbsp;&nbsp;지역ㅣ시카고 &nbsp;&nbsp;봉사단체ㅣ{review.institutionName}
           </p>
-          <div className="button-wrap">
-            <button className="button-wrap__edit" onClick={evt => editHandler(evt)}>
-              수정
-            </button>
-            <button onClick={evt => deleteHandler(evt, review._id)}>삭제</button>
-          </div>
+          {isLogin && (
+            <div className="button-wrap">
+              <button className="button-wrap__edit" onClick={evt => editHandler(evt)}>
+                수정
+              </button>
+              <button onClick={evt => deleteHandler(evt, review._id)}>삭제</button>
+            </div>
+          )}
         </section>
       </section>
       <img className="image" src={review.crawlingData[0].image} alt="review_img" />
