@@ -1,8 +1,9 @@
 /* eslint-disable arrow-parens */
 import axios from "axios";
 
+const apiServer = 'http://takeus-backend-loadbalancer-5def40d9bdb60d9f.elb.ap-northeast-2.amazonaws.com:5000';
 const instance = axios.create({
-  baseURL: "",
+  baseURL: process.env.NODE_ENV === 'development' ? '/' : apiServer,
 });
 
 export const getDogs = async () => {

@@ -9,7 +9,6 @@ const Styled = {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 19.7rem;
     padding: 8rem 0;
     background-color: ${({ theme }) => theme.color.bg_gray};
     

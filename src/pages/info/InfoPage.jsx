@@ -1,5 +1,5 @@
 import React from "react";
-import { InfoHeader, InfoBenefit, InfoWarning } from 'components';
+import { InfoHeader, InfoBenefit, InfoWarning, InfoProcedure } from 'components';
 
 const InfoPage = () => {
   return (
@@ -7,6 +7,7 @@ const InfoPage = () => {
       <InfoHeader />
       <InfoBenefit />
       <InfoWarning />
+      <InfoProcedure />
     </>
   );
 };
