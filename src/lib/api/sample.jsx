@@ -166,6 +166,23 @@ export const getReviewsWithTags = async (hashtag, num, selectedFilter) => {
   }
 };
 
+export const getReviewsSearch = async (hashtag, num, selectedFilter, search) => {
+  try {
+    const filter = selectedFilter === "최신순" ? "latest" : "oldest";
+    const data = await instance.get(`/api/reviews/${search}?hashtags=${hashtag}`, {
+      params: {
+        order: filter,
+        page: num,
+      },
+    });
+    console.log("[SUCCESS] GET review search data");
+    return data.data;
+  } catch (e) {
+    console.log("[FAIL] GET review search data");
+    throw e;
+  }
+};
+
 export const postToken = async (token, social) => {
   const body = {
     token: token,
