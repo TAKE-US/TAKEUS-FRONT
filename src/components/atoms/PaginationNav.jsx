@@ -27,9 +27,9 @@ const PaginationNav = ({ pageNum, setPageNum, totalPage, review }) => {
     <NavWrap pageNum={pageNum}>
       <PageMoveButton bg={leftBtnIcon} onClick={prevPageHandler} />
       <article>
-        {pageNums.map(num => (
+        {pageNums.map((num, idx) => (
           <PageBtn
-            key={num}
+            key={idx}
             isSelect={
               //선택된 page에서는 색 변함
               num === pageNum ? true : false

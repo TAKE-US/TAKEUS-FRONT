@@ -42,9 +42,9 @@ export const getCountry = async () => {
   }
 };
 
-export const getPageDogs = async (num, selectedFilter) => {
+export const getPageDogs = async (num, selected) => {
   try {
-    const filter = selectedFilter === "최신순" ? "latest" : "oldest";
+    const filter = selected === "최신순" ? "latest" : "oldest";
     const data = await instance.get("/api/dogs", {
       params: {
         order: filter,
@@ -107,7 +107,8 @@ export const getSearchDogs = async location => {
   }
 };
 
-export const getMyDogs = async (num, filter) => {
+export const getMyDogs = async (num, selectedFilter) => {
+  const filter = selectedFilter === "최신순" ? "latest" : "oldest";
   try {
     const data = await instance.get("/api/dogs/my", {
       headers: {
@@ -127,7 +128,8 @@ export const getMyDogs = async (num, filter) => {
   }
 };
 
-export const getMyReviews = async (num, filter) => {
+export const getMyReviews = async (num, selectedFilter) => {
+  const filter = selectedFilter === "최신순" ? "latest" : "oldest";
   try {
     const data = await instance.get("/api/reviews/list/my", {
       headers: {

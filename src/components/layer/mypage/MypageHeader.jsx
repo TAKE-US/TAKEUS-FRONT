@@ -69,7 +69,7 @@ const MypageHeader = () => {
   const [dogsTotalPage, setDogsTotalPage] = useState(1);
   const [reviewsPage, setReviewsPage] = useState(1);
   const [reviewsTotalPage, setReviewsTotalPage] = useState(1);
-  const contents = ["미완료순", "완료순", "최신순", "오래된순"];
+  const contents = ["최신순", "오래된순"];
   const [selectedFilter, setSelectedFilter] = useState(contents[0]);
 
   const selectHandler = t => {
@@ -79,23 +79,24 @@ const MypageHeader = () => {
 
   useEffect(() => {
     (async () => {
-      const data = await getMyDogs(dogsPage, "latest");
+      console.log(selectedFilter);
+      const data = await getMyDogs(dogsPage, selectedFilter);
       setDogs(data[0]);
       setDogsTotalPage(data[1]);
       //review
-      const ReviewData = await getMyReviews(reviewsPage, "latest");
+      const ReviewData = await getMyReviews(reviewsPage, selectedFilter);
       setReviews(ReviewData[0]);
-      console.log("review total", ReviewData[1]);
       setReviewsTotalPage(ReviewData[1]);
+      console.log(data, ReviewData);
     })();
-  }, [dogsPage, reviewsPage]);
+  }, [dogsPage, reviewsPage, selectedFilter]);
   return (
     <Styled.Wrapper>
       <Styled.Header>
         <div>
           <nav className="tab-wrapper">
-            {tabs.map(tab => (
-              <Styled.Tab key={tab} className="tab_button" onClick={() => selectHandler(tab)} select={tab.select}>
+            {tabs.map((tab, idx) => (
+              <Styled.Tab key={idx} className="tab_button" onClick={() => selectHandler(tab)} select={tab.select}>
                 {tab.value}
               </Styled.Tab>
             ))}
