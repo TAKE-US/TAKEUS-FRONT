@@ -1,11 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import {
-  DogCardContainer,
-  PaginationNav,
-  DogSearchNavigation,
-  Filter,
-} from "../../components";
+import { DogCardContainer, PaginationNav, DogSearchNavigation, Filter } from "../../components";
 //api
 import { getPageDogs } from "lib/api/sample";
 //redux
@@ -27,10 +22,17 @@ const DogPage = ({ dogData }) => {
   const [dogs, setDogs] = useState([]);
   const [pageNum, setPageNum] = useState(1);
   const [totalPage, setTotalPage] = useState(0);
+  const [isEmpty, setIsEmpty] = useState(false);
   const contents = ["최신순", "오래된순"];
   const [selectedFilter, setSelectedFilter] = useState(contents[0]);
 
   useEffect(() => {
+    if (dogData[0] === 0) {
+      setIsEmpty(true);
+      return;
+    } else {
+      setIsEmpty(false);
+    }
     if (dogData.length !== 0) {
       if (selectedFilter === "최신순") {
         setDogs(dogData);
@@ -51,18 +53,10 @@ const DogPage = ({ dogData }) => {
     <Styled.Wrapper>
       <DogSearchNavigation />
       <div className="container">
-        <Filter
-          contents={contents}
-          selectedFilter={selectedFilter}
-          setSelectedFilter={setSelectedFilter}
-        />
-        <DogCardContainer dogs={dogs} />
+        <Filter contents={contents} selectedFilter={selectedFilter} setSelectedFilter={setSelectedFilter} />
+        {!isEmpty && <DogCardContainer dogs={dogs} />}
       </div>
-      <PaginationNav
-        pageNum={pageNum}
-        setPageNum={setPageNum}
-        totalPage={totalPage}
-      />
+      <PaginationNav pageNum={pageNum} setPageNum={setPageNum} totalPage={totalPage} />
     </Styled.Wrapper>
   );
 };

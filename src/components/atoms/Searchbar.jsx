@@ -85,10 +85,14 @@ const Searchbar = ({ setDogs }) => {
     console.log("click", currAirport);
     if (currAirport) {
       const data = await getSearchDogs(currAirport);
-      console.log(data[0]);
-      setDogs(data[0]);
-      if (location.pathname === "/") {
-        history.push("/dogSearch");
+      console.log(data);
+      if (data[0].length === 0) {
+        setDogs([0]);
+      } else {
+        setDogs(data[0]);
+        if (location.pathname === "/") {
+          history.push("/dogSearch");
+        }
       }
     }
   };
