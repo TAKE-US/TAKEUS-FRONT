@@ -61,6 +61,7 @@ export { default as ReportModal } from "./layer/dogDetail/ReportModal";
 export { default as InfoHeader } from "./layer/info/InfoHeader";
 export { default as InfoBenefit } from "./layer/info/InfoBenefit";
 export { default as InfoWarning } from "./layer/info/InfoWarning";
+export { default as InfoProcedure } from "./layer/info/InfoProcedure";
 
 // layer/review
 export { default as ReviewPostInfo } from "./layer/review/ReviewPostInfo";
