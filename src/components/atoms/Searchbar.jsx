@@ -87,6 +87,7 @@ const Searchbar = ({ setDogs }) => {
       const data = await getSearchDogs(currAirport);
       console.log(data);
       if (data[0].length === 0) {
+        //강아지 검색결과 없을 때
         setDogs([0]);
       } else {
         setDogs(data[0]);

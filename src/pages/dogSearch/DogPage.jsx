@@ -27,12 +27,14 @@ const DogPage = ({ dogData }) => {
   const [selectedFilter, setSelectedFilter] = useState(contents[0]);
 
   useEffect(() => {
+    //강아지 검색결과 없을 때
     if (dogData[0] === 0) {
       setIsEmpty(true);
       return;
     } else {
       setIsEmpty(false);
     }
+    //강아지 검색을 하지 않았을때
     if (dogData.length !== 0) {
       if (selectedFilter === "최신순") {
         setDogs(dogData);
