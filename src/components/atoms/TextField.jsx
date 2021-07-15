@@ -41,7 +41,14 @@ const TextFieldWrap = styled.section`
   }
 `;
 
-const TextField = ({ label, maxLength, placeholder, setEnrollData, name, initial }) => {
+const TextField = ({
+  label,
+  maxLength,
+  placeholder,
+  setEnrollData,
+  name,
+  initial,
+}) => {
   const [text, setText] = useInput(initial);
   const onBlurHandler = () => {
     setEnrollData(name, text);

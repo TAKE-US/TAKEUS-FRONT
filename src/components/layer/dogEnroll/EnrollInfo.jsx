@@ -143,7 +143,7 @@ const EnrollInfo = () => {
       <AddDogLayer setEnrollData={setEnrollDataCallback} name="photos" />
       <div className="wrap wrap--flex">
         <label>출국정보</label>
-        <EnrollSearchbar enroll setEnrollData={setEnrollData} />
+        <EnrollSearchbar enroll setEnrollData={setEnrollDataCallback} />
         {/* setDogs, enroll, setEnrollData */}
       </div>
       <div className="wrap wrap--flex">
@@ -152,7 +152,7 @@ const EnrollInfo = () => {
           placeholder="ex 멍멍이"
           maxLength={30}
           caption="30자 이내로 적어주세요."
-          setEnrollData={setEnrollData}
+          setEnrollData={setEnrollDataCallback}
           name="name"
         />
       </div>
@@ -164,7 +164,7 @@ const EnrollInfo = () => {
             { value: "남", select: false },
             { value: "선택안함", select: false },
           ]}
-          setEnrollData={setEnrollData}
+          setEnrollData={setEnrollDataCallback}
           name="gender"
         />
       </div>
@@ -175,13 +175,13 @@ const EnrollInfo = () => {
           placeholder="ex 멍멍이"
           maxLength={10}
           caption="10자 이내로 적어주세요."
-          setEnrollData={setEnrollData}
+          setEnrollData={setEnrollDataCallback}
           name="age"
         />
       </div>
       <div className="wrap wrap--flex">
         <label>대상견 무게</label>
-        <Counter setEnrollData={setEnrollData} name="weight" />
+        <Counter setEnrollData={setEnrollDataCallback} name="weight" />
       </div>
       <div className="wrap wrap--flex">
         <label>중성화 여부</label>
@@ -190,7 +190,7 @@ const EnrollInfo = () => {
             { value: "완료", select: true },
             { value: "미완료", select: false },
           ]}
-          setEnrollData={setEnrollData}
+          setEnrollData={setEnrollDataCallback}
           name="neutralization"
         />
       </div>
@@ -201,7 +201,7 @@ const EnrollInfo = () => {
           placeholder="ex 멍멍이"
           maxLength={50}
           caption="50자 이내로 적어주세요."
-          setEnrollData={setEnrollData}
+          setEnrollData={setEnrollDataCallback}
           name="health"
         />
       </div>
@@ -212,7 +212,7 @@ const EnrollInfo = () => {
             { value: "개인구조자", select: true },
             { value: "단체", select: false },
           ]}
-          setEnrollData={setEnrollData}
+          setEnrollData={setEnrollDataCallback}
           name="isInstitution"
         />
         {/* <DogEnrollInput placeholder="단체명을 입력해주세요." maxLength="15" /> */}
@@ -220,7 +220,7 @@ const EnrollInfo = () => {
           placeholder="ex 멍멍이"
           maxLength={15}
           caption="15자 이내로 적어주세요."
-          setEnrollData={setEnrollData}
+          setEnrollData={setEnrollDataCallback}
           name="isInstitutionName"
         />
       </div>
@@ -262,7 +262,7 @@ const EnrollInfo = () => {
         <TextField
           label="내용을 작성해주세요"
           maxLength={500}
-          setEnrollData={setEnrollData}
+          setEnrollData={setEnrollDataCallback}
           name="detail"
         />
       </div>

@@ -25,25 +25,25 @@ const CounterWrap = styled.section`
 const WeightBtn = styled.button`
   width: 4rem;
   height: 4rem;
-  background-image: url(${(props) => props.bg});
+  background-image: url(${props => props.bg});
   :hover {
-    background-image: url(${(props) => props.hover});
+    background-image: url(${props => props.hover});
   }
 `;
 
 const Counter = ({ name, setEnrollData }) => {
   const [num, setNum] = useState(0);
   const plusHandler = () => {
-    setNum((prev) => prev + 1);
+    setNum(prev => prev + 1);
   };
   const minusHandler = () => {
     if (num > 0) {
-      setNum((prev) => prev - 1);
+      setNum(prev => prev - 1);
     }
   };
   useEffect(() => {
     setEnrollData(name, num);
-  }, [num]);
+  }, [num, name, setEnrollData]);
   return (
     <CounterWrap>
       <WeightBtn
