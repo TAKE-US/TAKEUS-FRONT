@@ -69,30 +69,45 @@ src
 
 # Main view
 ![img](https://ifh.cc/g/AOWtik.jpg)
-- 대상견 간편 검색
-- 
+- 랜딩 페이지
+- 대상견 검색 및 최신글 확인
+
 
 
 ### 이동봉사정보
 ![img](https://ifh.cc/g/QdfcaT.jpg)
+- 이동봉사 기본 정보 노출
+
 
 ### 로그인
 ![img](https://ifh.cc/g/36rhue.jpg)
+- 소셜 로그인 기능 구현 (Google, Kakao, Naver)
+
 
 ### 대상견 찾기
 ![img](https://ifh.cc/g/UR1k8h.jpg)
+- 등록된 대상견 확인 및 검색
+
 
 ### 이동봉사 후기
 ![img](https://ifh.cc/g/rizCq9.jpg)
+- 이동봉사 후기 확인 및 검색
+- og tag를 이용해 후기 정보 제공
+
 
 ### About us
 ![img](https://ifh.cc/g/4diXYW.jpg)
+- About TAKE US
+
 
 ### 내가 쓴 글(이동봉사 모집글)
 ![img](https://ifh.cc/g/kZWuGy.jpg)
+- 작성한 이동봉사 모집 게시글 확인
 
 ### 내가 쓴 글(이동봉사 후기글)
 ![img](https://ifh.cc/g/dkh47E.jpg)
+- 작성한 이동봉사 후기 확인
+
 
 # 👩🏻‍💻 Developers
 - [moonhopark](https://github.com/moonhopark)
