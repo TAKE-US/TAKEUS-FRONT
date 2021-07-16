@@ -49,7 +49,6 @@ const LoginKakao = ({ handleSuccess }) => {
         Kakao.Auth.login({
           success: (res) => {
             handleSuccess(res.access_token, "kakao");
-            // history.push("/");
           },
           fail: (err) => {
             console.error(err);
