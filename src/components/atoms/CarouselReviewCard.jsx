@@ -1,6 +1,7 @@
-import React from "react";
-import styled from "styled-components";
-import review_Img from "../../assets/img/review_Img.svg";
+/* eslint-disable max-len */
+import React from 'react';
+import styled from 'styled-components';
+import review_Img from '../../assets/img/review_Img.svg';
 
 const Card = styled.article`
   display: flex;
@@ -40,30 +41,14 @@ const Card = styled.article`
 
 const CarouselReviewCard = ({ review }) => {
   const defaultText =
-    "그렇지 않아도 부족한 입양자 중에서 믹스견, 백구, 황구는 국내 입양자가 거의 없어 해외 입양이 유일한 방법이라고 합니다. 그런 이유로 제가...";
+    '그렇지 않아도 부족한 입양자 중에서 믹스견, 백구, 황구는 국내 입양자가 거의 없어 해외 입양이 유일한 방법이라고 합니다. 그런 이유로 제가...';
 
-  console.log(typeof review.title.length);
   return (
     <Card>
-      <img
-        src={
-          review.crawlingData[0].image
-            ? review.crawlingData[0].image
-            : review_Img
-        }
-        alt="review_Img"
-      />
+      <img src={review.crawlingData[0].image ? review.crawlingData[0].image : review_Img} alt="review_Img" />
       <section className="cardInfo">
-        <div className="cardInfo__title">
-          {review.title.length < 21
-            ? review.title
-            : review.title.slice(0, 21).concat("...")}
-        </div>
-        <div className="cardInfo__content">
-          {review.crawlingData[0].desc
-            ? review.crawlingData[0].desc
-            : defaultText}
-        </div>
+        <div className="cardInfo__title">{review.title.length < 21 ? review.title : review.title.slice(0, 21).concat('...')}</div>
+        <div className="cardInfo__content">{review.crawlingData[0].desc ? review.crawlingData[0].desc : defaultText}</div>
       </section>
     </Card>
   );
