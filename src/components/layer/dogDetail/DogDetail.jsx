@@ -11,6 +11,8 @@ import {
   ReportModal,
 } from "components";
 
+import { putDogStatus } from "lib/api/sample";
+
 const DogDetailWrap = styled.div`
   display: flex;
   flex-direction: column;
@@ -117,6 +119,35 @@ const DogDetailWrap = styled.div`
       line-height: 140%;
     }
   }
+
+  .match-button {
+    width: 100%;
+    height: 20%;
+    display: flex;
+    justify-content: flex-end;
+    .waiting, .done {
+      width: 13.1rem;
+      height: 4.7rem;
+      padding: 1.2rem 3rem;
+      border-radius: 5rem;
+      color: ${({ theme }) => theme.color.white};
+      font: ${({ theme }) => theme.font.button_large};
+    }
+    
+    .waiting {
+      background: ${({ theme }) => theme.color.primary};
+    }
+  
+    .waiting:hover {
+      background: ${({ theme }) => theme.color.primary_light};
+    }
+  
+    .done {
+      cursor: not-allowed;
+      pointer-events: none;
+      background: ${({ theme }) => theme.color.lightgray2};
+    }
+  }
 `;
 
 const DogDetail = ({ dog }) => {
@@ -124,10 +155,22 @@ const DogDetail = ({ dog }) => {
   const [myPost, setMyPost] = useState(false);
   const isLogin = localStorage.getItem("token");
   const myId = localStorage.getItem("ID");
+  const [dogStatus, setDogStatus] = useState("waiting");
 
   useEffect(() => {
     if (myId === dog.user) setMyPost(true);
-  }, [dog.user, myId]);
+    dog.status === "done"
+      ? setDogStatus("done")
+      : setDogStatus("wating");
+  }, [dog, myId]);
+  
+  const handleClick = () => {
+    const data = {
+      status: "done"
+    };
+    putDogStatus(dog._id, data);
+    setDogStatus("done");
+  };
 
   return (
     <DogDetailWrap>
@@ -163,6 +206,16 @@ const DogDetail = ({ dog }) => {
         <DogDetailInfo dog={dog} />
       </section>
       <article className="dog--detail">{dog.detail}</article>
+      {isLogin && myPost && (
+        <div className="match-button">
+          <button
+            className={dogStatus === "done" ? "done" : "waiting"}
+            onClick={handleClick}
+          >
+            매칭 완료
+          </button>
+        </div>
+      )}
     </DogDetailWrap>
   );
 };

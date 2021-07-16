@@ -15,11 +15,13 @@ const CardWrap = styled.article`
   }
   .card-info {
     display: flex;
-    flex-direction: column;
-    margin-top: 1.6rem;
+    flex-direction: ${props => (props.isMine ? "raw" : "column")};
+    margin-top: ${props => (props.isMine ? "0.8rem" : "1.6rem")};
+    justify-content: space-between;
     &-main {
       display: flex;
-      justify-content: center;
+      justify-content: ${props => (props.isMine ? "flex-start" : "center")};
+      align-items: center;
       &__name {
         max-width: 11.2rem;
         white-space: nowrap;
@@ -27,6 +29,28 @@ const CardWrap = styled.article`
         text-overflow: ellipsis;
         font: ${({ theme }) => theme.font.title2};
         margin-right: 0.6rem;
+      }
+      &__info {
+        font-family: "Noto Sans KR";
+        font-style: normal;
+        font-weight: normal;
+        font-size: 1.4rem;
+        line-height: 2rem;
+        color: #040404;
+        :last-child {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          ::before {
+            content: "";
+            display: block;
+            width: 2px;
+            height: 2px;
+            margin: 3px;
+            border-radius: 100%;
+            background-color: #040404;
+          }
+        }
       }
       &__location {
         display: flex;
@@ -63,8 +87,22 @@ const CardWrap = styled.article`
     }
   }
 `;
+const DogStateTag = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 4.8rem;
+  font: ${({ theme }) => theme.font.body1};
+  background-color: ${props => (props.done ? "rgba(253,203,2,0.2)" : "rgba(115, 172, 255, 0.2)")};
+  border-radius: 3.5rem;
+  padding: 0 1.1rem;
+  p {
+    font: ${({ theme }) => theme.font.body1};
+    color: ${props => (props.done ? props.theme.color.primary : props.theme.color.sky_blue)};
+  }
+`;
 
-const DogCard = ({ dog, history }) => {
+const DogCard = ({ dog, history, match }) => {
   const cardClickHandler = () => {
     try {
       history.push(`/dogSearch/${dog._id}`);
@@ -72,21 +110,36 @@ const DogCard = ({ dog, history }) => {
       console.log(e);
     }
   };
+  const isMine = match.path === "/mypage" ? true : false;
+  const airport = (dog.endingAirport || "").split(" ");
   return (
-    <CardWrap onClick={cardClickHandler}>
+    <CardWrap onClick={cardClickHandler} isMine={isMine}>
       <img src={dog.photos[0]} alt="" />
-      <section className="card-info">
-        <article className="card-info-main">
-          <p className="card-info-main__name">{dog.name}</p>
-          <div className="card-info-main__location">
-            <img src={locationIcon} alt="card_image" />
-            <p>{dog.endingAirport}</p>
-          </div>
-        </article>
-        <article className="card-info-sub">
-          <p>단체 | {dog.institutionName}</p>
-        </article>
-      </section>
+      {isMine ? (
+        <section className="card-info">
+          <article className="card-info-main">
+            <p className="card-info-main__name">{dog.name}</p>
+            <p className="card-info-main__info">{dog.gender === "Male" ? "수컷" : "암컷"}</p>
+            <p className="card-info-main__info">{dog.weight + "kg"}</p>
+          </article>
+          <DogStateTag done={dog.status === "waiting" ? false : true}>
+            <p>{dog.status === "waiting" ? "미완료" : "완료"}</p>
+          </DogStateTag>
+        </section>
+      ) : (
+        <section className="card-info">
+          <article className="card-info-main">
+            <p className="card-info-main__name">{dog.name}</p>
+            <div className="card-info-main__location">
+              <img src={locationIcon} alt="card_image" />
+              <p>{airport[0]}</p>
+            </div>
+          </article>
+          <article className="card-info-sub">
+            <p>단체 | {dog.institutionName}</p>
+          </article>
+        </section>
+      )}
     </CardWrap>
   );
 };
