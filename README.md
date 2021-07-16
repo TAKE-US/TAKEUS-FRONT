@@ -69,8 +69,11 @@ src
 
 # Main view
 ![img](https://ifh.cc/g/AOWtik.jpg)
+- 대상견 간편 검색
+- 
 
-###이동봉사정보
+
+### 이동봉사정보
 ![img](https://ifh.cc/g/QdfcaT.jpg)
 
 ### 로그인
