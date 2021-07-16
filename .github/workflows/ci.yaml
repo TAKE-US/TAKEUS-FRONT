@@ -23,7 +23,7 @@ jobs:
         run: yarn install
         
       - name: Build webpack
-        run: yarn run build
+        run: yarn build
 
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
