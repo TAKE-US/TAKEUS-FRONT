@@ -1,13 +1,25 @@
 import React from 'react';
 import styled from 'styled-components';
-
-import { Button } from 'components';
 import BackgroundImg from 'assets/img/img_info_background-bottom.jpg';
 import Step1Img from 'assets/img/img_info_step1.png';
 import Step3Img from 'assets/img/img_info_step3.png';
 import Step4Img from 'assets/img/img_info_step4.png';
 
 const Styled = {
+  Button: styled.button`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: ${props => (props.full ? '100%' : 'auto')};
+    height: 100%;
+    padding: ${props => props.padding || '0.5rem'};
+    border-radius: ${props => (props.rounded ? '50px' : '8px')};
+    font: ${({ theme, fontStyle }) => (fontStyle ? theme.font[fontStyle] : theme.font.button)};
+
+    color: ${({ theme }) => theme.color.primary};
+    background-color: ${({ theme }) => theme.color.white};
+    border: solid 1px ${({ theme }) => theme.color.primary};
+  `,
   Wrapper: styled.div`
     margin-left: calc(-50vw + 50%);
     padding-bottom: 20rem;
@@ -15,7 +27,6 @@ const Styled = {
     background: url(${BackgroundImg});
     background-position: 100%;
     background-size: cover;
-    
 
     .content-wrapper {
       width: 1080px;
@@ -35,14 +46,18 @@ const Styled = {
         align-items: flex-end;
         margin-top: 4rem;
         margin-left: 7.6rem;
-        
+
+        .card:nth-child(4) {
+          background-color: ${({ theme }) => theme.color.white};
+          opacity: 80%;
+        }
         .card {
           display: inline-flex;
           margin: 4.2rem 0;
           padding: 4rem;
           border-radius: 10px;
           box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.07);
-          
+
           &__title {
             margin-bottom: 1.5rem;
             font: ${({ theme }) => theme.font.title2};
@@ -69,7 +84,6 @@ const Styled = {
             }
           }
         }
-
 
         .last-title {
           width: 100%;
@@ -106,11 +120,10 @@ const Styled = {
         }
       }
     }
-  `
+  `,
 };
 
 const InfoProcedure = () => {
-
   return (
     <Styled.Wrapper>
       <div className="content-wrapper">
@@ -121,7 +134,9 @@ const InfoProcedure = () => {
               <h4 className="card__title">STEP 1 비행기 탑승 예약</h4>
               <ul>
                 <li className="card__list">항공기 편당 탑승 가능한 강아지 자리가 한정되어 있습니다</li>
-                <li className="card__list">봉사자님의 e-ticket과 연락처를 보내주시면 단체에서 해당 항공편에 보낼 수 있는 강아지 자리가 남아있는지 확인하고 예약합니다</li>
+                <li className="card__list">
+                  봉사자님의 e-ticket과 연락처를 보내주시면 단체에서 해당 항공편에 보낼 수 있는 강아지 자리가 남아있는지 확인하고 예약합니다
+                </li>
                 <li className="card__list">항공사에 따라 1인 2~3마리까지 가능합니다</li>
                 <li className="card__list">일반적으로 동물전용칸의 수화물로 보내지만 작은 아이들의 경우 기내탑승도 가능합니다</li>
               </ul>
@@ -133,7 +148,9 @@ const InfoProcedure = () => {
               <h4 className="card__title">STEP 2 비행기 탑승 예약</h4>
               <ul>
                 <li className="card__list">항공기 편당 탑승 가능한 강아지 자리가 한정되어 있습니다</li>
-                <li className="card__list">봉사자님의 e-ticket과 연락처를 보내주시면 단체에서 해당 항공편에 보낼 수 있는 강아지 자리가 남아있는지 확인하고 예약합니다</li>
+                <li className="card__list">
+                  봉사자님의 e-ticket과 연락처를 보내주시면 단체에서 해당 항공편에 보낼 수 있는 강아지 자리가 남아있는지 확인하고 예약합니다
+                </li>
                 <li className="card__list">항공사에 따라 1인 2~3마리까지 가능합니다</li>
                 <li className="card__list">일반적으로 동물전용칸의 수화물로 보내지만 작은 아이들의 경우 기내탑승도 가능합니다</li>
               </ul>
@@ -144,7 +161,9 @@ const InfoProcedure = () => {
               <h4 className="card__title">STEP 3 비행기 탑승 예약</h4>
               <ul>
                 <li className="card__list">항공기 편당 탑승 가능한 강아지 자리가 한정되어 있습니다</li>
-                <li className="card__list">봉사자님의 e-ticket과 연락처를 보내주시면 단체에서 해당 항공편에 보낼 수 있는 강아지 자리가 남아있는지 확인하고 예약합니다</li>
+                <li className="card__list">
+                  봉사자님의 e-ticket과 연락처를 보내주시면 단체에서 해당 항공편에 보낼 수 있는 강아지 자리가 남아있는지 확인하고 예약합니다
+                </li>
                 <li className="card__list">항공사에 따라 1인 2~3마리까지 가능합니다</li>
                 <li className="card__list">일반적으로 동물전용칸의 수화물로 보내지만 작은 아이들의 경우 기내탑승도 가능합니다</li>
               </ul>
@@ -157,19 +176,22 @@ const InfoProcedure = () => {
               <h4 className="card__title">STEP 4 비행기 탑승 예약</h4>
               <ul>
                 <li className="card__list">항공기 편당 탑승 가능한 강아지 자리가 한정되어 있습니다</li>
-                <li className="card__list">봉사자님의 e-ticket과 연락처를 보내주시면 단체에서 해당 항공편에 보낼 수 있는 강아지 자리가 남아있는지 확인하고 예약합니다</li>
+                <li className="card__list">
+                  봉사자님의 e-ticket과 연락처를 보내주시면 단체에서 해당 항공편에 보낼 수 있는 강아지 자리가 남아있는지 확인하고 예약합니다
+                </li>
                 <li className="card__list">항공사에 따라 1인 2~3마리까지 가능합니다</li>
                 <li className="card__list">일반적으로 동물전용칸의 수화물로 보내지만 작은 아이들의 경우 기내탑승도 가능합니다</li>
               </ul>
             </div>
           </article>
           <h3 className="last-title">
-            입국장으로 나가시면 입양자님이 기다리고 계십니다!️<br />
+            입국장으로 나가시면 입양자님이 기다리고 계십니다!️
+            <br />
             유기견이었던 강아지가 평생 가족을 만나기 위해 내딛는 첫 발걸음에 동행해주셔서 감사합니다 :)
           </h3>
           <p className="last-desc">
-            입국수속 시 강아지에 대해 묻는다면
-            이 강아지는 입양자가 기다리고 있으며 이동봉사로 데려왔다고 하시면 됩니다.<br />
+            입국수속 시 강아지에 대해 묻는다면 이 강아지는 입양자가 기다리고 있으며 이동봉사로 데려왔다고 하시면 됩니다.
+            <br />
             이와 관련해 대부분의 단체에서는 Letter를 준비해 드리며 서류가 준비되어있기 때문에 입국시 전혀 문제될 일이 없습니다!
           </p>
           <div className="inquiry">
@@ -178,12 +200,15 @@ const InfoProcedure = () => {
           </div>
         </section>
         <div className="button-area">
-          <Button primary rounded padding="1.6rem 7.1rem" font="button">이동 봉사 하러 가기</Button>
-          <Button rounded padding="1.6rem 6.6rem" font="button">대상견 등록하러 가기</Button>
+          <Styled.Button rounded padding="1.6rem 7.1rem" font="button">
+            이동 봉사 하러 가기
+          </Styled.Button>
+          <Styled.Button rounded padding="1.6rem 6.6rem" font="button">
+            대상견 등록하러 가기
+          </Styled.Button>
         </div>
       </div>
     </Styled.Wrapper>
-    
   );
 };
 
