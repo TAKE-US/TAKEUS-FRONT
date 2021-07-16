@@ -33,6 +33,7 @@ const GlobalStyle = createGlobalStyle`
 
     padding: 0;
     margin: 0;
+    max-height: 100vh;
     overflow: overlay;
     -ms-overflow-style: none;
     
