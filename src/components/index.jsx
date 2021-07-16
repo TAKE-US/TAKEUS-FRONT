@@ -24,6 +24,7 @@ export { default as Modal } from "./atoms/Modal";
 export { default as CarouselReviewCard } from "./atoms/CarouselReviewCard";
 export { default as Carousel } from "./atoms/Carousel";
 export { default as ReviewSearchbar } from "./atoms/ReviewSearchbar";
+export { default as Loading } from "./atoms/Loading";
 
 // layer
 export { default as Header } from "./layer/Header";
