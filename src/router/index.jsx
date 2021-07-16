@@ -12,17 +12,18 @@ import {
 } from "pages";
 
 const Router = () => {
+  console.log('test');
   return (
     <>
       <Switch>
         <Route exact path="/" component={ MainPage } />
-        <Route exact path="/login" component={ LoginPage } />
-        <Route exact path="/info" component={ InfoPage } />
-        <Route exact path="/about" component={ AboutUsPage } />
-        <Route exact path="/mypage" component={ MyPage } />
+        <Route path="/login" component={ LoginPage } />
+        <Route path="/info" component={ InfoPage } />
+        <Route path="/about" component={ AboutUsPage } />
+        <Route path="/mypage" component={ MyPage } />
         
         <Route path="/dog" component={ DogRouter } />
-        <Route exact path="/review" compoennt={ ReviewRouter } />
+        <Route path="/review" component={ ReviewRouter } />
       </Switch>
     </>
   );

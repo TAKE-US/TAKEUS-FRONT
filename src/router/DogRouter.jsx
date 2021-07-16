@@ -11,15 +11,9 @@ const DogRouter = ({ match }) => {
   const path = match.path;
   return (
     <>
-      <Route path={ path + '/search' } exact>
-        <DogPage />
-      </Route>
-      <Route path={ path + '/search/:id' }>
-        <DogDetailPage />
-      </Route>
-      <Route path={ path+ '/enroll' }>
-        <DogEnrollPage />
-      </Route>
+      <Route exact path={path + '/search'} component={ DogPage } />
+      <Route path={ path + '/search/:id' } component={ DogDetailPage } />
+      <Route path={path + '/enroll'} component={ DogEnrollPage }/>
     </>
   );
 };
