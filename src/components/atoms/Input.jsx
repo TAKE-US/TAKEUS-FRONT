@@ -34,9 +34,7 @@ const Styled = {
   `,
   Input: styled.input`
     flex: 1;
-    padding: 0.8rem 0 0.8rem 1rem;
-    font: ${({ theme, fontStyle }) =>
-      fontStyle ? theme.font[fontStyle] : theme.font.button};
+    font: ${({ theme, fontStyle }) => (fontStyle ? theme.font[fontStyle] : theme.font.button)};
     color: ${({ theme }) => theme.color.darkgray1};
     line-height: 2.6rem;
     &::placeholder {
@@ -99,10 +97,7 @@ const Input = ({
     if (isValid) setValue(newValue);
     else {
       if (isValidLength(newValue, maxLength)) setValue(newValue);
-      else
-        setValue(
-          value.slice(0, maxLength).concat(newValue[newValue.length - 1])
-        );
+      else setValue(value.slice(0, maxLength).concat(newValue[newValue.length - 1]));
     }
   };
 
@@ -128,9 +123,7 @@ const Input = ({
           onChange={changeValue}
           onBlurCapture={onBlurHandler}
         />
-        <Styled.Caption className={isError ? "error" : ""}>
-          {caption}
-        </Styled.Caption>
+        <Styled.Caption className={isError ? "error" : ""}>{caption}</Styled.Caption>
       </Styled.InputWrapper>
     </>
   );

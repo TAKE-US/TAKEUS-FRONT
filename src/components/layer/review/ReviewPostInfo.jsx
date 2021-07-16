@@ -8,25 +8,36 @@ import { postReview, getReviewDetail, putReview } from "lib/api/sample";
 
 const ReviewInfoStyle = styled.section`
   .wrap {
+    display: flex;
+    width: 100%;
     margin-top: 6rem;
+    label {
+      display: inline-block;
+      min-width: 14.2rem;
+      margin-bottom: 2.4rem;
+      font: ${({ theme }) => theme.font.title2};
+    }
 
     &--flex {
       display: flex;
+    }
+
+    &--input {
+      width: 100%;
+      height: 3.2rem;
+    }
+    &--institution {
+      width: 100%;
+      height: 3.2rem;
+      width: 35.1rem;
     }
 
     &:last-child {
       margin-bottom: 18rem;
     }
 
-    label {
-      display: inline-block;
-      min-width: 18.2rem;
-      margin-bottom: 2.4rem;
-      font: ${({ theme }) => theme.font.headline};
-    }
-
     .hashtag {
-      margin-right: 1.6rem;
+      margin-right: 0.9rem;
     }
   }
 `;
@@ -77,15 +88,18 @@ const ReviewPostInfo = ({ edit }) => {
   return (
     <ReviewInfoStyle>
       <div className="wrap">
-        <label>출국정보</label>
-        <Input
-          placeholder="어떤 제목으로 후기를 등록하고 싶나요?"
-          caption="30자 이내로 적어주세요."
-          maxLength={30}
-          setEnrollData={setEnrollData}
-          name="title"
-          initial={initial?.title}
-        />
+        <label>후기제목</label>
+        <div className="wrap--input">
+          <Input
+            placeholder="어떤 제목으로 후기를 등록하고 싶나요?"
+            caption="30자 이내로 적어주세요."
+            maxLength={30}
+            setEnrollData={setEnrollData}
+            name="title"
+            font="body3"
+            initial={initial?.title}
+          />
+        </div>
       </div>
 
       <div className="wrap">
@@ -105,7 +119,7 @@ const ReviewPostInfo = ({ edit }) => {
               }}
               key={`hashtag-${i}`}
             >
-              <Hashtag tag={hashtag.tag} primary={hashtag.active} rounded />
+              <Hashtag tag={hashtag.tag} primary={hashtag.active} />
             </div>
           ))}
         </div>
@@ -123,14 +137,17 @@ const ReviewPostInfo = ({ edit }) => {
             setEnrollData={setEnrollData}
             name="isInstitution"
           />
-          <Input
-            placeholder="단체명을 입력해주세요."
-            caption="15자 이내로 적어주세요."
-            maxLength={15}
-            setEnrollData={setEnrollData}
-            name="institutionName"
-            initial={initial?.institutionName}
-          />
+          <div className="wrap--institution">
+            <Input
+              placeholder="단체명을 입력해주세요."
+              caption="15자 이내로 적어주세요."
+              maxLength={15}
+              setEnrollData={setEnrollData}
+              name="institutionName"
+              initial={initial?.institutionName}
+              font="body3"
+            />
+          </div>
         </div>
       </div>
 
@@ -153,7 +170,7 @@ const ReviewPostInfo = ({ edit }) => {
           }
         }}
       >
-        <Button full rounded padding="15px 0" font="headline">
+        <Button full rounded padding="15px 0" font="button">
           후기 등록하기
         </Button>
       </div>
