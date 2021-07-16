@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import React, { useState } from "react";
+import styled from "styled-components";
 //assets
-import radioOff from 'assets/icon/btn_radio_off_24.svg';
-import radioOn from 'assets/icon/btn_radio_on_24.svg';
+import radioOff from "assets/icon/btn_radio_off_24.svg";
+import radioOn from "assets/icon/btn_radio_on_24.svg";
 
 const RadioBtnWrap = styled.section`
   display: flex;
