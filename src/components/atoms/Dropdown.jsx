@@ -17,9 +17,6 @@ const Styled = {
     align-items: center;
     width: 100%;
     padding: ${props => (props.small ? '0' : '2.4rem 2.6rem')};
-    border-radius: ${props => (props.rounded ? '5.4rem' : '1rem')};
-    border: none;
-    background-color: ${({ theme }) => theme.color.white};
 
     .destination {
       display: flex;

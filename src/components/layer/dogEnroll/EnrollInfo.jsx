@@ -27,7 +27,6 @@ const EnrollInfoWrap = styled.section`
   .wrap {
     margin-top: 6rem;
     padding: 0 12rem;
-    height: 3.2rem;
     label {
       min-width: 15.2rem;
       font: ${({ theme }) => theme.font.title2};
