@@ -5,7 +5,6 @@ export { default as DogCard } from "./atoms/DogCard";
 export { default as CopyLinkButton } from "./atoms/CopyLinkButton";
 export { default as Searchbar } from "./atoms/Searchbar";
 export { default as Filter } from "./atoms/Filter";
-export { default as DogEnrollInput } from "./atoms/DogEnrollInput";
 export { default as RadioButton } from "./atoms/RadioButton";
 export { default as Counter } from "./atoms/Counter";
 export { default as TextField } from "./atoms/TextField";

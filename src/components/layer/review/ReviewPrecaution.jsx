@@ -7,7 +7,8 @@ const ReviewPrecautionStyle = styled.div`
     padding-bottom: 4.8rem;
     border-bottom: 1.5px solid ${({ theme }) => theme.color.lightgray2};
     p {
-      font: ${({ theme }) => theme.font.display1};
+      font: ${({ theme }) => theme.font.display2};
+      font-weight: 400;
     }
   }
 `;
