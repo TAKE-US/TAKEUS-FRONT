@@ -105,7 +105,7 @@ const DogStateTag = styled.div`
 const DogCard = ({ dog, history, match }) => {
   const cardClickHandler = () => {
     try {
-      history.push(`/dogSearch/${dog._id}`);
+      history.push(`/dog/search/${dog._id}`);
     } catch (e) {
       console.log(e);
     }

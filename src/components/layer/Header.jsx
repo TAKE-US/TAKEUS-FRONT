@@ -119,13 +119,15 @@ const mapDispatchToProps = dispatch => {
 };
 
 const Header = ({ setDogs }) => {
-  const noticeElement = useRef();
+  const noticeElement = useRef(null);
   const location = useLocation();
   const history = useHistory();
   const [isScrolling, setIsScrolling] = useState(false);
   const isLogin = localStorage.getItem("token");
 
   const scrollHandler = useCallback(() => {
+    if (!noticeElement.current) return;
+  
     if (isLogin) {
       if (window.scrollY > 0) {
         setIsScrolling(true);
@@ -170,9 +172,9 @@ const Header = ({ setDogs }) => {
               이동봉사정보
             </Head.Content>
             <Head.Content
-              isSelect={location.pathname === "/dogSearch"}
+              isSelect={location.pathname === "/dog/search"}
               onClick={() => {
-                history.push("/dogSearch");
+                history.push("/dog/search");
                 const empty = [];
                 setDogs(empty);
               }}
@@ -198,7 +200,7 @@ const Header = ({ setDogs }) => {
           </div>
           {isLogin ? (
             <Head.Login>
-              <Link className="enroll" to="/dogEnroll">
+              <Link className="enroll" to="/dog/enroll">
                 대상견 등록
               </Link>
               <Link className="login" to="/mypage">

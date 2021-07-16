@@ -1,23 +1,13 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
+import ContentRouter from 'router';
+
 import GlobalStyle from "./styles/GlobalStyle";
 import styled from "styled-components";
 import store from "redux/store";
 import { setDogs } from "redux/actions";
 
 import { Header, Footer } from "./components/index";
-import {
-  LoginPage,
-  DogPage,
-  InfoPage,
-  AboutUsPage,
-  MainPage,
-  DogDetailPage,
-  DogEnrollPage,
-  ReviewPage,
-  ReviewPostPage,
-  MyPage,
-} from "./pages";
 
 window.store = store;
 window.setDogs = setDogs;
@@ -37,41 +27,7 @@ function App() {
       <Router>
         <Header />
         <Styled.ContentWrapper>
-          <Switch>
-            <Route path="/" exact>
-              <MainPage />
-            </Route>
-            <Route path="/login" exact>
-              <LoginPage />
-            </Route>
-            <Route path="/dogSearch" exact>
-              <DogPage />
-            </Route>
-            <Route path="/dogEnroll" exact>
-              <DogEnrollPage />
-            </Route>
-            <Route path="/dogSearch/:id" exact>
-              <DogDetailPage />
-            </Route>
-            <Route path="/info" exact>
-              <InfoPage />
-            </Route>
-            <Route path="/about" exact>
-              <AboutUsPage />
-            </Route>
-            <Route path="/review" exact>
-              <ReviewPage />
-            </Route>
-            <Route path="/review/post" exact>
-              <ReviewPostPage />
-            </Route>
-            <Route path="/review/post/:id" exact>
-              <ReviewPostPage edit />
-            </Route>
-            <Route path="/mypage" exact>
-              <MyPage />
-            </Route>
-          </Switch>
+          <ContentRouter />
         </Styled.ContentWrapper>
         <Footer />
       </Router>

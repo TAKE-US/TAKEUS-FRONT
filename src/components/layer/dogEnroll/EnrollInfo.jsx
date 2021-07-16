@@ -176,7 +176,7 @@ const EnrollInfo = ({ history }) => {
       formData.append("photos", createImage[i]["image"]);
     }
     await postEnroll(formData);
-    history.push("/dogSearch");
+    history.push("/dog/search");
   };
 
   console.log(enrollData);

@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Button } from "components";
-import { useHistory } from "react-router";
+import { Link } from "react-router-dom";
 
 import ClockImg from "assets/img/img_clock.svg";
 import HeartImg from "assets/img/img_heart.svg";
@@ -55,7 +55,6 @@ const Styled = {
 };
 
 const AboutTakeUs = () => {
-  const history = useHistory();
   return (
     <Styled.Wrapper>
       <h2 className="title">ABOUT TAKE US</h2>
@@ -88,11 +87,11 @@ const AboutTakeUs = () => {
           </p>
         </Styled.Content>
       </Styled.ContentArea>
-      <button onClick={() => history.push("/about")}>
+      <Link to="/about">
         <Button primary rounded padding="12px 30px">
           테이커스에 문의하기
         </Button>
-      </button>
+      </Link>
     </Styled.Wrapper>
   );
 };

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 import styled from "styled-components";
 import BackgroundImg from "assets/img/img_info_background-bottom.jpg";
 import Step1Img from "assets/img/img_info_step1.png";
@@ -120,8 +121,8 @@ const Styled = {
       .button-area {
         display: flex;
         justify-content: center;
-        & > button {
-          margin: 1.3rem;
+        & > a {
+          margin: 0 1.3rem;
         }
       }
     }
@@ -129,6 +130,8 @@ const Styled = {
 };
 
 const InfoProcedure = () => {
+  const isLogin = localStorage.getItem('token');
+
   return (
     <Styled.Wrapper>
       <div className="content-wrapper">
@@ -241,12 +244,16 @@ const InfoProcedure = () => {
           </div>
         </section>
         <div className="button-area">
-          <Styled.Button rounded padding="1.6rem 7.1rem" font="button">
-            이동 봉사 하러 가기
-          </Styled.Button>
-          <Styled.Button rounded padding="1.6rem 6.6rem" font="button">
-            대상견 등록하러 가기
-          </Styled.Button>
+          <Link to="/dog/search">
+            <Styled.Button rounded padding="1.6rem 7.1rem" font="button">
+              이동 봉사 하러 가기
+            </Styled.Button>
+          </Link>
+          <Link to={ isLogin ? "/dog/enroll" : "/login"} >
+            <Styled.Button rounded padding="1.6rem 6.6rem" font="button">
+              대상견 등록하러 가기
+            </Styled.Button>
+          </Link>
         </div>
       </div>
     </Styled.Wrapper>
