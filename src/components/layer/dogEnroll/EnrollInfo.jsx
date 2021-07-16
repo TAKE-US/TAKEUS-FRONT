@@ -1,17 +1,18 @@
 /* eslint-disable max-len */
 /* eslint-disable arrow-parens */
 
-import React, { useState, useEffect, useCallback } from 'react';
-import styled from 'styled-components';
-import { RadioButton, Counter, TextField, AddDogLayer, Input, Button, EnrollSearchbar, Dropdown } from 'components';
-import { ReactComponent as Kakao } from 'assets/icon/ic_kakao_24.svg';
-import { ReactComponent as Call } from 'assets/icon/ic_call_24.svg';
-import { ReactComponent as Instagram } from 'assets/icon/ic_instar_24.svg';
-import { ReactComponent as Twitter } from 'assets/icon/ic_twitter_24.svg';
-import { ReactComponent as Facebook } from 'assets/icon/ic_facebook_24.svg';
-import { ReactComponent as Plus } from 'assets/icon/ic_plus_24.svg';
-import useEnrollData from 'hooks/useEnrollData';
-import { postEnroll } from 'lib/api/sample';
+import React, { useState, useEffect, useCallback } from "react";
+import styled from "styled-components";
+import { RadioButton, Counter, TextField, AddDogLayer, Input, Button, EnrollSearchbar, Dropdown } from "components";
+import { ReactComponent as Kakao } from "assets/icon/ic_kakao_24.svg";
+import { ReactComponent as Call } from "assets/icon/ic_call_24.svg";
+import { ReactComponent as Instagram } from "assets/icon/ic_instar_24.svg";
+import { ReactComponent as Twitter } from "assets/icon/ic_twitter_24.svg";
+import { ReactComponent as Facebook } from "assets/icon/ic_facebook_24.svg";
+import { ReactComponent as Plus } from "assets/icon/ic_plus_24.svg";
+import useEnrollData from "hooks/useEnrollData";
+import { postEnroll } from "lib/api/sample";
+import { withRouter } from "react-router-dom";
 
 const EnrollInfoWrap = styled.section`
   .wrap {
@@ -61,7 +62,7 @@ const EnrollInfoWrap = styled.section`
     font: ${({ theme }) => theme.font.button};
     color: ${({ theme }) => theme.color.gray3};
     &::after {
-      content: '';
+      content: "";
       width: 0;
       top: 0;
       right: 0;
@@ -74,30 +75,30 @@ const EnrollInfoWrap = styled.section`
 const ContactsList = [
   {
     img: <Kakao />,
-    type: '카카오톡',
+    type: "카카오톡",
   },
   {
     img: <Call />,
-    type: '전화번호',
+    type: "전화번호",
   },
   {
     img: <Instagram />,
-    type: '인스타그램',
+    type: "인스타그램",
   },
   {
     img: <Twitter />,
-    type: '트위터',
+    type: "트위터",
   },
   {
     img: <Facebook />,
-    type: '페이스북',
+    type: "페이스북",
   },
 ];
 
-const EnrollInfo = () => {
+const EnrollInfo = ({ history }) => {
   const [enrollData, setEnrollData] = useEnrollData({});
   const [dropArray, setDrop] = useState([]);
-  const [contacts, setContacts] = useState([{ type: 'phone', value: '' }]);
+  const [contacts, setContacts] = useState([{ type: "phone", value: "" }]);
   const [createdContact, setCreatedContact] = useState({});
   const [createImage, setCreateImage] = useState([]);
 
@@ -116,7 +117,7 @@ const EnrollInfo = () => {
   };
   const addContact = e => {
     e.preventDefault();
-    setContacts(contacts.concat({ type: 'kakaotalk', value: '' }));
+    setContacts(contacts.concat({ type: "kakaotalk", value: "" }));
   };
 
   useEffect(() => {
@@ -128,26 +129,27 @@ const EnrollInfo = () => {
   const handleSubmit = async event => {
     event.preventDefault();
     const formData = new FormData();
-    formData.append('endingCountry', enrollData.endingCountry);
-    formData.append('endingAirport', enrollData.endingAirport);
-    formData.append('name', enrollData.name);
-    formData.append('gender', enrollData.gender);
-    formData.append('age', enrollData.age);
-    formData.append('weight', enrollData.weight);
-    formData.append('neutralization', enrollData?.neutralization === '완료' ? true : false);
-    formData.append('health', enrollData.health);
-    formData.append('isInstitution', enrollData?.isInstitution === '단체' ? true : false);
-    formData.append('institutionName', enrollData?.institutionName);
-    formData.append('kakaotalkId', enrollData?.카카오톡);
-    formData.append('phoneNumber', enrollData?.전화번호);
-    formData.append('facebook', enrollData?.카카오톡);
-    formData.append('instagram', enrollData?.인스타그램);
-    formData.append('twitter', enrollData?.트위터);
-    formData.append('detail', enrollData?.detail);
+    formData.append("endingCountry", enrollData.endingCountry);
+    formData.append("endingAirport", enrollData.endingAirport);
+    formData.append("name", enrollData.name);
+    formData.append("gender", enrollData.gender);
+    formData.append("age", enrollData.age);
+    formData.append("weight", enrollData.weight);
+    formData.append("neutralization", enrollData?.neutralization === "완료" ? true : false);
+    formData.append("health", enrollData.health);
+    formData.append("isInstitution", enrollData?.isInstitution === "단체" ? true : false);
+    formData.append("institutionName", enrollData?.institutionName);
+    formData.append("kakaotalkId", enrollData?.카카오톡);
+    formData.append("phoneNumber", enrollData?.전화번호);
+    formData.append("facebook", enrollData?.카카오톡);
+    formData.append("instagram", enrollData?.인스타그램);
+    formData.append("twitter", enrollData?.트위터);
+    formData.append("detail", enrollData?.detail);
     for (let i = 0; i < Array.from(createImage).length; i++) {
-      formData.append('photos', createImage[i]['image']);
+      formData.append("photos", createImage[i]["image"]);
     }
-    postEnroll(formData);
+    await postEnroll(formData);
+    history.push("/dogSearch");
   };
 
   console.log(enrollData);
@@ -155,7 +157,12 @@ const EnrollInfo = () => {
   return (
     <EnrollInfoWrap>
       <form onSubmit={handleSubmit}>
-        <AddDogLayer createImage={createImage} setCreateImage={setCreateImage} setEnrollData={setEnrollDataCallback} name="photos" />
+        <AddDogLayer
+          createImage={createImage}
+          setCreateImage={setCreateImage}
+          setEnrollData={setEnrollDataCallback}
+          name="photos"
+        />
         <div className="wrap wrap--flex">
           <label>출국정보</label>
           <EnrollSearchbar enroll setEnrollData={setEnrollDataCallback} />
@@ -174,9 +181,9 @@ const EnrollInfo = () => {
           <label>대상견 성별</label>
           <RadioButton
             items={[
-              { value: '여', select: true },
-              { value: '남', select: false },
-              { value: '선택안함', select: false },
+              { value: "여", select: true },
+              { value: "남", select: false },
+              { value: "선택안함", select: false },
             ]}
             setEnrollData={setEnrollDataCallback}
             name="gender"
@@ -200,8 +207,8 @@ const EnrollInfo = () => {
           <label>중성화 여부</label>
           <RadioButton
             items={[
-              { value: '완료', select: true },
-              { value: '미완료', select: false },
+              { value: "완료", select: true },
+              { value: "미완료", select: false },
             ]}
             setEnrollData={setEnrollDataCallback}
             name="neutralization"
@@ -221,8 +228,8 @@ const EnrollInfo = () => {
           <label>소속여부</label>
           <RadioButton
             items={[
-              { value: '개인구조자', select: true },
-              { value: '단체', select: false },
+              { value: "개인구조자", select: true },
+              { value: "단체", select: false },
             ]}
             setEnrollData={setEnrollDataCallback}
             name="isInstitution"
@@ -233,7 +240,7 @@ const EnrollInfo = () => {
             maxLength={15}
             caption="15자 이내로 적어주세요."
             setEnrollData={setEnrollDataCallback}
-            name="isInstitutionName"
+            name="institutionName"
           />
         </div>
         <div className="wrap contact">
@@ -241,7 +248,7 @@ const EnrollInfo = () => {
           <div className="contact-layer">
             {contacts.map((contact, i) => (
               <Input
-                placeholder={'연락처를 입력해 주세요'}
+                placeholder={"연락처를 입력해 주세요"}
                 key={`contact-${i}`}
                 font="body3"
                 name={dropArray[i]}
@@ -286,4 +293,4 @@ const EnrollInfo = () => {
   );
 };
 
-export default EnrollInfo;
+export default withRouter(EnrollInfo);

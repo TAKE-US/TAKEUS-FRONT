@@ -1,3 +1,4 @@
+
 ![img](<https://user-images.githubusercontent.com/68781598/124507888-bc4a7400-de09-11eb-9476-149ac4ac613d.PNG>)
 
 # ✈️ Project
@@ -21,16 +22,16 @@ react-redux
 src
 ├── App.jsx
 ├── assets
-│   ├── img
-│   └── icon
+│   ├── img
+│   └── icon
 ├── components
-│   ├── atoms
-│   ├── layer
-│   └── index.jsx
+│   ├── atoms
+│   ├── layer
+│   └── index.jsx
 ├── hooks
 ├── index.jsx
 ├── lib
-│   └── api
+│   └── api
 ├── pages
 ├── redux
 └── styles
@@ -66,6 +67,29 @@ src
 
 - 풀리퀘스트를 통해 코드 리뷰를 진행합니다. 리뷰어가 2명 이상인 경우에만 merge를 진행합니다. 
 
+# Main view
+![img](https://ifh.cc/g/AOWtik.jpg)
+
+###이동봉사정보
+![img](https://ifh.cc/g/QdfcaT.jpg)
+
+### 로그인
+![img](https://ifh.cc/g/36rhue.jpg)
+
+### 대상견 찾기
+![img](https://ifh.cc/g/UR1k8h.jpg)
+
+### 이동봉사 후기
+![img](https://ifh.cc/g/rizCq9.jpg)
+
+### About us
+![img](https://ifh.cc/g/4diXYW.jpg)
+
+### 내가 쓴 글(이동봉사 모집글)
+![img](https://ifh.cc/g/kZWuGy.jpg)
+
+### 내가 쓴 글(이동봉사 후기글)
+![img](https://ifh.cc/g/dkh47E.jpg)
 
 # 👩🏻‍💻 Developers
 - [moonhopark](https://github.com/moonhopark)

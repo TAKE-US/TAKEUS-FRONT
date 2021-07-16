@@ -4,12 +4,7 @@ import styled from "styled-components";
 import DogPlane from "assets/img/img_dogswithplane.png";
 import DogHug from "assets/img/img_hugwithdog.png";
 //layer
-import {
-  DogCardContainer,
-  ReviewCardContainer,
-  Filter,
-  PaginationNav,
-} from "components";
+import { DogCardContainer, ReviewCardContainer, Filter, PaginationNav, Loading } from "components";
 //api
 import { getMyDogs, getMyReviews } from "lib/api/sample";
 
@@ -52,8 +47,7 @@ const Styled = {
   Tab: styled.button`
     width: 16.4rem;
     padding: 1.4rem 2.2rem;
-    background: ${props =>
-      props.select ? props.theme.color.lightgray1 : props.theme.color.white};
+    background: ${props => (props.select ? props.theme.color.lightgray1 : props.theme.color.white)};
     border-radius: 1rem;
     font: ${({ theme }) => theme.font.button};
     line-height: 2.2rem;
@@ -76,15 +70,15 @@ const MypageHeader = () => {
   const [reviewsTotalPage, setReviewsTotalPage] = useState(1);
   const contents = ["최신순", "오래된순"];
   const [selectedFilter, setSelectedFilter] = useState(contents[0]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const selectHandler = t => {
-    const newTabs = tabs.map(tab =>
-      tab === t ? { ...tab, select: true } : { ...tab, select: false }
-    );
+    const newTabs = tabs.map(tab => (tab === t ? { ...tab, select: true } : { ...tab, select: false }));
     setTabs(newTabs);
   };
 
   useEffect(() => {
+    setIsLoading(true);
     (async () => {
       console.log(selectedFilter);
       const data = await getMyDogs(dogsPage, selectedFilter);
@@ -95,6 +89,7 @@ const MypageHeader = () => {
       setReviews(ReviewData[0]);
       setReviewsTotalPage(ReviewData[1]);
       console.log(data, ReviewData);
+      setIsLoading(false);
     })();
   }, [dogsPage, reviewsPage, selectedFilter]);
   return (
@@ -103,12 +98,7 @@ const MypageHeader = () => {
         <div>
           <nav className="tab-wrapper">
             {tabs.map(tab => (
-              <Styled.Tab
-                key={tab}
-                className="tab_button"
-                onClick={() => selectHandler(tab)}
-                select={tab.select}
-              >
+              <Styled.Tab key={tab} className="tab_button" onClick={() => selectHandler(tab)} select={tab.select}>
                 {tab.value}
               </Styled.Tab>
             ))}
@@ -120,38 +110,25 @@ const MypageHeader = () => {
             <p>여러분의 도움으로 한 생명이 새로운 삶을 살게 되었어요 🙏🏻</p>
           </section>
         </div>
-        {tabs[0].select ? (
-          <img src={DogPlane} alt="" />
-        ) : (
-          <img src={DogHug} alt="" />
-        )}
+        {tabs[0].select ? <img src={DogPlane} alt="" /> : <img src={DogHug} alt="" />}
       </Styled.Header>
-      <Styled.Content>
-        <Filter
-          contents={contents}
-          selectedFilter={selectedFilter}
-          setSelectedFilter={setSelectedFilter}
-        />
-        {tabs[0].select ? (
-          <DogCardContainer dogs={dogs} />
-        ) : (
-          <ReviewCardContainer reviews={reviews} setReviews={setReviews} />
-        )}
-        {tabs[0].select ? (
-          <PaginationNav
-            pageNum={dogsPage}
-            setPageNum={setDogsPage}
-            totalPage={dogsTotalPage}
-          />
-        ) : (
-          <PaginationNav
-            pageNum={reviewsPage}
-            setPageNum={setReviewsPage}
-            totalPage={reviewsTotalPage}
-            review
-          />
-        )}
-      </Styled.Content>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <Styled.Content>
+          <Filter contents={contents} selectedFilter={selectedFilter} setSelectedFilter={setSelectedFilter} />
+          {tabs[0].select ? (
+            <DogCardContainer dogs={dogs} />
+          ) : (
+            <ReviewCardContainer reviews={reviews} setReviews={setReviews} />
+          )}
+          {tabs[0].select ? (
+            <PaginationNav pageNum={dogsPage} setPageNum={setDogsPage} totalPage={dogsTotalPage} />
+          ) : (
+            <PaginationNav pageNum={reviewsPage} setPageNum={setReviewsPage} totalPage={reviewsTotalPage} review />
+          )}
+        </Styled.Content>
+      )}
     </Styled.Wrapper>
   );
 };

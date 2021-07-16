@@ -9,6 +9,7 @@ import {
   CopyLinkButton,
   DeleteModal,
   ReportModal,
+  MatchingModal,
 } from "components";
 
 import { putDogStatus } from "lib/api/sample";
@@ -121,32 +122,8 @@ const DogDetailWrap = styled.div`
   }
 
   .match-button {
-    width: 100%;
-    height: 20%;
     display: flex;
     justify-content: flex-end;
-    .waiting, .done {
-      width: 13.1rem;
-      height: 4.7rem;
-      padding: 1.2rem 3rem;
-      border-radius: 5rem;
-      color: ${({ theme }) => theme.color.white};
-      font: ${({ theme }) => theme.font.button_large};
-    }
-    
-    .waiting {
-      background: ${({ theme }) => theme.color.primary};
-    }
-  
-    .waiting:hover {
-      background: ${({ theme }) => theme.color.primary_light};
-    }
-  
-    .done {
-      cursor: not-allowed;
-      pointer-events: none;
-      background: ${({ theme }) => theme.color.lightgray2};
-    }
   }
 `;
 
@@ -159,14 +136,12 @@ const DogDetail = ({ dog }) => {
 
   useEffect(() => {
     if (myId === dog.user) setMyPost(true);
-    dog.status === "done"
-      ? setDogStatus("done")
-      : setDogStatus("wating");
+    dog.status === "done" ? setDogStatus("done") : setDogStatus("wating");
   }, [dog, myId]);
-  
+
   const handleClick = () => {
     const data = {
-      status: "done"
+      status: "done",
     };
     putDogStatus(dog._id, data);
     setDogStatus("done");
@@ -208,12 +183,7 @@ const DogDetail = ({ dog }) => {
       <article className="dog--detail">{dog.detail}</article>
       {isLogin && myPost && (
         <div className="match-button">
-          <button
-            className={dogStatus === "done" ? "done" : "waiting"}
-            onClick={handleClick}
-          >
-            매칭 완료
-          </button>
+          <MatchingModal handleClick={handleClick} dogStatus={dogStatus} />
         </div>
       )}
     </DogDetailWrap>

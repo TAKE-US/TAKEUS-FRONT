@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import styled from "styled-components";
 
-import { ReviewSearchbar, Filter, PaginationNav, ReviewCardContainer, Hashtag, Empty } from "components";
+import { ReviewSearchbar, Filter, PaginationNav, ReviewCardContainer, Hashtag, Empty, Loading } from "components";
 import { ReactComponent as RegisterBtn } from "assets/img/btn_register.svg";
 //api
 import { getReviewsWithTags, getReviewsSearch } from "lib/api/sample";
@@ -61,6 +61,7 @@ const ReviewSearch = () => {
   const [totalPage, setTotalPage] = useState(0);
   const [activeHashtag, setActiveHashtag] = useState("");
   const [searchState, setSearchState] = useState("");
+  const [isLoading, setIsloading] = useState(false);
   const [hashtags, setHashtags] = useState([
     { tag: "이동봉사과정", active: false },
     { tag: "도착공항정보", active: false },
@@ -73,18 +74,22 @@ const ReviewSearch = () => {
   ]);
 
   useEffect(() => {
+    setIsloading(true);
     (async () => {
       if (searchState) {
         const searchData = await getReviewsSearch(activeHashtag, pageNum, selectedFilter, searchState);
         console.log(searchState);
         setReviews(searchData.data);
         setTotalPage(searchData.totalNum);
+        setIsloading(false);
       } else {
         const reviewData = await getReviewsWithTags(activeHashtag, pageNum, selectedFilter);
         setReviews(reviewData.data);
         setTotalPage(reviewData.totalNum);
+        setIsloading(false);
       }
     })();
+    // setIsloading(false);
   }, [activeHashtag, pageNum, selectedFilter, hashtags, searchState]);
 
   const toggleHashtag = tagName => {
@@ -114,17 +119,29 @@ const ReviewSearch = () => {
           </button>
         </div>
       </Styled.Search>
-      <Styled.Option>
-        <section className="tags">
-          {hashtags.map((hashtag, i) => (
-            <div className="hashtag" key={i} onClick={() => toggleHashtag(hashtag.tag)}>
-              <Hashtag tag={hashtag.tag} primary={hashtag.active} hasActiveHashtag={true} />
-            </div>
-          ))}
-        </section>
-        <Filter contents={contents} setSelectedFilter={setSelectedFilter} selectedFilter={selectedFilter} />
-      </Styled.Option>
-      {reviews?.length === 0 ? <Empty /> : <ReviewCardContainer reviews={reviews} />}
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <>
+          {reviews?.length === 0 ? (
+            <Empty />
+          ) : (
+            <>
+              <Styled.Option>
+                <section className="tags">
+                  {hashtags.map((hashtag, i) => (
+                    <div className="hashtag" key={i} onClick={() => toggleHashtag(hashtag.tag)}>
+                      <Hashtag tag={hashtag.tag} primary={hashtag.active} hasActiveHashtag={true} />
+                    </div>
+                  ))}
+                </section>
+                <Filter contents={contents} setSelectedFilter={setSelectedFilter} selectedFilter={selectedFilter} />
+              </Styled.Option>
+              <ReviewCardContainer reviews={reviews} />
+            </>
+          )}
+        </>
+      )}
       <PaginationNav totalPage={totalPage} pageNum={pageNum} setPageNum={setPageNum} review />
     </Styled.Wrapper>
   );
