@@ -32,6 +32,10 @@ const Search = {
     & > .button > button {
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
+
+      .text {
+        margin-right: 0.3rem;
+      }
     }
 
     .dropdown {
@@ -102,7 +106,11 @@ const Searchbar = ({ setDogs }) => {
     <>
       <Search.Container>
         <div className="dropdown dropdown__country">
-          <DropdownCountry currCountry={currCountry} setCurrCountry={setCurrCountry} country={country} />
+          <DropdownCountry
+            currCountry={currCountry}
+            setCurrCountry={setCurrCountry}
+            country={country}
+          />
         </div>
         <div className="dropdown dropdown__airport">
           <DropdownAirport
@@ -113,7 +121,11 @@ const Searchbar = ({ setDogs }) => {
           />
         </div>
         <div className="button" onClick={() => searchHandler()}>
-          <Button primary font="button_middle" padding="1.9rem 1.5rem 1.9rem 1.4rem">
+          <Button
+            primary
+            font="button_middle"
+            padding="1.9rem 1.3rem 1.9rem 1.4rem"
+          >
             <span className="text">검색</span>
             <SearchImg />
           </Button>

@@ -125,23 +125,24 @@ const DogDetailWrap = styled.div`
     height: 20%;
     display: flex;
     justify-content: flex-end;
-    .waiting, .done {
+    .waiting,
+    .done {
       width: 13.1rem;
       height: 4.7rem;
       padding: 1.2rem 3rem;
       border-radius: 5rem;
       color: ${({ theme }) => theme.color.white};
-      font: ${({ theme }) => theme.font.button_large};
+      font: ${({ theme }) => theme.font.button};
     }
-    
+
     .waiting {
       background: ${({ theme }) => theme.color.primary};
     }
-  
+
     .waiting:hover {
       background: ${({ theme }) => theme.color.primary_light};
     }
-  
+
     .done {
       cursor: not-allowed;
       pointer-events: none;
@@ -159,14 +160,12 @@ const DogDetail = ({ dog }) => {
 
   useEffect(() => {
     if (myId === dog.user) setMyPost(true);
-    dog.status === "done"
-      ? setDogStatus("done")
-      : setDogStatus("wating");
+    dog.status === "done" ? setDogStatus("done") : setDogStatus("wating");
   }, [dog, myId]);
-  
+
   const handleClick = () => {
     const data = {
-      status: "done"
+      status: "done",
     };
     putDogStatus(dog._id, data);
     setDogStatus("done");
