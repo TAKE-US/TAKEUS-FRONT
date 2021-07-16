@@ -30,7 +30,7 @@ const Styled = {
   `,
   ContentArea: styled.section`
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     margin-top: 7.2rem;
     margin-bottom: 9rem;
   `,
@@ -39,14 +39,6 @@ const Styled = {
     flex-direction: column;
     align-items: center;
     width: 24rem;
-    /* margin: 0 6rem; */
-    /* padding: 0 1.2rem; */
-    &:first-child {
-      /* margin-left: 4rem; */
-    }
-    &:last-child {
-      /* margin-right: 4rem; */
-    }
 
     img {
       margin-bottom: 1.8rem;
