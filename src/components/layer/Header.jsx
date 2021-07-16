@@ -126,8 +126,6 @@ const Header = ({ setDogs }) => {
   const isLogin = localStorage.getItem("token");
 
   const scrollHandler = useCallback(() => {
-    console.log(location.pathname);
-    if (location.pathname === "/login") return;
     if (isLogin) {
       if (window.scrollY > 0) {
         setIsScrolling(true);
@@ -141,7 +139,7 @@ const Header = ({ setDogs }) => {
         setIsScrolling(false);
       }
     }
-  }, [isLogin, location.pathname]);
+  }, [isLogin]);
 
   useEffect(() => {
     window.addEventListener("scroll", scrollHandler);
