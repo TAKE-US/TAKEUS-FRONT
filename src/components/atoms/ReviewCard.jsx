@@ -12,6 +12,7 @@ const Styled = {
     border-radius: 1rem;
     cursor: pointer;
     .text {
+      min-width: 77.3rem;
       .tags {
         display: flex;
         .hashtag {
@@ -25,6 +26,7 @@ const Styled = {
           font: ${({ theme }) => theme.font.headline2};
         }
         p {
+          min-height: 8.2rem;
           padding-top: 1.4rem;
           font: ${({ theme }) => theme.font.body3};
           line-height: 2.4rem;
@@ -80,38 +82,21 @@ const ReviewCard = ({ review, editHandler, deleteHandler }) => {
         </article>
         <section className="description">
           <p>
-            작성일ㅣ{review.writeDate} &nbsp;&nbsp;지역ㅣ시카고
-            &nbsp;&nbsp;봉사단체ㅣ{review.institutionName}
+            작성일ㅣ{review.writeDate} &nbsp;&nbsp;지역ㅣ시카고 &nbsp;&nbsp;봉사단체ㅣ{review.institutionName}
           </p>
           {isLogin && (
             <div className="button-wrap">
-              <button
-                className="button-wrap__edit"
-                onClick={evt => editHandler(evt, review._id)}
-              >
+              <button className="button-wrap__edit" onClick={evt => editHandler(evt, review._id)}>
                 수정
               </button>
-              <button
-                className="button-wrap__delete"
-                onClick={e => e.stopPropagation()}
-              >
-                <ReviewDeleteModal
-                  deleteHandler={deleteHandler}
-                  id={review._id}
-                />
+              <button className="button-wrap__delete" onClick={e => e.stopPropagation()}>
+                <ReviewDeleteModal deleteHandler={deleteHandler} id={review._id} />
               </button>
-              {/* <button onClick={evt => deleteHandler(evt, review._id)}>
-                삭제
-              </button> */}
             </div>
           )}
         </section>
       </section>
-      <img
-        className="image"
-        src={review.crawlingData[0].image}
-        alt="review_img"
-      />
+      <img className="image" src={review.crawlingData[0].image} alt="review_img" />
     </Styled.Wrapper>
   );
 };
