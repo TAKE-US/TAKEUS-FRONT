@@ -129,7 +129,7 @@ const DogDetailWrap = styled.div`
 
 const DogDetail = ({ dog }) => {
   const history = useHistory();
-  const [myPost, setMyPost] = useState(true);
+  const [myPost, setMyPost] = useState(false);
   const isLogin = localStorage.getItem("token");
   const myId = localStorage.getItem("ID");
   const [dogStatus, setDogStatus] = useState("waiting");
