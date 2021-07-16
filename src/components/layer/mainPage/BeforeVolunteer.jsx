@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import backgroundImg from "assets/img/img_before_volunteer.png";
 import { Button } from "components";
-import { useHistory } from "react-router";
+import { Link } from "react-router-dom";
 
 const Styled = {
   Wrapper: styled.section`
@@ -26,7 +26,6 @@ const Styled = {
   `,
 };
 const BeforeVolunteer = () => {
-  const history = useHistory();
 
   return (
     <Styled.Wrapper>
@@ -36,11 +35,11 @@ const BeforeVolunteer = () => {
         <br />
         해외이동봉사 정보와 주의사항, 테이커스가 차근차근 알려드릴게요.
       </p>
-      <button onClick={() => history.push("/info")}>
+      <Link to="/info">
         <Button black rounded padding="1.2rem 3rem">
           자세히 보기
         </Button>
-      </button>
+      </Link>
     </Styled.Wrapper>
   );
 };
