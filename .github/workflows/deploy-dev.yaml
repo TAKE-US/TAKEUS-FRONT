@@ -33,7 +33,7 @@ jobs:
       - name: make .env
         run: echo "REACT_APP_GOOGLE_CLIENTID={{ secrets.REACT_APP_GOOGLE_CLIENTID }}" > src/.env
 
-      - run: ls src/
+      - run: ls -al src/
       
       - name: Build webpack
         run: yarn build
