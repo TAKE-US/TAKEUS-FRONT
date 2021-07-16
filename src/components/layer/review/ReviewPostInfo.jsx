@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { useRouteMatch } from "react-router";
+import { withRouter } from "react-router";
 
 import { Input, Button, Hashtag, RadioButton, TextField, EnrollSearchbar } from "components";
 import useEnrollData from "hooks/useEnrollData";
@@ -31,7 +31,7 @@ const ReviewInfoStyle = styled.section`
   }
 `;
 
-const ReviewPostInfo = ({ edit }) => {
+const ReviewPostInfo = ({ edit, history, match }) => {
   const [enrollData, setEnrollData] = useEnrollData({});
   const [hashtags, setHashtags] = useState([
     { tag: "이동봉사과정", active: false },
@@ -45,7 +45,6 @@ const ReviewPostInfo = ({ edit }) => {
   ]);
   const [initial, setInitial] = useState();
   const [selectedHashtags, setSelectedHashtags] = useState([]);
-  const match = useRouteMatch();
 
   const toggleHashtag = idx => {
     setHashtags(
@@ -151,6 +150,7 @@ const ReviewPostInfo = ({ edit }) => {
           } else {
             postReview(enrollData);
           }
+          history.push("/review");
         }}
       >
         <Button full rounded padding="15px 0" font="headline">
@@ -161,4 +161,4 @@ const ReviewPostInfo = ({ edit }) => {
   );
 };
 
-export default ReviewPostInfo;
+export default withRouter(ReviewPostInfo);

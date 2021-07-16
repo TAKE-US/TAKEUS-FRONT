@@ -101,7 +101,7 @@ const LoginLayer = () => {
     const data = await postToken(token, social);
     localStorage.setItem("token", data.token);
     localStorage.setItem("ID", data.id);
-    // window.open("http://localhost:3000", "_self");
+    window.open("http://localhost:3000", "_self");
   };
 
   // 로그인 실패 시

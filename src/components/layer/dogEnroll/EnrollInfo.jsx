@@ -12,6 +12,7 @@ import { ReactComponent as Facebook } from "assets/icon/ic_facebook_24.svg";
 import { ReactComponent as Plus } from "assets/icon/ic_plus_24.svg";
 import useEnrollData from "hooks/useEnrollData";
 import { postEnroll } from "lib/api/sample";
+import { withRouter } from "react-router-dom";
 
 const EnrollInfoWrap = styled.section`
   .wrap {
@@ -94,7 +95,7 @@ const ContactsList = [
   },
 ];
 
-const EnrollInfo = () => {
+const EnrollInfo = ({ history }) => {
   const [enrollData, setEnrollData] = useEnrollData({});
   const [dropArray, setDrop] = useState([]);
   const [contacts, setContacts] = useState([{ type: "phone", value: "" }]);
@@ -147,7 +148,8 @@ const EnrollInfo = () => {
     for (let i = 0; i < Array.from(createImage).length; i++) {
       formData.append("photos", createImage[i]["image"]);
     }
-    postEnroll(formData);
+    await postEnroll(formData);
+    history.push("/dogSearch");
   };
 
   console.log(enrollData);
@@ -291,4 +293,4 @@ const EnrollInfo = () => {
   );
 };
 
-export default EnrollInfo;
+export default withRouter(EnrollInfo);
