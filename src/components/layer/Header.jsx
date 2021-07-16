@@ -126,8 +126,6 @@ const Header = ({ setDogs }) => {
   const isLogin = localStorage.getItem("token");
 
   const scrollHandler = useCallback(() => {
-    if (!noticeElement.current) return;
-  
     if (isLogin) {
       if (window.scrollY > 0) {
         setIsScrolling(true);
@@ -135,6 +133,8 @@ const Header = ({ setDogs }) => {
         setIsScrolling(false);
       }
     } else {
+      if (!noticeElement.current) return;
+    
       if (window.scrollY > noticeElement.current.clientHeight) {
         setIsScrolling(true);
       } else {
