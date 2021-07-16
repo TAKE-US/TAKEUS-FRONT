@@ -107,11 +107,9 @@ const Input = ({
   };
 
   const onBlurHandler = () => {
-    if (name["type"] !== undefined) {
-      // if (Object.keys(createdContact).includes[name["type"]]) {
+    if (name && name["type"] !== undefined) {
       const newVal = {};
       newVal[name["type"]] = value;
-      // setCreatedContact(Array.from(createdContact).concat(newVal));
       setCreatedContact(newVal);
     } else {
       setEnrollData(name, value);

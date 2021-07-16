@@ -1,8 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
-import styled from "styled-components";
+import React, { useEffect, useRef, useState } from 'react';
+import styled from 'styled-components';
 
-import { useDetectOutsideClick } from "../../hooks/useDetectOutsideClick";
-import { ReactComponent as Arrow } from "../../assets/img/ic_arrow_bottom_black_24.svg";
+import { useDetectOutsideClick } from '../../hooks/useDetectOutsideClick';
+import { ReactComponent as Arrow } from '../../assets/img/ic_arrow_bottom_black_24.svg';
 
 const Menu = {
   Container: styled.div`
@@ -33,14 +33,14 @@ const Menu = {
       .text {
         margin-top: 0.6rem;
         font: ${({ theme }) => theme.font.body2};
-        color: ${props => (props.currAirport ? "#3D3D3D" : "#C1C1C1")};
+        color: ${props => (props.currAirport ? '#3D3D3D' : '#C1C1C1')};
       }
     }
 
     svg {
       width: 2.2rem;
       margin-left: 4.4rem;
-      transform: ${props => props.isActive && "rotate(-180deg)"};
+      transform: ${props => props.isActive && 'rotate(-180deg)'};
       transition: transform 0.3s;
     }
     &.enroll {
@@ -55,7 +55,7 @@ const Menu = {
 
   Nav: styled.nav`
     position: absolute;
-    display: ${props => (props.isActive ? "flex" : "none")};
+    display: ${props => (props.isActive ? 'flex' : 'none')};
     width: 32rem;
     padding: 1rem 0.6rem;
     box-shadow: 0rem 0rem 3rem 0.1rem rgba(0, 0, 0, 0.1);
@@ -92,7 +92,7 @@ const Menu = {
     height: 3.4rem;
     padding-left: 1.2rem;
     font: ${({ theme }) => theme.font.body1};
-    color: ${props => (props.selected ? "#FDCB02" : "#3D3D3D")};
+    color: ${props => (props.selected ? '#FDCB02' : '#3D3D3D')};
     display: flex;
     align-items: center;
     border-radius: 10px;
@@ -109,15 +109,16 @@ const Menu = {
 const DropdownAirport = ({ currCountry, currAirport, setCurrAirport, allAirport, enroll }) => {
   const dropdownRef = useRef(null);
   const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
-  const [airport, setAirport] = useState("");
+  const [airport, setAirport] = useState('');
 
-  const onClick = () => {
+  const onClick = e => {
+    e.preventDefault();
     setIsActive(!isActive);
   };
 
   useEffect(() => {
     setAirport(allAirport[currCountry]);
-    setCurrAirport("");
+    setCurrAirport('');
   }, [currCountry, setCurrAirport, allAirport]);
 
   return (
@@ -127,15 +128,15 @@ const DropdownAirport = ({ currCountry, currAirport, setCurrAirport, allAirport,
         currAirport={currAirport}
         disabled={currCountry ? false : true}
         isActive={isActive}
-        className={enroll ? "enroll" : ""}
+        className={enroll ? 'enroll' : ''}
       >
         <div className="destination">
           {!enroll && <span className="name">공항명</span>}
-          <span className="text">{currAirport ? currAirport : enroll ? "공항명" : "도착 공항은 어디인가요?"}</span>
+          <span className="text">{currAirport ? currAirport : enroll ? '공항명' : '도착 공항은 어디인가요?'}</span>
         </div>
         <Arrow />
       </Menu.Button>
-      <Menu.Nav ref={dropdownRef} isActive={isActive} className={enroll ? "enroll" : ""}>
+      <Menu.Nav ref={dropdownRef} isActive={isActive} className={enroll ? 'enroll' : ''}>
         <Menu.Ul>
           {airport &&
             Object.keys(airport).map((city, index) => (
@@ -143,7 +144,7 @@ const DropdownAirport = ({ currCountry, currAirport, setCurrAirport, allAirport,
                 <span>{city}</span>
                 {airport[city].map((value, index) => (
                   <Menu.Li
-                    className={enroll ? "enroll" : ""}
+                    className={enroll ? 'enroll' : ''}
                     key={`airport-${index}`}
                     selected={currAirport === value ? true : false}
                     onClick={() => {

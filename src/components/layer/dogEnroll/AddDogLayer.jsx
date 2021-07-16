@@ -22,11 +22,16 @@ const Styled = {
   `,
 };
 
-const AddDogLayer = ({ setEnrollData, name }) => {
+const AddDogLayer = ({ setEnrollData, name, createImage, setCreateImage }) => {
   return (
     <Styled.Wrapper>
       <section className="title">대상견 사진을 올려주세요.(최대 5개)</section>
-      <AddDogCardContainer setEnrollData={setEnrollData} name={name} />
+      <AddDogCardContainer
+        setEnrollData={setEnrollData}
+        name={name}
+        createImage={createImage}
+        setCreateImage={setCreateImage}
+      />
     </Styled.Wrapper>
   );
 };

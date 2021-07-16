@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import styled from "styled-components";
+import React, { useState } from 'react';
+import styled from 'styled-components';
 //assets
-import radioOff from "assets/icon/btn_radio_off_24.svg";
-import radioOn from "assets/icon/btn_radio_on_24.svg";
+import radioOff from 'assets/icon/btn_radio_off_24.svg';
+import radioOn from 'assets/icon/btn_radio_on_24.svg';
 
 const RadioBtnWrap = styled.section`
   display: flex;
@@ -29,7 +29,8 @@ const RadioBtn = styled.button`
 const RadioButton = ({ items, setEnrollData, name }) => {
   const [itemState, setItemState] = useState(items);
 
-  const selectHandler = i => {
+  const selectHandler = (i, e) => {
+    e.preventDefault();
     const newItem = itemState.map(item => (i === item ? { ...item, select: true } : { ...item, select: false }));
     setItemState(newItem);
     setEnrollData(name, i.value);
@@ -38,7 +39,7 @@ const RadioButton = ({ items, setEnrollData, name }) => {
     <RadioBtnWrap>
       {itemState.map((item, key) => (
         <article key={key}>
-          <RadioBtn bg={item.select ? radioOn : radioOff} onClick={() => selectHandler(item)}></RadioBtn>
+          <RadioBtn bg={item.select ? radioOn : radioOff} onClick={e => selectHandler(item, e)}></RadioBtn>
           <p>{item.value}</p>
         </article>
       ))}
