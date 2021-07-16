@@ -1,25 +1,17 @@
+/* eslint-disable max-len */
 /* eslint-disable arrow-parens */
 
-import React, { useState, useEffect, useCallback } from "react";
-import styled from "styled-components";
-import {
-  RadioButton,
-  Counter,
-  TextField,
-  AddDogLayer,
-  Input,
-  Button,
-  EnrollSearchbar,
-  Dropdown,
-} from "components";
-import { ReactComponent as Kakao } from "assets/icon/ic_kakao_24.svg";
-import { ReactComponent as Call } from "assets/icon/ic_call_24.svg";
-import { ReactComponent as Instagram } from "assets/icon/ic_instar_24.svg";
-import { ReactComponent as Twitter } from "assets/icon/ic_twitter_24.svg";
-import { ReactComponent as Facebook } from "assets/icon/ic_facebook_24.svg";
-import { ReactComponent as Plus } from "assets/icon/ic_plus_24.svg";
-import useEnrollData from "hooks/useEnrollData";
-import { postEnroll } from "lib/api/sample";
+import React, { useState, useEffect, useCallback } from 'react';
+import styled from 'styled-components';
+import { RadioButton, Counter, TextField, AddDogLayer, Input, Button, EnrollSearchbar, Dropdown } from 'components';
+import { ReactComponent as Kakao } from 'assets/icon/ic_kakao_24.svg';
+import { ReactComponent as Call } from 'assets/icon/ic_call_24.svg';
+import { ReactComponent as Instagram } from 'assets/icon/ic_instar_24.svg';
+import { ReactComponent as Twitter } from 'assets/icon/ic_twitter_24.svg';
+import { ReactComponent as Facebook } from 'assets/icon/ic_facebook_24.svg';
+import { ReactComponent as Plus } from 'assets/icon/ic_plus_24.svg';
+import useEnrollData from 'hooks/useEnrollData';
+import { postEnroll } from 'lib/api/sample';
 
 const EnrollInfoWrap = styled.section`
   .wrap {
@@ -69,7 +61,7 @@ const EnrollInfoWrap = styled.section`
     font: ${({ theme }) => theme.font.button};
     color: ${({ theme }) => theme.color.gray3};
     &::after {
-      content: "";
+      content: '';
       width: 0;
       top: 0;
       right: 0;
@@ -82,32 +74,33 @@ const EnrollInfoWrap = styled.section`
 const ContactsList = [
   {
     img: <Kakao />,
-    type: "카카오톡",
+    type: '카카오톡',
   },
   {
     img: <Call />,
-    type: "전화번호",
+    type: '전화번호',
   },
   {
     img: <Instagram />,
-    type: "인스타그램",
+    type: '인스타그램',
   },
   {
     img: <Twitter />,
-    type: "트위터",
+    type: '트위터',
   },
   {
     img: <Facebook />,
-    type: "페이스북",
+    type: '페이스북',
   },
 ];
 
 const EnrollInfo = () => {
   const [enrollData, setEnrollData] = useEnrollData({});
   const [dropArray, setDrop] = useState([]);
-  const [contacts, setContacts] = useState([{ type: "phone", value: "" }]);
+  const [contacts, setContacts] = useState([{ type: 'phone', value: '' }]);
   const [createdContact, setCreatedContact] = useState({});
   const [createImage, setCreateImage] = useState([]);
+
   const setEnrollDataCallback = useCallback(
     (name, value) => {
       setEnrollData(name, value);
@@ -116,47 +109,53 @@ const EnrollInfo = () => {
   );
   const onDrop = (dropArray, value, id) => {
     if (dropArray.key === id) {
-      setDrop(
-        Array.from(dropArray).map(val =>
-          val.id === id ? { key: id, type: value } : val
-        )
-      );
+      setDrop(Array.from(dropArray).map(val => (val.id === id ? { key: id, type: value } : val)));
     } else {
       setDrop(dropArray => dropArray.concat({ key: id, type: value }));
     }
   };
-  const addContact = () => {
-    setContacts(contacts.concat({ type: "kakaotalk", value: "" }));
+  const addContact = e => {
+    e.preventDefault();
+    setContacts(contacts.concat({ type: 'kakaotalk', value: '' }));
   };
 
   useEffect(() => {
     if (Object.keys(createdContact).length !== 0) {
-      setEnrollData(
-        Object.keys(createdContact),
-        ...Object.values(createdContact)
-      );
+      setEnrollData(Object.keys(createdContact), ...Object.values(createdContact));
     }
   }, [createdContact, setEnrollData]);
 
   const handleSubmit = async event => {
+    console.log(enrollData['name']);
     event.preventDefault();
-    let formData = new FormData();
-    formData.append("name", enrollData["name"]);
+    const formData = new FormData();
+    // formData.append('endingCountry', enrollData['endingCountry']);
+    // formData.append('endingAirport', enrollData['endingAirport']);
+    // formData.append('name', enrollData['name']);
+    // formData.append('gender', enrollData['gender']);
+    // formData.append('age', enrollData['age']);
+    // formData.append('weight', enrollData['weight']);
+    // formData.append('neutralization', enrollData['neutralization']);
+    // formData.append('isInstitution', enrollData['isInstitution']);
+    // formData.append('institutionName', enrollData['institutionName']);
+    // - kakaotalkId (string) ⇒ Ex. kakaoTalk~
+    // - phoneNumber (string) ⇒ Ex. 01012345678
+    // - instagram (string) ⇒ Ex. instagram~
+    // - twitter (string) ⇒ Ex. twitter~
+    // - facebook (string) ⇒ Ex. facebook~
+    // console.log(enrollData.values().length);
     for (let i = 0; i < Array.from(createImage).length; i++) {
-      formData.append("photos", createImage[i]);
+      formData.append('photos', createImage[i]['image']);
     }
     postEnroll(formData);
   };
 
+  console.log(enrollData);
+  console.log(createImage);
   return (
     <EnrollInfoWrap>
       <form onSubmit={handleSubmit}>
-        <AddDogLayer
-          createImage={createImage}
-          setCreateImage={setCreateImage}
-          setEnrollData={setEnrollDataCallback}
-          name="photos"
-        />
+        <AddDogLayer createImage={createImage} setCreateImage={setCreateImage} setEnrollData={setEnrollDataCallback} name="photos" />
         <div className="wrap wrap--flex">
           <label>출국정보</label>
           <EnrollSearchbar enroll setEnrollData={setEnrollDataCallback} />
@@ -176,9 +175,9 @@ const EnrollInfo = () => {
           <label>대상견 성별</label>
           <RadioButton
             items={[
-              { value: "여", select: true },
-              { value: "남", select: false },
-              { value: "선택안함", select: false },
+              { value: '여', select: true },
+              { value: '남', select: false },
+              { value: '선택안함', select: false },
             ]}
             setEnrollData={setEnrollDataCallback}
             name="gender"
@@ -203,8 +202,8 @@ const EnrollInfo = () => {
           <label>중성화 여부</label>
           <RadioButton
             items={[
-              { value: "완료", select: true },
-              { value: "미완료", select: false },
+              { value: '완료', select: true },
+              { value: '미완료', select: false },
             ]}
             setEnrollData={setEnrollDataCallback}
             name="neutralization"
@@ -225,8 +224,8 @@ const EnrollInfo = () => {
           <label>소속여부</label>
           <RadioButton
             items={[
-              { value: "개인구조자", select: true },
-              { value: "단체", select: false },
+              { value: '개인구조자', select: true },
+              { value: '단체', select: false },
             ]}
             setEnrollData={setEnrollDataCallback}
             name="isInstitution"
@@ -245,7 +244,7 @@ const EnrollInfo = () => {
           <div className="contact-layer">
             {contacts.map((contact, i) => (
               <Input
-                placeholder={"연락처를 입력해 주세요"}
+                placeholder={'연락처를 입력해 주세요'}
                 key={`contact-${i}`}
                 font="body3"
                 name={dropArray[i]}
@@ -275,15 +274,10 @@ const EnrollInfo = () => {
           </div>
         </div>
         <div className="wrap">
-          <TextField
-            label="내용을 작성해주세요"
-            maxLength={500}
-            setEnrollData={setEnrollDataCallback}
-            name="detail"
-          />
+          <TextField label="내용을 작성해주세요" maxLength={500} setEnrollData={setEnrollDataCallback} name="detail" />
         </div>
         <div className="wrap">
-          <div className="wrap__button" onClick={handleSubmit}>
+          <div className="wrap__button">
             <Button rounded full font="headline" padding="1.5rem">
               대상견 등록하기
             </Button>

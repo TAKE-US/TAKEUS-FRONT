@@ -1,8 +1,8 @@
 /* eslint-disable arrow-parens */
-import React, { useState } from "react";
-import styled from "styled-components";
-import btn_plus from "assets/icon/btn_plus.svg";
-import deleteBtn from "assets/icon/btn_delete.svg";
+import React, { useState, useRef } from 'react';
+import styled from 'styled-components';
+import btn_plus from 'assets/icon/btn_plus.svg';
+import deleteBtn from 'assets/icon/btn_delete.svg';
 
 const Styled = {
   Wrapper: styled.section`
@@ -63,20 +63,12 @@ const Styled = {
   `,
 };
 
-const AddDogCard = ({
-  value,
-  photoHandle,
-  deleteHandle,
-  photoStore,
-  urlArray,
-  setUrlArray,
-  createImage,
-  setCreateImage,
-}) => {
-  const [imgfile, setImage] = useState("");
-  function createImagePreview(e) {
+const AddDogCard = ({ value, photoHandle, deleteHandle, urlArray, setUrlArray, createImage, setCreateImage }) => {
+  const [imgfile, setImage] = useState('');
+  const count = useRef(0);
+  const createImagePreview = e => {
     const files = e.target.files;
-    setCreateImage(createImage.concat(e.target.files[0]));
+    setCreateImage(createImage.concat({ id: count.current, image: e.target.files[0] }));
     if (files.length) {
       setImageFromFile({
         file: files[0],
@@ -86,7 +78,8 @@ const AddDogCard = ({
         },
       });
     }
-  }
+    count.current += 1;
+  };
 
   function setImageFromFile({ file, setImageUrl }) {
     let reader = new FileReader();
@@ -106,14 +99,9 @@ const AddDogCard = ({
               deleteHandle(e);
             }}
             src={deleteBtn}
-            alt={"delete"}
+            alt={'delete'}
           />
-          <img
-            className="image__area-img"
-            data-key={value.id}
-            src={urlArray[value.id]}
-            alt={imgfile.name}
-          />
+          <img className="image__area-img" data-key={value.id} src={urlArray[value.id]} alt={imgfile.name} />
         </div>
       ) : value ? (
         <div className="card">
@@ -136,5 +124,3 @@ const AddDogCard = ({
 };
 
 export default AddDogCard;
-
-// console.log(newphotoArray);

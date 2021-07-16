@@ -1,9 +1,9 @@
 /* eslint-disable arrow-parens */
-import React, { useRef, useState } from "react";
-import styled from "styled-components";
+import React, { useRef, useState } from 'react';
+import styled from 'styled-components';
 
-import { useDetectOutsideClick } from "../../hooks/useDetectOutsideClick";
-import Arrow_Bottom from "../../assets/img/ic_arrow_bottom_black_24.svg";
+import { useDetectOutsideClick } from '../../hooks/useDetectOutsideClick';
+import Arrow_Bottom from '../../assets/img/ic_arrow_bottom_black_24.svg';
 
 const Styled = {
   Container: styled.div`
@@ -16,8 +16,8 @@ const Styled = {
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    padding: ${(props) => (props.small ? "0" : "2.4rem 2.6rem")};
-    border-radius: ${(props) => (props.rounded ? "5.4rem" : "1rem")};
+    padding: ${props => (props.small ? '0' : '2.4rem 2.6rem')};
+    border-radius: ${props => (props.rounded ? '5.4rem' : '1rem')};
     border: none;
     background-color: ${({ theme }) => theme.color.white};
 
@@ -32,29 +32,28 @@ const Styled = {
       }
 
       .name {
-        display: ${(props) => (props.caption ? "block" : "none")};
+        display: ${props => (props.caption ? 'block' : 'none')};
         font: ${({ theme }) => theme.font.caption};
         color: ${({ theme }) => theme.color.gray3};
       }
 
       .text {
-        margin-top: ${(props) => (props.caption ? "0.6rem" : "0")};
-        margin-left: ${(props) => props.image && "0.4rem"};
-        font: ${({ theme, fontStyle }) =>
-          fontStyle ? theme.font[fontStyle] : theme.font.body2};
-        color: ${(props) => (props.list ? "#3D3D3D" : "#C1C1C1")};
+        margin-top: ${props => (props.caption ? '0.6rem' : '0')};
+        margin-left: ${props => props.image && '0.4rem'};
+        font: ${({ theme, fontStyle }) => (fontStyle ? theme.font[fontStyle] : theme.font.body2)};
+        color: ${props => (props.list ? '#3D3D3D' : '#C1C1C1')};
       }
     }
 
     .arrowimg {
-      transform: ${(props) => props.isActive && "rotate(180deg)"};
+      transform: ${props => props.isActive && 'rotate(180deg)'};
     }
   `,
 
   Nav: styled.nav`
     width: 100%;
     position: absolute;
-    display: ${(props) => (props.isActive ? "flex" : "none")};
+    display: ${props => (props.isActive ? 'flex' : 'none')};
     padding: 1rem 0.6rem;
     box-shadow: 0rem 0rem 3rem 0.1rem rgba(0, 0, 0, 0.1);
     border-radius: 1rem;
@@ -73,8 +72,7 @@ const Styled = {
     height: 3.4rem;
     padding-left: 1.4rem;
     font: ${({ theme }) => theme.font.body1};
-    color: ${({ theme, selected }) =>
-      selected ? theme.color.primary : theme.color.darkgray1};
+    color: ${({ theme, selected }) => (selected ? theme.color.primary : theme.color.darkgray1)};
     display: flex;
     align-items: center;
     border-radius: 1rem;
@@ -87,23 +85,14 @@ const Styled = {
   Img: styled.div``,
 };
 
-const Dropdown = ({
-  item,
-  placeholder,
-  rounded,
-  font,
-  caption,
-  small,
-  dropArray,
-  onDrop,
-  id,
-}) => {
+const Dropdown = ({ item, placeholder, rounded, font, caption, small, dropArray, onDrop, id }) => {
   const dropdownRef = useRef(null);
   const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
-  const [list, setList] = useState("");
-  const [image, setImage] = useState("");
+  const [list, setList] = useState('');
+  const [image, setImage] = useState('');
 
-  const onClick = () => {
+  const onClick = e => {
+    e.preventDefault();
     setIsActive(!isActive);
   };
 
@@ -134,15 +123,15 @@ const Dropdown = ({
             <>
               <Styled.List
                 key={index}
-                selected={list === value["type"] ? true : false}
+                selected={list === value['type'] ? true : false}
                 onClick={() => {
-                  setList(value["type"]);
-                  setImage(value["img"]);
-                  onDrop(dropArray, value["type"], id);
+                  setList(value['type']);
+                  setImage(value['img']);
+                  onDrop(dropArray, value['type'], id);
                   setIsActive(!isActive);
                 }}
               >
-                {value["type"]}
+                {value['type']}
               </Styled.List>
             </>
           ))}
