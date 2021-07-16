@@ -1,39 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <!--font-->
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <link
-      rel="stylesheet"
-      href="//fonts.googleapis.com/earlyaccess/notosanskr.css"
-      type="text/css"
-    />
-    <link
-      rel="stylesheet"
-      href="//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css"
-      type="text/css"
-    />
-    <title>TAKE US</title>
-    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-    <script>
-      // SDK를 초기화 합니다. 사용할 앱의 JavaScript 키를 설정해 주세요.
-      Kakao.init("26fd04b67d0bdc98cb3839e918b01742");
 
-      // SDK 초기화 여부를 판단합니다.
-      console.log(Kakao.isInitialized());
-    </script>
-  </head>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="description" content="TAKEUS" />
+  <title>TAKE US</title>
 
-  <body>
-    <div id="root"></div>
-  </body>
+  <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+  <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+
+  <link rel="stylesheet" href="//fonts.googleapis.com/earlyaccess/notosanskr.css" type="text/css" />
+  <link rel="stylesheet" href="//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css" type="text/css" />
+
+  <script src="https://developers.kakao.com/sdk/js/kakao.js" defer></script>
+  <script src="./kakaoLogin.js" defer></script>
+</head>
+
+<body>
+  <div id="root"></div>
+</body>
+
 </html>
