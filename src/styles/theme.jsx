@@ -49,7 +49,7 @@ const font = {
   body2: "normal 400 1.4rem/156% 'Noto Sans kr'",
   body1: "normal 400 1.2rem/160% 'Noto Sans kr'",
   caption: "normal 400 1.2rem/1.2rem 'Noto Sans kr'",
-  gnb: "normal 600 1.4rem/1.4rem 'Spoqa Han Sans Neo'",
+  gnb: "normal 500 1.4rem/1.4rem 'Noto Sans kr'",
   button: "normal 600 1.8rem/1.8rem 'Spoqa Han Sans Neo'",
   button_large: "normal 500 1.8rem/1.8rem 'Spoqa Han Sans Neo'",
   button_middle: "normal 600 1.6rem/1.6rem 'Spoqa Han Sans Neo'",
