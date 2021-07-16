@@ -1,11 +1,12 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 const EnrollInfoWrap = styled.div`
-  header{
+  padding: 0 12rem;
+  header {
     text-align: center;
     padding-bottom: 4.8rem;
-    border-bottom: 1.5px solid ${({theme}) => theme.color.lightgray2};
+    border-bottom: 1.5px solid ${({ theme }) => theme.color.lightgray2};
     p {
       font: ${({ theme }) => theme.font.display1};
     }
@@ -17,18 +18,18 @@ const EnrollInfoWrap = styled.div`
       font: ${({ theme }) => theme.font.headline};
     }
     article {
-        background: ${({ theme }) => theme.color.bg_gray} ;
-        margin-top: 2.4rem;
-        border-radius: 1rem;
-        ul {
-          list-style: disc;
-          padding: 4rem 6.4rem;
-          li {
-            font: ${({theme}) => theme.font.description};
-            line-height: 2.8rem;
-          }
+      background: ${({ theme }) => theme.color.bg_gray};
+      margin-top: 2.4rem;
+      border-radius: 1rem;
+      ul {
+        list-style: disc;
+        padding: 4rem 6.4rem;
+        li {
+          font: ${({ theme }) => theme.font.description};
+          line-height: 2.8rem;
         }
       }
+    }
   }
 `;
 

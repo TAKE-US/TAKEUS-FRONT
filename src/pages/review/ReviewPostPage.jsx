@@ -5,6 +5,7 @@ import { ReviewPostInfo, ReviewPrecaution } from "components";
 
 const PageStyle = styled.div`
   margin-top: 18.7rem;
+  padding: 0 12rem;
 `;
 
 const ReviewPostPage = ({ edit }) => {

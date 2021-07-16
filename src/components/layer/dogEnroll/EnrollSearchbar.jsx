@@ -26,6 +26,7 @@ const Search = {
       }
       &__airport {
         width: 50.6rem;
+        height: 3.2rem;
         border: 1px solid #dfdfdf;
         border-radius: 41rem;
       }
