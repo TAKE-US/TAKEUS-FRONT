@@ -4,6 +4,7 @@ import styled from "styled-components";
 import useInput from "hooks/useInput";
 
 const TextFieldWrap = styled.section`
+  width: 100%;
   article {
     display: flex;
     justify-content: space-between;

@@ -3,7 +3,16 @@
 
 import React, { useState, useEffect, useCallback } from "react";
 import styled from "styled-components";
-import { RadioButton, Counter, TextField, AddDogLayer, Input, Button, EnrollSearchbar, Dropdown } from "components";
+import {
+  RadioButton,
+  Counter,
+  TextField,
+  AddDogLayer,
+  Input,
+  Button,
+  EnrollSearchbar,
+  Dropdown,
+} from "components";
 import { ReactComponent as Kakao } from "assets/icon/ic_kakao_24.svg";
 import { ReactComponent as Call } from "assets/icon/ic_call_24.svg";
 import { ReactComponent as Instagram } from "assets/icon/ic_instar_24.svg";
@@ -17,6 +26,12 @@ import { withRouter } from "react-router-dom";
 const EnrollInfoWrap = styled.section`
   .wrap {
     margin-top: 6rem;
+    padding: 0 12rem;
+    height: 3.2rem;
+    label {
+      min-width: 15.2rem;
+      font: ${({ theme }) => theme.font.title2};
+    }
 
     &:last-child {
       margin-top: 8rem;
@@ -27,11 +42,15 @@ const EnrollInfoWrap = styled.section`
       align-items: center;
     }
 
+    &--add {
+      width: 100%;
+      height: 20rem;
+    }
     &.contact {
       .contact-layer {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        grid-auto-rows: calc(4.2rem + 0.2rem);
+        grid-auto-rows: 3.2rem;
         column-gap: 1.9rem;
         row-gap: 1.2rem;
         margin-top: 2.4rem;
@@ -49,11 +68,6 @@ const EnrollInfoWrap = styled.section`
           }
         }
       }
-    }
-
-    label {
-      min-width: 18.2rem;
-      font: ${({ theme }) => theme.font.headline};
     }
   }
   .dropdown {
@@ -110,7 +124,11 @@ const EnrollInfo = ({ history }) => {
   );
   const onDrop = (dropArray, value, id) => {
     if (dropArray.key === id) {
-      setDrop(Array.from(dropArray).map(val => (val.id === id ? { key: id, type: value } : val)));
+      setDrop(
+        Array.from(dropArray).map(val =>
+          val.id === id ? { key: id, type: value } : val
+        )
+      );
     } else {
       setDrop(dropArray => dropArray.concat({ key: id, type: value }));
     }
@@ -122,7 +140,10 @@ const EnrollInfo = ({ history }) => {
 
   useEffect(() => {
     if (Object.keys(createdContact).length !== 0) {
-      setEnrollData(Object.keys(createdContact), ...Object.values(createdContact));
+      setEnrollData(
+        Object.keys(createdContact),
+        ...Object.values(createdContact)
+      );
     }
   }, [createdContact, setEnrollData]);
 
@@ -135,9 +156,15 @@ const EnrollInfo = ({ history }) => {
     formData.append("gender", enrollData.gender);
     formData.append("age", enrollData.age);
     formData.append("weight", enrollData.weight);
-    formData.append("neutralization", enrollData?.neutralization === "완료" ? true : false);
+    formData.append(
+      "neutralization",
+      enrollData?.neutralization === "완료" ? true : false
+    );
     formData.append("health", enrollData.health);
-    formData.append("isInstitution", enrollData?.isInstitution === "단체" ? true : false);
+    formData.append(
+      "isInstitution",
+      enrollData?.isInstitution === "단체" ? true : false
+    );
     formData.append("institutionName", enrollData?.institutionName);
     formData.append("kakaotalkId", enrollData?.카카오톡);
     formData.append("phoneNumber", enrollData?.전화번호);
@@ -157,12 +184,14 @@ const EnrollInfo = ({ history }) => {
   return (
     <EnrollInfoWrap>
       <form onSubmit={handleSubmit}>
-        <AddDogLayer
-          createImage={createImage}
-          setCreateImage={setCreateImage}
-          setEnrollData={setEnrollDataCallback}
-          name="photos"
-        />
+        <div className="wrap wrap--add">
+          <AddDogLayer
+            createImage={createImage}
+            setCreateImage={setCreateImage}
+            setEnrollData={setEnrollDataCallback}
+            name="photos"
+          />
+        </div>
         <div className="wrap wrap--flex">
           <label>출국정보</label>
           <EnrollSearchbar enroll setEnrollData={setEnrollDataCallback} />
@@ -175,6 +204,7 @@ const EnrollInfo = ({ history }) => {
             caption="30자 이내로 적어주세요."
             setEnrollData={setEnrollDataCallback}
             name="name"
+            font="body3"
           />
         </div>
         <div className="wrap wrap--flex">
@@ -192,11 +222,12 @@ const EnrollInfo = ({ history }) => {
         <div className="wrap wrap--flex">
           <label>대상견 나이</label>
           <Input
-            placeholder="ex 멍멍이"
+            placeholder="ex 1살 , 2개월 등"
             maxLength={10}
             caption="10자 이내로 적어주세요."
             setEnrollData={setEnrollDataCallback}
             name="age"
+            font="body3"
           />
         </div>
         <div className="wrap wrap--flex">
@@ -217,11 +248,12 @@ const EnrollInfo = ({ history }) => {
         <div className="wrap wrap--flex">
           <label>건강상태</label>
           <Input
-            placeholder="ex 멍멍이"
+            placeholder="ex 접종내역, 건강상태, 유의할 점 등"
             maxLength={50}
             caption="50자 이내로 적어주세요."
             setEnrollData={setEnrollDataCallback}
             name="health"
+            font="body3"
           />
         </div>
         <div className="wrap wrap--flex">
@@ -234,13 +266,13 @@ const EnrollInfo = ({ history }) => {
             setEnrollData={setEnrollDataCallback}
             name="isInstitution"
           />
-          {/* <DogEnrollInput placeholder="단체명을 입력해주세요." maxLength="15" /> */}
           <Input
-            placeholder="ex 멍멍이"
+            placeholder="단체명을 입력해주세요."
             maxLength={15}
             caption="15자 이내로 적어주세요."
             setEnrollData={setEnrollDataCallback}
             name="institutionName"
+            font="body3"
           />
         </div>
         <div className="wrap contact">
@@ -271,7 +303,7 @@ const EnrollInfo = ({ history }) => {
               </Input>
             ))}
             <div className="contact__btn" onClick={addContact}>
-              <Button rounded full padding="1rem 0">
+              <Button rounded full padding="1rem 0" font="gnb">
                 <Plus />
                 연락처 추가하기
               </Button>
@@ -279,11 +311,16 @@ const EnrollInfo = ({ history }) => {
           </div>
         </div>
         <div className="wrap">
-          <TextField label="내용을 작성해주세요" maxLength={500} setEnrollData={setEnrollDataCallback} name="detail" />
+          <TextField
+            label="내용을 작성해주세요"
+            maxLength={500}
+            setEnrollData={setEnrollDataCallback}
+            name="detail"
+          />
         </div>
         <div className="wrap">
           <div className="wrap__button">
-            <Button rounded full font="headline" padding="1.5rem">
+            <Button rounded full font="button" padding="1.5rem">
               대상견 등록하기
             </Button>
           </div>

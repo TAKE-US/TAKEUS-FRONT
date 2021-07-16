@@ -7,10 +7,14 @@ import radioOn from "assets/icon/btn_radio_on_24.svg";
 const RadioBtnWrap = styled.section`
   display: flex;
   justify-content: space-between;
+  height: 2.4rem;
   article {
     display: flex;
     align-items: center;
-    margin-right: 6.6rem;
+    margin-right: 5rem;
+    :last-child {
+      margin-right: 2.4rem;
+    }
     p {
       margin-left: 1rem;
       font: ${({ theme }) => theme.font.description};
