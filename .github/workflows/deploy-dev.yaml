@@ -31,9 +31,9 @@ jobs:
         run: yarn install
 
       - name: make .env
-        run: echo "REACT_APP_GOOGLE_CLIENTID=${{ secrets.REACT_APP_GOOGLE_CLIENTID }}" > src/.env
+        run: echo "REACT_APP_GOOGLE_CLIENTID=${{ secrets.REACT_APP_GOOGLE_CLIENTID }}" > .env
 
-      - run: ls -al src/
+      - run: ls -al ./
       
       - name: Build webpack
         run: yarn build
