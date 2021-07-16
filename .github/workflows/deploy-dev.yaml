@@ -30,17 +30,20 @@ jobs:
         if: steps.node-cache.outputs.cache-hit != 'true'
         run: yarn install
 
+      - name: make .env
+        run: echo "REACT_APP_GOOGLE_CLIENTID={{ secrets.REACT_APP_GOOGLE_CLIENTID }}" > src/.env
+
+      - run: ls src/
+      
       - name: Build webpack
         run: yarn build
 
-      - run: ls build
-      
       - uses: actions/upload-artifact@v2
         with:
           name: built-artifact
           path: build/
       
-      - run: ls build
+
 
   deploy:
     needs: build
