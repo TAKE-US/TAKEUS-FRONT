@@ -36,7 +36,7 @@ const Hashtag = ({ tag, primary, rounded, hasActiveHashtag }) => {
     hasActiveHashtag
     ? (
       <Styled.Wrapper
-        className={primary && isSelected ? "primary" : "reverse"}
+        className={primary ? "primary" : "reverse"}
         rounded={rounded}
         isSelected={isSelected}
         onClick={() => setIsSelected(!isSelected)}
