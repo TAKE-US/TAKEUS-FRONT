@@ -8,36 +8,37 @@ const Styled = {
   Wrapper: styled.section`
     display: flex;
     align-items: center;
-    width: 20rem;
-    height: 20rem;
+    width: 15.4rem;
+    height: 15.4rem;
     border-radius: 1rem;
     background-color: #f8f8f8;
     margin-right: 1.5rem;
     .card {
-      width: 20rem;
-      height: 20rem;
+      width: 15.4rem;
+      height: 15.4rem;
       position: relative;
       &__img {
         position: absolute;
-        top: 9.4rem;
-        left: 3rem;
+        top: 7.2rem;
+        left: 2.5rem;
         max-width: 2rem;
         max-height: 2rem;
       }
       &__content {
         position: absolute;
-        width: 12rem;
-        left: 5.5rem;
-        top: 9.5rem;
-        font: ${({ theme }) => theme.font.button};
+        width: 9rem;
+        height: 2rem;
+        left: 4.5rem;
+        top: 7.2rem;
+        font: ${({ theme }) => theme.font.gnb};
         color: ${({ theme }) => theme.color.primary};
       }
       &__input {
         position: absolute;
         top: 0;
         left: 0;
-        width: 20rem;
-        height: 20rem;
+        width: 15.4rem;
+        height: 15.4rem;
         opacity: 0;
         :hover {
           cursor: pointer;
@@ -47,8 +48,8 @@ const Styled = {
     .image__area {
       position: relative;
       &-img {
-        width: 20rem;
-        height: 20rem;
+        width: 15.4rem;
+        height: 15.4rem;
         border-radius: 1rem;
       }
       &-delete {

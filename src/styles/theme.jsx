@@ -37,10 +37,10 @@ const color = {
  * light: 300
  */
 const font = {
-  display2: "normal 700 3.2rem/3.2rem 'Noto Sans kr'",
+  display2: "normal 700 3rem/3rem 'Noto Sans kr'",
   display1: "normal 400 2.4rem/2.4rem 'Noto Sans kr'",
   headline: "normal 700 2.4rem/2.4rem 'Noto Sans kr'",
-  headline2: "normal 300 2.4rem/2.4rem 'Noto Sans kr'",
+  headline2: "normal 400 2.4rem/2.4rem 'Noto Sans kr'",
   title3: "normal 400 2.0rem/2.0rem 'Noto Sans kr'",
   title2: "normal 700 1.8rem/1.8rem 'Noto Sans kr'",
   title1: "normal 700 1.6rem/1.6rem 'Noto Sans kr'",
