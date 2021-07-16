@@ -55,7 +55,7 @@ const CardWrap = styled.article`
       &__location {
         display: flex;
         align-items: center;
-        min-width: 7.9rem;
+        min-width: 6.8rem;
         height: 2.4rem;
         border: 0.1rem solid ${({ theme }) => theme.color.primary_darker};
         border-radius: 3.5rem;
