@@ -97,7 +97,7 @@ const Searchbar = ({ setDogs }) => {
         setDogs(data[0]);
       }
       if (location.pathname === "/") {
-        history.push("/dogSearch");
+        history.push("/dog/search");
       }
     }
   };
