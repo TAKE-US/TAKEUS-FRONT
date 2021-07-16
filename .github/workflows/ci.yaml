@@ -23,11 +23,12 @@ jobs:
         run: yarn install
         
       - name: Build webpack
-        run: yarn run build
+        run: yarn build
 
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_TAKE__US }}'
+          expires: 1d
           projectId: take--us
 

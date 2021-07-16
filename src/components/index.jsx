@@ -56,6 +56,7 @@ export { default as DogCardContainer } from "./layer/dogSearch/DogCardContainer"
 export { default as DogDetail } from "./layer/dogDetail/DogDetail";
 export { default as DeleteModal } from "./layer/dogDetail/DeleteModal";
 export { default as ReportModal } from "./layer/dogDetail/ReportModal";
+export { default as MatchingModal } from "./layer/dogDetail/MatchingModal";
 
 // layer/info
 export { default as InfoHeader } from "./layer/info/InfoHeader";
