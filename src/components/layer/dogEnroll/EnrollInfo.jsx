@@ -126,24 +126,24 @@ const EnrollInfo = () => {
   }, [createdContact, setEnrollData]);
 
   const handleSubmit = async event => {
-    console.log(enrollData['name']);
     event.preventDefault();
     const formData = new FormData();
-    // formData.append('endingCountry', enrollData['endingCountry']);
-    // formData.append('endingAirport', enrollData['endingAirport']);
-    // formData.append('name', enrollData['name']);
-    // formData.append('gender', enrollData['gender']);
-    // formData.append('age', enrollData['age']);
-    // formData.append('weight', enrollData['weight']);
-    // formData.append('neutralization', enrollData['neutralization']);
-    // formData.append('isInstitution', enrollData['isInstitution']);
-    // formData.append('institutionName', enrollData['institutionName']);
-    // - kakaotalkId (string) ⇒ Ex. kakaoTalk~
-    // - phoneNumber (string) ⇒ Ex. 01012345678
-    // - instagram (string) ⇒ Ex. instagram~
-    // - twitter (string) ⇒ Ex. twitter~
-    // - facebook (string) ⇒ Ex. facebook~
-    // console.log(enrollData.values().length);
+    formData.append('endingCountry', enrollData.endingCountry);
+    formData.append('endingAirport', enrollData.endingAirport);
+    formData.append('name', enrollData.name);
+    formData.append('gender', enrollData.gender);
+    formData.append('age', enrollData.age);
+    formData.append('weight', enrollData.weight);
+    formData.append('neutralization', enrollData?.neutralization === '완료' ? true : false);
+    formData.append('health', enrollData.health);
+    formData.append('isInstitution', enrollData?.isInstitution === '단체' ? true : false);
+    formData.append('institutionName', enrollData?.institutionName);
+    formData.append('kakaotalkId', enrollData?.카카오톡);
+    formData.append('phoneNumber', enrollData?.전화번호);
+    formData.append('facebook', enrollData?.카카오톡);
+    formData.append('instagram', enrollData?.인스타그램);
+    formData.append('twitter', enrollData?.트위터);
+    formData.append('detail', enrollData?.detail);
     for (let i = 0; i < Array.from(createImage).length; i++) {
       formData.append('photos', createImage[i]['image']);
     }
@@ -151,7 +151,7 @@ const EnrollInfo = () => {
   };
 
   console.log(enrollData);
-  console.log(createImage);
+  console.log(createdContact);
   return (
     <EnrollInfoWrap>
       <form onSubmit={handleSubmit}>
@@ -159,7 +159,6 @@ const EnrollInfo = () => {
         <div className="wrap wrap--flex">
           <label>출국정보</label>
           <EnrollSearchbar enroll setEnrollData={setEnrollDataCallback} />
-          {/* setDogs, enroll, setEnrollData */}
         </div>
         <div className="wrap wrap--flex">
           <label>대상견 이름</label>
@@ -185,7 +184,6 @@ const EnrollInfo = () => {
         </div>
         <div className="wrap wrap--flex">
           <label>대상견 나이</label>
-          {/* <DogEnrollInput placeholder="ex 1살 , 2개월 등" maxLength="10" /> */}
           <Input
             placeholder="ex 멍멍이"
             maxLength={10}
@@ -211,7 +209,6 @@ const EnrollInfo = () => {
         </div>
         <div className="wrap wrap--flex">
           <label>건강상태</label>
-          {/* <DogEnrollInput placeholder="ex 접종내역, 건강상태, 유의할 점 등" maxLength="50" /> */}
           <Input
             placeholder="ex 멍멍이"
             maxLength={50}
@@ -250,6 +247,7 @@ const EnrollInfo = () => {
                 name={dropArray[i]}
                 createdContact={createdContact}
                 setCreatedContact={setCreatedContact}
+                setEnrollData={setEnrollDataCallback}
               >
                 <div className="dropdown">
                   <Dropdown
