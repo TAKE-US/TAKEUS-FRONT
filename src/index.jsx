@@ -1,18 +1,32 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import { hydrate, render } from "react-dom";
 import App from "./App";
+import store from "redux/store";
+import { Provider } from "react-redux";
 import { ThemeProvider } from "styled-components";
 import theme from "./styles/theme";
-import { Provider } from "react-redux";
-import store from "redux/store";
 
-ReactDOM.render(
-  <Provider store={store}>
-    <React.StrictMode>
-      <ThemeProvider theme={theme}>
-        <App />
-      </ThemeProvider>
-    </React.StrictMode>
-  </Provider>,
-  document.getElementById("root")
-);
+const rootElement = document.getElementById("root");
+
+if (rootElement.hasChildNodes()) {
+  hydrate(
+    <Provider store={store}>
+      <React.StrictMode>
+        <ThemeProvider theme={theme}>
+          <App />
+        </ThemeProvider>
+      </React.StrictMode>
+    </Provider>, rootElement);
+} else {
+  render(
+    <Provider store={store}>
+      <React.StrictMode>
+        <ThemeProvider theme={theme}>
+          <App />
+        </ThemeProvider>
+      </React.StrictMode>
+    </Provider>,
+    rootElement
+  );
+  
+}
