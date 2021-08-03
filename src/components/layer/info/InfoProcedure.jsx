@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import styled from "styled-components";
 import BackgroundImg from "assets/img/img_info_background-bottom.jpg";
 import Step1Img from "assets/img/img_info_step1.png";
@@ -121,7 +121,7 @@ const Styled = {
       .button-area {
         display: flex;
         justify-content: center;
-        & > a {
+        & > button {
           margin: 0 1.3rem;
         }
       }
@@ -131,6 +131,7 @@ const Styled = {
 
 const InfoProcedure = () => {
   const isLogin = localStorage.getItem('token');
+  const history = useHistory();
 
   return (
     <Styled.Wrapper>
@@ -244,16 +245,13 @@ const InfoProcedure = () => {
           </div>
         </section>
         <div className="button-area">
-          <Link to="/dog/search">
-            <Styled.Button rounded padding="1.6rem 7.1rem" font="button">
-              이동 봉사 하러 가기
-            </Styled.Button>
-          </Link>
-          <Link to={ isLogin ? "/dog/enroll" : "/login"} >
-            <Styled.Button rounded padding="1.6rem 6.6rem" font="button">
-              대상견 등록하러 가기
-            </Styled.Button>
-          </Link>
+          <Styled.Button rounded padding="1.6rem 7.1rem" font="button" onClick={() => history.push('/dog/search')}>
+            이동 봉사 하러 가기
+          </Styled.Button>
+          <Styled.Button rounded padding="1.6rem 6.6rem" font="button"
+            onClick={() => history.push(isLogin ? '/dog/emroll' : 'login')}>
+            대상견 등록하러 가기
+          </Styled.Button>
         </div>
       </div>
     </Styled.Wrapper>

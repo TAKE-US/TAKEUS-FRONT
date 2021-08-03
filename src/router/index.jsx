@@ -12,7 +12,6 @@ import {
 } from "pages";
 
 const Router = () => {
-  console.log('test');
   return (
     <>
       <Switch>
