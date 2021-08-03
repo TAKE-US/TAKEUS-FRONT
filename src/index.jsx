@@ -9,7 +9,14 @@ import theme from "./styles/theme";
 const rootElement = document.getElementById("root");
 
 if (rootElement.hasChildNodes()) {
-  hydrate(<App />, rootElement);
+  hydrate(
+    <Provider store={store}>
+      <React.StrictMode>
+        <ThemeProvider theme={theme}>
+          <App />
+        </ThemeProvider>
+      </React.StrictMode>
+    </Provider>, rootElement);
 } else {
   render(
     <Provider store={store}>
