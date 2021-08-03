@@ -21,6 +21,9 @@ jobs:
       - name: Install Dependencies
         if: steps.node-cache.outputs.cache-hit != 'true'
         run: yarn install
+
+      - name: Setting .env
+        run: echo "REACT_APP_GOOGLE_CLIENTID=${{ secrets.REACT_APP_GOOGLE_CLIENTID }}" > .env
         
       - name: Build webpack
         run: yarn build
