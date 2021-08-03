@@ -17,15 +17,14 @@
     "redux": "^4.1.0",
     "styled-components": "^5.3.0",
     "styled-reset": "^4.3.4",
-    "web-vitals": "^1.0.1",
-    "yarn": "^1.22.10"
+    "web-vitals": "^1.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "postbuild": "react-snap",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "postbuild": "react-snap"
+    "eject": "react-scripts eject"
   },
   "browserslist": {
     "production": [
