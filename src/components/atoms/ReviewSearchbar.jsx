@@ -62,7 +62,7 @@ const ReviewSearchbar = ({ setSearchState }) => {
     (async () => {
       try {
         const data = await getCountry();
-        console.warn(data);
+        console.log(data);
 
         setCountry(Object.keys(data).splice(1));
         setAllAirport(data);
