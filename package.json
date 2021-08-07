@@ -19,6 +19,9 @@
     "styled-reset": "^4.3.4",
     "web-vitals": "^1.0.1"
   },
+  "resolutions": {
+    "babel-loader": "8.1.0"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
