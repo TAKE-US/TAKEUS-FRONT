@@ -4,14 +4,6 @@ import styled from "styled-components";
 
 import { getCountry } from "lib/api/sample";
 import { DropdownCountry, DropdownAirport } from "components";
-import { connect } from "react-redux";
-import { setDogs } from "redux/actions";
-
-const mapDispatchToProps = dispatch => {
-  return {
-    setDogs: dog => dispatch(setDogs(dog)),
-  };
-};
 
 const Search = {
   Container: styled.div`
@@ -84,4 +76,4 @@ const Searchbar = ({ setDogs, enroll, setEnrollData }) => {
   );
 };
 
-export default connect(null, mapDispatchToProps)(Searchbar);
+export default Searchbar;
