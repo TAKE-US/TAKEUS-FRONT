@@ -2,8 +2,6 @@ import React, { useEffect, useState, useCallback, useRef } from "react";
 import { useLocation, useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { connect } from "react-redux";
-import { setDogs } from "redux/actions";
 import { ReactComponent as LogoBlack } from "../../assets/img/ic_logo_wordmark_black_small.svg";
 
 const Head = {
@@ -112,12 +110,6 @@ const Head = {
   `,
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    setDogs: dog => dispatch(setDogs(dog)),
-  };
-};
-
 const Header = ({ setDogs }) => {
   const noticeElement = useRef(null);
   const location = useLocation();
@@ -134,7 +126,7 @@ const Header = ({ setDogs }) => {
       }
     } else {
       if (!noticeElement.current) return;
-    
+
       if (window.scrollY > noticeElement.current.clientHeight) {
         setIsScrolling(true);
       } else {
@@ -220,4 +212,4 @@ const Header = ({ setDogs }) => {
   );
 };
 
-export default connect(null, mapDispatchToProps)(Header);
+export default Header;
