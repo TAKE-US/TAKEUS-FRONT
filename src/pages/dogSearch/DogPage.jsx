@@ -51,7 +51,7 @@ const DogPage = ({ dogData, location }) => {
         setIsLoading(false);
       })();
     }
-  }, [pageNum, selectedFilter]);
+  }, [pageNum, query?.name, selectedFilter]);
 
   return (
     <Styled.Wrapper>
