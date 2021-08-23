@@ -1,62 +1,62 @@
 /* eslint-disable arrow-parens */
-import axios from 'axios';
+import axios from "axios";
 
-const apiServer = 'http://takeus-backend-loadbalancer-5def40d9bdb60d9f.elb.ap-northeast-2.amazonaws.com:5000';
+const apiServer = "http://takeus-load-balancer-df429d1c80a7777c.elb.ap-northeast-2.amazonaws.com:5000";
 const instance = axios.create({
-  baseURL: process.env.NODE_ENV === 'development' ? '/' : apiServer,
+  baseURL: process.env.NODE_ENV === "development" ? "/" : apiServer,
 });
 
 export const getDogs = async () => {
   try {
-    const data = await instance.get('/api/dogs');
+    const data = await instance.get("/api/dogs");
     console.log(data);
-    console.log('[SUCCESS] GET dogs data');
+    console.log("[SUCCESS] GET dogs data");
     return data.data.data;
   } catch (e) {
-    console.log('[FAIL] GET dogs data');
+    console.log("[FAIL] GET dogs data");
     throw e;
   }
 };
 
 export const postMail = async (name, email, text) => {
   try {
-    await axios.post('/api/email', {
+    await axios.post("/api/email", {
       body: {
         name: name,
         email: email,
         text: text,
       },
     });
-    console.log('{SUCCESS] POST email');
+    console.log("{SUCCESS] POST email");
   } catch (e) {
-    console.log('[FAIL] POST email');
+    console.log("[FAIL] POST email");
     throw e;
   }
 };
 
 export const getCountry = async () => {
   try {
-    const data = await instance.get('/api/airports/country');
-    console.log('[SUCCESS] GET country data');
+    const data = await instance.get("/api/airports/country");
+    console.log("[SUCCESS] GET country data");
     return data.data;
   } catch (e) {
-    console.log('[FAIL] GET country data');
+    console.log("[FAIL] GET country data");
   }
 };
 
 export const getPageDogs = async (num, selected) => {
   try {
-    const filter = selected === '최신순' ? 'latest' : 'oldest';
-    const data = await instance.get('/api/dogs', {
+    const filter = selected === "최신순" ? "latest" : "oldest";
+    const data = await instance.get("/api/dogs", {
       params: {
         order: filter,
         page: num,
       },
     });
-    console.log('[SUCCESS] GET dogs data');
+    console.log("[SUCCESS] GET dogs data");
     return [data.data.data, data.data.totalNum];
   } catch (e) {
-    console.log('[FAIL] GET dogs data');
+    console.log("[FAIL] GET dogs data");
     throw e;
   }
 };
@@ -65,88 +65,89 @@ export const getDogDetail = async id => {
   try {
     const data = await instance.get(`/api/dogs/detail/${id}`, {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     });
-    console.log('[SUCCESS] GET dog detail data');
+    console.log("[SUCCESS] GET dog detail data");
     console.log(data);
     return data.data.data;
   } catch (e) {
-    console.log('[FAIL] GET dog detail data');
+    console.log("[FAIL] GET dog detail data");
     return null;
   }
 };
 
 export const getReviews = async num => {
   try {
-    const data = await instance.get('/api/reviews', {
+    const data = await instance.get("/api/reviews", {
       params: {
-        order: 'latest',
+        order: "latest",
         page: num,
       },
     });
-    console.log('[SUCCESS] GET review data');
+    console.log("[SUCCESS] GET review data");
     return [data.data.data, data.data.totalNum];
   } catch (e) {
-    console.log('[FAIL] GET review data');
+    console.log("[FAIL] GET review data");
     throw e;
   }
 };
 
-export const getSearchDogs = async airport => {
+export const getSearchDogs = async (airport, selectedFilter, num) => {
+  const filter = selectedFilter === "최신순" ? "latest" : "oldest";
   try {
     const data = await instance.get(`/api/dogs/search/${airport}`, {
       params: {
-        order: 'latest',
-        page: 1,
+        order: filter,
+        page: num,
       },
     });
-    console.log('[SUCCESS] GET dog search data');
+    console.log("[SUCCESS] GET dog search data");
     return [data.data.data, data.data.totalNum];
   } catch (e) {
-    console.log('[FAIL] GET dog search data');
+    console.log("[FAIL] GET dog search data");
     throw e;
   }
 };
 
 export const getMyDogs = async (num, selectedFilter) => {
-  const filter = selectedFilter === '최신순' ? 'latest' : 'oldest';
+  const filter = selectedFilter === "최신순" ? "latest" : "oldest";
   try {
-    const data = await instance.get('/api/dogs/my', {
+    const data = await instance.get("/api/dogs/my", {
       headers: {
-        'Content-Type': 'application/json',
-        'x-auth-token': localStorage.getItem('token'),
+        "Content-Type": "application/json",
+        "x-auth-token": localStorage.getItem("token"),
       },
       params: {
         order: filter,
         page: num,
       },
     });
-    console.log('[SUCCESS] GET my dog data');
+    console.log("[SUCCESS] GET my dog data");
     return [data.data.data, data.data.totalNum];
   } catch (e) {
-    console.log('[FAIL] GET my dog data');
+    console.log("[FAIL] GET my dog data");
     throw e;
   }
 };
 
 export const getMyReviews = async (num, selectedFilter) => {
-  const filter = selectedFilter === '최신순' ? 'latest' : 'oldest';
+  const filter = selectedFilter === "최신순" ? "latest" : "oldest";
   try {
-    const data = await instance.get('/api/reviews/list/my', {
+    const data = await instance.get("/api/reviews/list/my", {
       headers: {
-        'Content-Type': 'application/json',
-        'x-auth-token': localStorage.getItem('token'),
+        "Content-Type": "application/json",
+        "x-auth-token": localStorage.getItem("token"),
       },
       params: {
         order: filter,
         page: num,
       },
     });
-    console.log('[SUCCESS] GET my review data');
+    console.log("[SUCCESS] GET my review data");
     return [data.data.data, data.data.totalNum];
   } catch (e) {
-    console.log('[FAIL] GET my review data');
+    console.log("[FAIL] GET my review data");
     throw e;
   }
 };
@@ -155,48 +156,48 @@ export const getReviewDetail = async id => {
   try {
     const data = await instance.get(`/api/reviews/detail/${id}`, {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     });
     console.log(data);
-    console.log('[SUCCESS] GET review detail data');
+    console.log("[SUCCESS] GET review detail data");
     return data.data.data;
   } catch (e) {
-    console.log('[FAIL] GET my review data');
+    console.log("[FAIL] GET my review data");
     throw e;
   }
 };
 
-export const getReviewsWithTags = async (hashtag = '', num, selectedFilter) => {
+export const getReviewsWithTags = async (hashtag = "", num, selectedFilter) => {
   try {
-    const filter = selectedFilter === '최신순' ? 'latest' : 'oldest';
+    const filter = selectedFilter === "최신순" ? "latest" : "oldest";
     const data = await instance.get(`/api/reviews/${hashtag}`, {
       params: {
         order: filter,
         page: num,
       },
     });
-    console.log('[SUCCESS] GET review data with hashtag', data);
+    console.log("[SUCCESS] GET review data with hashtag", data);
     return data.data;
   } catch (e) {
-    console.log('[FAIL] GET review data hashtag');
+    console.log("[FAIL] GET review data hashtag");
     throw e;
   }
 };
 
 export const getReviewsSearch = async (hashtag, num, selectedFilter, search) => {
   try {
-    const filter = selectedFilter === '최신순' ? 'latest' : 'oldest';
+    const filter = selectedFilter === "최신순" ? "latest" : "oldest";
     const data = await instance.get(`/api/reviews/${search}?hashtags=${hashtag}`, {
       params: {
         order: filter,
         page: num,
       },
     });
-    console.log('[SUCCESS] GET review search data');
+    console.log("[SUCCESS] GET review search data");
     return data.data;
   } catch (e) {
-    console.log('[FAIL] GET review search data');
+    console.log("[FAIL] GET review search data");
     throw e;
   }
 };
@@ -206,18 +207,18 @@ export const postToken = async (token, social) => {
     token: token,
     social: social,
   };
-  console.log('body', body);
+  console.log("body", body);
   try {
-    const data = await instance.post('/api/login', body, {
+    const data = await instance.post("/api/login", body, {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     });
     console.log(data);
-    console.log('[SUCCESS] POST token');
+    console.log("[SUCCESS] POST token");
     return data.data;
   } catch (e) {
-    console.log('[FAIL] POST token');
+    console.log("[FAIL] POST token");
     return null;
   }
 };
@@ -225,17 +226,17 @@ export const postToken = async (token, social) => {
 export const postReview = async data => {
   const body = data;
   try {
-    const data = await instance.post('/api/reviews', body, {
+    const data = await instance.post("/api/reviews", body, {
       headers: {
-        'Content-Type': 'application/json',
-        'x-auth-token': localStorage.getItem('token'),
+        "Content-Type": "application/json",
+        "x-auth-token": localStorage.getItem("token"),
       },
     });
     console.log(data);
-    console.log('[SUCCESS] POST reviews');
+    console.log("[SUCCESS] POST reviews");
     return data;
   } catch (e) {
-    console.log('[FAIL] POST reviews');
+    console.log("[FAIL] POST reviews");
     return e;
   }
 };
@@ -244,15 +245,15 @@ export const deleteReview = async id => {
   try {
     const res = await instance.delete(`/api/reviews/detail/${id}`, {
       headers: {
-        'Content-Type': 'application/json',
-        'x-auth-token': localStorage.getItem('token'),
+        "Content-Type": "application/json",
+        "x-auth-token": localStorage.getItem("token"),
       },
     });
     console.log(res);
-    console.log('[SUCCESS] DELETE review');
+    console.log("[SUCCESS] DELETE review");
     return res;
   } catch (e) {
-    console.log('[FAIL] DELETE review');
+    console.log("[FAIL] DELETE review");
     return e;
   }
 };
@@ -261,13 +262,13 @@ export const deleteDog = async id => {
   try {
     const data = await axios.delete(`/api/dogs/detail/${id}`, {
       headers: {
-        'x-auth-token': localStorage.getItem('token'),
+        "x-auth-token": localStorage.getItem("token"),
       },
     });
     console.log(data);
-    console.log('[SUCESS] DELETE dog detail');
+    console.log("[SUCESS] DELETE dog detail");
   } catch (e) {
-    console.log('[FAIL] DELETE dog detail');
+    console.log("[FAIL] DELETE dog detail");
     throw e;
   }
 };
@@ -277,15 +278,15 @@ export const putReview = async (id, data) => {
   try {
     const data = await instance.put(`/api/reviews/detail/${id}`, body, {
       headers: {
-        'Content-Type': 'application/json',
-        'x-auth-token': localStorage.getItem('token'),
+        "Content-Type": "application/json",
+        "x-auth-token": localStorage.getItem("token"),
       },
     });
     console.log(data);
-    console.log('[SUCCESS] PUT reviews');
+    console.log("[SUCCESS] PUT reviews");
     return data;
   } catch (e) {
-    console.log('[FAIL] PUT reviews');
+    console.log("[FAIL] PUT reviews");
     return e;
   }
 };
@@ -294,18 +295,18 @@ export const postEnroll = async data => {
   console.log(data);
   const body = data;
   try {
-    const data = await instance.post('/api/dogs', body, {
+    const data = await instance.post("/api/dogs", body, {
       headers: {
-        'Content-Type': 'multipart/form-data',
-        'x-auth-token': localStorage.getItem('token'),
+        "Content-Type": "multipart/form-data",
+        "x-auth-token": localStorage.getItem("token"),
       },
     });
     console.log(data);
-    console.log('[SUCCESS] Post Enroll');
+    console.log("[SUCCESS] Post Enroll");
     return data;
   } catch (e) {
     console.log(e);
-    console.log('[FAIL] Post Enroll');
+    console.log("[FAIL] Post Enroll");
     return e;
   }
 };

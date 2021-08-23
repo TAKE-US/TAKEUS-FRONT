@@ -1,18 +1,10 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
-import { getCountry, getSearchDogs } from "lib/api/sample";
+import { getCountry } from "lib/api/sample";
 import { DropdownCountry, DropdownAirport, Button } from "components";
 import { ReactComponent as SearchImg } from "assets/icon/ic_search_white_24.svg";
-import { connect } from "react-redux";
-import { setDogs } from "redux/actions";
-import { useLocation, useHistory } from "react-router";
-
-const mapDispatchToProps = dispatch => {
-  return {
-    setDogs: dog => dispatch(setDogs(dog)),
-  };
-};
+import { useHistory } from "react-router";
 
 const Search = {
   Container: styled.div`
@@ -62,12 +54,11 @@ const Search = {
   `,
 };
 
-const Searchbar = ({ setDogs }) => {
+const Searchbar = () => {
   const [currCountry, setCurrCountry] = useState("");
   const [currAirport, setCurrAirport] = useState("");
   const [country, setCountry] = useState([]);
   const [allAirport, setAllAirport] = useState("");
-  const location = useLocation();
   const history = useHistory();
 
   useEffect(() => {
@@ -86,19 +77,8 @@ const Searchbar = ({ setDogs }) => {
   }, []);
 
   const searchHandler = async () => {
-    console.log("click", currAirport);
     if (currAirport) {
-      const data = await getSearchDogs(currAirport);
-      console.log(data);
-      if (data[0].length === 0) {
-        //강아지 검색결과 없을 때
-        setDogs([0]);
-      } else {
-        setDogs(data[0]);
-      }
-      if (location.pathname === "/") {
-        history.push("/dog/search");
-      }
+      history.push(`/dog/search/airport?name=${currAirport}`);
     }
   };
 
@@ -106,11 +86,7 @@ const Searchbar = ({ setDogs }) => {
     <>
       <Search.Container>
         <div className="dropdown dropdown__country">
-          <DropdownCountry
-            currCountry={currCountry}
-            setCurrCountry={setCurrCountry}
-            country={country}
-          />
+          <DropdownCountry currCountry={currCountry} setCurrCountry={setCurrCountry} country={country} />
         </div>
         <div className="dropdown dropdown__airport">
           <DropdownAirport
@@ -121,11 +97,7 @@ const Searchbar = ({ setDogs }) => {
           />
         </div>
         <div className="button" onClick={() => searchHandler()}>
-          <Button
-            primary
-            font="button_middle"
-            padding="1.9rem 1.3rem 1.9rem 1.4rem"
-          >
+          <Button primary font="button_middle" padding="1.9rem 1.3rem 1.9rem 1.4rem">
             <span className="text">검색</span>
             <SearchImg />
           </Button>
@@ -135,4 +107,4 @@ const Searchbar = ({ setDogs }) => {
   );
 };
 
-export default connect(null, mapDispatchToProps)(Searchbar);
+export default Searchbar;
