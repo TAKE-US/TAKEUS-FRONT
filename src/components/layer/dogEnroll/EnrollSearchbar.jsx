@@ -30,7 +30,7 @@ const Search = {
   `,
 };
 
-const Searchbar = ({ setDogs, enroll, setEnrollData }) => {
+const Searchbar = ({ enroll, setEnrollData }) => {
   const [currCountry, setCurrCountry] = useState("");
   const [currAirport, setCurrAirport] = useState("");
   const [country, setCountry] = useState([]);
