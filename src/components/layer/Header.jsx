@@ -110,7 +110,7 @@ const Head = {
   `,
 };
 
-const Header = ({ setDogs }) => {
+const Header = () => {
   const noticeElement = useRef(null);
   const location = useLocation();
   const history = useHistory();
@@ -167,8 +167,6 @@ const Header = ({ setDogs }) => {
               isSelect={location.pathname === "/dog/search"}
               onClick={() => {
                 history.push("/dog/search");
-                const empty = [];
-                setDogs(empty);
               }}
             >
               대상견 찾기

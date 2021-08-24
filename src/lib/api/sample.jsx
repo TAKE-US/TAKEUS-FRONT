@@ -27,7 +27,7 @@ export const postMail = async (name, email, text) => {
         text: text,
       },
     });
-    console.log("{SUCCESS] POST email");
+    console.log("{SUCCESS] POST EMAIL");
   } catch (e) {
     console.log("[FAIL] POST email");
     throw e;

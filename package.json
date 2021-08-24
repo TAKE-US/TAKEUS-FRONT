@@ -44,5 +44,5 @@
     "eslint-plugin-react": "^7.24.0",
     "react-snap": "^1.23.0"
   },
-  "proxy": "http://takeus-load-balancer-df429d1c80a7777c.elb.ap-northeast-2.amazonaws.com:5000/"
+  "proxy": "https://takeus.shop/"
 }
