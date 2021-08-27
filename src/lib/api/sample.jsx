@@ -1,7 +1,7 @@
 /* eslint-disable arrow-parens */
 import axios from "axios";
 
-const apiServer = "http://takeus-load-balancer-df429d1c80a7777c.elb.ap-northeast-2.amazonaws.com:5000";
+const apiServer = "https://takeus.shop";
 const instance = axios.create({
   baseURL: process.env.NODE_ENV === "development" ? "/" : apiServer,
 });
@@ -27,7 +27,7 @@ export const postMail = async (name, email, text) => {
         text: text,
       },
     });
-    console.log("{SUCCESS] POST email");
+    console.log("{SUCCESS] POST EMAIL");
   } catch (e) {
     console.log("[FAIL] POST email");
     throw e;
