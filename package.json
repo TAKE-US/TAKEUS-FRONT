@@ -20,12 +20,17 @@
     "styled-reset": "^4.3.4",
     "web-vitals": "^1.0.1"
   },
+  "resolutions": {
+    "babel-loader": "8.1.0"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "postbuild": "react-snap",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "storybook": "start-storybook -p 6006 -s public",
+    "build-storybook": "build-storybook -s public"
   },
   "browserslist": {
     "production": [
@@ -40,9 +45,28 @@
     ]
   },
   "devDependencies": {
+    "@storybook/addon-actions": "^6.3.6",
+    "@storybook/addon-essentials": "^6.3.6",
+    "@storybook/addon-links": "^6.3.6",
+    "@storybook/node-logger": "^6.3.6",
+    "@storybook/preset-create-react-app": "^3.2.0",
+    "@storybook/react": "^6.3.6",
     "eslint": "^7.29.0",
     "eslint-plugin-react": "^7.24.0",
-    "react-snap": "^1.23.0"
+    "react-snap": "^1.23.0",
+    "storybook-addon-styled-component-theme": "^2.0.0"
   },
-  "proxy": "https://takeus.shop/"
+  "proxy": "https://takeus.shop/",
+  "eslintConfig": {
+    "overrides": [
+      {
+        "files": [
+          "**/*.stories.*"
+        ],
+        "rules": {
+          "import/no-anonymous-default-export": "off"
+        }
+      }
+    ]
+  }
 }
