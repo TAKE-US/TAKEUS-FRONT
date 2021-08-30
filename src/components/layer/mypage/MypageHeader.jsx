@@ -97,8 +97,9 @@ const MypageHeader = () => {
       <Styled.Header>
         <div>
           <nav className="tab-wrapper">
-            {tabs.map(tab => (
-              <Styled.Tab key={tab} className="tab_button" onClick={() => selectHandler(tab)} select={tab.select}>
+            {tabs.map((tab, i) => (
+              <Styled.Tab key={`${tab}-${i}`} className="tab_button"
+              onClick={() => selectHandler(tab)} select={tab.select}>
                 {tab.value}
               </Styled.Tab>
             ))}
