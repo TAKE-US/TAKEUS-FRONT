@@ -1,5 +1,5 @@
-import React from "react";
-import { Route, Switch } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Route, Switch, useLocation } from "react-router-dom";
 import DogRouter from './DogRouter';
 import ReviewRouter from './ReviewRouter';
 
@@ -12,6 +12,12 @@ import {
 } from "pages";
 
 const Router = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
   return (
     <>
       <Switch>
