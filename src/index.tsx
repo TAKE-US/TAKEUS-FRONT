@@ -4,7 +4,7 @@ import App from "./App";
 import { ThemeProvider } from "styled-components";
 import theme from "./styles/theme";
 
-const rootElement = document.getElementById("root");
+const rootElement = document.getElementById("root") as HTMLElement;
 
 if (rootElement.hasChildNodes()) {
   hydrate(

@@ -51,10 +51,14 @@
     "@storybook/node-logger": "^6.3.6",
     "@storybook/preset-create-react-app": "^3.2.0",
     "@storybook/react": "^6.3.6",
+    "@types/react": "^17.0.19",
+    "@types/react-dom": "^17.0.9",
+    "@types/styled-components": "^5.1.13",
     "eslint": "^7.29.0",
     "eslint-plugin-react": "^7.24.0",
     "react-snap": "^1.23.0",
-    "storybook-addon-styled-component-theme": "^2.0.0"
+    "storybook-addon-styled-component-theme": "^2.0.0",
+    "typescript": "^4.4.2"
   },
   "proxy": "https://takeus.shop/",
   "eslintConfig": {
