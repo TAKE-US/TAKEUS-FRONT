@@ -7,6 +7,7 @@ import DogHug from "assets/img/img_hugwithdog.png";
 import { DogCardContainer, ReviewCardContainer, Filter, PaginationNav, Loading } from "components";
 //api
 import { getMyDogs, getMyReviews } from "lib/api/sample";
+import { useHistory } from 'react-router-dom';
 
 const Styled = {
   Wrapper: styled.div``,
@@ -58,6 +59,7 @@ const Styled = {
 };
 
 const MypageHeader = () => {
+  const history = useHistory();
   const [tabs, setTabs] = useState([
     { value: "이동봉사 모집글", select: true },
     { value: "이동봉사 후기글", select: false },
@@ -80,18 +82,27 @@ const MypageHeader = () => {
   useEffect(() => {
     setIsLoading(true);
     (async () => {
-      console.log(selectedFilter);
-      const data = await getMyDogs(dogsPage, selectedFilter);
-      setDogs(data[0]);
-      setDogsTotalPage(data[1]);
-      //review
-      const ReviewData = await getMyReviews(reviewsPage, selectedFilter);
-      setReviews(ReviewData[0]);
-      setReviewsTotalPage(ReviewData[1]);
-      console.log(data, ReviewData);
-      setIsLoading(false);
+      try {
+        const data = await getMyDogs(dogsPage, selectedFilter);
+        setDogs(data[0]);
+        setDogsTotalPage(data[1]);
+        //review
+        const ReviewData = await getMyReviews(reviewsPage, selectedFilter);
+        setReviews(ReviewData[0]);
+        setReviewsTotalPage(ReviewData[1]);
+        console.log(data, ReviewData);
+        setIsLoading(false);
+      } catch (e) {
+        if (e.response.status === 401) {
+          alert('재 로그인 필요');
+          history.push('login');
+        } else {
+          alert('에러 발생!');
+          history.goBack();
+        }
+      }
     })();
-  }, [dogsPage, reviewsPage, selectedFilter]);
+  }, [dogsPage, reviewsPage, selectedFilter, history]);
   return (
     <Styled.Wrapper>
       <Styled.Header>
