@@ -45,6 +45,7 @@ const ReviewInfoStyle = styled.section`
 const ReviewPostInfo = ({ edit, history, match }) => {
   const [enrollData, setEnrollData] = useEnrollData({});
   const [hashtags, setHashtags] = useState([
+    { tag: "일반후기", active: false },
     { tag: "이동봉사과정", active: false },
     { tag: "도착공항정보", active: false },
     { tag: "보호단체관련", active: false },
@@ -67,7 +68,12 @@ const ReviewPostInfo = ({ edit, history, match }) => {
     if (match.params.id) {
       (async () => {
         const data = await getReviewDetail(match.params.id);
-        console.log(data);
+        const results = data.hashtags.map(hashtag => hashtags.find(item => item.tag === hashtag));
+        results.map(result =>
+          setHashtags(prev =>
+            prev.map(hashtag => (hashtag.tag === result.tag ? { ...hashtag, active: true } : { ...hashtag }))
+          )
+        );
         setInitial(data);
       })();
     }
@@ -103,7 +109,7 @@ const ReviewPostInfo = ({ edit, history, match }) => {
 
       <div className="wrap">
         <label>봉사 지역</label>
-        <EnrollSearchbar enroll setEnrollData={setEnrollData} />
+        <EnrollSearchbar initialData={initial} enroll setEnrollData={setEnrollData} />
       </div>
 
       <div className="wrap">
