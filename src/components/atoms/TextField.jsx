@@ -45,7 +45,6 @@ const TextFieldWrap = styled.section`
 const TextField = ({ label, maxLength, placeholder, setEnrollData, name, initial }) => {
   const [text, onChange, setText] = useInput("");
   const onBlurHandler = () => {
-    console.log(initial);
     setEnrollData(name, text);
   };
   useEffect(() => {
@@ -57,7 +56,7 @@ const TextField = ({ label, maxLength, placeholder, setEnrollData, name, initial
         {label ? <label>{label}</label> : ""}
         {maxLength ? (
           <div className="count">
-            {text.length}/<span className="count--gray">{maxLength}</span>
+            {text?.length}/<span className="count--gray">{maxLength}</span>
           </div>
         ) : (
           ""
