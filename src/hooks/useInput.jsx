@@ -4,9 +4,9 @@ function useInput(initialForm) {
   const [form, setForm] = useState(initialForm);
   // change
   const onChange = useCallback(evt => {
-    evt?.target?.value ? setForm(evt.target.value) : setForm(evt);
+    setForm(evt.target.value);
   }, []);
-  return [form, onChange];
+  return [form, onChange, setForm];
 }
 
 export default useInput;

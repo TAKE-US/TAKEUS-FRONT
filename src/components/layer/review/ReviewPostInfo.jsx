@@ -73,10 +73,10 @@ const ReviewPostInfo = ({ edit, history, match }) => {
     if (match.params.id) {
       (async () => {
         const data = await getReviewDetail(match.params.id);
-        const results = data.hashtags.map(hashtag => hashtags.find(item => item.tag === hashtag));
+        const results = data.hashtags.map(hashtag => hashtags.find(item => item?.tag === hashtag));
         results.map(result =>
           setHashtags(prev =>
-            prev.map(hashtag => (hashtag.tag === result.tag ? { ...hashtag, active: true } : { ...hashtag }))
+            prev.map(hashtag => (hashtag?.tag === result?.tag ? { ...hashtag, active: true } : { ...hashtag }))
           )
         );
         setRadioItems(prev =>
@@ -85,6 +85,13 @@ const ReviewPostInfo = ({ edit, history, match }) => {
           )
         );
         setInitial(data);
+        setEnrollData("title", data.title);
+        setEnrollData("content", data.content);
+        setEnrollData("endingAirport", data.endingAirport);
+        setEnrollData("endingCountry", data.endingCountry);
+        setEnrollData("hashtags", data.hashtags);
+        setEnrollData("isInstitution", data.isInstitution);
+        setEnrollData("institutionName", data.institutionName);
       })();
     }
   }, [match.params.id]);
@@ -170,7 +177,7 @@ const ReviewPostInfo = ({ edit, history, match }) => {
       <div
         className="wrap"
         onClick={() => {
-          if (initial) {
+          if (edit) {
             putReview(match.params.id, enrollData);
           } else {
             postReview(enrollData);
