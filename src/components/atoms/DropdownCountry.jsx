@@ -109,7 +109,7 @@ const DropdownCountry = ({ currCountry, setCurrCountry, country, enroll }) => {
       <Menu.Button onClick={onClick} currCountry={currCountry} isActive={isActive} className={enroll ? "enroll" : ""}>
         <div className="destination">
           {!enroll && <span className="name">국가</span>}
-          <span className="text">{currCountry ? currCountry : enroll ? "국가" : "어디로 가시나요?"}</span>
+          <span className="text">{currCountry ? currCountry : enroll ? enroll.initialValue : "어디로 가시나요?"}</span>
         </div>
         <Arrow />
       </Menu.Button>
