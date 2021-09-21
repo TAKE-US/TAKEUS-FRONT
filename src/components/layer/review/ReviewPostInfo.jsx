@@ -57,6 +57,11 @@ const ReviewPostInfo = ({ edit, history, match }) => {
   ]);
   const [initial, setInitial] = useState();
   const [selectedHashtags, setSelectedHashtags] = useState([]);
+  const [radioItems, setRadioItems] = useState([
+    { value: "선택 안함", select: true },
+    { value: "개인 구조자", select: false },
+    { value: "단체", select: false },
+  ]);
 
   const toggleHashtag = idx => {
     setHashtags(
@@ -72,6 +77,11 @@ const ReviewPostInfo = ({ edit, history, match }) => {
         results.map(result =>
           setHashtags(prev =>
             prev.map(hashtag => (hashtag.tag === result.tag ? { ...hashtag, active: true } : { ...hashtag }))
+          )
+        );
+        setRadioItems(prev =>
+          prev.map(radio =>
+            radio.value === data.isInstitution ? { ...radio, select: true } : { ...radio, select: false }
           )
         );
         setInitial(data);
@@ -133,15 +143,7 @@ const ReviewPostInfo = ({ edit, history, match }) => {
       <div className="wrap">
         <label>진행 단체</label>
         <div className="wrap--flex">
-          <RadioButton
-            items={[
-              { value: "선택 안함", select: true },
-              { value: "개인 구조자", select: false },
-              { value: "단체", select: false },
-            ]}
-            setEnrollData={setEnrollData}
-            name="isInstitution"
-          />
+          <RadioButton items={radioItems} setItems={setRadioItems} setEnrollData={setEnrollData} name="isInstitution" />
           <div className="wrap--institution">
             <Input
               placeholder="단체명을 입력해주세요."
@@ -177,7 +179,7 @@ const ReviewPostInfo = ({ edit, history, match }) => {
         }}
       >
         <Button full rounded padding="15px 0" font="button">
-          후기 등록하기
+          {edit ? "후기 수정하기" : "후기 등록하기"}
         </Button>
       </div>
     </ReviewInfoStyle>
