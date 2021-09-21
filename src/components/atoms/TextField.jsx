@@ -49,9 +49,8 @@ const TextField = ({ label, maxLength, placeholder, setEnrollData, name, initial
     setEnrollData(name, text);
   };
   useEffect(() => {
-    console.log("text", initial);
     setText(initial);
-  }, [initial]);
+  }, [initial, setText]);
   return (
     <TextFieldWrap hasTitle={label || maxLength}>
       <article>

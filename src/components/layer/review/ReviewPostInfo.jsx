@@ -94,7 +94,8 @@ const ReviewPostInfo = ({ edit, history, match }) => {
         setEnrollData("institutionName", data.institutionName);
       })();
     }
-  }, [match.params.id]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [match.params.id, setEnrollData]);
 
   const addHashtag = hashtag => {
     if (hashtag.active) {
