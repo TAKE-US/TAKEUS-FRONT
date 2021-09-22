@@ -169,7 +169,7 @@ const DogDetail = ({ dog }) => {
             </div>
           ) : (
             <div className="dog--post">
-              <ReportModal />
+              <ReportModal id={dog._id}/>
             </div>
           ))}
       </header>
