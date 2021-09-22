@@ -272,7 +272,7 @@ export const deleteDog = async id => {
 };
 
 export const putReview = async (id, data) => {
-  const body = data;
+  const body = Object.fromEntries(Object.entries(data).filter(([_, value]) => value));
   try {
     const data = await instance.put(`/api/reviews/detail/${id}`, body, {
       headers: {

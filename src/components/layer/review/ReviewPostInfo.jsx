@@ -45,6 +45,7 @@ const ReviewInfoStyle = styled.section`
 const ReviewPostInfo = ({ edit, history, match }) => {
   const [enrollData, setEnrollData] = useEnrollData({});
   const [hashtags, setHashtags] = useState([
+    { tag: "일반후기", active: false },
     { tag: "이동봉사과정", active: false },
     { tag: "도착공항정보", active: false },
     { tag: "보호단체관련", active: false },
@@ -56,6 +57,11 @@ const ReviewPostInfo = ({ edit, history, match }) => {
   ]);
   const [initial, setInitial] = useState();
   const [selectedHashtags, setSelectedHashtags] = useState([]);
+  const [radioItems, setRadioItems] = useState([
+    { value: "선택 안함", select: true },
+    { value: "개인 구조자", select: false },
+    { value: "단체", select: false },
+  ]);
 
   const toggleHashtag = idx => {
     setHashtags(
@@ -67,11 +73,29 @@ const ReviewPostInfo = ({ edit, history, match }) => {
     if (match.params.id) {
       (async () => {
         const data = await getReviewDetail(match.params.id);
-        console.log(data);
+        const results = data.hashtags.map(hashtag => hashtags.find(item => item?.tag === hashtag));
+        results.map(result =>
+          setHashtags(prev =>
+            prev.map(hashtag => (hashtag?.tag === result?.tag ? { ...hashtag, active: true } : { ...hashtag }))
+          )
+        );
+        setRadioItems(prev =>
+          prev.map(radio =>
+            radio.value === data.isInstitution ? { ...radio, select: true } : { ...radio, select: false }
+          )
+        );
         setInitial(data);
+        setEnrollData("title", data.title);
+        setEnrollData("content", data.content);
+        setEnrollData("endingAirport", data.endingAirport);
+        setEnrollData("endingCountry", data.endingCountry);
+        setEnrollData("hashtags", data.hashtags);
+        setEnrollData("isInstitution", data.isInstitution);
+        setEnrollData("institutionName", data.institutionName);
       })();
     }
-  }, [match.params.id]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [match.params.id, setEnrollData]);
 
   const addHashtag = hashtag => {
     if (hashtag.active) {
@@ -103,7 +127,7 @@ const ReviewPostInfo = ({ edit, history, match }) => {
 
       <div className="wrap">
         <label>봉사 지역</label>
-        <EnrollSearchbar enroll setEnrollData={setEnrollData} />
+        <EnrollSearchbar initialData={initial} enroll setEnrollData={setEnrollData} />
       </div>
 
       <div className="wrap">
@@ -127,15 +151,7 @@ const ReviewPostInfo = ({ edit, history, match }) => {
       <div className="wrap">
         <label>진행 단체</label>
         <div className="wrap--flex">
-          <RadioButton
-            items={[
-              { value: "선택 안함", select: true },
-              { value: "개인 구조자", select: false },
-              { value: "단체", select: false },
-            ]}
-            setEnrollData={setEnrollData}
-            name="isInstitution"
-          />
+          <RadioButton items={radioItems} setItems={setRadioItems} setEnrollData={setEnrollData} name="isInstitution" />
           <div className="wrap--institution">
             <Input
               placeholder="단체명을 입력해주세요."
@@ -162,7 +178,7 @@ const ReviewPostInfo = ({ edit, history, match }) => {
       <div
         className="wrap"
         onClick={() => {
-          if (initial) {
+          if (edit) {
             putReview(match.params.id, enrollData);
           } else {
             postReview(enrollData);
@@ -171,7 +187,7 @@ const ReviewPostInfo = ({ edit, history, match }) => {
         }}
       >
         <Button full rounded padding="15px 0" font="button">
-          후기 등록하기
+          {edit ? "후기 수정하기" : "후기 등록하기"}
         </Button>
       </div>
     </ReviewInfoStyle>

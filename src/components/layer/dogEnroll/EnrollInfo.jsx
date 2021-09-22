@@ -3,16 +3,7 @@
 
 import React, { useState, useEffect, useCallback } from "react";
 import styled from "styled-components";
-import {
-  RadioButton,
-  Counter,
-  TextField,
-  AddDogLayer,
-  Input,
-  Button,
-  EnrollSearchbar,
-  Dropdown,
-} from "components";
+import { RadioButton, Counter, TextField, AddDogLayer, Input, Button, EnrollSearchbar, Dropdown } from "components";
 import { ReactComponent as Kakao } from "assets/icon/ic_kakao_24.svg";
 import { ReactComponent as Call } from "assets/icon/ic_call_24.svg";
 import { ReactComponent as Instagram } from "assets/icon/ic_instar_24.svg";
@@ -114,6 +105,19 @@ const EnrollInfo = ({ history }) => {
   const [contacts, setContacts] = useState([{ type: "phone", value: "" }]);
   const [createdContact, setCreatedContact] = useState({});
   const [createImage, setCreateImage] = useState([]);
+  const [genderItems, setGenderItems] = useState([
+    { value: "여", select: true },
+    { value: "남", select: false },
+    { value: "선택안함", select: false },
+  ]);
+  const [isNeutering, setIsNeutering] = useState([
+    { value: "완료", select: true },
+    { value: "미완료", select: false },
+  ]);
+  const [isInstitution, setIsInstitution] = useState([
+    { value: "개인구조자", select: true },
+    { value: "단체", select: false },
+  ]);
 
   const setEnrollDataCallback = useCallback(
     (name, value) => {
@@ -123,11 +127,7 @@ const EnrollInfo = ({ history }) => {
   );
   const onDrop = (dropArray, value, id) => {
     if (dropArray.key === id) {
-      setDrop(
-        Array.from(dropArray).map(val =>
-          val.id === id ? { key: id, type: value } : val
-        )
-      );
+      setDrop(Array.from(dropArray).map(val => (val.id === id ? { key: id, type: value } : val)));
     } else {
       setDrop(dropArray => dropArray.concat({ key: id, type: value }));
     }
@@ -139,10 +139,7 @@ const EnrollInfo = ({ history }) => {
 
   useEffect(() => {
     if (Object.keys(createdContact).length !== 0) {
-      setEnrollData(
-        Object.keys(createdContact),
-        ...Object.values(createdContact)
-      );
+      setEnrollData(Object.keys(createdContact), ...Object.values(createdContact));
     }
   }, [createdContact, setEnrollData]);
 
@@ -155,15 +152,9 @@ const EnrollInfo = ({ history }) => {
     formData.append("gender", enrollData.gender);
     formData.append("age", enrollData.age);
     formData.append("weight", enrollData.weight);
-    formData.append(
-      "neutralization",
-      enrollData?.neutralization === "완료" ? true : false
-    );
+    formData.append("neutralization", enrollData?.neutralization === "완료" ? true : false);
     formData.append("health", enrollData.health);
-    formData.append(
-      "isInstitution",
-      enrollData?.isInstitution === "단체" ? true : false
-    );
+    formData.append("isInstitution", enrollData?.isInstitution === "단체" ? true : false);
     formData.append("institutionName", enrollData?.institutionName);
     formData.append("kakaotalkId", enrollData?.카카오톡);
     formData.append("phoneNumber", enrollData?.전화번호);
@@ -179,7 +170,6 @@ const EnrollInfo = ({ history }) => {
   };
 
   console.log(enrollData);
-  console.log(createdContact);
   return (
     <EnrollInfoWrap>
       <form onSubmit={handleSubmit}>
@@ -209,11 +199,8 @@ const EnrollInfo = ({ history }) => {
         <div className="wrap wrap--flex">
           <label>대상견 성별</label>
           <RadioButton
-            items={[
-              { value: "여", select: true },
-              { value: "남", select: false },
-              { value: "선택안함", select: false },
-            ]}
+            items={genderItems}
+            setItems={setGenderItems}
             setEnrollData={setEnrollDataCallback}
             name="gender"
           />
@@ -236,10 +223,8 @@ const EnrollInfo = ({ history }) => {
         <div className="wrap wrap--flex">
           <label>중성화 여부</label>
           <RadioButton
-            items={[
-              { value: "완료", select: true },
-              { value: "미완료", select: false },
-            ]}
+            items={isNeutering}
+            setItems={setIsNeutering}
             setEnrollData={setEnrollDataCallback}
             name="neutralization"
           />
@@ -258,10 +243,8 @@ const EnrollInfo = ({ history }) => {
         <div className="wrap wrap--flex">
           <label>소속여부</label>
           <RadioButton
-            items={[
-              { value: "개인구조자", select: true },
-              { value: "단체", select: false },
-            ]}
+            items={isInstitution}
+            setItems={setIsInstitution}
             setEnrollData={setEnrollDataCallback}
             name="isInstitution"
           />
@@ -310,12 +293,7 @@ const EnrollInfo = ({ history }) => {
           </div>
         </div>
         <div className="wrap">
-          <TextField
-            label="내용을 작성해주세요"
-            maxLength={500}
-            setEnrollData={setEnrollDataCallback}
-            name="detail"
-          />
+          <TextField label="내용을 작성해주세요" maxLength={500} setEnrollData={setEnrollDataCallback} name="detail" />
         </div>
         <div className="wrap">
           <div className="wrap__button">
