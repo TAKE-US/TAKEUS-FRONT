@@ -1,0 +1,1 @@
+export { postDogDetailReport } from './report';
