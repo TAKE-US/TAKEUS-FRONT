@@ -209,7 +209,7 @@ export const postToken = async (token, social) => {
   };
   console.log("body", body);
   try {
-    const data = await instance.post("/api/login", body, {
+    const data = await instance.post("/api/users/login", body, {
       headers: {
         "Content-Type": "application/json",
       },
