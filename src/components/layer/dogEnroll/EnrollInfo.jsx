@@ -99,7 +99,7 @@ const ContactsList = [
   },
 ];
 
-const EnrollInfo = ({ history }) => {
+const EnrollInfo = ({ edit, history, match }) => {
   const [enrollData, setEnrollData] = useEnrollData({});
   const [dropArray, setDrop] = useState([]);
   const [contacts, setContacts] = useState([{ type: "phone", value: "" }]);

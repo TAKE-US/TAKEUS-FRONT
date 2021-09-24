@@ -7,11 +7,11 @@ const PageStyle = styled.div`
   margin-bottom: 30rem;
 `;
 
-const DogEnrollPage = () => {
+const DogEnrollPage = ({ edit }) => {
   return (
     <PageStyle className="dog-enroll-page">
       <EnrollPrecaution />
-      <EnrollInfo />
+      <EnrollInfo edit={edit ? true : false} />
     </PageStyle>
   );
 };
