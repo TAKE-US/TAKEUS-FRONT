@@ -13,6 +13,7 @@ import { ReactComponent as Plus } from "assets/icon/ic_plus_24.svg";
 import useEnrollData from "hooks/useEnrollData";
 import { postEnroll } from "lib/api/sample";
 import { withRouter } from "react-router-dom";
+import { useHistory } from "react-router";
 
 const EnrollInfoWrap = styled.section`
   .wrap {
@@ -99,7 +100,8 @@ const ContactsList = [
   },
 ];
 
-const EnrollInfo = ({ edit, history, match }) => {
+const EnrollInfo = ({ edit, match }) => {
+  const history = useHistory();
   const [enrollData, setEnrollData] = useEnrollData({});
   const [dropArray, setDrop] = useState([]);
   const [contacts, setContacts] = useState([{ type: "phone", value: "" }]);
@@ -119,12 +121,16 @@ const EnrollInfo = ({ edit, history, match }) => {
     { value: "단체", select: false },
   ]);
 
+  const initialData = edit ? history.location.state.dog : undefined;
+  console.log(initialData);
+
   const setEnrollDataCallback = useCallback(
     (name, value) => {
       setEnrollData(name, value);
     },
     [setEnrollData]
   );
+
   const onDrop = (dropArray, value, id) => {
     if (dropArray.key === id) {
       setDrop(Array.from(dropArray).map(val => (val.id === id ? { key: id, type: value } : val)));
@@ -132,6 +138,7 @@ const EnrollInfo = ({ edit, history, match }) => {
       setDrop(dropArray => dropArray.concat({ key: id, type: value }));
     }
   };
+
   const addContact = e => {
     e.preventDefault();
     setContacts(contacts.concat({ type: "kakaotalk", value: "" }));
