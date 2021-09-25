@@ -54,7 +54,8 @@
     "eslint": "^7.29.0",
     "eslint-plugin-react": "^7.24.0",
     "react-snap": "^1.23.0",
-    "storybook-addon-styled-component-theme": "^2.0.0"
+    "storybook-addon-styled-component-theme": "^2.0.0",
+    "typescript": "^4.4.3"
   },
   "proxy": "https://takeus.shop/",
   "eslintConfig": {

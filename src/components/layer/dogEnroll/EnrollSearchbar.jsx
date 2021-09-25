@@ -30,7 +30,7 @@ const Search = {
   `,
 };
 
-const Searchbar = ({ enroll, setEnrollData }) => {
+const Searchbar = ({ initialData, setEnrollData }) => {
   const [currCountry, setCurrCountry] = useState("");
   const [currAirport, setCurrAirport] = useState("");
   const [country, setCountry] = useState([]);
@@ -39,8 +39,7 @@ const Searchbar = ({ enroll, setEnrollData }) => {
   useEffect(() => {
     (async () => {
       try {
-        const data = await getCountry();
-        console.log(data);
+        const { data } = await getCountry();
 
         setCountry(Object.keys(data).splice(1));
         setAllAirport(data);
@@ -60,11 +59,16 @@ const Searchbar = ({ enroll, setEnrollData }) => {
     <>
       <Search.Container>
         <div className="dropdown dropdown__country">
-          <DropdownCountry enroll currCountry={currCountry} setCurrCountry={setCurrCountry} country={country} />
+          <DropdownCountry
+            enroll={{ initialValue: initialData?.endingCountry }}
+            currCountry={currCountry}
+            setCurrCountry={setCurrCountry}
+            country={country}
+          />
         </div>
         <div className="dropdown dropdown__airport">
           <DropdownAirport
-            enroll
+            enroll={{ initialValue: initialData?.endingAirport }}
             currCountry={currCountry}
             currAirport={currAirport}
             setCurrAirport={setCurrAirport}

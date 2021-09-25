@@ -132,7 +132,9 @@ const DropdownAirport = ({ currCountry, currAirport, setCurrAirport, allAirport,
       >
         <div className="destination">
           {!enroll && <span className="name">공항명</span>}
-          <span className="text">{currAirport ? currAirport : enroll ? "공항명" : "도착 공항은 어디인가요?"}</span>
+          <span className="text">
+            {currAirport ? currAirport : enroll ? enroll.initialValue : "도착 공항은 어디인가요?"}
+          </span>
         </div>
         <Arrow />
       </Menu.Button>

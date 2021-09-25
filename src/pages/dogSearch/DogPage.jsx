@@ -5,14 +5,7 @@ import { withRouter } from "react-router";
 import { DogCardContainer, PaginationNav, DogSearchNavigation, Filter, Empty, Loading } from "components";
 //api
 import { getPageDogs, getSearchDogs } from "lib/api/sample";
-// //redux
-// import { connect } from "react-redux";
 
-// const mapStateToProps = state => {
-//   return {
-//     dogData: state.dogData,
-//   };
-// };
 const Styled = {
   Wrapper: styled.section`
     .container {

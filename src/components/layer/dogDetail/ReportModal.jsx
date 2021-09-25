@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import { useHistory } from "react-router";
 import styled from "styled-components";
 
+import {
+  postDogDetailReport
+} from '../../../lib/api/index.ts';
+
 import { Modal } from "components";
 import { ReactComponent as ReportIcon } from "assets/img/ic_report_24.svg";
 import { ReactComponent as ReportModalIcon } from "assets/img/img_report.svg";
@@ -72,7 +76,7 @@ const Styled = {
   `,
 };
 
-const ReportModal = () => {
+const ReportModal = ({id}) => {
   const [modalOpen, setModalOpen] = useState(false);
   const history = useHistory();
 
@@ -84,7 +88,8 @@ const ReportModal = () => {
     setModalOpen(false);
   };
 
-  const reportClick = () => {
+  const reportClick = async () => {
+    await postDogDetailReport(localStorage.getItem('token'), id);
     closeModal();
     history.goBack();
   };

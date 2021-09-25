@@ -215,14 +215,12 @@ export const postToken = async (token, social) => {
     token: token,
     social: social,
   };
-  console.log("body", body);
   try {
-    const data = await instance.post("/api/login", body, {
+    const data = await instance.post("/api/users/login", body, {
       headers: {
         "Content-Type": "application/json",
       },
     });
-    console.log(data);
     console.log("[SUCCESS] POST token");
     return data.data;
   } catch (e) {
@@ -282,7 +280,7 @@ export const deleteDog = async id => {
 };
 
 export const putReview = async (id, data) => {
-  const body = data;
+  const body = Object.fromEntries(Object.entries(data).filter(([_, value]) => value));
   try {
     const data = await instance.put(`/api/reviews/detail/${id}`, body, {
       headers: {

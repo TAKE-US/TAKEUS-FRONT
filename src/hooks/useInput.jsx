@@ -6,7 +6,7 @@ function useInput(initialForm) {
   const onChange = useCallback(evt => {
     setForm(evt.target.value);
   }, []);
-  return [form, onChange];
+  return [form, onChange, setForm];
 }
 
 export default useInput;
