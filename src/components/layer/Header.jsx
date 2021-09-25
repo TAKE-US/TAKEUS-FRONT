@@ -200,7 +200,7 @@ const Header = () => {
               <Link className="enroll" to="/dog/enroll">
                 대상견 등록
               </Link>
-              <LogOut>마이페이지</LogOut>
+              <LogOut />
               {/* <Link className="login" to="/mypage">
                 마이페이지
               </Link> */}
