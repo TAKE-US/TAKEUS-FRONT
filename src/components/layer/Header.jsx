@@ -3,6 +3,7 @@ import { useLocation, useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { ReactComponent as LogoBlack } from "../../assets/img/ic_logo_wordmark_black_small.svg";
+import { LogOut } from "../";
 
 const Head = {
   Notice: styled.div`
@@ -34,8 +35,10 @@ const Head = {
       align-items: center;
       height: 100%;
       padding: 0 9.2rem;
-      background-color: ${props => (props.isScrolling ? "#FFFFFF" : "transparent")};
-      box-shadow: ${props => props.isScrolling && "0rem 0rem 1.6rem 0.1rem rgba(0, 0, 0, 0.08)"};
+      background-color: ${props =>
+        props.isScrolling ? "#FFFFFF" : "transparent"};
+      box-shadow: ${props =>
+        props.isScrolling && "0rem 0rem 1.6rem 0.1rem rgba(0, 0, 0, 0.08)"};
       transition: background-color 0.6s;
       svg {
         &:hover {
@@ -152,7 +155,11 @@ const Header = () => {
       <Head.Wrap isScrolling={isScrolling} isLogin={isLogin}>
         <div className="inner">
           <Link to="/">
-            <LogoBlack fill={isScrolling || location.pathname !== "/" ? "#FDCB02" : "#1A1A1A"} />
+            <LogoBlack
+              fill={
+                isScrolling || location.pathname !== "/" ? "#FDCB02" : "#1A1A1A"
+              }
+            />
           </Link>
           <div className="gnb">
             <Head.Content
@@ -193,9 +200,10 @@ const Header = () => {
               <Link className="enroll" to="/dog/enroll">
                 대상견 등록
               </Link>
-              <Link className="login" to="/mypage">
-                내가 쓴 글
-              </Link>
+              <LogOut>마이페이지</LogOut>
+              {/* <Link className="login" to="/mypage">
+                마이페이지
+              </Link> */}
             </Head.Login>
           ) : (
             <Head.Login>
