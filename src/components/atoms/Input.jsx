@@ -69,7 +69,7 @@ const Input = ({
   disabled,
   setEnrollData,
   name,
-  setCreatedContact,
+  setContact,
   initial,
   isContact,
 }) => {
@@ -108,7 +108,7 @@ const Input = ({
     if (name && name["type"] !== undefined) {
       const newVal = {};
       newVal[name["type"]] = value;
-      setCreatedContact(newVal);
+      setContact(newVal);
     } else {
       setEnrollData(name, value);
     }
