@@ -228,7 +228,8 @@ const EnrollInfo = ({ edit }) => {
     // }
   };
 
-  console.log(initial);
+  console.log("만들어진 이미지");
+  console.log(createImage);
   return (
     <EnrollInfoWrap>
       <form onSubmit={handleSubmit}>
@@ -238,6 +239,7 @@ const EnrollInfo = ({ edit }) => {
             setCreateImage={setCreateImage}
             setEnrollData={setEnrollDataCallback}
             name="photos"
+            initial={initial?.photos}
           />
         </div>
         <div className="wrap wrap--flex">
