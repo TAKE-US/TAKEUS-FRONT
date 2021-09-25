@@ -309,6 +309,24 @@ export const postEnroll = async data => {
   }
 };
 
+export const putDog = async (dogId, data) => {
+  const body = data;
+  try {
+    const data = await instance.put(`/api/dogs/detail/${dogId}`, body, {
+      headers: {
+        "Content-Type": "application/json",
+        "x-auth-token": localStorage.getItem("token"),
+      },
+    });
+    console.log(data);
+    console.log("[SUCCESS] PUT dog status");
+    return data;
+  } catch (e) {
+    console.log("[FAIL] PUT dog status");
+    return e;
+  }
+};
+
 export const putDogStatus = async (dogId, data) => {
   const body = data;
   try {

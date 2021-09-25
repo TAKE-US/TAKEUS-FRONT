@@ -11,7 +11,7 @@ import { ReactComponent as Twitter } from "assets/icon/ic_twitter_24.svg";
 import { ReactComponent as Facebook } from "assets/icon/ic_facebook_24.svg";
 import { ReactComponent as Plus } from "assets/icon/ic_plus_24.svg";
 import useEnrollData from "hooks/useEnrollData";
-import { postEnroll } from "lib/api/sample";
+import { postEnroll, putDog } from "lib/api/sample";
 import { withRouter } from "react-router-dom";
 import { useHistory } from "react-router";
 
@@ -221,7 +221,8 @@ const EnrollInfo = ({ edit }) => {
       formData.append("photos", createdImage[i]["image"]);
     }
 
-    await postEnroll(formData);
+    if (edit) await putDog(history.location.state?.dog._id, formData);
+    else await postEnroll(formData);
     history.push("/dog/search");
   };
 
