@@ -147,6 +147,21 @@ const EnrollInfo = ({ edit, match }) => {
       (async () => {
         const data = history.location.state.dog;
         setInitial(data);
+        setGenderItems(prev =>
+          prev.map(item => (item.value === data.gender ? { ...item, select: true } : { ...item, select: false }))
+        );
+        setIsNeutering(prev =>
+          prev.map(item => {
+            const isNeutralized = data.neutralization ? "완료" : "미완료";
+            return item.value === isNeutralized ? { ...item, select: true } : { ...item, select: false };
+          })
+        );
+        setIsInstitution(prev =>
+          prev.map(item => {
+            const isGroup = data.isInstitution ? "단체" : "개인구조자";
+            return item.value === isGroup ? { ...item, select: true } : { ...item, select: false };
+          })
+        );
       })();
     }
 
