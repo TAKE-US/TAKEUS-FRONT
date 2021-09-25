@@ -314,7 +314,7 @@ export const putDog = async (dogId, data) => {
   try {
     const data = await instance.put(`/api/dogs/detail/${dogId}`, body, {
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "multipart/form-data",
         "x-auth-token": localStorage.getItem("token"),
       },
     });
