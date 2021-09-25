@@ -120,9 +120,7 @@ const EnrollInfo = ({ edit, match }) => {
     { value: "개인구조자", select: true },
     { value: "단체", select: false },
   ]);
-
-  const initialData = edit ? history.location.state.dog : undefined;
-  console.log(initialData);
+  const [initial, setInitial] = useState();
 
   const setEnrollDataCallback = useCallback(
     (name, value) => {
@@ -145,11 +143,19 @@ const EnrollInfo = ({ edit, match }) => {
   };
 
   useEffect(() => {
+    if (edit) {
+      (async () => {
+        const data = history.location.state.dog;
+        setInitial(data);
+      })();
+    }
+
     if (Object.keys(createdContact).length !== 0) {
       setEnrollData(Object.keys(createdContact), ...Object.values(createdContact));
     }
-  }, [createdContact, setEnrollData]);
+  }, [edit, history.location.state.dog, createdContact, setEnrollData]);
 
+  console.log(initial);
   const handleSubmit = async event => {
     event.preventDefault();
     const formData = new FormData();
@@ -176,7 +182,6 @@ const EnrollInfo = ({ edit, match }) => {
     history.push("/dog/search");
   };
 
-  console.log(enrollData);
   return (
     <EnrollInfoWrap>
       <form onSubmit={handleSubmit}>
@@ -201,6 +206,7 @@ const EnrollInfo = ({ edit, match }) => {
             setEnrollData={setEnrollDataCallback}
             name="name"
             font="body3"
+            initial={initial?.name}
           />
         </div>
         <div className="wrap wrap--flex">
@@ -221,6 +227,7 @@ const EnrollInfo = ({ edit, match }) => {
             setEnrollData={setEnrollDataCallback}
             name="age"
             font="body3"
+            initial={initial?.age}
           />
         </div>
         <div className="wrap wrap--flex">
@@ -245,6 +252,7 @@ const EnrollInfo = ({ edit, match }) => {
             setEnrollData={setEnrollDataCallback}
             name="health"
             font="body3"
+            initial={initial?.health}
           />
         </div>
         <div className="wrap wrap--flex">
@@ -262,6 +270,7 @@ const EnrollInfo = ({ edit, match }) => {
             setEnrollData={setEnrollDataCallback}
             name="institutionName"
             font="body3"
+            initial={initial?.institutionName}
           />
         </div>
         <div className="wrap contact">
@@ -300,7 +309,13 @@ const EnrollInfo = ({ edit, match }) => {
           </div>
         </div>
         <div className="wrap">
-          <TextField label="내용을 작성해주세요" maxLength={500} setEnrollData={setEnrollDataCallback} name="detail" />
+          <TextField
+            label="내용을 작성해주세요"
+            maxLength={500}
+            setEnrollData={setEnrollDataCallback}
+            name="detail"
+            initial={initial?.detail}
+          />
         </div>
         <div className="wrap">
           <div className="wrap__button">
