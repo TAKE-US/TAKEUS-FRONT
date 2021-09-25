@@ -100,12 +100,12 @@ const ContactsList = [
   },
 ];
 
-const EnrollInfo = ({ edit, match }) => {
+const EnrollInfo = ({ edit }) => {
   const history = useHistory();
   const [enrollData, setEnrollData] = useEnrollData({});
   const [dropArray, setDrop] = useState([]);
-  const [contacts, setContacts] = useState([{ type: "phone", value: "" }]);
-  const [createdContact, setCreatedContact] = useState({});
+  const [contactList, setContactList] = useState([{ type: "", value: "" }]);
+  const [selectedContact, setContact] = useState({});
   const [createImage, setCreateImage] = useState([]);
   const [genderItems, setGenderItems] = useState([
     { value: "여", select: true },
@@ -137,9 +137,9 @@ const EnrollInfo = ({ edit, match }) => {
     }
   };
 
-  const addContact = e => {
+  const addContactList = e => {
     e.preventDefault();
-    setContacts(contacts.concat({ type: "kakaotalk", value: "" }));
+    setContactList(contactList.concat({ type: "", value: "" }));
   };
 
   useEffect(() => {
@@ -162,15 +162,40 @@ const EnrollInfo = ({ edit, match }) => {
             return item.value === isGroup ? { ...item, select: true } : { ...item, select: false };
           })
         );
+
+        const existedContactList = [
+          { 페이스북: data.facebook },
+          { 인스타그램: data.instagram },
+          { 전화번호: data.phoneNumber },
+          { 트위터: data.twitter },
+          { 카카오톡: data.kakaotalkId },
+        ];
+
+        setContactList([]);
+        existedContactList.map(contact => {
+          if (Object.values(contact)[0].length === 1) {
+            let newValue = {};
+            newValue.type = Object.keys(contact)[0];
+            newValue.value = Object.values(contact)[0];
+            setContactList(prev => prev.concat(newValue));
+          } else if (Object.values(contact)[0].length > 1) {
+            Object.values(contact)[0].map(repeated => {
+              let newValue = {};
+              newValue.type = Object.keys(contact)[0];
+              newValue.value = repeated;
+              setContactList(prev => prev.concat(newValue));
+            });
+          }
+        });
       })();
     }
   }, [edit, history.location.state?.dog]);
 
   useEffect(() => {
-    if (Object.keys(createdContact).length !== 0) {
-      setEnrollData(Object.keys(createdContact), ...Object.values(createdContact));
+    if (Object.keys(selectedContact).length !== 0) {
+      setEnrollData(Object.keys(selectedContact), ...Object.values(selectedContact));
     }
-  }, [createdContact, setEnrollData]);
+  }, [selectedContact, setEnrollData]);
 
   const handleSubmit = async event => {
     event.preventDefault();
@@ -185,7 +210,7 @@ const EnrollInfo = ({ edit, match }) => {
     formData.append("health", enrollData.health);
     formData.append("isInstitution", enrollData?.isInstitution === "단체" ? true : false);
     formData.append("institutionName", enrollData?.institutionName);
-    formData.append("detail", enrollData?.detail);
+    formData.append("detail", enrollData?.detail ? enrollData.detail : "");
     if (enrollData?.카카오톡) formData.append("kakaotalkId", enrollData?.카카오톡);
     if (enrollData?.전화번호) formData.append("phoneNumber", enrollData?.전화번호);
     if (enrollData?.페이스북) formData.append("facebook", enrollData?.페이스북);
@@ -195,10 +220,15 @@ const EnrollInfo = ({ edit, match }) => {
     for (let i = 0; i < Array.from(createImage).length; i++) {
       formData.append("photos", createImage[i]["image"]);
     }
+
     await postEnroll(formData);
     history.push("/dog/search");
+    // for (let item of formData.entries()) {
+    //   console.log(`${item[0]} : ${item[1]}`);
+    // }
   };
 
+  console.log(initial);
   return (
     <EnrollInfoWrap>
       <form onSubmit={handleSubmit}>
@@ -298,15 +328,17 @@ const EnrollInfo = ({ edit, match }) => {
         <div className="wrap contact">
           <label>연락처</label>
           <div className="contact-layer">
-            {contacts.map((contact, i) => (
+            {contactList.map((contact, i) => (
               <Input
                 placeholder={"연락처를 입력해 주세요"}
                 key={`contact-${i}`}
                 font="body3"
                 name={dropArray[i]}
-                createdContact={createdContact}
-                setCreatedContact={setCreatedContact}
+                selectedContact={selectedContact}
+                setContact={setContact}
                 setEnrollData={setEnrollDataCallback}
+                initial={contact}
+                isContact={true}
               >
                 <div className="dropdown">
                   <Dropdown
@@ -318,11 +350,12 @@ const EnrollInfo = ({ edit, match }) => {
                     dropArray={dropArray}
                     onDrop={onDrop}
                     id={i}
+                    initial={contact}
                   />
                 </div>
               </Input>
             ))}
-            <div className="contact__btn" onClick={addContact}>
+            <div className="contact__btn" onClick={addContactList}>
               <Button rounded full padding="1rem 0" font="gnb">
                 <Plus />
                 연락처 추가하기
