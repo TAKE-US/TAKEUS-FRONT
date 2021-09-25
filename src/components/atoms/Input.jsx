@@ -88,7 +88,10 @@ const Input = ({
   useEffect(() => {
     if (isValid) setError(false);
     else setError(true);
-    if (initial && !isContact) setValue(initial);
+    if (initial && !isContact) {
+      setValue(initial);
+      setEnrollData(name, initial);
+    }
     if (isContact && initial.type) {
       setValue(initial.value);
     }

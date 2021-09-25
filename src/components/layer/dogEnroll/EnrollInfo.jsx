@@ -147,15 +147,22 @@ const EnrollInfo = ({ edit }) => {
       (async () => {
         const data = history.location.state.dog;
         setInitial(data);
-        setGenderItems(prev =>
-          prev.map(item => (item.value === data.gender ? { ...item, select: true } : { ...item, select: false }))
-        );
+
+        setGenderItems(prev => {
+          return prev.map(item => {
+            return item.value === data.gender
+              ? { value: item.value, select: true }
+              : { value: item.value, select: false };
+          });
+        });
+        setEnrollData("gender", genderItems.find(value => value.select === true).value);
         setIsNeutering(prev =>
           prev.map(item => {
             const isNeutralized = data.neutralization ? "완료" : "미완료";
             return item.value === isNeutralized ? { ...item, select: true } : { ...item, select: false };
           })
         );
+
         setIsInstitution(prev =>
           prev.map(item => {
             const isGroup = data.isInstitution ? "단체" : "개인구조자";
@@ -209,7 +216,7 @@ const EnrollInfo = ({ edit }) => {
     formData.append("neutralization", enrollData?.neutralization === "완료" ? true : false);
     formData.append("health", enrollData.health);
     formData.append("isInstitution", enrollData?.isInstitution === "단체" ? true : false);
-    formData.append("institutionName", enrollData?.institutionName);
+    formData.append("institutionName", enrollData?.institutionName ? enrollData.institutionName : "");
     formData.append("detail", enrollData?.detail ? enrollData.detail : "");
     if (enrollData?.카카오톡) formData.append("kakaotalkId", enrollData?.카카오톡);
     if (enrollData?.전화번호) formData.append("phoneNumber", enrollData?.전화번호);
