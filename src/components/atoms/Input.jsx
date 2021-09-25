@@ -69,9 +69,9 @@ const Input = ({
   disabled,
   setEnrollData,
   name,
-  createdContact,
   setCreatedContact,
   initial,
+  isContact,
 }) => {
   const [value, setValue] = useState("");
   const [isError, setError] = useState(false);
@@ -88,8 +88,11 @@ const Input = ({
   useEffect(() => {
     if (isValid) setError(false);
     else setError(true);
-    if (initial) setValue(initial);
-  }, [isValid, initial]);
+    if (initial && !isContact) setValue(initial);
+    if (isContact && initial.type) {
+      setValue(initial.value);
+    }
+  }, [isValid, initial, isContact]);
 
   const changeValue = evt => {
     const newValue = evt.target.value;

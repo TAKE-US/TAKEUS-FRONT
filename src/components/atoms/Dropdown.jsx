@@ -1,5 +1,5 @@
 /* eslint-disable arrow-parens */
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 import { useDetectOutsideClick } from '../../hooks/useDetectOutsideClick';
@@ -82,16 +82,20 @@ const Styled = {
   Img: styled.div``,
 };
 
-const Dropdown = ({ item, placeholder, rounded, font, caption, small, dropArray, onDrop, id }) => {
+const Dropdown = ({ item, placeholder, rounded, font, caption, small, dropArray, onDrop, id, initial }) => {
   const dropdownRef = useRef(null);
   const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
   const [list, setList] = useState('');
   const [image, setImage] = useState('');
-
   const onClick = e => {
     e.preventDefault();
     setIsActive(!isActive);
   };
+
+  useEffect(() => {
+    setList(initial.type);
+    setImage(item.filter(category => category.type === initial.type)[0]?.img);
+  }, [item, initial]);
 
   return (
     <Styled.Container>
@@ -105,14 +109,14 @@ const Dropdown = ({ item, placeholder, rounded, font, caption, small, dropArray,
         small={small}
         isActive={isActive}
       >
-        <div className="destination">
-          <span className="name">{caption}</span>
-          <div className="item">
+        <div className='destination'>
+          <span className='name'>{caption}</span>
+          <div className='item'>
             {image && image}
-            <span className="text">{list ? list : placeholder}</span>
+            <span className='text'>{list ? list : placeholder}</span>
           </div>
         </div>
-        <img className="arrowimg" src={Arrow_Bottom} alt="arrow" />
+        <img className='arrowimg' src={Arrow_Bottom} alt='arrow' />
       </Styled.Button>
       <Styled.Nav ref={dropdownRef} isActive={isActive}>
         <Styled.Ul>
