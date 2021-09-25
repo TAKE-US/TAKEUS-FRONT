@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable arrow-parens */
-import React, { useState, useRef } from "react";
-import styled from "styled-components";
-import AddDogCard from "components/atoms/AddDogCard";
+import React, { useState, useRef } from 'react';
+import styled from 'styled-components';
+import AddDogCard from 'components/atoms/AddDogCard';
 
 const Styled = {
   Wrapper: styled.section`
@@ -11,54 +11,51 @@ const Styled = {
   `,
 };
 
-const AddDogCardContainer = ({ name, createImage, setCreateImage }) => {
-  const [photo, setPhoto] = useState("");
-  const [urlArray, setUrlArray] = useState([]);
-  const [photoArray, setPhotoArray] = useState([1, 0, 0, 0, 0]);
-  function photoHandle(e) {
+const AddDogCardContainer = ({ createdImage, setCreatedImage, initial }) => {
+  const [boxList, setBoxList] = useState([1, 0, 0, 0, 0]);
+  const [URLArray, setURLArray] = useState([]);
+  const [photoId, setPhotoId] = useState(0);
+  const nextId = useRef(0);
+
+  const photoHandle = e => {
     const newFile = e.target.files;
-    (async () => {
-      setPhoto(newFile);
-    })();
     (async () => {
       arrayHandle(newFile);
     })();
-  }
+  };
 
-  const nextId = useRef(0);
-  function arrayHandle(photo) {
+  const arrayHandle = photo => {
     const idPhoto = {
       id: nextId.current,
       photo: photo,
-      url: urlArray,
+      url: URLArray,
     };
-    if (photo !== null) {
-      setPhotoArray([idPhoto, ...photoArray]);
-    }
+    if (photo !== null) setBoxList([idPhoto, ...boxList]);
     nextId.current += 1;
-  }
+    setPhotoId(nextId.current);
+  };
 
-  function deleteHandle(e) {
+  const deleteHandle = e => {
     const deletedKey = e.target.nextSibling.dataset.key;
-    setPhotoArray(
-      photoArray.filter(photo => photo.id !== parseInt(deletedKey, 10))
-    );
-  }
+    setBoxList(prev => prev.filter(photo => photo.id !== Number(deletedKey)));
+    setCreatedImage(prev => prev.filter(photo => photo.id !== Number(deletedKey)));
+  };
 
   return (
     <Styled.Wrapper>
       <>
-        {photoArray.map((value, i) =>
+        {boxList.map((value, i) =>
           i < 5 ? (
             <AddDogCard
               key={i}
               value={value}
+              photoId={photoId}
               photoHandle={photoHandle}
               deleteHandle={deleteHandle}
-              urlArray={urlArray}
-              setUrlArray={setUrlArray}
-              createImage={createImage}
-              setCreateImage={setCreateImage}
+              URLArray={URLArray}
+              setURLArray={setURLArray}
+              createdImage={createdImage}
+              setCreatedImage={setCreatedImage}
             />
           ) : null
         )}
