@@ -106,7 +106,7 @@ const EnrollInfo = ({ edit }) => {
   const [dropArray, setDrop] = useState([]);
   const [contactList, setContactList] = useState([{ type: "", value: "" }]);
   const [selectedContact, setContact] = useState({});
-  const [createImage, setCreateImage] = useState([]);
+  const [createdImage, setCreatedImage] = useState([]);
   const [genderItems, setGenderItems] = useState([
     { value: "여", select: true },
     { value: "남", select: false },
@@ -217,28 +217,23 @@ const EnrollInfo = ({ edit }) => {
     if (enrollData?.인스타그램) formData.append("instagram", enrollData?.인스타그램);
     if (enrollData?.트위터) formData.append("twitter", enrollData?.트위터);
 
-    for (let i = 0; i < Array.from(createImage).length; i++) {
-      formData.append("photos", createImage[i]["image"]);
+    for (let i = 0; i < Array.from(createdImage).length; i++) {
+      formData.append("photos", createdImage[i]["image"]);
     }
 
     await postEnroll(formData);
     history.push("/dog/search");
-    // for (let item of formData.entries()) {
-    //   console.log(`${item[0]} : ${item[1]}`);
-    // }
   };
 
-  console.log("만들어진 이미지");
-  console.log(createImage);
+  console.log(createdImage);
   return (
     <EnrollInfoWrap>
       <form onSubmit={handleSubmit}>
         <div className="wrap wrap--add">
           <AddDogLayer
-            createImage={createImage}
-            setCreateImage={setCreateImage}
+            createdImage={createdImage}
+            setCreatedImage={setCreatedImage}
             setEnrollData={setEnrollDataCallback}
-            name="photos"
             initial={initial?.photos}
           />
         </div>
