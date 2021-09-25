@@ -33,6 +33,15 @@ const WeightBtn = styled.button`
 
 const Counter = ({ name, setEnrollData, initial }) => {
   const [num, setNum] = useState(0);
+
+  useEffect(() => {
+    if (initial) setNum(initial);
+  }, [initial]);
+
+  useEffect(() => {
+    setEnrollData(name, num);
+  }, [num, name, setEnrollData]);
+
   const plusHandler = e => {
     e.preventDefault();
     setNum(prev => prev + 1);
@@ -43,10 +52,7 @@ const Counter = ({ name, setEnrollData, initial }) => {
       setNum(prev => prev - 1);
     }
   };
-  useEffect(() => {
-    if (initial) setNum(initial);
-    setEnrollData(name, num);
-  }, [num, name, setEnrollData, initial]);
+
   return (
     <CounterWrap>
       <WeightBtn bg={minus} hover={minusHover} onClick={minusHandler}></WeightBtn>

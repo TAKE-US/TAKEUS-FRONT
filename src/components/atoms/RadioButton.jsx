@@ -31,7 +31,6 @@ const RadioBtn = styled.button`
 `;
 
 const RadioButton = ({ items, setItems, setEnrollData, name }) => {
-  console.log(items);
   // const [itemState, setItemState] = useState(items);
 
   const selectHandler = (i, e) => {
