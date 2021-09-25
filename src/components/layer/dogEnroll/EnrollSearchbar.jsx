@@ -30,7 +30,7 @@ const Search = {
   `,
 };
 
-const Searchbar = ({ initialData, setEnrollData }) => {
+const Searchbar = ({ initialData, setEnrollData, initialEndingCountry, initialEndingAirport }) => {
   const [currCountry, setCurrCountry] = useState("");
   const [currAirport, setCurrAirport] = useState("");
   const [country, setCountry] = useState([]);
@@ -49,6 +49,11 @@ const Searchbar = ({ initialData, setEnrollData }) => {
       }
     })();
   }, []);
+
+  useEffect(() => {
+    if (initialEndingCountry) setCurrCountry(initialEndingCountry);
+    if (initialEndingAirport) setCurrAirport(initialEndingAirport);
+  }, [initialEndingCountry, initialEndingAirport]);
 
   useEffect(() => {
     setEnrollData("endingCountry", currCountry);

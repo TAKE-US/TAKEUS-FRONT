@@ -164,13 +164,14 @@ const EnrollInfo = ({ edit, match }) => {
         );
       })();
     }
+  }, [edit, history.location.state?.dog]);
 
+  useEffect(() => {
     if (Object.keys(createdContact).length !== 0) {
       setEnrollData(Object.keys(createdContact), ...Object.values(createdContact));
     }
-  }, [edit, history.location.state.dog, createdContact, setEnrollData]);
+  }, [createdContact, setEnrollData]);
 
-  console.log(initial);
   const handleSubmit = async event => {
     event.preventDefault();
     const formData = new FormData();
@@ -184,12 +185,13 @@ const EnrollInfo = ({ edit, match }) => {
     formData.append("health", enrollData.health);
     formData.append("isInstitution", enrollData?.isInstitution === "단체" ? true : false);
     formData.append("institutionName", enrollData?.institutionName);
-    formData.append("kakaotalkId", enrollData?.카카오톡);
-    formData.append("phoneNumber", enrollData?.전화번호);
-    formData.append("facebook", enrollData?.카카오톡);
-    formData.append("instagram", enrollData?.인스타그램);
-    formData.append("twitter", enrollData?.트위터);
     formData.append("detail", enrollData?.detail);
+    if (enrollData?.카카오톡) formData.append("kakaotalkId", enrollData?.카카오톡);
+    if (enrollData?.전화번호) formData.append("phoneNumber", enrollData?.전화번호);
+    if (enrollData?.페이스북) formData.append("facebook", enrollData?.페이스북);
+    if (enrollData?.인스타그램) formData.append("instagram", enrollData?.인스타그램);
+    if (enrollData?.트위터) formData.append("twitter", enrollData?.트위터);
+
     for (let i = 0; i < Array.from(createImage).length; i++) {
       formData.append("photos", createImage[i]["image"]);
     }
@@ -210,7 +212,12 @@ const EnrollInfo = ({ edit, match }) => {
         </div>
         <div className="wrap wrap--flex">
           <label>출국정보</label>
-          <EnrollSearchbar enroll setEnrollData={setEnrollDataCallback} />
+          <EnrollSearchbar
+            enroll
+            setEnrollData={setEnrollDataCallback}
+            initialEndingCountry={initial?.endingCountry}
+            initialEndingAirport={initial?.endingAirport}
+          />
         </div>
         <div className="wrap wrap--flex">
           <label>대상견 이름</label>

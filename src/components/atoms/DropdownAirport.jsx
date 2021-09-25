@@ -118,7 +118,7 @@ const DropdownAirport = ({ currCountry, currAirport, setCurrAirport, allAirport,
 
   useEffect(() => {
     setAirport(allAirport[currCountry]);
-    setCurrAirport("");
+    // setCurrAirport("");
   }, [currCountry, setCurrAirport, allAirport]);
 
   return (
