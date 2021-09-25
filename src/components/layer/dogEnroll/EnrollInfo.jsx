@@ -225,7 +225,6 @@ const EnrollInfo = ({ edit }) => {
     history.push("/dog/search");
   };
 
-  console.log(createdImage);
   return (
     <EnrollInfoWrap>
       <form onSubmit={handleSubmit}>

@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable arrow-parens */
-import React, { useState, useRef } from 'react';
-import styled from 'styled-components';
-import AddDogCard from 'components/atoms/AddDogCard';
+import React, { useState, useRef, useEffect } from "react";
+import styled from "styled-components";
+import AddDogCard from "components/atoms/AddDogCard";
 
 const Styled = {
   Wrapper: styled.section`
@@ -18,19 +18,19 @@ const AddDogCardContainer = ({ createdImage, setCreatedImage, initial }) => {
   const nextId = useRef(0);
 
   const photoHandle = e => {
-    const newFile = e.target.files;
+    const photoFile = e.target.files;
     (async () => {
-      arrayHandle(newFile);
+      arrayHandle(photoFile);
     })();
   };
 
-  const arrayHandle = photo => {
+  const arrayHandle = photoFile => {
     const idPhoto = {
       id: nextId.current,
-      photo: photo,
+      photoFile: photoFile,
       url: URLArray,
     };
-    if (photo !== null) setBoxList([idPhoto, ...boxList]);
+    if (photoFile !== null) setBoxList([idPhoto, ...boxList]);
     nextId.current += 1;
     setPhotoId(nextId.current);
   };
@@ -41,6 +41,21 @@ const AddDogCardContainer = ({ createdImage, setCreatedImage, initial }) => {
     setCreatedImage(prev => prev.filter(photo => photo.id !== Number(deletedKey)));
   };
 
+  useEffect(() => {
+    initial?.length > 0 && initial.map(URL => setURLArray(prev => prev.concat(URL)));
+    if (initial?.length > 0) {
+      const initialList = initial.map((URL, index) => {
+        return {
+          id: index,
+          photoFile: URL,
+          url: URLArray,
+        };
+      });
+      setBoxList([...initialList, ...boxList]);
+      nextId.current = initialList.length;
+      setPhotoId(nextId.current);
+    }
+  }, [initial]);
   return (
     <Styled.Wrapper>
       <>
