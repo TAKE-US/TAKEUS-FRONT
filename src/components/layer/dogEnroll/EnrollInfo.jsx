@@ -247,7 +247,7 @@ const EnrollInfo = ({ edit, match }) => {
         </div>
         <div className="wrap wrap--flex">
           <label>대상견 무게</label>
-          <Counter setEnrollData={setEnrollDataCallback} name="weight" />
+          <Counter setEnrollData={setEnrollDataCallback} name="weight" initial={initial?.weight} />
         </div>
         <div className="wrap wrap--flex">
           <label>중성화 여부</label>
