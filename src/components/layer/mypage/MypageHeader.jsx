@@ -84,21 +84,20 @@ const MypageHeader = ({ location, history }) => {
   const query = QueryString.parse(location.search, { ignoreQueryPrefix: true });
 
   useEffect(() => {
-    if (query?.page === "모집글") {
+    if (query?.select === "post") {
       setTabs([
         { value: "이동봉사 모집글", select: true },
         { value: "이동봉사 후기글", select: false },
       ]);
-    } else if (query?.page === "후기글") {
+    } else if (query?.select === "review") {
       setTabs([
         { value: "이동봉사 모집글", select: false },
         { value: "이동봉사 후기글", select: true },
       ]);
     }
-  }, [query?.page]);
+  }, [query?.select]);
 
   // const selectHandler = t => {
-  //   console.log("t", t.value.split(" ")[1] === query?.page);
   //   const newTabs = tabs.map(tab =>
   //     tab === t ? { ...tab, select: true } : { ...tab, select: false }
   //   );
@@ -107,8 +106,8 @@ const MypageHeader = ({ location, history }) => {
 
   const selectHandler = t => {
     t.value.split(" ")[1] === "모집글"
-      ? history.push("mypage?page=모집글")
-      : history.push("mypage?page=후기글");
+      ? history.push("mypage?select=post")
+      : history.push("mypage?select=review");
   };
 
   useEffect(() => {
@@ -126,6 +125,7 @@ const MypageHeader = ({ location, history }) => {
       setIsLoading(false);
     })();
   }, [dogsPage, reviewsPage, selectedFilter]);
+
   return (
     <Styled.Wrapper>
       <Styled.Header>
@@ -144,7 +144,12 @@ const MypageHeader = ({ location, history }) => {
           </nav>
           <section className="text">
             <h1>
-              내가 올린 <b>이동 봉사 모집글</b>을 한번에 확인해보세요!
+              내가 올린{" "}
+              <b>
+                이동 봉사{" "}
+                {tabs.filter(t => t.select).map(t => t.value.split(" ")[1])}
+              </b>
+              을 한번에 확인해보세요!
             </h1>
             <p>여러분의 도움으로 한 생명이 새로운 삶을 살게 되었어요 🙏🏻</p>
           </section>

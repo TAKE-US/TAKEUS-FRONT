@@ -199,7 +199,7 @@ const Header = () => {
               <Link className="enroll" to="/dog/enroll">
                 대상견 등록
               </Link>
-              <Link className="login" to="/mypage?page=모집글">
+              <Link className="login" to="/mypage?select=post">
                 내가 쓴 글
               </Link>
             </Head.Login>
