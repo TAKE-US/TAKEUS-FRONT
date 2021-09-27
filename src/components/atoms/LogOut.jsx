@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useDetectOutsideClick } from "hooks/useDetectOutsideClick";
 import { getMyData } from "lib/api/sample";
 import { withRouter } from "react-router-dom";
+import QueryString from "qs";
 
 const Styled = {
   Wrap: styled.div`
@@ -82,30 +83,33 @@ const Styled = {
     .nav {
       display: flex;
       padding-top: 1.5rem;
+    }
+  `,
 
-      .page {
-        font: ${({ theme }) => theme.font.body3};
-        background-color: ${({ theme }) => theme.color.lightgray1};
-        padding: 1rem 2.2rem;
-        border-radius: 0.5rem;
-        white-space: nowrap;
+  Page: styled.div`
+    font: ${({ theme }) => theme.font.body3};
+    background-color: ${({ theme, isSelect }) =>
+      isSelect ? theme.color.primary_light : theme.color.lightgray1};
+    padding: 1rem 2.2rem;
+    border-radius: 0.5rem;
+    white-space: nowrap;
 
-        :hover {
-          cursor: pointer;
-        }
+    :hover {
+      cursor: pointer;
+    }
 
-        :first-child {
-          margin-right: 0.5rem;
-        }
-      }
+    :first-child {
+      margin-right: 0.5rem;
     }
   `,
 };
 
-const LogOut = ({ history }) => {
+const LogOut = ({ history, location }) => {
   const statusRef = useRef(null);
   const [isActive, setIsActive] = useDetectOutsideClick(statusRef, false);
   // const [email, setEmail] = useState("takeus@gmail.com");
+
+  const query = QueryString.parse(location.search, { ignoreQueryPrefix: true });
 
   useEffect(() => {
     (async () => {
@@ -125,7 +129,12 @@ const LogOut = ({ history }) => {
   };
 
   const pageClick = () => {
-    history.push("/mypage");
+    history.push("/mypage?select=post");
+    setIsActive(!isActive);
+  };
+
+  const reviewClick = () => {
+    history.push("/mypage?select=review");
     setIsActive(!isActive);
   };
 
@@ -143,12 +152,15 @@ const LogOut = ({ history }) => {
           </button>
         </div>
         <div className="nav">
-          <div className="page" onClick={pageClick}>
+          <Styled.Page onClick={pageClick} isSelect={query?.select === "post"}>
             이동봉사 모집글
-          </div>
-          <div className="page" onClick={pageClick}>
+          </Styled.Page>
+          <Styled.Page
+            onClick={reviewClick}
+            isSelect={query?.select === "review"}
+          >
             이동봉사 후기글
-          </div>
+          </Styled.Page>
         </div>
       </Styled.Status>
     </Styled.Wrap>
