@@ -95,6 +95,7 @@ const Input = ({
     if (isContact && initial.type) {
       setValue(initial.value);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isValid, initial, isContact]);
 
   const changeValue = evt => {

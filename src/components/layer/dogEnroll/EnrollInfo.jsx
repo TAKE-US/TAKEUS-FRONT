@@ -155,7 +155,7 @@ const EnrollInfo = ({ edit }) => {
             : { value: item.value, select: false };
         });
       });
-      setEnrollData("gender", genderItems.find(value => value.select === true).value);
+      setEnrollDataCallback("gender", genderItems.find(value => value.select === true).value);
       setIsNeutering(prev =>
         prev.map(item => {
           const isNeutralized = data.neutralization ? "완료" : "미완료";
