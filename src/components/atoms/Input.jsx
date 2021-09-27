@@ -1,5 +1,5 @@
 /* eslint-disable arrow-parens */
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState, useCallback } from "react";
 import styled from "styled-components";
 
 const Styled = {
@@ -85,18 +85,24 @@ const Input = ({
     return false;
   }, [value, maxLength]);
 
+  const setEnrollDataCallback = useCallback(
+    (name, value) => {
+      setEnrollData(name, value);
+    },
+    [setEnrollData]
+  );
+
   useEffect(() => {
     if (isValid) setError(false);
     else setError(true);
     if (initial && !isContact) {
       setValue(initial);
-      setEnrollData(name, initial);
+      setEnrollDataCallback(name, initial);
     }
     if (isContact && initial.type) {
       setValue(initial.value);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isValid, initial, isContact]);
+  }, [isValid, initial, isContact, setEnrollDataCallback, name]);
 
   const changeValue = evt => {
     const newValue = evt.target.value;
