@@ -295,7 +295,7 @@ export const postEnroll = async data => {
   try {
     const data = await instance.post("/api/dogs", body, {
       headers: {
-        "Content-Type": "multipart/form-data",
+        "Content-Type": "multipart/form-data; boundary=<calculated when request is sent>",
         "x-auth-token": localStorage.getItem("token"),
       },
     });
@@ -314,7 +314,7 @@ export const putDog = async (dogId, data) => {
   try {
     const data = await instance.put(`/api/dogs/detail/${dogId}`, body, {
       headers: {
-        "Content-Type": "multipart/form-data",
+        "Content-Type": "multipart/form-data; boundary=<calculated when request is sent>",
         "x-auth-token": localStorage.getItem("token"),
       },
     });
