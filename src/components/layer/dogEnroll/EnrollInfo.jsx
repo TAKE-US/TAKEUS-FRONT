@@ -143,60 +143,60 @@ const EnrollInfo = ({ edit }) => {
   };
 
   useEffect(() => {
-    if (edit) {
-      (async () => {
-        const data = history.location.state.dog;
-        setInitial(data);
+    (async () => {
+      if (!edit) return;
+      const data = history.location.state ? history.location.state.dog : null;
+      setInitial(data);
 
-        setGenderItems(prev => {
-          return prev.map(item => {
-            return item.value === data.gender
-              ? { value: item.value, select: true }
-              : { value: item.value, select: false };
-          });
+      setGenderItems(prev => {
+        return prev.map(item => {
+          return item.value === data.gender
+            ? { value: item.value, select: true }
+            : { value: item.value, select: false };
         });
-        setEnrollData("gender", genderItems.find(value => value.select === true).value);
-        setIsNeutering(prev =>
-          prev.map(item => {
-            const isNeutralized = data.neutralization ? "완료" : "미완료";
-            return item.value === isNeutralized ? { ...item, select: true } : { ...item, select: false };
-          })
-        );
+      });
+      setEnrollData("gender", genderItems.find(value => value.select === true).value);
+      setIsNeutering(prev =>
+        prev.map(item => {
+          const isNeutralized = data.neutralization ? "완료" : "미완료";
+          return item.value === isNeutralized ? { ...item, select: true } : { ...item, select: false };
+        })
+      );
 
-        setIsInstitution(prev =>
-          prev.map(item => {
-            const isGroup = data.isInstitution ? "단체" : "개인구조자";
-            return item.value === isGroup ? { ...item, select: true } : { ...item, select: false };
-          })
-        );
+      setIsInstitution(prev =>
+        prev.map(item => {
+          const isGroup = data.isInstitution ? "단체" : "개인구조자";
+          return item.value === isGroup ? { ...item, select: true } : { ...item, select: false };
+        })
+      );
 
-        const existedContactList = [
-          { 페이스북: data.facebook },
-          { 인스타그램: data.instagram },
-          { 전화번호: data.phoneNumber },
-          { 트위터: data.twitter },
-          { 카카오톡: data.kakaotalkId },
-        ];
+      const existedContactList = [
+        { 페이스북: data.facebook },
+        { 인스타그램: data.instagram },
+        { 전화번호: data.phoneNumber },
+        { 트위터: data.twitter },
+        { 카카오톡: data.kakaotalkId },
+      ];
 
-        setContactList([]);
-        existedContactList.map(contact => {
-          if (Object.values(contact)[0].length === 1) {
+      setContactList([]);
+      existedContactList.forEach(contact => {
+        if (Object.values(contact)[0].length === 1) {
+          let newValue = {};
+          newValue.type = Object.keys(contact)[0];
+          newValue.value = Object.values(contact)[0];
+          setContactList(prev => prev.concat(newValue));
+        } else if (Object.values(contact)[0].length > 1) {
+          Object.values(contact)[0].forEach(repeated => {
             let newValue = {};
             newValue.type = Object.keys(contact)[0];
-            newValue.value = Object.values(contact)[0];
+            newValue.value = repeated;
             setContactList(prev => prev.concat(newValue));
-          } else if (Object.values(contact)[0].length > 1) {
-            Object.values(contact)[0].map(repeated => {
-              let newValue = {};
-              newValue.type = Object.keys(contact)[0];
-              newValue.value = repeated;
-              setContactList(prev => prev.concat(newValue));
-            });
-          }
-        });
-      })();
-    }
-  }, [edit, history.location.state?.dog]);
+          });
+        }
+      });
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     if (Object.keys(selectedContact).length !== 0) {

@@ -48,14 +48,14 @@ const AddDogCardContainer = ({ createdImage, setCreatedImage, initial }) => {
         return {
           id: index,
           photoFile: URL,
-          url: URLArray,
         };
       });
-      setBoxList([...initialList, ...boxList]);
+      setBoxList(boxList => [...initialList, ...boxList]);
       nextId.current = initialList.length;
       setPhotoId(nextId.current);
     }
   }, [initial]);
+
   return (
     <Styled.Wrapper>
       <>
