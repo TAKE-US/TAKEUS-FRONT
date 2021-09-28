@@ -280,7 +280,9 @@ export const deleteDog = async id => {
 };
 
 export const putReview = async (id, data) => {
-  const body = Object.fromEntries(Object.entries(data).filter(([_, value]) => value));
+  const body = Object.fromEntries(
+    Object.entries(data).filter(([_, value]) => value)
+  );
   try {
     const data = await instance.put(`/api/reviews/detail/${id}`, body, {
       headers: {
@@ -337,7 +339,7 @@ export const putDogStatus = async (dogId, data) => {
 
 export const getMyData = async () => {
   try {
-    const data = await instance.get("/api/login", {
+    const data = await instance.get("/api/users/login", {
       header: {
         "Content-Type": "application/json",
         "x-auth-token": localStorage.getItem("token"),
