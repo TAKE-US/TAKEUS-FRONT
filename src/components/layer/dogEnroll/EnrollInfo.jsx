@@ -11,8 +11,9 @@ import { ReactComponent as Twitter } from "assets/icon/ic_twitter_24.svg";
 import { ReactComponent as Facebook } from "assets/icon/ic_facebook_24.svg";
 import { ReactComponent as Plus } from "assets/icon/ic_plus_24.svg";
 import useEnrollData from "hooks/useEnrollData";
-import { postEnroll } from "lib/api/sample";
+import { postEnroll, putDog } from "lib/api/sample";
 import { withRouter } from "react-router-dom";
+import { useHistory } from "react-router";
 
 const EnrollInfoWrap = styled.section`
   .wrap {
@@ -99,12 +100,13 @@ const ContactsList = [
   },
 ];
 
-const EnrollInfo = ({ history }) => {
+const EnrollInfo = ({ edit }) => {
+  const history = useHistory();
   const [enrollData, setEnrollData] = useEnrollData({});
   const [dropArray, setDrop] = useState([]);
-  const [contacts, setContacts] = useState([{ type: "phone", value: "" }]);
-  const [createdContact, setCreatedContact] = useState({});
-  const [createImage, setCreateImage] = useState([]);
+  const [contactList, setContactList] = useState([{ type: "", value: "" }]);
+  const [selectedContact, setContact] = useState({});
+  const [createdImage, setCreatedImage] = useState([]);
   const [genderItems, setGenderItems] = useState([
     { value: "여", select: true },
     { value: "남", select: false },
@@ -118,6 +120,7 @@ const EnrollInfo = ({ history }) => {
     { value: "개인구조자", select: true },
     { value: "단체", select: false },
   ]);
+  const [initial, setInitial] = useState();
 
   const setEnrollDataCallback = useCallback(
     (name, value) => {
@@ -125,6 +128,7 @@ const EnrollInfo = ({ history }) => {
     },
     [setEnrollData]
   );
+
   const onDrop = (dropArray, value, id) => {
     if (dropArray.key === id) {
       setDrop(Array.from(dropArray).map(val => (val.id === id ? { key: id, type: value } : val)));
@@ -132,16 +136,73 @@ const EnrollInfo = ({ history }) => {
       setDrop(dropArray => dropArray.concat({ key: id, type: value }));
     }
   };
-  const addContact = e => {
+
+  const addContactList = e => {
     e.preventDefault();
-    setContacts(contacts.concat({ type: "kakaotalk", value: "" }));
+    setContactList(contactList.concat({ type: "", value: "" }));
   };
 
   useEffect(() => {
-    if (Object.keys(createdContact).length !== 0) {
-      setEnrollData(Object.keys(createdContact), ...Object.values(createdContact));
+    (async () => {
+      if (!edit) return;
+      const data = history.location.state ? history.location.state.dog : null;
+      setInitial(data);
+
+      setGenderItems(prev => {
+        return prev.map(item => {
+          return item.value === data.gender
+            ? { value: item.value, select: true }
+            : { value: item.value, select: false };
+        });
+      });
+      setEnrollDataCallback("gender", genderItems.find(value => value.select === true).value);
+      setIsNeutering(prev =>
+        prev.map(item => {
+          const isNeutralized = data.neutralization ? "완료" : "미완료";
+          return item.value === isNeutralized ? { ...item, select: true } : { ...item, select: false };
+        })
+      );
+
+      setIsInstitution(prev =>
+        prev.map(item => {
+          const isGroup = data.isInstitution ? "단체" : "개인구조자";
+          return item.value === isGroup ? { ...item, select: true } : { ...item, select: false };
+        })
+      );
+
+      const existedContactList = [
+        { 페이스북: data.facebook },
+        { 인스타그램: data.instagram },
+        { 전화번호: data.phoneNumber },
+        { 트위터: data.twitter },
+        { 카카오톡: data.kakaotalkId },
+      ];
+
+      setContactList([]);
+      existedContactList.forEach(contact => {
+        if (Object.values(contact)[0].length === 1) {
+          let newValue = {};
+          newValue.type = Object.keys(contact)[0];
+          newValue.value = Object.values(contact)[0];
+          setContactList(prev => prev.concat(newValue));
+        } else if (Object.values(contact)[0].length > 1) {
+          Object.values(contact)[0].forEach(repeated => {
+            let newValue = {};
+            newValue.type = Object.keys(contact)[0];
+            newValue.value = repeated;
+            setContactList(prev => prev.concat(newValue));
+          });
+        }
+      });
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (Object.keys(selectedContact).length !== 0) {
+      setEnrollData(Object.keys(selectedContact), ...Object.values(selectedContact));
     }
-  }, [createdContact, setEnrollData]);
+  }, [selectedContact, setEnrollData]);
 
   const handleSubmit = async event => {
     event.preventDefault();
@@ -155,35 +216,42 @@ const EnrollInfo = ({ history }) => {
     formData.append("neutralization", enrollData?.neutralization === "완료" ? true : false);
     formData.append("health", enrollData.health);
     formData.append("isInstitution", enrollData?.isInstitution === "단체" ? true : false);
-    formData.append("institutionName", enrollData?.institutionName);
-    formData.append("kakaotalkId", enrollData?.카카오톡);
-    formData.append("phoneNumber", enrollData?.전화번호);
-    formData.append("facebook", enrollData?.카카오톡);
-    formData.append("instagram", enrollData?.인스타그램);
-    formData.append("twitter", enrollData?.트위터);
-    formData.append("detail", enrollData?.detail);
-    for (let i = 0; i < Array.from(createImage).length; i++) {
-      formData.append("photos", createImage[i]["image"]);
+    formData.append("institutionName", enrollData?.institutionName ? enrollData.institutionName : "");
+    formData.append("detail", enrollData?.detail ? enrollData.detail : "");
+    if (enrollData?.카카오톡) formData.append("kakaotalkId", enrollData?.카카오톡);
+    if (enrollData?.전화번호) formData.append("phoneNumber", enrollData?.전화번호);
+    if (enrollData?.페이스북) formData.append("facebook", enrollData?.페이스북);
+    if (enrollData?.인스타그램) formData.append("instagram", enrollData?.인스타그램);
+    if (enrollData?.트위터) formData.append("twitter", enrollData?.트위터);
+
+    for (let i = 0; i < Array.from(createdImage).length; i++) {
+      formData.append("photos", createdImage[i]["image"]);
     }
-    await postEnroll(formData);
+
+    if (edit) await putDog(history.location.state?.dog._id, formData);
+    else await postEnroll(formData);
     history.push("/dog/search");
   };
 
-  console.log(enrollData);
   return (
     <EnrollInfoWrap>
       <form onSubmit={handleSubmit}>
         <div className="wrap wrap--add">
           <AddDogLayer
-            createImage={createImage}
-            setCreateImage={setCreateImage}
+            createdImage={createdImage}
+            setCreatedImage={setCreatedImage}
             setEnrollData={setEnrollDataCallback}
-            name="photos"
+            initial={initial?.photos}
           />
         </div>
         <div className="wrap wrap--flex">
           <label>출국정보</label>
-          <EnrollSearchbar enroll setEnrollData={setEnrollDataCallback} />
+          <EnrollSearchbar
+            enroll
+            setEnrollData={setEnrollDataCallback}
+            initialEndingCountry={initial?.endingCountry}
+            initialEndingAirport={initial?.endingAirport}
+          />
         </div>
         <div className="wrap wrap--flex">
           <label>대상견 이름</label>
@@ -194,6 +262,7 @@ const EnrollInfo = ({ history }) => {
             setEnrollData={setEnrollDataCallback}
             name="name"
             font="body3"
+            initial={initial?.name}
           />
         </div>
         <div className="wrap wrap--flex">
@@ -214,11 +283,12 @@ const EnrollInfo = ({ history }) => {
             setEnrollData={setEnrollDataCallback}
             name="age"
             font="body3"
+            initial={initial?.age}
           />
         </div>
         <div className="wrap wrap--flex">
           <label>대상견 무게</label>
-          <Counter setEnrollData={setEnrollDataCallback} name="weight" />
+          <Counter setEnrollData={setEnrollDataCallback} name="weight" initial={initial?.weight} />
         </div>
         <div className="wrap wrap--flex">
           <label>중성화 여부</label>
@@ -238,6 +308,7 @@ const EnrollInfo = ({ history }) => {
             setEnrollData={setEnrollDataCallback}
             name="health"
             font="body3"
+            initial={initial?.health}
           />
         </div>
         <div className="wrap wrap--flex">
@@ -255,20 +326,23 @@ const EnrollInfo = ({ history }) => {
             setEnrollData={setEnrollDataCallback}
             name="institutionName"
             font="body3"
+            initial={initial?.institutionName}
           />
         </div>
         <div className="wrap contact">
           <label>연락처</label>
           <div className="contact-layer">
-            {contacts.map((contact, i) => (
+            {contactList.map((contact, i) => (
               <Input
                 placeholder={"연락처를 입력해 주세요"}
                 key={`contact-${i}`}
                 font="body3"
                 name={dropArray[i]}
-                createdContact={createdContact}
-                setCreatedContact={setCreatedContact}
+                selectedContact={selectedContact}
+                setContact={setContact}
                 setEnrollData={setEnrollDataCallback}
+                initial={contact}
+                isContact={true}
               >
                 <div className="dropdown">
                   <Dropdown
@@ -280,11 +354,12 @@ const EnrollInfo = ({ history }) => {
                     dropArray={dropArray}
                     onDrop={onDrop}
                     id={i}
+                    initial={contact}
                   />
                 </div>
               </Input>
             ))}
-            <div className="contact__btn" onClick={addContact}>
+            <div className="contact__btn" onClick={addContactList}>
               <Button rounded full padding="1rem 0" font="gnb">
                 <Plus />
                 연락처 추가하기
@@ -293,7 +368,13 @@ const EnrollInfo = ({ history }) => {
           </div>
         </div>
         <div className="wrap">
-          <TextField label="내용을 작성해주세요" maxLength={500} setEnrollData={setEnrollDataCallback} name="detail" />
+          <TextField
+            label="내용을 작성해주세요"
+            maxLength={500}
+            setEnrollData={setEnrollDataCallback}
+            name="detail"
+            initial={initial?.detail}
+          />
         </div>
         <div className="wrap">
           <div className="wrap__button">

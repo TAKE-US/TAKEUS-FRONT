@@ -64,7 +64,7 @@ const Searchbar = () => {
   useEffect(() => {
     (async () => {
       try {
-        const data = await getCountry();
+        const { data } = await getCountry();
         console.log(data);
 
         setCountry(Object.keys(data).splice(1));

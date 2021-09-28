@@ -201,9 +201,6 @@ const Header = () => {
                 대상견 등록
               </Link>
               <LogOut />
-              {/* <Link className="login" to="/mypage">
-                마이페이지
-              </Link> */}
             </Head.Login>
           ) : (
             <Head.Login>

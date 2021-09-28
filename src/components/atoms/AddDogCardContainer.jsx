@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable arrow-parens */
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import AddDogCard from "components/atoms/AddDogCard";
 
@@ -11,54 +11,66 @@ const Styled = {
   `,
 };
 
-const AddDogCardContainer = ({ name, createImage, setCreateImage }) => {
-  const [photo, setPhoto] = useState("");
-  const [urlArray, setUrlArray] = useState([]);
-  const [photoArray, setPhotoArray] = useState([1, 0, 0, 0, 0]);
-  function photoHandle(e) {
-    const newFile = e.target.files;
-    (async () => {
-      setPhoto(newFile);
-    })();
-    (async () => {
-      arrayHandle(newFile);
-    })();
-  }
-
+const AddDogCardContainer = ({ createdImage, setCreatedImage, initial }) => {
+  const [boxList, setBoxList] = useState([1, 0, 0, 0, 0]);
+  const [URLArray, setURLArray] = useState([]);
+  const [photoId, setPhotoId] = useState(0);
   const nextId = useRef(0);
-  function arrayHandle(photo) {
+
+  const photoHandle = e => {
+    const photoFile = e.target.files;
+    (async () => {
+      arrayHandle(photoFile);
+    })();
+  };
+
+  const arrayHandle = photoFile => {
     const idPhoto = {
       id: nextId.current,
-      photo: photo,
-      url: urlArray,
+      photoFile: photoFile,
+      url: URLArray,
     };
-    if (photo !== null) {
-      setPhotoArray([idPhoto, ...photoArray]);
-    }
+    if (photoFile !== null) setBoxList([idPhoto, ...boxList]);
     nextId.current += 1;
-  }
+    setPhotoId(nextId.current);
+  };
 
-  function deleteHandle(e) {
+  const deleteHandle = e => {
     const deletedKey = e.target.nextSibling.dataset.key;
-    setPhotoArray(
-      photoArray.filter(photo => photo.id !== parseInt(deletedKey, 10))
-    );
-  }
+    setBoxList(prev => prev.filter(photo => photo.id !== Number(deletedKey)));
+    setCreatedImage(prev => prev.filter(photo => photo.id !== Number(deletedKey)));
+  };
+
+  useEffect(() => {
+    initial?.length > 0 && initial.map(URL => setURLArray(prev => prev.concat(URL)));
+    if (initial?.length > 0) {
+      const initialList = initial.map((URL, index) => {
+        return {
+          id: index,
+          photoFile: URL,
+        };
+      });
+      setBoxList(boxList => [...initialList, ...boxList]);
+      nextId.current = initialList.length;
+      setPhotoId(nextId.current);
+    }
+  }, [initial]);
 
   return (
     <Styled.Wrapper>
       <>
-        {photoArray.map((value, i) =>
+        {boxList.map((value, i) =>
           i < 5 ? (
             <AddDogCard
               key={i}
               value={value}
+              photoId={photoId}
               photoHandle={photoHandle}
               deleteHandle={deleteHandle}
-              urlArray={urlArray}
-              setUrlArray={setUrlArray}
-              createImage={createImage}
-              setCreateImage={setCreateImage}
+              URLArray={URLArray}
+              setURLArray={setURLArray}
+              createdImage={createdImage}
+              setCreatedImage={setCreatedImage}
             />
           ) : null
         )}
