@@ -1,5 +1,5 @@
 /* eslint-disable arrow-parens */
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import btn_plus from 'assets/icon/btn_plus.svg';
 import deleteBtn from 'assets/icon/btn_delete.svg';
@@ -64,55 +64,64 @@ const Styled = {
   `,
 };
 
-const AddDogCard = ({ value, photoHandle, deleteHandle, urlArray, setUrlArray, createImage, setCreateImage }) => {
+const AddDogCard = ({
+  value,
+  photoHandle,
+  deleteHandle,
+  URLArray,
+  setURLArray,
+  photoId,
+  createdImage,
+  setCreatedImage,
+}) => {
   const [imgfile, setImage] = useState('');
-  const count = useRef(0);
-  const createImagePreview = e => {
-    const files = e.target.files;
-    setCreateImage(createImage.concat({ id: count.current, image: e.target.files[0] }));
-    if (files.length) {
-      setImageFromFile({
-        file: files[0],
-        setImageUrl: ({ result }) => {
-          setImage(files[0]);
-          setUrlArray(urlArray.concat(result));
-        },
-      });
-    }
-    count.current += 1;
-  };
-
-  function setImageFromFile({ file, setImageUrl }) {
+  const setImageFromFile = ({ file, setImageUrl }) => {
     let reader = new FileReader();
     reader.onload = () => {
       setImageUrl({ result: reader.result });
     };
     reader.readAsDataURL(file);
-  }
+  };
+
+  const createImagePreview = e => {
+    const files = e.target.files;
+    if (createdImage.length === 0) setCreatedImage([{ id: 0, image: e.target.files[0] }]);
+    else setCreatedImage(prev => [...prev, { id: photoId, image: e.target.files[0] }]);
+
+    if (files.length) {
+      setImageFromFile({
+        file: files[0],
+        setImageUrl: ({ result }) => {
+          setImage(files[0]);
+          setURLArray(URLArray.concat(result));
+        },
+      });
+    }
+  };
 
   return (
     <Styled.Wrapper>
       {value.id !== undefined ? (
-        <div className="image__area">
+        <div className='image__area'>
           <img
-            className="image__area-delete"
+            className='image__area-delete'
             onClick={e => {
               deleteHandle(e);
             }}
             src={deleteBtn}
             alt={'delete'}
           />
-          <img className="image__area-img" data-key={value.id} src={urlArray[value.id]} alt={imgfile.name} />
+          <img className='image__area-img' data-key={value.id} src={URLArray[value.id]} alt={imgfile.name} />
         </div>
       ) : value ? (
-        <div className="card">
-          <img className="card__img" src={btn_plus} alt="plus" />
-          <p className="card__content">사진 추가하기</p>
+        <div className='card'>
+          <img className='card__img' src={btn_plus} alt='plus' />
+          <p className='card__content'>사진 추가하기</p>
           <input
-            className="card__input"
-            type="file"
-            id="detail_image"
-            accept="image/*"
+            className='card__input'
+            type='file'
+            id='detail_image'
+            accept='image/*'
             onChange={e => {
               photoHandle(e);
               createImagePreview(e);

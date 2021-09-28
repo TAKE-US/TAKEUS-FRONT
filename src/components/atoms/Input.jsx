@@ -1,5 +1,5 @@
 /* eslint-disable arrow-parens */
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState, useCallback } from "react";
 import styled from "styled-components";
 
 const Styled = {
@@ -69,9 +69,9 @@ const Input = ({
   disabled,
   setEnrollData,
   name,
-  createdContact,
-  setCreatedContact,
+  setContact,
   initial,
+  isContact,
 }) => {
   const [value, setValue] = useState("");
   const [isError, setError] = useState(false);
@@ -85,11 +85,24 @@ const Input = ({
     return false;
   }, [value, maxLength]);
 
+  const setEnrollDataCallback = useCallback(
+    (name, value) => {
+      setEnrollData(name, value);
+    },
+    [setEnrollData]
+  );
+
   useEffect(() => {
     if (isValid) setError(false);
     else setError(true);
-    if (initial) setValue(initial);
-  }, [isValid, initial]);
+    if (initial && !isContact) {
+      setValue(initial);
+      setEnrollDataCallback(name, initial);
+    }
+    if (isContact && initial.type) {
+      setValue(initial.value);
+    }
+  }, [isValid, initial, isContact, setEnrollDataCallback, name]);
 
   const changeValue = evt => {
     const newValue = evt.target.value;
@@ -105,7 +118,7 @@ const Input = ({
     if (name && name["type"] !== undefined) {
       const newVal = {};
       newVal[name["type"]] = value;
-      setCreatedContact(newVal);
+      setContact(newVal);
     } else {
       setEnrollData(name, value);
     }
