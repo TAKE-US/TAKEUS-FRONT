@@ -2,7 +2,14 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import QueryString from "qs";
 import { withRouter } from "react-router";
-import { DogCardContainer, PaginationNav, DogSearchNavigation, Filter, Empty, Loading } from "components";
+import {
+  DogCardContainer,
+  PaginationNav,
+  DogSearchNavigation,
+  Filter,
+  Empty,
+  Loading,
+} from "components";
 //api
 import { getPageDogs, getSearchDogs } from "lib/api/sample";
 
@@ -52,9 +59,21 @@ const DogPage = ({ dogData, location }) => {
       <div className="container">
         {dogs.length !== 0 ? (
           <>
-            <Filter contents={contents} selectedFilter={selectedFilter} setSelectedFilter={setSelectedFilter} />
-            {isLoading ? <Loading dogs={dogs} /> : <DogCardContainer dogs={dogs} />}
-            <PaginationNav pageNum={pageNum} setPageNum={setPageNum} totalPage={totalPage} />
+            <Filter
+              contents={contents}
+              selectedFilter={selectedFilter}
+              setSelectedFilter={setSelectedFilter}
+            />
+            {isLoading ? (
+              <Loading dogs={dogs} />
+            ) : (
+              <DogCardContainer dogs={dogs} />
+            )}
+            <PaginationNav
+              pageNum={pageNum}
+              setPageNum={setPageNum}
+              totalPage={totalPage}
+            />
           </>
         ) : (
           <Empty />
