@@ -24,6 +24,7 @@ export { default as CarouselReviewCard } from "./atoms/CarouselReviewCard";
 export { default as Carousel } from "./atoms/Carousel";
 export { default as ReviewSearchbar } from "./atoms/ReviewSearchbar";
 export { default as Loading } from "./atoms/Loading";
+export { default as LogOut } from "./atoms/LogOut";
 
 // layer
 export { default as Header } from "./layer/Header";

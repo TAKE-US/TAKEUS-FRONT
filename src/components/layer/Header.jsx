@@ -3,6 +3,7 @@ import { useLocation, useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { ReactComponent as LogoBlack } from "../../assets/img/ic_logo_wordmark_black_small.svg";
+import { LogOut } from "../";
 
 const Head = {
   Notice: styled.div`
@@ -199,9 +200,7 @@ const Header = () => {
               <Link className="enroll" to="/dog/enroll">
                 대상견 등록
               </Link>
-              <Link className="login" to="/mypage?select=post">
-                내가 쓴 글
-              </Link>
+              <LogOut />
             </Head.Login>
           ) : (
             <Head.Login>

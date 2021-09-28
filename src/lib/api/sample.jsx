@@ -185,15 +185,23 @@ export const getReviewsWithTags = async (hashtag = "", num, selectedFilter) => {
   }
 };
 
-export const getReviewsSearch = async (hashtag, num, selectedFilter, search) => {
+export const getReviewsSearch = async (
+  hashtag,
+  num,
+  selectedFilter,
+  search
+) => {
   try {
     const filter = selectedFilter === "최신순" ? "latest" : "oldest";
-    const data = await instance.get(`/api/reviews/${search}?hashtags=${hashtag}`, {
-      params: {
-        order: filter,
-        page: num,
-      },
-    });
+    const data = await instance.get(
+      `/api/reviews/${search}?hashtags=${hashtag}`,
+      {
+        params: {
+          order: filter,
+          page: num,
+        },
+      }
+    );
     console.log("[SUCCESS] GET review search data");
     return data.data;
   } catch (e) {
@@ -272,7 +280,9 @@ export const deleteDog = async id => {
 };
 
 export const putReview = async (id, data) => {
-  const body = Object.fromEntries(Object.entries(data).filter(([_, value]) => value));
+  const body = Object.fromEntries(
+    Object.entries(data).filter(([_, value]) => value)
+  );
   try {
     const data = await instance.put(`/api/reviews/detail/${id}`, body, {
       headers: {
@@ -342,5 +352,22 @@ export const putDogStatus = async (dogId, data) => {
   } catch (e) {
     console.log("[FAIL] PUT dog status");
     return e;
+  }
+};
+
+export const getMyData = async () => {
+  try {
+    const data = await instance.get("/api/users/login", {
+      header: {
+        "Content-Type": "application/json",
+        "x-auth-token": localStorage.getItem("token"),
+      },
+    });
+    console.log(data);
+    console.log("[SUCCESS] GET my data");
+    return data.data.data;
+  } catch (e) {
+    console.log("[FAIL] GET my data");
+    throw e;
   }
 };
