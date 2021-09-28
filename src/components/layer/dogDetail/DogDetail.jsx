@@ -3,14 +3,7 @@ import styled from "styled-components";
 import { useHistory } from "react-router";
 
 import { ReactComponent as EditIcon } from "assets/img/ic_edit.svg";
-import {
-  Swiper,
-  DogDetailInfo,
-  CopyLinkButton,
-  DeleteModal,
-  ReportModal,
-  MatchingModal,
-} from "components";
+import { Swiper, DogDetailInfo, CopyLinkButton, DeleteModal, ReportModal, MatchingModal } from "components";
 
 import { putDogStatus } from "lib/api/sample";
 
@@ -147,6 +140,10 @@ const DogDetail = ({ dog }) => {
     setDogStatus("done");
   };
 
+  const goEditPage = () => {
+    history.push({ pathname: `${dog._id}/edit`, state: { dog } });
+  };
+
   return (
     <DogDetailWrap>
       <button className="goBack" type="button" onClick={history.goBack}>
@@ -161,7 +158,7 @@ const DogDetail = ({ dog }) => {
         {isLogin &&
           (myPost ? (
             <div className="dog--post">
-              <button className="edit">
+              <button className="edit" onClick={goEditPage}>
                 <EditIcon width="20" height="20" />
                 <div>수정</div>
               </button>
@@ -169,7 +166,7 @@ const DogDetail = ({ dog }) => {
             </div>
           ) : (
             <div className="dog--post">
-              <ReportModal />
+              <ReportModal id={dog._id} />
             </div>
           ))}
       </header>

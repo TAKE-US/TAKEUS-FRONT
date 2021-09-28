@@ -1,8 +1,8 @@
 /* eslint-disable max-len */
 /* eslint-disable arrow-parens */
-import React from 'react';
-import styled from 'styled-components';
-import AddDogCardContainer from 'components/atoms/AddDogCardContainer';
+import React from "react";
+import styled from "styled-components";
+import AddDogCardContainer from "components/atoms/AddDogCardContainer";
 
 const Styled = {
   Wrapper: styled.section`
@@ -21,11 +21,16 @@ const Styled = {
   `,
 };
 
-const AddDogLayer = ({ setEnrollData, name, createImage, setCreateImage }) => {
+const AddDogLayer = ({ setEnrollData, createdImage, setCreatedImage, initial }) => {
   return (
     <Styled.Wrapper>
       <section className="title">대상견 사진을 올려주세요.(최대 5개)</section>
-      <AddDogCardContainer setEnrollData={setEnrollData} name={name} createImage={createImage} setCreateImage={setCreateImage} />
+      <AddDogCardContainer
+        setEnrollData={setEnrollData}
+        createdImage={createdImage}
+        setCreatedImage={setCreatedImage}
+        initial={initial}
+      />
     </Styled.Wrapper>
   );
 };

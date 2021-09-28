@@ -207,14 +207,12 @@ export const postToken = async (token, social) => {
     token: token,
     social: social,
   };
-  console.log("body", body);
   try {
     const data = await instance.post("/api/users/login", body, {
       headers: {
         "Content-Type": "application/json",
       },
     });
-    console.log(data);
     console.log("[SUCCESS] POST token");
     return data.data;
   } catch (e) {
@@ -274,7 +272,7 @@ export const deleteDog = async id => {
 };
 
 export const putReview = async (id, data) => {
-  const body = data;
+  const body = Object.fromEntries(Object.entries(data).filter(([_, value]) => value));
   try {
     const data = await instance.put(`/api/reviews/detail/${id}`, body, {
       headers: {
@@ -297,7 +295,7 @@ export const postEnroll = async data => {
   try {
     const data = await instance.post("/api/dogs", body, {
       headers: {
-        "Content-Type": "multipart/form-data",
+        "Content-Type": "multipart/form-data; boundary=<calculated when request is sent>",
         "x-auth-token": localStorage.getItem("token"),
       },
     });
@@ -307,6 +305,24 @@ export const postEnroll = async data => {
   } catch (e) {
     console.log(e);
     console.log("[FAIL] Post Enroll");
+    return e;
+  }
+};
+
+export const putDog = async (dogId, data) => {
+  const body = data;
+  try {
+    const data = await instance.put(`/api/dogs/detail/${dogId}`, body, {
+      headers: {
+        "Content-Type": "multipart/form-data; boundary=<calculated when request is sent>",
+        "x-auth-token": localStorage.getItem("token"),
+      },
+    });
+    console.log(data);
+    console.log("[SUCCESS] PUT dog status");
+    return data;
+  } catch (e) {
+    console.log("[FAIL] PUT dog status");
     return e;
   }
 };
