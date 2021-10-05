@@ -17,7 +17,7 @@ const Styled = {
   Button: styled.button`
     width: 45.2rem;
     height: 4.8rem;
-    background-color: ${(props) => props.color};
+    background-color: ${props => props.color};
     border-radius: 2.1rem;
     padding-left: 1rem;
     margin-bottom: 1.7rem;
@@ -37,27 +37,15 @@ const Styled = {
   `,
 };
 
-const LoginKakao = ({ handleSuccess }) => {
-  const { Kakao } = window;
+const LoginKakao = () => {
+  const REST_API_KEY = "f67ac346de494c1931b31d6ec8ea192e";
+  const REDIRECT_URI = "http://localhost:3000/oauth/callback/kakao";
+
+  // eslint-disable-next-line max-len
+  const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+
   const LoginClickHandler = () => {
-    console.log("Clicked");
-    try {
-      return new Promise((resolve, reject) => {
-        if (!Kakao) {
-          reject("There is No instance");
-        }
-        Kakao.Auth.login({
-          success: (res) => {
-            handleSuccess(res.access_token, "kakao");
-          },
-          fail: (err) => {
-            console.error(err);
-          },
-        });
-      });
-    } catch (err) {
-      console.error(err);
-    }
+    window.location.assign(KAKAO_AUTH_URL);
   };
 
   return (
