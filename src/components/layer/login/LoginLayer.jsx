@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { LoginKakao } from 'components';
+import { initializeNaverLogin, getUserProfile } from '../../atoms/LoginNaver';
 import { GoogleLogin } from 'react-google-login';
-
 import LoginImg from 'assets/img/img_Login.png';
 import NaverIcon from 'assets/img/ic_naver.svg';
 import GoogleIcon from 'assets/img/ic_google.svg';
@@ -101,7 +101,6 @@ const LoginLayer = () => {
   const handleSuccess = async (token, social) => {
     console.log(token);
     const data = await postToken(token, social);
-    console.log(data);
     localStorage.setItem('email', data.email);
     localStorage.setItem('token', data.token);
     localStorage.setItem('ID', data.id);
@@ -112,6 +111,14 @@ const LoginLayer = () => {
   const handleFailure = error => {
     console.log(error);
   };
+
+  const makeNaverlogin = () => {
+    initializeNaverLogin();
+    getUserProfile();
+  };
+
+  useEffect(makeNaverlogin, []);
+
   return (
     <Styled.Wrapper>
       <Styled.ImageContainer>
@@ -123,7 +130,7 @@ const LoginLayer = () => {
           <h1>Takeus 시작하기</h1>
           <p>SNS 계정으로 손쉽게 가입하고 Takers가 될 수 있어요 :)</p>
           <LoginKakao handleSuccess={handleSuccess} />
-          <Styled.Button type="button" color={'#1EC800'}>
+          <Styled.Button type="button" color={'#1EC800'} onClick={makeNaverlogin} id="naverIdLogin">
             <img className="naverIcon" src={NaverIcon} alt="naver" />
             네이버로 시작하기
           </Styled.Button>
