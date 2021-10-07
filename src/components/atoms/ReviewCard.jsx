@@ -67,7 +67,7 @@ const Styled = {
 const ReviewCard = ({ review, editHandler, deleteHandler }) => {
   const isLogin = review.user === localStorage.getItem("ID") ? true : false;
   return (
-    <Styled.Wrapper onClick={() => window.open(review.crawlingData[0].link)}>
+    <Styled.Wrapper onClick={() => window.open(review.content)}>
       <section className="text">
         <section className="tags">
           {review.hashtags.map(tag => (
