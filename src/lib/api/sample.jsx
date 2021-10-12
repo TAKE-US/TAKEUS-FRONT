@@ -19,15 +19,19 @@ export const getDogs = async () => {
 };
 
 export const postMail = async (name, email, text) => {
+  const body = {
+    name: name,
+    email: email,
+    text: text,
+  };
   try {
-    await axios.post('/api/email', {
-      body: {
-        name: name,
-        email: email,
-        text: text,
+    await axios.post('/api/email', body, {
+      headers: {
+        'Content-Type': 'application/json',
+        'x-auth-token': localStorage.getItem('token'),
       },
     });
-    console.log('{SUCCESS] POST EMAIL');
+    console.log('{SUCCESS] POST email');
   } catch (e) {
     console.log('[FAIL] POST email');
     throw e;
