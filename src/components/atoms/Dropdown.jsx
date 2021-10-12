@@ -82,7 +82,18 @@ const Styled = {
   Img: styled.div``,
 };
 
-const Dropdown = ({ item, placeholder, rounded, font, caption, small, dropArray, onDrop, id, initial }) => {
+const Dropdown = ({
+  item,
+  placeholder,
+  rounded,
+  font,
+  caption,
+  small,
+  dropArray,
+  onDrop,
+  id,
+  initial,
+}) => {
   const dropdownRef = useRef(null);
   const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
   const [list, setList] = useState('');
@@ -109,14 +120,14 @@ const Dropdown = ({ item, placeholder, rounded, font, caption, small, dropArray,
         small={small}
         isActive={isActive}
       >
-        <div className='destination'>
-          <span className='name'>{caption}</span>
-          <div className='item'>
+        <div className="destination">
+          <span className="name">{caption}</span>
+          <div className="item">
             {image && image}
-            <span className='text'>{list ? list : placeholder}</span>
+            <span className="text">{list ? list : placeholder}</span>
           </div>
         </div>
-        <img className='arrowimg' src={Arrow_Bottom} alt='arrow' />
+        <img className="arrowimg" src={Arrow_Bottom} alt="arrow" />
       </Styled.Button>
       <Styled.Nav ref={dropdownRef} isActive={isActive}>
         <Styled.Ul>
