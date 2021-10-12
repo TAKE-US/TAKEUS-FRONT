@@ -348,20 +348,3 @@ export const putDogStatus = async (dogId, data) => {
     return e;
   }
 };
-
-export const getMyData = async () => {
-  try {
-    const data = await instance.get('/api/users/login', {
-      header: {
-        'Content-Type': 'application/json',
-        'x-auth-token': localStorage.getItem('token'),
-      },
-    });
-    console.log(data);
-    console.log('[SUCCESS] GET my data');
-    return data.data.data;
-  } catch (e) {
-    console.log('[FAIL] GET my data');
-    throw e;
-  }
-};

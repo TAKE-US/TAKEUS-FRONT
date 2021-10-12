@@ -101,6 +101,7 @@ const LoginLayer = () => {
   const handleSuccess = async (token, social) => {
     console.log(token);
     const data = await postToken(token, social);
+    localStorage.setItem('email', data.email);
     localStorage.setItem('token', data.token);
     localStorage.setItem('ID', data.id);
     window.open('http://localhost:3000', '_self');
@@ -136,7 +137,12 @@ const LoginLayer = () => {
           <GoogleLogin
             clientId={process.env.REACT_APP_GOOGLE_CLIENTID}
             render={renderProps => (
-              <Styled.Button className="google" type="button" color={'white'} onClick={renderProps.onClick}>
+              <Styled.Button
+                className="google"
+                type="button"
+                color={'white'}
+                onClick={renderProps.onClick}
+              >
                 <img className="googleIcon" src={GoogleIcon} alt="google" />
                 구글로 시작하기
               </Styled.Button>
