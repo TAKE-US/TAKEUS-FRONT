@@ -65,7 +65,13 @@ const Styled = {
 };
 
 const ReviewCard = ({ review, editHandler, deleteHandler }) => {
-  const isLogin = review.user === localStorage.getItem("ID") ? true : false;
+  const isLogin = review.user === localStorage.getItem("ID");
+  const formatDate = rawDate => {
+    const [date, time] = rawDate.split("T");
+    const [hour, minute] = time.split(":");
+    return `${date}  ${hour}:${minute}`;
+  };
+
   return (
     <Styled.Wrapper onClick={() => window.open(review.content)}>
       <section className="text">
@@ -82,7 +88,8 @@ const ReviewCard = ({ review, editHandler, deleteHandler }) => {
         </article>
         <section className="description">
           <p>
-            작성일ㅣ{review.writeDate} &nbsp;&nbsp;지역ㅣ시카고 &nbsp;&nbsp;봉사단체ㅣ{review.institutionName}
+            작성일ㅣ{formatDate(review.writeDate)} &nbsp;&nbsp;지역ㅣ시카고 &nbsp;&nbsp;봉사단체ㅣ
+            {review.institutionName}
           </p>
           {isLogin && (
             <div className="button-wrap">
