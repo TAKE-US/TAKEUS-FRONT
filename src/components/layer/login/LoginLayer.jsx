@@ -1,15 +1,16 @@
-import React, { useEffect } from 'react';
-import styled from 'styled-components';
-import { LoginKakao } from 'components';
-import { initializeNaverLogin, getUserProfile } from '../../atoms/LoginNaver';
-import { GoogleLogin } from 'react-google-login';
-import LoginImg from 'assets/img/img_Login.png';
-import NaverIcon from 'assets/img/ic_naver.svg';
-import GoogleIcon from 'assets/img/ic_google.svg';
-import { ReactComponent as Title } from 'assets/icon/ic_logo_wordmark_middle.svg';
-import { ReactComponent as SubTitle } from 'assets/icon/Group.svg';
+import React, { useEffect } from "react";
+import styled from "styled-components";
+import { useHistory } from "react-router-dom";
+import { LoginKakao } from "components";
+import { initializeNaverLogin, getUserProfile } from "../../atoms/LoginNaver";
+import { GoogleLogin } from "react-google-login";
+import LoginImg from "assets/img/img_Login.png";
+import NaverIcon from "assets/img/ic_naver.svg";
+import GoogleIcon from "assets/img/ic_google.svg";
+import { ReactComponent as Title } from "assets/icon/ic_logo_wordmark_middle.svg";
+import { ReactComponent as SubTitle } from "assets/icon/Group.svg";
 //api
-import { postToken } from 'lib/api/sample';
+import { postToken } from "lib/api/sample";
 
 const Styled = {
   Wrapper: styled.div`
@@ -98,13 +99,14 @@ const Styled = {
 };
 
 const LoginLayer = () => {
+  const history = useHistory();
   const handleSuccess = async (token, social) => {
     console.log(token);
     const data = await postToken(token, social);
-    localStorage.setItem('email', data.email);
-    localStorage.setItem('token', data.token);
-    localStorage.setItem('ID', data.id);
-    window.open('http://localhost:3000', '_self');
+    localStorage.setItem("email", data.email);
+    localStorage.setItem("token", data.token);
+    localStorage.setItem("ID", data.id);
+    history.push("/");
   };
 
   // 로그인 실패 시
@@ -123,31 +125,26 @@ const LoginLayer = () => {
     <Styled.Wrapper>
       <Styled.ImageContainer>
         <Title />
-        <SubTitle style={{ marginTop: '2.1rem' }} />
+        <SubTitle style={{ marginTop: "2.1rem" }} />
       </Styled.ImageContainer>
       <Styled.Section>
         <div className="content-wrapper">
           <h1>Takeus 시작하기</h1>
           <p>SNS 계정으로 손쉽게 가입하고 Takers가 될 수 있어요 :)</p>
           <LoginKakao handleSuccess={handleSuccess} />
-          <Styled.Button type="button" color={'#1EC800'} onClick={makeNaverlogin} id="naverIdLogin">
+          <Styled.Button type="button" color={"#1EC800"} onClick={makeNaverlogin} id="naverIdLogin">
             <img className="naverIcon" src={NaverIcon} alt="naver" />
             네이버로 시작하기
           </Styled.Button>
           <GoogleLogin
             clientId={process.env.REACT_APP_GOOGLE_CLIENTID}
             render={renderProps => (
-              <Styled.Button
-                className="google"
-                type="button"
-                color={'white'}
-                onClick={renderProps.onClick}
-              >
+              <Styled.Button className="google" type="button" color={"white"} onClick={renderProps.onClick}>
                 <img className="googleIcon" src={GoogleIcon} alt="google" />
                 구글로 시작하기
               </Styled.Button>
             )}
-            onSuccess={res => handleSuccess(res.accessToken, 'google')}
+            onSuccess={res => handleSuccess(res.accessToken, "google")}
             onFailure={handleFailure}
           />
         </div>

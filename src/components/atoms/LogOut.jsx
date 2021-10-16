@@ -140,7 +140,7 @@ const LogOut = ({ history, location }) => {
       </Styled.Btn>
       <Styled.Status ref={statusRef} isActive={isActive}>
         <div className="profile">
-          <div className="avatar">{email.charAt(0)}</div>
+          <div className="avatar">{email?.charAt(0)}</div>
           <div className="email">{email}</div>
           <button className="logout" onClick={logoutClick}>
             로그아웃
