@@ -117,7 +117,6 @@ const LoginLayer = () => {
   const makeNaverlogin = () => {
     initializeNaverLogin();
     getUserProfile();
-    history.push("/");
   };
 
   useEffect(makeNaverlogin, []);
