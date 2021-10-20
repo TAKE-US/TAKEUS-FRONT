@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 //components
 import { Hashtag, ReviewDeleteModal } from "components";
@@ -12,7 +12,7 @@ const Styled = {
     border-radius: 1rem;
     cursor: pointer;
     .text {
-      min-width: 77.3rem;
+      width: 100%;
       .tags {
         display: flex;
         .hashtag {
@@ -66,6 +66,7 @@ const Styled = {
 
 const ReviewCard = ({ review, editHandler, deleteHandler }) => {
   const isLogin = review.user === localStorage.getItem("ID");
+  const [availableImg, setAvailableImg] = useState(true);
   const formatDate = rawDate => {
     const [date, time] = rawDate.split("T");
     const [hour, minute] = time.split(":");
@@ -88,7 +89,8 @@ const ReviewCard = ({ review, editHandler, deleteHandler }) => {
         </article>
         <section className="description">
           <p>
-            작성일ㅣ{formatDate(review.writeDate)} &nbsp;&nbsp;지역ㅣ시카고 &nbsp;&nbsp;봉사단체ㅣ
+            작성일ㅣ{formatDate(review.writeDate)} &nbsp;&nbsp;지역ㅣ{review.endingAirport.split(" ")[0]}{" "}
+            &nbsp;&nbsp;봉사단체ㅣ
             {review.institutionName}
           </p>
           {isLogin && (
@@ -103,7 +105,14 @@ const ReviewCard = ({ review, editHandler, deleteHandler }) => {
           )}
         </section>
       </section>
-      <img className="image" src={review.crawlingData[0].image} alt="review_img" />
+      {availableImg && (
+        <img
+          className="image"
+          src={review.crawlingData[0].image}
+          alt="review_img"
+          onError={e => setAvailableImg(false)}
+        />
+      )}
     </Styled.Wrapper>
   );
 };

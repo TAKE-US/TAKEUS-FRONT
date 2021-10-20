@@ -45,7 +45,6 @@ const ReviewInfoStyle = styled.section`
 const ReviewPostInfo = ({ edit, history, match }) => {
   const [enrollData, setEnrollData] = useEnrollData({});
   const [hashtags, setHashtags] = useState([
-    { tag: "일반후기", active: false },
     { tag: "이동봉사과정", active: false },
     { tag: "도착공항정보", active: false },
     { tag: "보호단체관련", active: false },
