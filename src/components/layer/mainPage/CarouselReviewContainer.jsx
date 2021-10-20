@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { CarouselReviewCard } from "components";
 import { Carousel } from "components";
 import { getReviewsWithTags } from "lib/api/sample";
+import { withRouter } from "react-router-dom";
 
 const ContainerWrap = styled.article`
   height: 100%;
@@ -17,6 +18,12 @@ const ContainerWrap = styled.article`
         display: inline-block;
         font-size: 3.2rem;
       }
+      &__button {
+        padding: 0;
+        margin-left: 2.4rem;
+        font: ${({ theme }) => theme.font.body2};
+        color: ${({ theme }) => theme.color.gray1};
+      }
     }
   }
 
@@ -27,9 +34,7 @@ const ContainerWrap = styled.article`
     &__cards {
       display: flex;
       overflow-y: hidden;
-      & > * {
-        margin-right: 1.8rem;
-      }
+      gap: 1.8rem;
     }
     &__cards::-webkit-scrollbar {
       display: none;
@@ -37,14 +42,16 @@ const ContainerWrap = styled.article`
   }
 `;
 
-const CarouselReviewContainer = () => {
+const CarouselReviewContainer = ({ history }) => {
   const [reviews, setReview] = useState([]);
+  const [reviewTotalCount, setReviewTotalCount] = useState(0);
   const listRef = useRef(null);
-  const movingValue = 360;
+  const movingValue = 361;
 
   useEffect(() => {
     (async () => {
       const data = await getReviewsWithTags("이동봉사과정", 1);
+      setReviewTotalCount(data.data.length);
       data.data && setReview(data.data.slice(0, 6));
     })();
   }, []);
@@ -53,8 +60,11 @@ const CarouselReviewContainer = () => {
     <ContainerWrap>
       <article className="container-top">
         <section className="container-top__title">
-          <p className="container-top__title__number">1622</p>
+          <p className="container-top__title__number">{reviewTotalCount}</p>
           명이 TAKEUS와 함께하고 있습니다.
+          <button className="container-top__title__button" onClick={() => history.push("/dog/search")}>
+            더보기
+          </button>
         </section>
         <Carousel listRef={listRef} movingValue={movingValue} />
       </article>
@@ -67,4 +77,4 @@ const CarouselReviewContainer = () => {
   );
 };
 
-export default CarouselReviewContainer;
+export default withRouter(CarouselReviewContainer);
