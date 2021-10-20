@@ -8,6 +8,9 @@ const Styled = {
     display: flex;
     width: 100%;
     justify-content: center;
+    img {
+      width: 40%;
+    }
   `,
 };
 
