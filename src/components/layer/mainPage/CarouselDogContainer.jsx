@@ -19,6 +19,12 @@ const ContainerWrap = styled.article`
         display: inline-block;
         font-size: 3.2rem;
       }
+      &__button {
+        padding: 0;
+        margin-left: 2.4rem;
+        font: ${({ theme }) => theme.font.body2};
+        color: ${({ theme }) => theme.color.gray1};
+      }
     }
   }
 
@@ -29,9 +35,7 @@ const ContainerWrap = styled.article`
     &__cards {
       display: flex;
       overflow-y: hidden;
-      & > * {
-        margin-right: 1.8rem;
-      }
+      gap: 1.8rem;
     }
     &__cards::-webkit-scrollbar {
       display: none;
@@ -39,31 +43,34 @@ const ContainerWrap = styled.article`
   }
 `;
 
-const CarouselDogContainer = () => {
+const CarouselDogContainer = ({ history }) => {
   const [dogs, setDogs] = useState([]);
+  const [totalDogCount, setTotalDogCount] = useState(0);
   const listRef = useRef(null);
   const movingValue = 272;
 
   useEffect(() => {
     (async () => {
       const data = await getDogs();
+      setTotalDogCount(data.length);
       data && setDogs(data.slice(0, 8));
     })();
   }, []);
-
   return (
     <ContainerWrap>
       <article className="container-top">
         <section className="container-top__title">
-          <p className="container-top__title__number">1622</p>
+          <p className="container-top__title__number">{totalDogCount}</p>
           마리의 대상견이 이동 봉사를 기다리고 있습니다.
+          <button className="container-top__title__button" onClick={() => history.push("/dog/search")}>
+            더보기
+          </button>
         </section>
         <Carousel listRef={listRef} movingValue={movingValue} />
       </article>
       <article className="container-bottom">
         <div className="container-bottom__cards" ref={listRef}>
-          {dogs.length &&
-            dogs.map((dog) => <DogCard key={dog._id} dog={dog} />)}
+          {dogs.length && dogs.map(dog => <DogCard key={dog._id} dog={dog} />)}
         </div>
       </article>
     </ContainerWrap>
