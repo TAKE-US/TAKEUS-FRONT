@@ -8,3 +8,5 @@ export { default as ReviewPage } from "./review/ReviewPage";
 export { default as ReviewPostPage } from "./review/ReviewPostPage";
 export { default as MainPage } from "./MainPage";
 export { default as MyPage } from "./my/MyPage";
+export { default as KakaoPage } from "./oAuth/KakaoPage";
+export { default as NaverPage } from "./oAuth/NaverPage";
