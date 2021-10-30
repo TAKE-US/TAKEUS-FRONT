@@ -10,6 +10,7 @@ import {
   MainPage,
   MyPage,
   KakaoPage,
+  NaverPage,
 } from "pages";
 
 const Router = () => {
@@ -24,6 +25,7 @@ const Router = () => {
         <Route path="/dog" component={DogRouter} />
         <Route path="/review" component={ReviewRouter} />
         <Route path="/oauth/callback/kakao" component={KakaoPage}></Route>
+        <Route path="/oauth/callback/naver" component={NaverPage}></Route>
       </Switch>
     </>
   );
