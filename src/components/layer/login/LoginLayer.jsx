@@ -2,10 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import { LoginKakao, LoginNaver } from "components";
 import { GoogleLogin } from "react-google-login";
+import { useHistory } from "react-router";
 import LoginImg from "assets/img/img_Login.png";
 import GoogleIcon from "assets/img/ic_google.svg";
 import { ReactComponent as Title } from "assets/icon/ic_logo_wordmark_middle.svg";
 import { ReactComponent as SubTitle } from "assets/icon/Group.svg";
+
 //api
 import { postToken } from "lib/api/sample";
 
@@ -126,7 +128,12 @@ const LoginLayer = () => {
           <GoogleLogin
             clientId={process.env.REACT_APP_GOOGLE_CLIENTID}
             render={renderProps => (
-              <Styled.Button className="google" type="button" color={"white"} onClick={renderProps.onClick}>
+              <Styled.Button
+                className="google"
+                type="button"
+                color={"white"}
+                onClick={renderProps.onClick}
+              >
                 <img className="googleIcon" src={GoogleIcon} alt="google" />
                 구글로 시작하기
               </Styled.Button>
