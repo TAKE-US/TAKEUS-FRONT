@@ -305,7 +305,8 @@ export const postEnroll = async data => {
   try {
     const data = await instance.post("/api/dogs", body, {
       headers: {
-        "Content-Type": "multipart/form-data; boundary=<calculated when request is sent>",
+        "Content-Type":
+          "multipart/form-data; boundary=<calculated when request is sent>",
         "x-auth-token": localStorage.getItem("token"),
       },
     });
@@ -324,7 +325,8 @@ export const putDog = async (dogId, data) => {
   try {
     const data = await instance.put(`/api/dogs/detail/${dogId}`, body, {
       headers: {
-        "Content-Type": "multipart/form-data; boundary=<calculated when request is sent>",
+        "Content-Type":
+          "multipart/form-data; boundary=<calculated when request is sent>",
         "x-auth-token": localStorage.getItem("token"),
       },
     });
@@ -369,5 +371,25 @@ export const getMyData = async () => {
   } catch (e) {
     console.log("[FAIL] GET my data");
     throw e;
+  }
+};
+
+export const postNaverToken = async (code, state) => {
+  const body = {
+    code: code,
+    state: state,
+  };
+  console.log(code, state);
+  try {
+    const data = await instance.post("/api/users/naverLogin", body, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    console.log("[SUCCESS] Naver Login");
+    return data.data;
+  } catch (e) {
+    console.log("[FAIL] Naver Login");
+    return null;
   }
 };
