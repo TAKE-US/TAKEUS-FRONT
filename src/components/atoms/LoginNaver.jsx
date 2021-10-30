@@ -2,7 +2,6 @@
 import React from "react";
 import styled from "styled-components";
 import NaverIcon from "assets/img/ic_naver.svg";
-
 import { withRouter } from "react-router-dom";
 
 const Styled = {
@@ -60,5 +59,6 @@ const LoginNaver = () => {
       네이버로 시작하기
     </Styled.Button>
   );
+};
 
 export default withRouter(LoginNaver);
