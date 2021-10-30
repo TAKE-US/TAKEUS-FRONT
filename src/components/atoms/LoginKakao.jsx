@@ -39,7 +39,10 @@ const Styled = {
 
 const LoginKakao = () => {
   const REST_API_KEY = "f67ac346de494c1931b31d6ec8ea192e";
-  const REDIRECT_URI = "http://localhost:3000/oauth/callback/kakao";
+  const REDIRECT_URI =
+    process.env.NODE_ENV === "development"
+      ? "http://localhost:3000/oauth/callback/kakao"
+      : "https://take--us.web.app/oauth/callback/kakao";
 
   // eslint-disable-next-line max-len
   const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
