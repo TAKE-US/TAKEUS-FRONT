@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { LoginKakao, LoginNaver } from "components";
-
 import { GoogleLogin } from "react-google-login";
 import LoginImg from "assets/img/img_Login.png";
 import GoogleIcon from "assets/img/ic_google.svg";
@@ -97,12 +96,14 @@ const Styled = {
 };
 
 const LoginLayer = () => {
+  const history = useHistory();
   const handleSuccess = async (token, social) => {
     console.log(token);
     const data = await postToken(token, social);
+    localStorage.setItem("email", data.email);
     localStorage.setItem("token", data.token);
     localStorage.setItem("ID", data.id);
-    window.open("http://localhost:3000", "_self");
+    history.push("/");
   };
 
   // 로그인 실패 시
@@ -125,12 +126,7 @@ const LoginLayer = () => {
           <GoogleLogin
             clientId={process.env.REACT_APP_GOOGLE_CLIENTID}
             render={renderProps => (
-              <Styled.Button
-                className="google"
-                type="button"
-                color={"white"}
-                onClick={renderProps.onClick}
-              >
+              <Styled.Button className="google" type="button" color={"white"} onClick={renderProps.onClick}>
                 <img className="googleIcon" src={GoogleIcon} alt="google" />
                 구글로 시작하기
               </Styled.Button>

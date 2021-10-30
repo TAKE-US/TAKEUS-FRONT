@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 
 import { Searchbar } from "components";
-import backgroundImg from "assets/img/img_bg_explore.png";
 
 const Styled = {
   Wrapper: styled.section`
@@ -12,7 +11,7 @@ const Styled = {
     }
 
     .img {
-      background: url(${backgroundImg}) center;
+      background: linear-gradient(92.22deg, rgba(255, 239, 175, 0.31) 28%, rgba(255, 239, 175, 0.17) 73.01%);
       background-size: cover;
       height: 24rem;
       width: 100vw;

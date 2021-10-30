@@ -60,6 +60,5 @@ const LoginNaver = () => {
       네이버로 시작하기
     </Styled.Button>
   );
-};
 
 export default withRouter(LoginNaver);

@@ -1,9 +1,8 @@
-import React, { useEffect, useRef } from "react";
-import styled from "styled-components";
-import { useDetectOutsideClick } from "hooks/useDetectOutsideClick";
-import { getMyData } from "lib/api/sample";
-import { withRouter } from "react-router-dom";
-import QueryString from "qs";
+import React, { useRef } from 'react';
+import styled from 'styled-components';
+import { useDetectOutsideClick } from 'hooks/useDetectOutsideClick';
+import { withRouter } from 'react-router-dom';
+import QueryString from 'qs';
 
 const Styled = {
   Wrap: styled.div`
@@ -12,8 +11,7 @@ const Styled = {
 
   Btn: styled.div`
     font: ${({ theme }) => theme.font.gnb};
-    color: ${({ isActive, theme }) =>
-      isActive ? theme.color.primary : theme.color.darkgray1};
+    color: ${({ isActive, theme }) => (isActive ? theme.color.primary : theme.color.darkgray1)};
     white-space: nowrap;
 
     &:hover {
@@ -26,7 +24,7 @@ const Styled = {
     position: absolute;
     right: -0.9rem;
     top: 3rem;
-    display: ${props => (props.isActive ? "flex" : "none")};
+    display: ${props => (props.isActive ? 'flex' : 'none')};
     flex-direction: column;
     background-color: ${({ theme }) => theme.color.white};
     padding: 1.9rem 1.7rem;
@@ -34,7 +32,7 @@ const Styled = {
     box-shadow: 0rem 0rem 1rem rgba(0, 0, 0, 0.15);
 
     :after {
-      content: "";
+      content: '';
       position: absolute;
       border-style: solid;
       border-width: 0.2rem 1.5rem 1.5rem;
@@ -111,12 +109,7 @@ const LogOut = ({ history, location }) => {
 
   const query = QueryString.parse(location.search, { ignoreQueryPrefix: true });
 
-  useEffect(() => {
-    (async () => {
-      const data = await getMyData();
-      console.log(data);
-    })();
-  }, []);
+  const email = localStorage.getItem('email');
 
   const onClick = e => {
     e.preventDefault();
@@ -124,17 +117,19 @@ const LogOut = ({ history, location }) => {
   };
 
   const logoutClick = () => {
-    localStorage.removeItem("token");
-    history.push("/");
+    localStorage.removeItem('token');
+    localStorage.removeItem('ID');
+    localStorage.removeItem('email');
+    history.push('/');
   };
 
   const pageClick = () => {
-    history.push("/mypage?select=post");
+    history.push('/mypage?select=post');
     setIsActive(!isActive);
   };
 
   const reviewClick = () => {
-    history.push("/mypage?select=review");
+    history.push('/mypage?select=review');
     setIsActive(!isActive);
   };
 
@@ -145,20 +140,17 @@ const LogOut = ({ history, location }) => {
       </Styled.Btn>
       <Styled.Status ref={statusRef} isActive={isActive}>
         <div className="profile">
-          <div className="avatar">T</div>
-          <div className="email">takeus@gmail.com</div>
+          <div className="avatar">{email?.charAt(0)}</div>
+          <div className="email">{email}</div>
           <button className="logout" onClick={logoutClick}>
             로그아웃
           </button>
         </div>
         <div className="nav">
-          <Styled.Page onClick={pageClick} isSelect={query?.select === "post"}>
+          <Styled.Page onClick={pageClick} isSelect={query?.select === 'post'}>
             이동봉사 모집글
           </Styled.Page>
-          <Styled.Page
-            onClick={reviewClick}
-            isSelect={query?.select === "review"}
-          >
+          <Styled.Page onClick={reviewClick} isSelect={query?.select === 'review'}>
             이동봉사 후기글
           </Styled.Page>
         </div>

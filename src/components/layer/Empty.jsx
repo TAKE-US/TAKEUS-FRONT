@@ -10,7 +10,7 @@ const Styled = {
       display: flex;
       flex-direction: column;
       align-items: center;
-
+      margin-bottom: 12rem;
       .h2 {
         font: ${({ theme }) => theme.font.body2};
         color: ${({ theme }) => theme.color.darkgray2};

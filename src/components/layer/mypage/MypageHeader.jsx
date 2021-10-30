@@ -6,13 +6,7 @@ import { withRouter } from "react-router-dom";
 import DogPlane from "assets/img/img_dogswithplane.png";
 import DogHug from "assets/img/img_hugwithdog.png";
 //layer
-import {
-  DogCardContainer,
-  ReviewCardContainer,
-  Filter,
-  PaginationNav,
-  Loading,
-} from "components";
+import { DogCardContainer, ReviewCardContainer, Filter, PaginationNav, Loading } from "components";
 //api
 import { getMyDogs, getMyReviews } from "lib/api/sample";
 
@@ -21,13 +15,10 @@ const Styled = {
   Header: styled.div`
     display: flex;
     min-width: 100%;
-    justify-content: space-between;
-    .image {
-      /* width: 36rem; */
-    }
+    padding-top: 14rem;
+    padding-bottom: 8rem;
+    background: url(${props => props.bg}) no-repeat center right;
     & > div {
-      position: relative;
-      top: 10.6rem;
       .tab-wrapper {
         display: grid;
         grid-template-columns: repeat(2, 16.4rem);
@@ -36,9 +27,14 @@ const Styled = {
       .text {
         margin-top: 6.4rem;
         & > h1 {
-          font: ${({ theme }) => theme.font.display1};
+          font-style: normal;
+          font-weight: normal;
+          font-size: 3rem;
+          line-height: 4.3rem;
           & > b {
-            font: ${({ theme }) => theme.font.display1};
+            font-style: normal;
+            font-weight: normal;
+            font-size: 30px;
             line-height: 4.3rem;
             color: ${({ theme }) => theme.color.primary};
           }
@@ -55,8 +51,7 @@ const Styled = {
   Tab: styled.button`
     width: 16.4rem;
     padding: 1.4rem 2.2rem;
-    background: ${props =>
-      props.select ? props.theme.color.lightgray1 : props.theme.color.white};
+    background: ${props => (props.select ? props.theme.color.lightgray1 : props.theme.color.white)};
     border-radius: 1rem;
     font: ${({ theme }) => theme.font.button};
     line-height: 2.2rem;
@@ -105,9 +100,7 @@ const MypageHeader = ({ location, history }) => {
   // };
 
   const selectHandler = t => {
-    t.value.split(" ")[1] === "모집글"
-      ? history.push("mypage?select=post")
-      : history.push("mypage?select=review");
+    t.value.split(" ")[1] === "모집글" ? history.push("mypage?select=post") : history.push("mypage?select=review");
   };
 
   useEffect(() => {
@@ -128,65 +121,38 @@ const MypageHeader = ({ location, history }) => {
 
   return (
     <Styled.Wrapper>
-      <Styled.Header>
+      <Styled.Header bg={tabs[0].select ? DogPlane : DogHug}>
         <div>
           <nav className="tab-wrapper">
             {tabs.map(tab => (
-              <Styled.Tab
-                key={tab}
-                className="tab_button"
-                onClick={() => selectHandler(tab)}
-                select={tab.select}
-              >
+              <Styled.Tab key={tab} className="tab_button" onClick={() => selectHandler(tab)} select={tab.select}>
                 {tab.value}
               </Styled.Tab>
             ))}
           </nav>
           <section className="text">
             <h1>
-              내가 올린{" "}
-              <b>
-                이동 봉사{" "}
-                {tabs.filter(t => t.select).map(t => t.value.split(" ")[1])}
-              </b>
-              을 한번에 확인해보세요!
+              내가 올린 <b>이동 봉사 {tabs.filter(t => t.select).map(t => t.value.split(" ")[1])}</b>을 한번에
+              확인해보세요!
             </h1>
             <p>여러분의 도움으로 한 생명이 새로운 삶을 살게 되었어요 🙏🏻</p>
           </section>
         </div>
-        {tabs[0].select ? (
-          <img src={DogPlane} alt="" />
-        ) : (
-          <img src={DogHug} alt="" />
-        )}
       </Styled.Header>
       {isLoading ? (
         <Loading />
       ) : (
         <Styled.Content>
-          <Filter
-            contents={contents}
-            selectedFilter={selectedFilter}
-            setSelectedFilter={setSelectedFilter}
-          />
+          <Filter contents={contents} selectedFilter={selectedFilter} setSelectedFilter={setSelectedFilter} />
           {tabs[0].select ? (
             <DogCardContainer dogs={dogs} />
           ) : (
             <ReviewCardContainer reviews={reviews} setReviews={setReviews} />
           )}
           {tabs[0].select ? (
-            <PaginationNav
-              pageNum={dogsPage}
-              setPageNum={setDogsPage}
-              totalPage={dogsTotalPage}
-            />
+            <PaginationNav pageNum={dogsPage} setPageNum={setDogsPage} totalPage={dogsTotalPage} />
           ) : (
-            <PaginationNav
-              pageNum={reviewsPage}
-              setPageNum={setReviewsPage}
-              totalPage={reviewsTotalPage}
-              review
-            />
+            <PaginationNav pageNum={reviewsPage} setPageNum={setReviewsPage} totalPage={reviewsTotalPage} review />
           )}
         </Styled.Content>
       )}
