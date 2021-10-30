@@ -1,32 +1,65 @@
-import { postToken } from 'lib/api/sample';
+/* eslint-disable arrow-parens */
+import React from "react";
+import styled from "styled-components";
+import NaverIcon from "assets/img/ic_naver.svg";
 
-const handleNaver = async (token, social) => {
-  const data = await postToken(token, social);
-  localStorage.setItem('token', data.token);
-  localStorage.setItem('ID', data.id);
-  window.open('http://localhost:3000', '_self');
+import { withRouter } from "react-router-dom";
+
+const Styled = {
+  Wrapper: styled.div`
+    display: flex;
+    flex-direction: space-between;
+    position: absolute;
+    left: 0rem;
+    width: 144rem;
+    height: 102.4rem;
+  `,
+
+  Button: styled.button`
+    width: 45.2rem;
+    height: 4.8rem;
+    background-color: ${props => props.color};
+    border-radius: 2.1rem;
+    padding-left: 1rem;
+    margin-bottom: 1.7rem;
+    color: #363636;
+    font: ${({ theme }) => theme.font.gnb};
+    line-height: 3rem;
+
+    img {
+      position: relative;
+      top: 0.4rem;
+      right: 1rem;
+    }
+
+    .kakaotalkIcon {
+      right: 1rem;
+    }
+  `,
 };
 
-export const initializeNaverLogin = () => {
-  const { naver } = window;
-  const NAVER_CLIENT_ID = '6R8wLk9Dd9xVp9RDilRh';
-  const NAVER_CALLBACK_URL = 'http://localhost:3000/login';
-  const naverLogin = new naver.LoginWithNaverId({
-    clientId: NAVER_CLIENT_ID,
-    callbackUrl: NAVER_CALLBACK_URL,
-    isPopup: true,
-    callbackHandle: true,
-    loginButton: { color: 'white', type: 1, height: '47' },
-  });
-  naverLogin.init();
+const LoginNaver = () => {
+  const CLIENT_ID = "6R8wLk9Dd9xVp9RDilRh";
+  const STATE_STRING = "Eb8rRcK0Dd";
+  const CALLBACK_URL =
+    process.env.NODE_ENV === "development"
+      ? "http://localhost:3000/oauth/callback/naver"
+      : "https://take--us.web.app/oauth/callback/naver";
+
+  // eslint-disable-next-line max-len
+  const NAVER_AUTH_URL = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${CLIENT_ID}&state=${STATE_STRING}&redirect_uri=${CALLBACK_URL}
+`;
+
+  const LoginClickHandler = () => {
+    window.location.assign(NAVER_AUTH_URL);
+  };
+
+  return (
+    <Styled.Button type="button" color={"#1EC800"} onClick={LoginClickHandler}>
+      <img className="naverIcon" src={NaverIcon} alt="naverLogin" />
+      네이버로 시작하기
+    </Styled.Button>
+  );
 };
 
-export const getUserProfile = () => {
-  window.location.href.includes('access_token') && GetUser();
-  function GetUser() {
-    const location = window.location.href.split('=')[1];
-    const token = location.split('&')[0];
-    console.log('token: ', token);
-    handleNaver(token, 'naver');
-  }
-};
+export default withRouter(LoginNaver);
