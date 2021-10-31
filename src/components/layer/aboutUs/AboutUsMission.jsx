@@ -16,18 +16,19 @@ const Styled = {
       display: flex;
       justify-content: space-between;
       &__main {
-        width: 16.3rem;
-        height: 4.1rem;
+        height: 100%;
+        display: flex;
+        align-items: center;
         font: ${({ theme }) => theme.font.headline};
         color: ${({ theme }) => theme.color.darkgray1};
       }
       &__contour {
         width: 0.2rem;
-        height: 4.2rem;
+        margin: 0 4.8rem;
+        height: 100%;
         background-color: #dfdfdf;
       }
       &__sub {
-        width: 81.5rem;
         height: 5.2rem;
         font: ${({ theme }) => theme.font.body2};
         color: ${({ theme }) => theme.color.darkgray1};
