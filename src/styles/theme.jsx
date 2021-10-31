@@ -39,7 +39,7 @@ const color = {
 const font = {
   display2: "normal 700 3rem/3rem 'Noto Sans kr'",
   display1: "normal 400 2.4rem/2.4rem 'Noto Sans kr'",
-  headline: "normal 700 2.4rem/2.4rem 'Noto Sans kr'",
+  headline: "normal 700 2.8rem/2.8rem 'Noto Sans kr'",
   headline2: "normal 400 2.4rem/2.4rem 'Noto Sans kr'",
   title3: "normal 400 2.0rem/2.0rem 'Noto Sans kr'",
   title2: "normal 700 1.8rem/1.8rem 'Noto Sans kr'",
@@ -47,7 +47,7 @@ const font = {
   subheading: "normal 500 1.6rem/1.6rem 'Noto Sans kr'",
   description: "normal 400 1.4rem/2.3rem 'Noto Sans kr'",
   body3: "normal 400 1.4rem/1.4rem 'Noto Sans kr'",
-  body2: "normal 400 1.6rem/1.6rem 'Noto Sans kr'",
+  body2: "normal 400 1.8rem/1.8rem 'Noto Sans kr'",
   body1: "normal 400 1.2rem/1.2rem 'Noto Sans kr'",
   caption: "normal 400 1.2rem/1.4rem 'Noto Sans kr'",
   gnb: "normal 500 1.4rem/1.4rem 'Noto Sans kr'",
