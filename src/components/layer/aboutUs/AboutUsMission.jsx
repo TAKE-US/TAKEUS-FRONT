@@ -14,20 +14,21 @@ const Styled = {
     .title {
       width: 90%;
       display: flex;
-      justify-content: space-between;
       &__main {
-        width: 16.3rem;
-        height: 4.1rem;
+        height: 100%;
+        display: flex;
+        align-items: center;
         font: ${({ theme }) => theme.font.headline};
         color: ${({ theme }) => theme.color.darkgray1};
+        white-space: nowrap;
       }
       &__contour {
         width: 0.2rem;
-        height: 4.2rem;
+        margin: 0 4.8rem;
+        height: 100%;
         background-color: #dfdfdf;
       }
       &__sub {
-        width: 81.5rem;
         height: 5.2rem;
         font: ${({ theme }) => theme.font.body2};
         color: ${({ theme }) => theme.color.darkgray1};
@@ -100,7 +101,7 @@ const AboutUsMission = () => {
         <section className="title__sub">
           우리의 목표는 이동봉사를 하고자하는 봉사자도, 봉사를 요하는 대상견도
           있지만 정보가 닿지 못해 이동봉사가
-          <br /> 진행되지 못하는 일이 없게 하는 것입니다.
+          진행되지 못하는 일이 없게 하는 것입니다.
         </section>
       </article>
       <article className="contents">
