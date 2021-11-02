@@ -1,9 +1,9 @@
 /* eslint-disable arrow-parens */
-import React, { useState, useEffect } from "react";
-import styled from "styled-components";
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
 
-import { getCountry } from "lib/api/sample";
-import { DropdownCountry, DropdownAirport } from "components";
+import { getCountry } from 'lib/api/sample';
+import { DropdownCountry, DropdownAirport } from 'components';
 
 const Search = {
   Container: styled.div`
@@ -23,18 +23,23 @@ const Search = {
         border-radius: 41rem;
       }
       ::after {
-        content: "";
+        content: '';
         display: none;
       }
     }
   `,
 };
 
-const Searchbar = ({ initialData, setEnrollData, initialEndingCountry, initialEndingAirport }) => {
-  const [currCountry, setCurrCountry] = useState("");
-  const [currAirport, setCurrAirport] = useState("");
+const Searchbar = ({
+  initialData,
+  setEnrollData,
+  initialEndingCountry,
+  initialEndingAirport,
+}) => {
+  const [currCountry, setCurrCountry] = useState('국가');
+  const [currAirport, setCurrAirport] = useState('공항명');
   const [country, setCountry] = useState([]);
-  const [allAirport, setAllAirport] = useState("");
+  const [allAirport, setAllAirport] = useState('');
 
   useEffect(() => {
     (async () => {
@@ -56,14 +61,14 @@ const Searchbar = ({ initialData, setEnrollData, initialEndingCountry, initialEn
   }, [initialEndingCountry, initialEndingAirport]);
 
   useEffect(() => {
-    setEnrollData("endingCountry", currCountry);
-    setEnrollData("endingAirport", currAirport);
+    setEnrollData('endingCountry', currCountry);
+    setEnrollData('endingAirport', currAirport);
   }, [currCountry, currAirport, setEnrollData]);
 
   return (
     <>
       <Search.Container>
-        <div className="dropdown dropdown__country">
+        <div className='dropdown dropdown__country'>
           <DropdownCountry
             enroll={{ initialValue: initialData?.endingCountry }}
             currCountry={currCountry}
@@ -71,7 +76,7 @@ const Searchbar = ({ initialData, setEnrollData, initialEndingCountry, initialEn
             country={country}
           />
         </div>
-        <div className="dropdown dropdown__airport">
+        <div className='dropdown dropdown__airport'>
           <DropdownAirport
             enroll={{ initialValue: initialData?.endingAirport }}
             currCountry={currCountry}

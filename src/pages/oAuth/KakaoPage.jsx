@@ -13,7 +13,9 @@ const KakaoPage = () => {
   else redirectURL = 'https://take--us.web.app/oauth/callback/kakao';
 
   const handleSuccess = async (token, social) => {
+    console.log(token, social);
     const data = await postToken(token, social);
+    console.log(data);
     localStorage.setItem('token', data.token);
     localStorage.setItem('ID', data.id);
     if (process.env.NODE_ENV === 'development')
@@ -29,7 +31,6 @@ const KakaoPage = () => {
       code: code,
     };
     try {
-      console.log(body);
       const data = await axios({
         method: 'POST',
         url: 'https://kauth.kakao.com/oauth/token',

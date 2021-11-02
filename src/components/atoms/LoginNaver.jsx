@@ -1,8 +1,8 @@
 /* eslint-disable arrow-parens */
-import React from "react";
-import styled from "styled-components";
-import NaverIcon from "assets/img/ic_naver.svg";
-import { withRouter } from "react-router-dom";
+import React from 'react';
+import styled from 'styled-components';
+import NaverIcon from 'assets/img/ic_naver.svg';
+import { withRouter } from 'react-router-dom';
 
 const Styled = {
   Wrapper: styled.div`
@@ -28,7 +28,7 @@ const Styled = {
     img {
       position: relative;
       top: 0.4rem;
-      right: 1rem;
+      right: 2rem;
     }
 
     .kakaotalkIcon {
@@ -38,12 +38,12 @@ const Styled = {
 };
 
 const LoginNaver = () => {
-  const CLIENT_ID = "6R8wLk9Dd9xVp9RDilRh";
-  const STATE_STRING = "Eb8rRcK0Dd";
+  const CLIENT_ID = '6R8wLk9Dd9xVp9RDilRh';
+  const STATE_STRING = 'Eb8rRcK0Dd';
   const CALLBACK_URL =
-    process.env.NODE_ENV === "development"
-      ? "http://localhost:3000/oauth/callback/naver"
-      : "https://take--us.web.app/oauth/callback/naver";
+    process.env.NODE_ENV === 'development'
+      ? 'http://localhost:3000/oauth/callback/naver'
+      : 'https://take--us.web.app/oauth/callback/naver';
 
   // eslint-disable-next-line max-len
   const NAVER_AUTH_URL = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${CLIENT_ID}&state=${STATE_STRING}&redirect_uri=${CALLBACK_URL}
@@ -54,8 +54,8 @@ const LoginNaver = () => {
   };
 
   return (
-    <Styled.Button type="button" color={"#1EC800"} onClick={LoginClickHandler}>
-      <img className="naverIcon" src={NaverIcon} alt="naverLogin" />
+    <Styled.Button type='button' color={'#1EC800'} onClick={LoginClickHandler}>
+      <img className='naverIcon' src={NaverIcon} alt='naverLogin' />
       네이버로 시작하기
     </Styled.Button>
   );
