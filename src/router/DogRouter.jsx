@@ -5,7 +5,7 @@ import {
   DogDetailPage,
   DogEnrollPage,
   DogEnrollCautionPage,
-  DogEnrollFinishPage,
+  DogEnrollConfirmPage,
 } from 'pages';
 
 const DogRouter = ({ match }) => {
@@ -18,9 +18,9 @@ const DogRouter = ({ match }) => {
       <Route path={path + '/search/:id/edit'}>
         <DogEnrollPage edit={true} />
       </Route>
-      <Route path={path + '/enroll'} component={DogEnrollPage} />
-      <Route path={path + '/enrollcaution'} component={DogEnrollCautionPage} />
-      <Route path={path + '/enrollfinish'} component={DogEnrollFinishPage} />
+      <Route exact path={path + '/enroll'} component={DogEnrollPage} />
+      <Route path={path + '/enroll/caution'} component={DogEnrollCautionPage} />
+      <Route path={path + '/enroll/confirm'} component={DogEnrollConfirmPage} />
     </>
   );
 };

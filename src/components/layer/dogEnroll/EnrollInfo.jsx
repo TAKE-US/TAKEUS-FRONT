@@ -244,7 +244,7 @@ const EnrollInfo = ({ edit }) => {
 
     if (edit) await putDog(history.location.state?.dog._id, formData);
     else await postEnroll(formData);
-    history.push('/dog/enrollfinish');
+    history.push('/dog/enroll/confirm');
   };
 
   return (
