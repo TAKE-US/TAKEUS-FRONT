@@ -51,6 +51,7 @@ export { default as EnrollInfo } from './layer/dogEnroll/EnrollInfo.jsx';
 export { default as AddDogLayer } from './layer/dogEnroll/AddDogLayer';
 export { default as EnrollSearchbar } from './layer/dogEnroll/EnrollSearchbar';
 export { default as EnrollCaution } from './layer/dogEnroll/EnrollCaution';
+export { default as EnrollFinish } from './layer/dogEnroll/EnrollFinish';
 
 // layer/dogSearch
 export { default as DogSearchNavigation } from './layer/dogSearch/DogSearchNavigation';

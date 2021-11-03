@@ -1,6 +1,12 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import { DogPage, DogDetailPage, DogEnrollPage, DogEnrollCautionPage } from 'pages';
+import {
+  DogPage,
+  DogDetailPage,
+  DogEnrollPage,
+  DogEnrollCautionPage,
+  DogEnrollFinishPage,
+} from 'pages';
 
 const DogRouter = ({ match }) => {
   const path = match.path;
@@ -14,6 +20,7 @@ const DogRouter = ({ match }) => {
       </Route>
       <Route path={path + '/enroll'} component={DogEnrollPage} />
       <Route path={path + '/enrollcaution'} component={DogEnrollCautionPage} />
+      <Route path={path + '/enrollfinish'} component={DogEnrollFinishPage} />
     </>
   );
 };

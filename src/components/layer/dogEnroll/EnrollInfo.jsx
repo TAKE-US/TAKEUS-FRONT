@@ -1,19 +1,28 @@
 /* eslint-disable max-len */
 /* eslint-disable arrow-parens */
 
-import React, { useState, useEffect, useCallback } from "react";
-import styled from "styled-components";
-import { RadioButton, Counter, TextField, AddDogLayer, Input, Button, EnrollSearchbar, Dropdown } from "components";
-import { ReactComponent as Kakao } from "assets/icon/ic_kakao_24.svg";
-import { ReactComponent as Call } from "assets/icon/ic_call_24.svg";
-import { ReactComponent as Instagram } from "assets/icon/ic_instar_24.svg";
-import { ReactComponent as Twitter } from "assets/icon/ic_twitter_24.svg";
-import { ReactComponent as Facebook } from "assets/icon/ic_facebook_24.svg";
-import { ReactComponent as Plus } from "assets/icon/ic_plus_24.svg";
-import useEnrollData from "hooks/useEnrollData";
-import { postEnroll, putDog } from "lib/api/sample";
-import { withRouter } from "react-router-dom";
-import { useHistory } from "react-router";
+import React, { useState, useEffect, useCallback } from 'react';
+import styled from 'styled-components';
+import {
+  RadioButton,
+  Counter,
+  TextField,
+  AddDogLayer,
+  Input,
+  Button,
+  EnrollSearchbar,
+  Dropdown,
+} from 'components';
+import { ReactComponent as Kakao } from 'assets/icon/ic_kakao_24.svg';
+import { ReactComponent as Call } from 'assets/icon/ic_call_24.svg';
+import { ReactComponent as Instagram } from 'assets/icon/ic_instar_24.svg';
+import { ReactComponent as Twitter } from 'assets/icon/ic_twitter_24.svg';
+import { ReactComponent as Facebook } from 'assets/icon/ic_facebook_24.svg';
+import { ReactComponent as Plus } from 'assets/icon/ic_plus_24.svg';
+import useEnrollData from 'hooks/useEnrollData';
+import { postEnroll, putDog } from 'lib/api/sample';
+import { withRouter } from 'react-router-dom';
+import { useHistory } from 'react-router';
 
 const EnrollInfoWrap = styled.section`
   .wrap {
@@ -67,7 +76,7 @@ const EnrollInfoWrap = styled.section`
     font: ${({ theme }) => theme.font.button};
     color: ${({ theme }) => theme.color.gray3};
     &::after {
-      content: "";
+      content: '';
       width: 0;
       top: 0;
       right: 0;
@@ -80,23 +89,23 @@ const EnrollInfoWrap = styled.section`
 const ContactsList = [
   {
     img: <Kakao />,
-    type: "카카오톡",
+    type: '카카오톡',
   },
   {
     img: <Call />,
-    type: "전화번호",
+    type: '전화번호',
   },
   {
     img: <Instagram />,
-    type: "인스타그램",
+    type: '인스타그램',
   },
   {
     img: <Twitter />,
-    type: "트위터",
+    type: '트위터',
   },
   {
     img: <Facebook />,
-    type: "페이스북",
+    type: '페이스북',
   },
 ];
 
@@ -104,21 +113,21 @@ const EnrollInfo = ({ edit }) => {
   const history = useHistory();
   const [enrollData, setEnrollData] = useEnrollData({});
   const [dropArray, setDrop] = useState([]);
-  const [contactList, setContactList] = useState([{ type: "", value: "" }]);
+  const [contactList, setContactList] = useState([{ type: '', value: '' }]);
   const [selectedContact, setContact] = useState({});
   const [createdImage, setCreatedImage] = useState([]);
   const [genderItems, setGenderItems] = useState([
-    { value: "여", select: true },
-    { value: "남", select: false },
-    { value: "선택안함", select: false },
+    { value: '여', select: true },
+    { value: '남', select: false },
+    { value: '선택안함', select: false },
   ]);
   const [isNeutering, setIsNeutering] = useState([
-    { value: "완료", select: true },
-    { value: "미완료", select: false },
+    { value: '완료', select: true },
+    { value: '미완료', select: false },
   ]);
   const [isInstitution, setIsInstitution] = useState([
-    { value: "개인구조자", select: true },
-    { value: "단체", select: false },
+    { value: '개인구조자', select: true },
+    { value: '단체', select: false },
   ]);
   const [initial, setInitial] = useState();
 
@@ -139,7 +148,7 @@ const EnrollInfo = ({ edit }) => {
 
   const addContactList = e => {
     e.preventDefault();
-    setContactList(contactList.concat({ type: "", value: "" }));
+    setContactList(contactList.concat({ type: '', value: '' }));
   };
 
   useEffect(() => {
@@ -155,17 +164,19 @@ const EnrollInfo = ({ edit }) => {
             : { value: item.value, select: false };
         });
       });
-      setEnrollDataCallback("gender", genderItems.find(value => value.select === true).value);
+      setEnrollDataCallback('gender', genderItems.find(value => value.select === true).value);
       setIsNeutering(prev =>
         prev.map(item => {
-          const isNeutralized = data.neutralization ? "완료" : "미완료";
-          return item.value === isNeutralized ? { ...item, select: true } : { ...item, select: false };
+          const isNeutralized = data.neutralization ? '완료' : '미완료';
+          return item.value === isNeutralized
+            ? { ...item, select: true }
+            : { ...item, select: false };
         })
       );
 
       setIsInstitution(prev =>
         prev.map(item => {
-          const isGroup = data.isInstitution ? "단체" : "개인구조자";
+          const isGroup = data.isInstitution ? '단체' : '개인구조자';
           return item.value === isGroup ? { ...item, select: true } : { ...item, select: false };
         })
       );
@@ -207,30 +218,33 @@ const EnrollInfo = ({ edit }) => {
   const handleSubmit = async event => {
     event.preventDefault();
     const formData = new FormData();
-    formData.append("endingCountry", enrollData.endingCountry);
-    formData.append("endingAirport", enrollData.endingAirport);
-    formData.append("name", enrollData.name);
-    formData.append("gender", enrollData.gender);
-    formData.append("age", enrollData.age);
-    formData.append("weight", enrollData.weight);
-    formData.append("neutralization", enrollData?.neutralization === "완료" ? true : false);
-    formData.append("health", enrollData.health);
-    formData.append("isInstitution", enrollData?.isInstitution === "단체" ? true : false);
-    formData.append("institutionName", enrollData?.institutionName ? enrollData.institutionName : "");
-    formData.append("detail", enrollData?.detail ? enrollData.detail : "");
-    if (enrollData?.카카오톡) formData.append("kakaotalkId", enrollData?.카카오톡);
-    if (enrollData?.전화번호) formData.append("phoneNumber", enrollData?.전화번호);
-    if (enrollData?.페이스북) formData.append("facebook", enrollData?.페이스북);
-    if (enrollData?.인스타그램) formData.append("instagram", enrollData?.인스타그램);
-    if (enrollData?.트위터) formData.append("twitter", enrollData?.트위터);
+    formData.append('endingCountry', enrollData.endingCountry);
+    formData.append('endingAirport', enrollData.endingAirport);
+    formData.append('name', enrollData.name);
+    formData.append('gender', enrollData.gender);
+    formData.append('age', enrollData.age);
+    formData.append('weight', enrollData.weight);
+    formData.append('neutralization', enrollData?.neutralization === '완료' ? true : false);
+    formData.append('health', enrollData.health);
+    formData.append('isInstitution', enrollData?.isInstitution === '단체' ? true : false);
+    formData.append(
+      'institutionName',
+      enrollData?.institutionName ? enrollData.institutionName : ''
+    );
+    formData.append('detail', enrollData?.detail ? enrollData.detail : '');
+    if (enrollData?.카카오톡) formData.append('kakaotalkId', enrollData?.카카오톡);
+    if (enrollData?.전화번호) formData.append('phoneNumber', enrollData?.전화번호);
+    if (enrollData?.페이스북) formData.append('facebook', enrollData?.페이스북);
+    if (enrollData?.인스타그램) formData.append('instagram', enrollData?.인스타그램);
+    if (enrollData?.트위터) formData.append('twitter', enrollData?.트위터);
 
     for (let i = 0; i < Array.from(createdImage).length; i++) {
-      formData.append("photos", createdImage[i]["image"]);
+      formData.append('photos', createdImage[i]['image']);
     }
 
     if (edit) await putDog(history.location.state?.dog._id, formData);
     else await postEnroll(formData);
-    history.push("/dog/search");
+    history.push('/dog/enrollfinish');
   };
 
   return (
@@ -334,7 +348,7 @@ const EnrollInfo = ({ edit }) => {
           <div className="contact-layer">
             {contactList.map((contact, i) => (
               <Input
-                placeholder={"연락처를 입력해 주세요"}
+                placeholder={'연락처를 입력해 주세요'}
                 key={`contact-${i}`}
                 font="body3"
                 name={dropArray[i]}
