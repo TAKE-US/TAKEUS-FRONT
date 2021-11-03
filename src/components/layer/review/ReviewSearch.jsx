@@ -1,11 +1,19 @@
-import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router";
-import styled from "styled-components";
+import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router';
+import styled from 'styled-components';
 
-import { ReviewSearchbar, Filter, PaginationNav, ReviewCardContainer, Hashtag, Empty, Loading } from "components";
-import { ReactComponent as RegisterBtn } from "assets/img/btn_register.svg";
+import {
+  ReviewSearchbar,
+  Filter,
+  PaginationNav,
+  ReviewCardContainer,
+  Hashtag,
+  Empty,
+  Loading,
+} from 'components';
+import { ReactComponent as RegisterBtn } from 'assets/img/btn_register.svg';
 //api
-import { getReviewsWithTags, getReviewsSearch } from "lib/api/sample";
+import { getReviewsWithTags, getReviewsSearch } from 'lib/api/sample';
 
 const Styled = {
   Wrapper: styled.div`
@@ -25,7 +33,11 @@ const Styled = {
     padding-top: 5.4rem;
     padding-bottom: 6.4rem;
     height: 24rem;
-    background: linear-gradient(92.22deg, rgba(255, 239, 175, 0.31) 28%, rgba(255, 239, 175, 0.17) 73.01%);
+    background: linear-gradient(
+      92.22deg,
+      rgba(255, 239, 175, 0.31) 28%,
+      rgba(255, 239, 175, 0.17) 73.01%
+    );
     .header {
       text-align: center;
       font: ${({ theme }) => theme.font.display1};
@@ -38,6 +50,14 @@ const Styled = {
       display: flex;
       justify-content: center;
       margin-top: 2.4rem;
+
+      > div {
+        margin-right: 0.8rem;
+      }
+
+      .button {
+        padding: 0rem;
+      }
     }
   `,
   Option: styled.section`
@@ -54,30 +74,35 @@ const Styled = {
 
 const ReviewSearch = () => {
   const history = useHistory();
-  const contents = ["최신순", "오래된순"];
+  const contents = ['최신순', '오래된순'];
   const [selectedFilter, setSelectedFilter] = useState(contents[0]);
   const [reviews, setReviews] = useState(null);
   const [pageNum, setPageNum] = useState(1);
   const [totalPage, setTotalPage] = useState(0);
-  const [activeHashtag, setActiveHashtag] = useState("");
-  const [searchState, setSearchState] = useState("");
+  const [activeHashtag, setActiveHashtag] = useState('');
+  const [searchState, setSearchState] = useState('');
   const [isLoading, setIsloading] = useState(false);
   const [hashtags, setHashtags] = useState([
-    { tag: "이동봉사과정", active: false },
-    { tag: "도착공항정보", active: false },
-    { tag: "보호단체관련", active: false },
-    { tag: "이동봉사준비", active: false },
-    { tag: "봉사국가", active: false },
-    { tag: "주의사항", active: false },
-    { tag: "입국심사", active: false },
-    { tag: "대상견케어", active: false },
+    { tag: '이동봉사과정', active: false },
+    { tag: '도착공항정보', active: false },
+    { tag: '보호단체관련', active: false },
+    { tag: '이동봉사준비', active: false },
+    { tag: '봉사국가', active: false },
+    { tag: '주의사항', active: false },
+    { tag: '입국심사', active: false },
+    { tag: '대상견케어', active: false },
   ]);
 
   useEffect(() => {
     setIsloading(true);
     (async () => {
       if (searchState) {
-        const searchData = await getReviewsSearch(activeHashtag, pageNum, selectedFilter, searchState);
+        const searchData = await getReviewsSearch(
+          activeHashtag,
+          pageNum,
+          selectedFilter,
+          searchState
+        );
         console.log(searchState);
         setReviews(searchData.data);
         setTotalPage(searchData.totalNum);
@@ -102,7 +127,9 @@ const ReviewSearch = () => {
     );
 
     let newActiveHashtag = hashtags.filter(hashtag => hashtag.active);
-    newActiveHashtag.length !== 0 ? setActiveHashtag(newActiveHashtag[0].tag) : setActiveHashtag("");
+    newActiveHashtag.length !== 0
+      ? setActiveHashtag(newActiveHashtag[0].tag)
+      : setActiveHashtag('');
   };
 
   return (
@@ -115,7 +142,7 @@ const ReviewSearch = () => {
         <div className="search">
           <ReviewSearchbar setSearchState={setSearchState} />
           <button className="button">
-            <RegisterBtn onClick={() => history.push("/review/post")} />
+            <RegisterBtn onClick={() => history.push('/review/post')} />
           </button>
         </div>
       </Styled.Search>
@@ -135,7 +162,11 @@ const ReviewSearch = () => {
                     </div>
                   ))}
                 </section>
-                <Filter contents={contents} setSelectedFilter={setSelectedFilter} selectedFilter={selectedFilter} />
+                <Filter
+                  contents={contents}
+                  setSelectedFilter={setSelectedFilter}
+                  selectedFilter={selectedFilter}
+                />
               </Styled.Option>
               <ReviewCardContainer reviews={reviews} />
             </>
