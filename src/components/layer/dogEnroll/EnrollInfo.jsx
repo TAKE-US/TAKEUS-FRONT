@@ -228,9 +228,12 @@ const EnrollInfo = ({ edit }) => {
       formData.append("photos", createdImage[i]["image"]);
     }
 
-    if (edit) await putDog(history.location.state?.dog._id, formData);
-    else await postEnroll(formData);
-    history.push("/dog/search");
+    try {
+      edit ? await putDog(history.location.state?.dog._id, formData) : await postEnroll(formData);
+      history.push("enroll/confirm");
+    } catch (e) {
+      alert(`[ 대상견 ${edit ? "수정" : "등록"} 실패 ]\n필수 내용을 입력해주세요.`);
+    }
   };
 
   return (
