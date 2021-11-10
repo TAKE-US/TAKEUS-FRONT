@@ -1,7 +1,7 @@
-import React from "react";
-import styled from "styled-components";
-import { withRouter } from "react-router-dom";
-import locationIcon from "../../assets/img/ic_location_blue_18.svg";
+import React from 'react';
+import styled from 'styled-components';
+import { withRouter } from 'react-router-dom';
+import locationIcon from '../../assets/img/ic_location_blue_18.svg';
 
 const CardWrap = styled.article`
   display: flex;
@@ -15,12 +15,12 @@ const CardWrap = styled.article`
   }
   .card-info {
     display: flex;
-    flex-direction: ${props => (props.isMine ? "raw" : "column")};
-    margin-top: ${props => (props.isMine ? "0.8rem" : "1.6rem")};
+    flex-direction: ${props => (props.isMine ? 'raw' : 'column')};
+    margin-top: ${props => (props.isMine ? '0.8rem' : '1.6rem')};
     justify-content: space-between;
     &-main {
       display: flex;
-      justify-content: ${props => (props.isMine ? "flex-start" : "center")};
+      justify-content: ${props => (props.isMine ? 'flex-start' : 'center')};
       align-items: center;
       &__name {
         max-width: 11.2rem;
@@ -31,7 +31,7 @@ const CardWrap = styled.article`
         margin-right: 0.6rem;
       }
       &__info {
-        font-family: "Noto Sans KR";
+        font-family: 'Noto Sans KR';
         font-style: normal;
         font-weight: normal;
         font-size: 1.4rem;
@@ -42,7 +42,7 @@ const CardWrap = styled.article`
           justify-content: center;
           align-items: center;
           ::before {
-            content: "";
+            content: '';
             display: block;
             width: 2px;
             height: 2px;
@@ -93,7 +93,7 @@ const DogStateTag = styled.div`
   align-items: center;
   min-width: 4.8rem;
   font: ${({ theme }) => theme.font.body1};
-  background-color: ${props => (props.done ? "rgba(253,203,2,0.2)" : "rgba(115, 172, 255, 0.2)")};
+  background-color: ${props => (props.done ? 'rgba(253,203,2,0.2)' : 'rgba(115, 172, 255, 0.2)')};
   border-radius: 3.5rem;
   padding: 0 1.1rem;
   p {
@@ -110,8 +110,9 @@ const DogCard = ({ dog, history, match }) => {
       console.log(e);
     }
   };
-  const isMine = match.path === "/mypage" ? true : false;
-  const airport = (dog.endingAirport || "").split(" ");
+  const isMine = match.path === '/mypage' ? true : false;
+  const airport = (dog.endingAirport || '').split(' ');
+
   return (
     <CardWrap onClick={cardClickHandler} isMine={isMine}>
       <img src={dog.photos[0]} alt="" />
@@ -119,11 +120,11 @@ const DogCard = ({ dog, history, match }) => {
         <section className="card-info">
           <article className="card-info-main">
             <p className="card-info-main__name">{dog.name}</p>
-            <p className="card-info-main__info">{dog.gender === "Male" ? "수컷" : "암컷"}</p>
-            <p className="card-info-main__info">{dog.weight + "kg"}</p>
+            <p className="card-info-main__info">{dog.gender === 'Male' ? '수컷' : '암컷'}</p>
+            <p className="card-info-main__info">{dog.weight + 'kg'}</p>
           </article>
-          <DogStateTag done={dog.status === "waiting" ? false : true}>
-            <p>{dog.status === "waiting" ? "미완료" : "완료"}</p>
+          <DogStateTag done={dog.status === 'waiting' ? false : true}>
+            <p>{dog.status === 'waiting' ? '미완료' : '완료'}</p>
           </DogStateTag>
         </section>
       ) : (
@@ -136,7 +137,7 @@ const DogCard = ({ dog, history, match }) => {
             </div>
           </article>
           <article className="card-info-sub">
-            <p>단체 | {dog.institutionName}</p>
+            <p>{dog.isInstitution ? `단체 | ${dog.institutionName}` : '개인구조자'}</p>
           </article>
         </section>
       )}
