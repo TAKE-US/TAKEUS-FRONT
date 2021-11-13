@@ -393,7 +393,7 @@ const EnrollInfo = ({ edit }) => {
         <div className="wrap">
           <div className="wrap__button">
             <Button rounded full font="button" padding="1.5rem">
-              대상견 등록하기
+              대상견 {edit ? '수정' : '등록'}하기
             </Button>
           </div>
         </div>
