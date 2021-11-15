@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable arrow-parens */
-import React, { useState, useRef, useEffect } from "react";
-import styled from "styled-components";
-import AddDogCard from "components/atoms/AddDogCard";
+import React, { useState, useRef, useEffect } from 'react';
+import styled from 'styled-components';
+import AddDogCard from 'components/atoms/AddDogCard';
 
 const Styled = {
   Wrapper: styled.section`
@@ -43,6 +43,7 @@ const AddDogCardContainer = ({ createdImage, setCreatedImage, initial }) => {
 
   useEffect(() => {
     initial?.length > 0 && initial.map(URL => setURLArray(prev => prev.concat(URL)));
+    setCreatedImage(initial);
     if (initial?.length > 0) {
       const initialList = initial.map((URL, index) => {
         return {

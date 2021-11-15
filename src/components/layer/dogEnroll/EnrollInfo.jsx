@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable max-len */
 /* eslint-disable arrow-parens */
 import React, { useState, useEffect } from 'react';
@@ -58,6 +59,7 @@ const EnrollInfo = ({ edit }) => {
     { value: '단체', select: false },
   ]);
   const [initial, setInitial] = useState();
+  const [data, setData] = useState(history.location.state?.dog);
 
   const setEnrollDataCallback = React.useCallback(
     (name, value) => {
@@ -82,9 +84,8 @@ const EnrollInfo = ({ edit }) => {
   useEffect(() => {
     (async () => {
       if (!edit) return;
-      const data = history.location.state ? history.location.state.dog : null;
-      setInitial(data);
 
+      setInitial(data);
       setGenderItems(prev => {
         return prev.map(item => {
           return item.value === data.gender
@@ -162,7 +163,8 @@ const EnrollInfo = ({ edit }) => {
     if (enrollData?.트위터) formData.append('twitter', enrollData?.트위터);
 
     for (let i = 0; i < Array.from(createdImage).length; i++) {
-      formData.append('photos', createdImage[i]['image']);
+      if (typeof createdImage[i] === 'string') formData.append('photo_link', createdImage[i]);
+      else formData.append('photos', createdImage[i]['image']);
     }
 
     if (edit) await putDog(history.location.state?.dog._id, formData);
