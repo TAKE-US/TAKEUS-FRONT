@@ -64,16 +64,7 @@ const Styled = {
   `,
 };
 
-const AddDogCard = ({
-  value,
-  photoHandle,
-  deleteHandle,
-  URLArray,
-  setURLArray,
-  photoId,
-  createdImage,
-  setCreatedImage,
-}) => {
+const AddDogCard = ({ value, photoHandle, deleteHandle, URLArray, setURLArray, photoId, imageList, setImageList }) => {
   const [imgfile, setImage] = useState('');
   const setImageFromFile = ({ file, setImageUrl }) => {
     let reader = new FileReader();
@@ -85,9 +76,9 @@ const AddDogCard = ({
 
   const createImagePreview = e => {
     const files = e.target.files;
-    console.log(createdImage);
-    if (createdImage?.length === 0) setCreatedImage([{ id: 0, image: e.target.files[0] }]);
-    if (createdImage?.length > 0) setCreatedImage(prev => prev.concat({ id: photoId, image: e.target.files[0] }));
+
+    if (imageList?.length === 0) setImageList([{ id: 0, image: e.target.files[0] }]);
+    if (imageList?.length > 0) setImageList(prev => prev.concat({ id: photoId, image: e.target.files[0] }));
 
     if (files.length) {
       setImageFromFile({

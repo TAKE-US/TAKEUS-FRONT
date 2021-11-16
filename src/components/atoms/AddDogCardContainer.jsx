@@ -11,7 +11,7 @@ const Styled = {
   `,
 };
 
-const AddDogCardContainer = ({ createdImage, setCreatedImage, initial }) => {
+const AddDogCardContainer = ({ imageList, setImageList, initial }) => {
   const [boxList, setBoxList] = useState([1, 0, 0, 0, 0]);
   const [URLArray, setURLArray] = useState([]);
   const [photoId, setPhotoId] = useState(0);
@@ -38,12 +38,13 @@ const AddDogCardContainer = ({ createdImage, setCreatedImage, initial }) => {
   const deleteHandle = e => {
     const deletedKey = e.target.nextSibling.dataset.key;
     setBoxList(prev => prev.filter(photo => photo.id !== Number(deletedKey)));
-    setCreatedImage(prev => prev.filter(photo => photo.id !== Number(deletedKey)));
+    setImageList(prev => prev.filter(photo => photo.id !== Number(deletedKey)));
+    console.log(imageList);
   };
 
   useEffect(() => {
     if (initial?.length > 0) initial.map(URL => setURLArray(prev => prev.concat(URL)));
-    if (initial?.length > 0) setCreatedImage(initial);
+    if (initial?.length > 0) setImageList(initial);
     if (initial?.length > 0) {
       const initialList = initial.map((URL, index) => {
         return {
@@ -70,8 +71,8 @@ const AddDogCardContainer = ({ createdImage, setCreatedImage, initial }) => {
               deleteHandle={deleteHandle}
               URLArray={URLArray}
               setURLArray={setURLArray}
-              createdImage={createdImage}
-              setCreatedImage={setCreatedImage}
+              imageList={imageList}
+              setImageList={setImageList}
             />
           ) : null
         )}
