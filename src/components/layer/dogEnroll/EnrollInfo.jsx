@@ -167,12 +167,9 @@ const EnrollInfo = ({ edit }) => {
       else formData.append('photos', imageList[i]['imgURL']);
     }
 
-    for (let value of formData.values()) {
-      console.log(value);
-    }
-
     if (edit) await putDog(history.location.state?.dog._id, formData);
     else await postEnroll(formData);
+
     history.push('/dog/search');
   };
 

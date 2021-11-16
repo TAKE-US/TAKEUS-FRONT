@@ -64,13 +64,7 @@ const Styled = {
   `,
 };
 
-const ImageCard = ({ setImgPreviewList, setImageList, value, imageList, imagePreviewList }) => {
-  const deleteHandle = e => {
-    const deletedKey = e.target.nextSibling.dataset.key;
-    setImgPreviewList(prev => prev.filter(photo => photo.id !== Number(deletedKey)));
-    setImageList(prev => prev.filter(photo => photo.id !== Number(deletedKey)));
-  };
-
+const ImageCard = ({ value, imagePreviewList, deleteHandle }) => {
   let imgSrc;
   const isHaveImg =
     imagePreviewList.filter(value => typeof value !== 'number').filter(element => element.id === value.id).length > 0;

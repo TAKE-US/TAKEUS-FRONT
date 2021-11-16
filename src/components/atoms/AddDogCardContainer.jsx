@@ -21,6 +21,16 @@ const AddDogCardContainer = ({ imageList, setImageList, initial }) => {
     });
   }, [initial, setImageList]);
 
+  const deleteHandle = e => {
+    const deletedKey = e.target.nextSibling.dataset.key;
+    // const filteredList = imageList.filter(value => value.id !== +deletedKey);
+    setImgPreviewList(prev => prev.filter(photo => photo.id !== Number(deletedKey)));
+    setImageList(prev => prev.filter(photo => photo.id !== Number(deletedKey)));
+  };
+
+  console.log(imagePreviewList);
+  console.log(imageList);
+
   return (
     <Styled.Wrapper>
       {imagePreviewList.map((value, i) =>
@@ -35,14 +45,7 @@ const AddDogCardContainer = ({ imageList, setImageList, initial }) => {
               setImageList={setImageList}
             />
           ) : (
-            <ImageCard
-              key={i}
-              value={value}
-              imagePreviewList={imagePreviewList}
-              setImgPreviewList={setImgPreviewList}
-              imageList={imageList}
-              setImageList={setImageList}
-            />
+            <ImageCard key={i} value={value} imagePreviewList={imagePreviewList} deleteHandle={deleteHandle} />
           )
         ) : null
       )}
