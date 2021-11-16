@@ -163,8 +163,12 @@ const EnrollInfo = ({ edit }) => {
     if (enrollData?.트위터) formData.append('twitter', enrollData?.트위터);
 
     for (let i = 0; i < Array.from(imageList).length; i++) {
-      if (typeof imageList[i] === 'string') formData.append('photo_link', imageList[i]['image']);
-      else formData.append('photos', imageList[i]['image']);
+      if (typeof imageList[i]['imgURL'] === 'string') formData.append('photo_link', imageList[i]['imgURL']);
+      else formData.append('photos', imageList[i]['imgURL']);
+    }
+
+    for (let value of formData.values()) {
+      console.log(value);
     }
 
     if (edit) await putDog(history.location.state?.dog._id, formData);
