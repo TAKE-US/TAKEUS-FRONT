@@ -59,7 +59,6 @@ const EnrollInfo = ({ edit }) => {
     { value: '단체', select: false },
   ]);
   const [initial, setInitial] = useState();
-  const [data, setData] = useState(history.location.state?.dog);
 
   const setEnrollDataCallback = React.useCallback(
     (name, value) => {
@@ -85,6 +84,7 @@ const EnrollInfo = ({ edit }) => {
     (async () => {
       if (!edit) return;
 
+      const data = history.location.state ? history.location.state.dog : null;
       setInitial(data);
       setGenderItems(prev => {
         return prev.map(item => {

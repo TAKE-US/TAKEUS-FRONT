@@ -42,8 +42,8 @@ const AddDogCardContainer = ({ createdImage, setCreatedImage, initial }) => {
   };
 
   useEffect(() => {
-    initial?.length > 0 && initial.map(URL => setURLArray(prev => prev.concat(URL)));
-    setCreatedImage(initial);
+    if (initial?.length > 0) initial.map(URL => setURLArray(prev => prev.concat(URL)));
+    if (initial?.length > 0) setCreatedImage(initial);
     if (initial?.length > 0) {
       const initialList = initial.map((URL, index) => {
         return {

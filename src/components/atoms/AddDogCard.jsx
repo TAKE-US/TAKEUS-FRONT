@@ -85,8 +85,9 @@ const AddDogCard = ({
 
   const createImagePreview = e => {
     const files = e.target.files;
-    if (createdImage.length === 0) setCreatedImage([{ id: 0, image: e.target.files[0] }]);
-    else setCreatedImage(prev => [...prev, { id: photoId, image: e.target.files[0] }]);
+    console.log(createdImage);
+    if (createdImage?.length === 0) setCreatedImage([{ id: 0, image: e.target.files[0] }]);
+    if (createdImage?.length > 0) setCreatedImage(prev => prev.concat({ id: photoId, image: e.target.files[0] }));
 
     if (files.length) {
       setImageFromFile({
