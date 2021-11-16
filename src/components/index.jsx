@@ -26,6 +26,8 @@ export { default as Carousel } from './atoms/Carousel';
 export { default as ReviewSearchbar } from './atoms/ReviewSearchbar';
 export { default as Loading } from './atoms/Loading';
 export { default as LogOut } from './atoms/LogOut';
+export { default as ImageCard } from './atoms/ImageCard';
+export { default as AddDogCard } from './atoms/AddDogCard';
 
 // layer
 export { default as Header } from './layer/Header';
