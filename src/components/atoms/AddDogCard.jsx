@@ -76,16 +76,17 @@ const AddDogCard = ({ value, photoHandle, deleteHandle, URLArray, setURLArray, p
 
   const createImagePreview = e => {
     const files = e.target.files;
+    console.log(e.target.files);
 
-    if (imageList?.length === 0) setImageList([{ id: 0, image: e.target.files[0] }]);
-    if (imageList?.length > 0) setImageList(prev => prev.concat({ id: photoId, image: e.target.files[0] }));
+    // if (imageList?.length === 0) setImageList([{ id: 0, image: e.target.files[0] }]);
+    // if (imageList?.length > 0) setImageList(prev => prev.concat({ id: photoId, image: e.target.files[0] }));
 
     if (files.length) {
       setImageFromFile({
         file: files[0],
         setImageUrl: ({ result }) => {
           setImage(files[0]);
-          setURLArray(URLArray.concat(result));
+          // setURLArray(URLArray.concat(result));
         },
       });
     }
@@ -115,7 +116,7 @@ const AddDogCard = ({ value, photoHandle, deleteHandle, URLArray, setURLArray, p
             id='detail_image'
             accept='image/*'
             onChange={e => {
-              photoHandle(e);
+              // photoHandle(e);
               createImagePreview(e);
             }}
           />

@@ -163,7 +163,7 @@ const EnrollInfo = ({ edit }) => {
     if (enrollData?.트위터) formData.append('twitter', enrollData?.트위터);
 
     for (let i = 0; i < Array.from(imageList).length; i++) {
-      if (typeof imageList[i] === 'string') formData.append('photo_link', imageList[i]);
+      if (typeof imageList[i] === 'string') formData.append('photo_link', imageList[i]['image']);
       else formData.append('photos', imageList[i]['image']);
     }
 
