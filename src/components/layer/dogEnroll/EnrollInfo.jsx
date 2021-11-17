@@ -2,7 +2,16 @@
 /* eslint-disable max-len */
 /* eslint-disable arrow-parens */
 import React, { useState, useEffect } from 'react';
-import { RadioButton, Counter, TextField, AddDogLayer, Input, Button, EnrollSearchbar, Dropdown } from 'components';
+import {
+  RadioButton,
+  Counter,
+  TextField,
+  AddDogLayer,
+  Input,
+  Button,
+  EnrollSearchbar,
+  Dropdown,
+} from 'components';
 import { ReactComponent as Kakao } from 'assets/icon/ic_kakao_24.svg';
 import { ReactComponent as Call } from 'assets/icon/ic_call_24.svg';
 import { ReactComponent as Instagram } from 'assets/icon/ic_instar_24.svg';
@@ -97,7 +106,9 @@ const EnrollInfo = ({ edit }) => {
       setIsNeutering(prev =>
         prev.map(item => {
           const isNeutralized = data.neutralization ? '완료' : '미완료';
-          return item.value === isNeutralized ? { ...item, select: true } : { ...item, select: false };
+          return item.value === isNeutralized
+            ? { ...item, select: true }
+            : { ...item, select: false };
         })
       );
 
@@ -154,7 +165,10 @@ const EnrollInfo = ({ edit }) => {
     formData.append('neutralization', enrollData?.neutralization === '완료' ? true : false);
     formData.append('health', enrollData.health);
     formData.append('isInstitution', enrollData?.isInstitution === '단체' ? true : false);
-    formData.append('institutionName', enrollData?.institutionName ? enrollData.institutionName : '');
+    formData.append(
+      'institutionName',
+      enrollData?.institutionName ? enrollData.institutionName : ''
+    );
     formData.append('detail', enrollData?.detail ? enrollData.detail : '');
     if (enrollData?.카카오톡) formData.append('kakaotalkId', enrollData?.카카오톡);
     if (enrollData?.전화번호) formData.append('phoneNumber', enrollData?.전화번호);
@@ -162,8 +176,10 @@ const EnrollInfo = ({ edit }) => {
     if (enrollData?.인스타그램) formData.append('instagram', enrollData?.인스타그램);
     if (enrollData?.트위터) formData.append('twitter', enrollData?.트위터);
 
+    if (edit) formData.append('photo_link', []);
     for (let i = 0; i < Array.from(imageList).length; i++) {
-      if (typeof imageList[i]['imgURL'] === 'string') formData.append('photo_link', imageList[i]['imgURL']);
+      if (typeof imageList[i]['imgURL'] === 'string')
+        formData.append('photo_link', imageList[i]['imgURL']);
       else formData.append('photos', imageList[i]['imgURL']);
     }
 
