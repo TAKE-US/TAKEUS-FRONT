@@ -1,9 +1,9 @@
-import React, { useEffect, useState, useCallback, useRef } from "react";
-import { useLocation, useHistory } from "react-router";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
-import { ReactComponent as LogoBlack } from "../../assets/img/ic_logo_wordmark_black_small.svg";
-import { LogOut } from "../";
+import React, { useEffect, useState, useCallback, useRef } from 'react';
+import { useLocation, useHistory } from 'react-router';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import { ReactComponent as LogoBlack } from '../../assets/img/ic_logo_wordmark_black_small.svg';
+import { LogOut } from '../';
 
 const Head = {
   Notice: styled.div`
@@ -35,10 +35,8 @@ const Head = {
       align-items: center;
       height: 100%;
       padding: 0 9.2rem;
-      background-color: ${props =>
-        props.isScrolling ? "#FFFFFF" : "transparent"};
-      box-shadow: ${props =>
-        props.isScrolling && "0rem 0rem 1.6rem 0.1rem rgba(0, 0, 0, 0.08)"};
+      background-color: ${props => (props.isScrolling ? '#FFFFFF' : 'transparent')};
+      box-shadow: ${props => props.isScrolling && '0rem 0rem 1.6rem 0.1rem rgba(0, 0, 0, 0.08)'};
       transition: background-color 0.6s;
       svg {
         &:hover {
@@ -61,7 +59,7 @@ const Head = {
     flex-direction: column;
     align-items: center;
     font: ${({ theme }) => theme.font.gnb};
-    color: ${props => props.isSelect && "#FDCB02"};
+    color: ${props => props.isSelect && '#FDCB02'};
 
     &:hover {
       cursor: pointer;
@@ -69,10 +67,10 @@ const Head = {
     }
 
     &::after {
-      content: "";
+      content: '';
       position: relative;
       top: 0.5rem;
-      display: ${props => (props.isSelect ? "block" : "none")};
+      display: ${props => (props.isSelect ? 'block' : 'none')};
       width: 0.4rem;
       height: 0.4rem;
       background-color: ${({ theme }) => theme.color.primary};
@@ -118,7 +116,7 @@ const Header = () => {
   const location = useLocation();
   const history = useHistory();
   const [isScrolling, setIsScrolling] = useState(false);
-  const isLogin = localStorage.getItem("token");
+  const isLogin = localStorage.getItem('token');
 
   const scrollHandler = useCallback(() => {
     if (isLogin) {
@@ -139,10 +137,10 @@ const Header = () => {
   }, [isLogin]);
 
   useEffect(() => {
-    window.addEventListener("scroll", scrollHandler);
+    window.addEventListener('scroll', scrollHandler);
   }, [scrollHandler]);
 
-  if (location.pathname === "/login") return "";
+  if (location.pathname === '/login') return '';
 
   return (
     <>
@@ -155,41 +153,37 @@ const Header = () => {
       <Head.Wrap isScrolling={isScrolling} isLogin={isLogin}>
         <div className="inner">
           <Link to="/">
-            <LogoBlack
-              fill={
-                isScrolling || location.pathname !== "/" ? "#FDCB02" : "#1A1A1A"
-              }
-            />
+            <LogoBlack fill={isScrolling || location.pathname !== '/' ? '#FDCB02' : '#1A1A1A'} />
           </Link>
           <div className="gnb">
             <Head.Content
-              isSelect={location.pathname === "/info"}
+              isSelect={location.pathname === '/info'}
               onClick={() => {
-                history.push("/info");
+                history.push('/info');
               }}
             >
               이동봉사정보
             </Head.Content>
             <Head.Content
-              isSelect={location.pathname === "/dog/search"}
+              isSelect={location.pathname === '/dog/search'}
               onClick={() => {
-                history.push("/dog/search");
+                history.push('/dog/search');
               }}
             >
               대상견 찾기
             </Head.Content>
             <Head.Content
-              isSelect={location.pathname === "/review"}
+              isSelect={location.pathname === '/review'}
               onClick={() => {
-                history.push("/review");
+                history.push('/review');
               }}
             >
               이동봉사 후기
             </Head.Content>
             <Head.Content
-              isSelect={location.pathname === "/about"}
+              isSelect={location.pathname === '/about'}
               onClick={() => {
-                history.push("/about");
+                history.push('/about');
               }}
             >
               About us
@@ -197,7 +191,7 @@ const Header = () => {
           </div>
           {isLogin ? (
             <Head.Login>
-              <Link className="enroll" to="/dog/enroll">
+              <Link className="enroll" to="/dog/enrollcaution">
                 대상견 등록
               </Link>
               <LogOut />

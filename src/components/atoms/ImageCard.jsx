@@ -1,8 +1,8 @@
 /* eslint-disable arrow-parens */
 /* eslint-disable no-unused-vars */
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import btn_plus from 'assets/icon/btn_plus.svg';
+import deleteBtn from 'assets/icon/btn_delete.svg';
 
 const Styled = {
   Wrapper: styled.section`
@@ -64,31 +64,30 @@ const Styled = {
   `,
 };
 
-const extractLastId = array => {
-  if (array.length === 0) return 0;
-  return array.sort((a, b) => b.id - a.id)[0].id;
-};
+const ImageCard = ({ value, imagePreviewList, deleteHandle }) => {
+  let imgSrc;
+  const isHaveImg =
+    imagePreviewList.filter(value => typeof value !== 'number').filter(element => element.id === value.id).length > 0;
 
-const AddDogCard = ({ setImgPreviewList, imageList, setImageList }) => {
-  const setImagePreview = e => {
-    const reader = new FileReader();
-    const file = e.target.files[0];
-    reader.onload = () => {
-      setImageList(prev => [{ id: extractLastId(imageList) + 1, file: file, imgURL: e.target.files[0] }, ...prev]);
-      setImgPreviewList(prev => [{ id: extractLastId(imageList) + 1, file: file, imgURL: reader.result }, ...prev]);
-    };
-    if (file) reader.readAsDataURL(file);
-  };
+  if (isHaveImg) imgSrc = imagePreviewList.filter(element => element.id === value.id)[0]['imgURL'];
 
   return (
     <Styled.Wrapper>
-      <div className='card'>
-        <img className='card__img' src={btn_plus} alt='plus' />
-        <p className='card__content'>사진 추가하기</p>
-        <input className='card__input' type='file' id='detail_image' accept='image/*' onChange={setImagePreview} />
-      </div>
+      {isHaveImg ? (
+        <div className='image__area'>
+          <img
+            className='image__area-delete'
+            onClick={e => {
+              deleteHandle(e);
+            }}
+            src={deleteBtn}
+            alt={'delete'}
+          />
+          <img className='image__area-img' data-key={value.id} src={imgSrc} alt='img' />
+        </div>
+      ) : null}
     </Styled.Wrapper>
   );
 };
 
-export default AddDogCard;
+export default ImageCard;
