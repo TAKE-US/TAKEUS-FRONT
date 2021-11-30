@@ -1,6 +1,12 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import { DogPage, DogDetailPage, DogEnrollPage, DogEnrollCautionPage } from 'pages';
+import {
+  DogPage,
+  DogDetailPage,
+  DogEnrollPage,
+  DogEnrollCautionPage,
+  DogEnrollConfirmPage,
+} from 'pages';
 
 const DogRouter = ({ match }) => {
   const path = match.path;
@@ -12,8 +18,9 @@ const DogRouter = ({ match }) => {
       <Route path={path + '/search/:id/edit'}>
         <DogEnrollPage edit={true} />
       </Route>
-      <Route path={path + '/enroll'} component={DogEnrollPage} />
-      <Route path={path + '/enrollcaution'} component={DogEnrollCautionPage} />
+      <Route exact path={path + '/enroll'} component={DogEnrollPage} />
+      <Route path={path + '/enroll/caution'} component={DogEnrollCautionPage} />
+      <Route path={path + '/enroll/confirm'} component={DogEnrollConfirmPage} />
     </>
   );
 };

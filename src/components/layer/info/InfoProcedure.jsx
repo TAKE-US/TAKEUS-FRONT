@@ -243,7 +243,7 @@ const InfoProcedure = () => {
             rounded
             padding="1.6rem 6.6rem"
             font="button"
-            onClick={() => history.push(isLogin ? '/dog/enrollcaution' : 'login')}
+            onClick={() => history.push(isLogin ? '/dog/enroll/caution' : 'login')}
           >
             대상견 등록하러 가기
           </Styled.Button>

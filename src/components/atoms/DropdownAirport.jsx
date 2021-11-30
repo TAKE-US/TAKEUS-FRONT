@@ -34,11 +34,7 @@ const Menu = {
         margin-top: 0.6rem;
         font: ${({ theme }) => theme.font.body2};
         color: ${props =>
-          props.currAirport
-            ? props.currAirport === '공항명'
-              ? '#C1C1C1'
-              : '#3D3D3D'
-            : '#C1C1C1'};
+          props.currAirport ? (props.currAirport === '공항명' ? '#C1C1C1' : '#3D3D3D') : '#C1C1C1'};
       }
     }
 
@@ -65,7 +61,7 @@ const Menu = {
     padding: 1rem 0.6rem;
     box-shadow: 0rem 0rem 3rem 0.1rem rgba(0, 0, 0, 0.1);
     border-radius: 1rem;
-    margin-left: 1rem;
+    margin-left: -1rem;
     margin-top: 1.6rem;
     background-color: ${props =>
       props.enroll ? props.theme.color.black : props.theme.color.white};
@@ -112,13 +108,7 @@ const Menu = {
   `,
 };
 
-const DropdownAirport = ({
-  currCountry,
-  currAirport,
-  setCurrAirport,
-  allAirport,
-  enroll,
-}) => {
+const DropdownAirport = ({ currCountry, currAirport, setCurrAirport, allAirport, enroll }) => {
   const dropdownRef = useRef(null);
   const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
   const [airport, setAirport] = useState('');
@@ -142,23 +132,15 @@ const DropdownAirport = ({
         isActive={isActive}
         className={enroll ? 'enroll' : ''}
       >
-        <div className='destination'>
-          {!enroll && <span className='name'>공항명</span>}
-          <span className='text'>
-            {currAirport
-              ? currAirport
-              : enroll
-              ? enroll.initialValue
-              : '도착 공항은 어디인가요?'}
+        <div className="destination">
+          {!enroll && <span className="name">공항명</span>}
+          <span className="text">
+            {currAirport ? currAirport : enroll ? enroll.initialValue : '도착 공항은 어디인가요?'}
           </span>
         </div>
         <Arrow />
       </Menu.Button>
-      <Menu.Nav
-        ref={dropdownRef}
-        isActive={isActive}
-        className={enroll ? 'enroll' : ''}
-      >
+      <Menu.Nav ref={dropdownRef} isActive={isActive} className={enroll ? 'enroll' : ''}>
         <Menu.Ul>
           {airport &&
             Object.keys(airport).map((city, index) => (
