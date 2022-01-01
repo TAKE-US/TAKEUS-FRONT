@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
-import styled from "styled-components";
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
 
-import { getCountry } from "lib/api/sample";
-import { DropdownCountry, DropdownAirport, Button } from "components";
-import { ReactComponent as SearchImg } from "assets/icon/ic_search_white_24.svg";
+import { getCountry } from 'lib/api/sample';
+import { DropdownCountry, DropdownAirport, Button } from 'components';
+import { ReactComponent as SearchImg } from 'assets/icon/ic_search_white_24.svg';
 
 const Search = {
   Container: styled.div`
@@ -23,6 +23,8 @@ const Search = {
     & > .button > button {
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
+      border-top-right-radius: 1rem;
+      border-bottom-right-radius: 1rem;
       .text {
         margin-right: 0.3rem;
       }
@@ -40,7 +42,7 @@ const Search = {
         flex: 1;
         &:before {
           position: absolute;
-          content: "";
+          content: '';
           top: 0;
           left: -2.6rem;
           height: 3.6rem;
@@ -53,10 +55,10 @@ const Search = {
 };
 
 const ReviewSearchbar = ({ setSearchState }) => {
-  const [currCountry, setCurrCountry] = useState("");
-  const [currAirport, setCurrAirport] = useState("");
+  const [currCountry, setCurrCountry] = useState('');
+  const [currAirport, setCurrAirport] = useState('');
   const [country, setCountry] = useState([]);
-  const [allAirport, setAllAirport] = useState("");
+  const [allAirport, setAllAirport] = useState('');
 
   useEffect(() => {
     (async () => {
@@ -74,7 +76,7 @@ const ReviewSearchbar = ({ setSearchState }) => {
   }, []);
 
   const searchHandler = async () => {
-    console.log("click", currAirport);
+    console.log('click', currAirport);
     setSearchState(currAirport);
   };
 
@@ -97,11 +99,7 @@ const ReviewSearchbar = ({ setSearchState }) => {
           />
         </div>
         <div className="button" onClick={() => searchHandler()}>
-          <Button
-            primary
-            font="button_middle"
-            padding="1.9rem 1.3rem 1.9rem 1.4rem"
-          >
+          <Button primary font="button_middle" padding="1.9rem 1.3rem 1.9rem 1.4rem">
             <span className="text">검색</span>
             <SearchImg />
           </Button>

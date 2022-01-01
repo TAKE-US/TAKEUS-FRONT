@@ -191,7 +191,7 @@ const Header = () => {
           </div>
           {isLogin ? (
             <Head.Login>
-              <Link className="enroll" to="/dog/enrollcaution">
+              <Link className="enroll" to="/dog/enroll/caution">
                 대상견 등록
               </Link>
               <LogOut />

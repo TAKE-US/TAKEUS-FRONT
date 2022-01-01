@@ -16,10 +16,10 @@ const KakaoPage = () => {
     console.log(token, social);
     const data = await postToken(token, social);
     console.log(data);
+    localStorage.setItem('email', data.email);
     localStorage.setItem('token', data.token);
     localStorage.setItem('ID', data.id);
-    if (process.env.NODE_ENV === 'development')
-      window.open('http://localhost:3000', '_self');
+    if (process.env.NODE_ENV === 'development') window.open('http://localhost:3000', '_self');
     else window.open('https://take--us.web.app/', '_self');
   };
 
