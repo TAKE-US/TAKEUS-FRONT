@@ -14,7 +14,6 @@ const Styled = {
 const AddDogCardContainer = ({ imageList, setImageList, initial }) => {
   const [imagePreviewList, setImgPreviewList] = useState([1, 0, 0, 0, 0]);
 
-  console.log(initial);
   useEffect(() => {
     initial
       ?.filter(v => v.length > 0)
