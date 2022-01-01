@@ -11,6 +11,7 @@ const Card = styled.article`
   height: 45rem;
   border: 0.1rem solid #dfdfdf;
   border-radius: 1rem;
+  cursor: pointer;
   img {
     width: 34.6rem;
     height: 25rem;
@@ -44,11 +45,18 @@ const CarouselReviewCard = ({ review }) => {
     '그렇지 않아도 부족한 입양자 중에서 믹스견, 백구, 황구는 국내 입양자가 거의 없어 해외 입양이 유일한 방법이라고 합니다. 그런 이유로 제가...';
 
   return (
-    <Card>
-      <img src={review.crawlingData[0].image ? review.crawlingData[0].image : review_Img} alt="review_Img" />
+    <Card onClick={() => window.open(review.content)}>
+      <img
+        src={review.crawlingData[0].image ? review.crawlingData[0].image : review_Img}
+        alt="review_Img"
+      />
       <section className="cardInfo">
-        <div className="cardInfo__title">{review.title.length < 21 ? review.title : review.title.slice(0, 21).concat('...')}</div>
-        <div className="cardInfo__content">{review.crawlingData[0].desc ? review.crawlingData[0].desc : defaultText}</div>
+        <div className="cardInfo__title">
+          {review.title.length < 21 ? review.title : review.title.slice(0, 21).concat('...')}
+        </div>
+        <div className="cardInfo__content">
+          {review.crawlingData[0].desc ? review.crawlingData[0].desc : defaultText}
+        </div>
       </section>
     </Card>
   );

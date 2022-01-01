@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 //assets
 import radioOff from "assets/icon/btn_radio_off_24.svg";
@@ -30,18 +30,18 @@ const RadioBtn = styled.button`
   background-size: 100% 100%;
 `;
 
-const RadioButton = ({ items, setEnrollData, name }) => {
-  const [itemState, setItemState] = useState(items);
+const RadioButton = ({ items, setItems, setEnrollData, name }) => {
+  // const [itemState, setItemState] = useState(items);
 
   const selectHandler = (i, e) => {
     e.preventDefault();
-    const newItem = itemState.map(item => (i === item ? { ...item, select: true } : { ...item, select: false }));
-    setItemState(newItem);
+    const newItem = items.map(item => (i === item ? { ...item, select: true } : { ...item, select: false }));
+    setItems(newItem);
     setEnrollData(name, i.value);
   };
   return (
     <RadioBtnWrap>
-      {itemState.map((item, key) => (
+      {items.map((item, key) => (
         <article key={key}>
           <RadioBtn bg={item.select ? radioOn : radioOff} onClick={e => selectHandler(item, e)}></RadioBtn>
           <p>{item.value}</p>

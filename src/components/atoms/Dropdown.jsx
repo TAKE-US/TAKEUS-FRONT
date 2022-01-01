@@ -1,5 +1,5 @@
 /* eslint-disable arrow-parens */
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 import { useDetectOutsideClick } from '../../hooks/useDetectOutsideClick';
@@ -82,16 +82,31 @@ const Styled = {
   Img: styled.div``,
 };
 
-const Dropdown = ({ item, placeholder, rounded, font, caption, small, dropArray, onDrop, id }) => {
+const Dropdown = ({
+  item,
+  placeholder,
+  rounded,
+  font,
+  caption,
+  small,
+  dropArray,
+  onDrop,
+  id,
+  initial,
+}) => {
   const dropdownRef = useRef(null);
   const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
   const [list, setList] = useState('');
   const [image, setImage] = useState('');
-
   const onClick = e => {
     e.preventDefault();
     setIsActive(!isActive);
   };
+
+  useEffect(() => {
+    setList(initial.type);
+    setImage(item.filter(category => category.type === initial.type)[0]?.img);
+  }, [item, initial]);
 
   return (
     <Styled.Container>

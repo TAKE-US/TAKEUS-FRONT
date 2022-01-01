@@ -1,6 +1,6 @@
 /* eslint-disable arrow-parens */
-import React, { useEffect, useMemo, useState } from "react";
-import styled from "styled-components";
+import React, { useEffect, useMemo, useState, useCallback } from 'react';
+import styled from 'styled-components';
 
 const Styled = {
   InputWrapper: styled.div`
@@ -69,11 +69,11 @@ const Input = ({
   disabled,
   setEnrollData,
   name,
-  createdContact,
-  setCreatedContact,
+  setContact,
   initial,
+  isContact,
 }) => {
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState('');
   const [isError, setError] = useState(false);
   const isValid = useMemo(() => {
     switch (true) {
@@ -85,11 +85,24 @@ const Input = ({
     return false;
   }, [value, maxLength]);
 
+  const setEnrollDataCallback = useCallback(
+    (name, value) => {
+      setEnrollData(name, value);
+    },
+    [setEnrollData]
+  );
+
   useEffect(() => {
     if (isValid) setError(false);
     else setError(true);
-    if (initial) setValue(initial);
-  }, [isValid, initial]);
+    if (initial && !isContact) {
+      setValue(initial);
+      setEnrollDataCallback(name, initial);
+    }
+    if (isContact && initial.type) {
+      setValue(initial.value);
+    }
+  }, [isValid, initial, isContact, setEnrollDataCallback, name]);
 
   const changeValue = evt => {
     const newValue = evt.target.value;
@@ -102,10 +115,10 @@ const Input = ({
   };
 
   const onBlurHandler = () => {
-    if (name && name["type"] !== undefined) {
+    if (name && name['type'] !== undefined) {
       const newVal = {};
-      newVal[name["type"]] = value;
-      setCreatedContact(newVal);
+      newVal[name['type']] = value;
+      setContact(newVal);
     } else {
       setEnrollData(name, value);
     }
@@ -113,7 +126,7 @@ const Input = ({
 
   return (
     <>
-      <Styled.InputWrapper className={disabled ? "disabled" : ""}>
+      <Styled.InputWrapper className={disabled ? 'disabled' : ''}>
         {children}
         <Styled.Input
           disabled={disabled}
@@ -123,7 +136,7 @@ const Input = ({
           onChange={changeValue}
           onBlurCapture={onBlurHandler}
         />
-        <Styled.Caption className={isError ? "error" : ""}>{caption}</Styled.Caption>
+        <Styled.Caption className={isError ? 'error' : ''}>{caption}</Styled.Caption>
       </Styled.InputWrapper>
     </>
   );

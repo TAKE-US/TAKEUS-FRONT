@@ -1,16 +1,15 @@
-import React, { useState, useEffect } from "react";
-import styled from "styled-components";
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
 
-import { getCountry } from "lib/api/sample";
-import { DropdownCountry, DropdownAirport, Button } from "components";
-import { ReactComponent as SearchImg } from "assets/icon/ic_search_white_24.svg";
-import { useHistory } from "react-router";
+import { getCountry } from 'lib/api/sample';
+import { DropdownCountry, DropdownAirport, Button } from 'components';
+import { ReactComponent as SearchImg } from 'assets/icon/ic_search_white_24.svg';
+import { useHistory } from 'react-router';
 
 const Search = {
   Container: styled.div`
     background-color: ${({ theme }) => theme.color.white};
     width: 72.6rem;
-    border-radius: 1rem;
     box-shadow: 0rem 0rem 2rem 0.1rem rgba(0, 0, 0, 0.05);
     display: flex;
 
@@ -24,6 +23,8 @@ const Search = {
     & > .button > button {
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
+      border-top-right-radius: 1rem;
+      border-bottom-right-radius: 1rem;
 
       .text {
         margin-right: 0.3rem;
@@ -42,7 +43,7 @@ const Search = {
         flex: 1;
         &:before {
           position: absolute;
-          content: "";
+          content: '';
           top: 0;
           left: -2.6rem;
           height: 3.6rem;
@@ -55,16 +56,16 @@ const Search = {
 };
 
 const Searchbar = () => {
-  const [currCountry, setCurrCountry] = useState("");
-  const [currAirport, setCurrAirport] = useState("");
+  const [currCountry, setCurrCountry] = useState('');
+  const [currAirport, setCurrAirport] = useState('');
   const [country, setCountry] = useState([]);
-  const [allAirport, setAllAirport] = useState("");
+  const [allAirport, setAllAirport] = useState('');
   const history = useHistory();
 
   useEffect(() => {
     (async () => {
       try {
-        const data = await getCountry();
+        const { data } = await getCountry();
         console.log(data);
 
         setCountry(Object.keys(data).splice(1));
@@ -86,7 +87,11 @@ const Searchbar = () => {
     <>
       <Search.Container>
         <div className="dropdown dropdown__country">
-          <DropdownCountry currCountry={currCountry} setCurrCountry={setCurrCountry} country={country} />
+          <DropdownCountry
+            currCountry={currCountry}
+            setCurrCountry={setCurrCountry}
+            country={country}
+          />
         </div>
         <div className="dropdown dropdown__airport">
           <DropdownAirport

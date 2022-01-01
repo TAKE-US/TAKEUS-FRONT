@@ -21,11 +21,16 @@ const Styled = {
   `,
 };
 
-const AddDogLayer = ({ setEnrollData, name, createImage, setCreateImage }) => {
+const AddDogLayer = ({ setEnrollData, imageList, setImageList, initial }) => {
   return (
     <Styled.Wrapper>
-      <section className="title">대상견 사진을 올려주세요.(최대 5개)</section>
-      <AddDogCardContainer setEnrollData={setEnrollData} name={name} createImage={createImage} setCreateImage={setCreateImage} />
+      <section className='title'>대상견 사진을 올려주세요.(최대 5개)</section>
+      <AddDogCardContainer
+        setEnrollData={setEnrollData}
+        imageList={imageList}
+        setImageList={setImageList}
+        initial={initial}
+      />
     </Styled.Wrapper>
   );
 };

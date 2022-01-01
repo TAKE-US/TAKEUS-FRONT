@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import QueryString from "qs";
+import { withRouter } from "react-router-dom";
 //asset
 import DogPlane from "assets/img/img_dogswithplane.png";
 import DogHug from "assets/img/img_hugwithdog.png";
@@ -13,13 +15,10 @@ const Styled = {
   Header: styled.div`
     display: flex;
     min-width: 100%;
-    justify-content: space-between;
-    .image {
-      /* width: 36rem; */
-    }
+    padding-top: 14rem;
+    padding-bottom: 8rem;
+    background: url(${props => props.bg}) no-repeat center right;
     & > div {
-      position: relative;
-      top: 10.6rem;
       .tab-wrapper {
         display: grid;
         grid-template-columns: repeat(2, 16.4rem);
@@ -28,9 +27,14 @@ const Styled = {
       .text {
         margin-top: 6.4rem;
         & > h1 {
-          font: ${({ theme }) => theme.font.display1};
+          font-style: normal;
+          font-weight: normal;
+          font-size: 3rem;
+          line-height: 4.3rem;
           & > b {
-            font: ${({ theme }) => theme.font.display1};
+            font-style: normal;
+            font-weight: normal;
+            font-size: 30px;
             line-height: 4.3rem;
             color: ${({ theme }) => theme.color.primary};
           }
@@ -57,7 +61,7 @@ const Styled = {
   `,
 };
 
-const MypageHeader = () => {
+const MypageHeader = ({ location, history }) => {
   const [tabs, setTabs] = useState([
     { value: "이동봉사 모집글", select: true },
     { value: "이동봉사 후기글", select: false },
@@ -72,9 +76,31 @@ const MypageHeader = () => {
   const [selectedFilter, setSelectedFilter] = useState(contents[0]);
   const [isLoading, setIsLoading] = useState(false);
 
+  const query = QueryString.parse(location.search, { ignoreQueryPrefix: true });
+
+  useEffect(() => {
+    if (query?.select === "post") {
+      setTabs([
+        { value: "이동봉사 모집글", select: true },
+        { value: "이동봉사 후기글", select: false },
+      ]);
+    } else if (query?.select === "review") {
+      setTabs([
+        { value: "이동봉사 모집글", select: false },
+        { value: "이동봉사 후기글", select: true },
+      ]);
+    }
+  }, [query?.select]);
+
+  // const selectHandler = t => {
+  //   const newTabs = tabs.map(tab =>
+  //     tab === t ? { ...tab, select: true } : { ...tab, select: false }
+  //   );
+  //   setTabs(newTabs);
+  // };
+
   const selectHandler = t => {
-    const newTabs = tabs.map(tab => (tab === t ? { ...tab, select: true } : { ...tab, select: false }));
-    setTabs(newTabs);
+    t.value.split(" ")[1] === "모집글" ? history.push("mypage?select=post") : history.push("mypage?select=review");
   };
 
   useEffect(() => {
@@ -92,9 +118,10 @@ const MypageHeader = () => {
       setIsLoading(false);
     })();
   }, [dogsPage, reviewsPage, selectedFilter]);
+
   return (
     <Styled.Wrapper>
-      <Styled.Header>
+      <Styled.Header bg={tabs[0].select ? DogPlane : DogHug}>
         <div>
           <nav className="tab-wrapper">
             {tabs.map(tab => (
@@ -105,12 +132,12 @@ const MypageHeader = () => {
           </nav>
           <section className="text">
             <h1>
-              내가 올린 <b>이동 봉사 모집글</b>을 한번에 확인해보세요!
+              내가 올린 <b>이동 봉사 {tabs.filter(t => t.select).map(t => t.value.split(" ")[1])}</b>을 한번에
+              확인해보세요!
             </h1>
             <p>여러분의 도움으로 한 생명이 새로운 삶을 살게 되었어요 🙏🏻</p>
           </section>
         </div>
-        {tabs[0].select ? <img src={DogPlane} alt="" /> : <img src={DogHug} alt="" />}
       </Styled.Header>
       {isLoading ? (
         <Loading />
@@ -133,4 +160,4 @@ const MypageHeader = () => {
   );
 };
 
-export default MypageHeader;
+export default withRouter(MypageHeader);

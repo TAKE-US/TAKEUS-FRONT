@@ -1,11 +1,11 @@
 /* eslint-disable arrow-parens */
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
 //assets
-import minus from 'assets/icon/btn_round_minus_40.svg';
-import minusHover from 'assets/icon/btn_round_minus_hover_40.svg';
-import plus from 'assets/icon/btn_round_plus_40.svg';
-import plusHover from 'assets/icon/btn_round_plus_hover_40.svg';
+import minus from "assets/icon/btn_round_minus_40.svg";
+import minusHover from "assets/icon/btn_round_minus_hover_40.svg";
+import plus from "assets/icon/btn_round_plus_40.svg";
+import plusHover from "assets/icon/btn_round_plus_hover_40.svg";
 
 const CounterWrap = styled.section`
   display: flex;
@@ -31,8 +31,17 @@ const WeightBtn = styled.button`
   }
 `;
 
-const Counter = ({ name, setEnrollData }) => {
+const Counter = ({ name, setEnrollData, initial }) => {
   const [num, setNum] = useState(0);
+
+  useEffect(() => {
+    if (initial) setNum(initial);
+  }, [initial]);
+
+  useEffect(() => {
+    setEnrollData(name, num);
+  }, [num, name, setEnrollData]);
+
   const plusHandler = e => {
     e.preventDefault();
     setNum(prev => prev + 1);
@@ -43,9 +52,7 @@ const Counter = ({ name, setEnrollData }) => {
       setNum(prev => prev - 1);
     }
   };
-  useEffect(() => {
-    setEnrollData(name, num);
-  }, [num, name, setEnrollData]);
+
   return (
     <CounterWrap>
       <WeightBtn bg={minus} hover={minusHover} onClick={minusHandler}></WeightBtn>

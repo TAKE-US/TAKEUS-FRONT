@@ -1,8 +1,8 @@
 /* eslint-disable arrow-parens */
-import React, { useState, useRef } from 'react';
+/* eslint-disable no-unused-vars */
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import btn_plus from 'assets/icon/btn_plus.svg';
-import deleteBtn from 'assets/icon/btn_delete.svg';
 
 const Styled = {
   Wrapper: styled.section`
@@ -64,62 +64,29 @@ const Styled = {
   `,
 };
 
-const AddDogCard = ({ value, photoHandle, deleteHandle, urlArray, setUrlArray, createImage, setCreateImage }) => {
-  const [imgfile, setImage] = useState('');
-  const count = useRef(0);
-  const createImagePreview = e => {
-    const files = e.target.files;
-    setCreateImage(createImage.concat({ id: count.current, image: e.target.files[0] }));
-    if (files.length) {
-      setImageFromFile({
-        file: files[0],
-        setImageUrl: ({ result }) => {
-          setImage(files[0]);
-          setUrlArray(urlArray.concat(result));
-        },
-      });
-    }
-    count.current += 1;
-  };
+const extractLastId = array => {
+  if (array.length === 0) return 0;
+  return array.sort((a, b) => b.id - a.id)[0].id;
+};
 
-  function setImageFromFile({ file, setImageUrl }) {
-    let reader = new FileReader();
+const AddDogCard = ({ setImgPreviewList, imageList, setImageList }) => {
+  const setImagePreview = e => {
+    const reader = new FileReader();
+    const file = e.target.files[0];
     reader.onload = () => {
-      setImageUrl({ result: reader.result });
+      setImageList(prev => [{ id: extractLastId(imageList) + 1, file: file, imgURL: e.target.files[0] }, ...prev]);
+      setImgPreviewList(prev => [{ id: extractLastId(imageList) + 1, file: file, imgURL: reader.result }, ...prev]);
     };
-    reader.readAsDataURL(file);
-  }
+    if (file) reader.readAsDataURL(file);
+  };
 
   return (
     <Styled.Wrapper>
-      {value.id !== undefined ? (
-        <div className="image__area">
-          <img
-            className="image__area-delete"
-            onClick={e => {
-              deleteHandle(e);
-            }}
-            src={deleteBtn}
-            alt={'delete'}
-          />
-          <img className="image__area-img" data-key={value.id} src={urlArray[value.id]} alt={imgfile.name} />
-        </div>
-      ) : value ? (
-        <div className="card">
-          <img className="card__img" src={btn_plus} alt="plus" />
-          <p className="card__content">사진 추가하기</p>
-          <input
-            className="card__input"
-            type="file"
-            id="detail_image"
-            accept="image/*"
-            onChange={e => {
-              photoHandle(e);
-              createImagePreview(e);
-            }}
-          />
-        </div>
-      ) : null}
+      <div className='card'>
+        <img className='card__img' src={btn_plus} alt='plus' />
+        <p className='card__content'>사진 추가하기</p>
+        <input className='card__input' type='file' id='detail_image' accept='image/*' onChange={setImagePreview} />
+      </div>
     </Styled.Wrapper>
   );
 };

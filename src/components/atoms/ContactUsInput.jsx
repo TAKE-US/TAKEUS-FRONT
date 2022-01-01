@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 import styled from 'styled-components';
 
-import { Input, Button } from 'components';
-import useInput from "hooks/useInput";
+import { Button } from 'components';
 import { postMail } from 'lib/api/sample';
 
 const Styled = {
@@ -22,7 +21,7 @@ const Styled = {
       flex-direction: column;
       justify-content: space-between;
 
-      .text{
+      .text {
         width: 100%;
         height: 25.4rem;
         border: 1px solid ${({ theme }) => theme.color.lightgray2};
@@ -36,17 +35,8 @@ const Styled = {
         }
         ::placeholder {
           color: ${({ theme }) => theme.color.gray1};
-          font: ${({theme}) => theme.font.body2};
+          font: ${({ theme }) => theme.font.body2};
         }
-      }
-      .name, .email {
-        text-align: center;
-        width: 7rem;
-        font: ${({ theme }) => theme.font.body2};
-        color: ${({ theme }) => theme.color.gray3};
-        border-right: 1px solid ${({ theme }) => theme.color.lightgray2};
-        padding-right: 2rem;
-        white-space: nowrap;
       }
     }
   `,
@@ -54,63 +44,101 @@ const Styled = {
   Button: styled.div`
     height: 4.2rem;
   `,
-  
+
   Divider: styled.div`
-  margin: 0 1.6rem;
-  width: 0;
-  border-right: solid 0.1rem ${({ theme }) => theme.color.lightgray2};
+    margin: 0 1.6rem;
+    width: 0;
+    border-right: solid 0.1rem ${({ theme }) => theme.color.lightgray2};
+  `,
+
+  InputWrapper: styled.div`
+    border: 0.1rem solid ${({ theme }) => theme.color.lightgray2};
+    padding: 1rem 3.1rem;
+    border-radius: 5.4rem;
+    display: flex;
+    align-items: center;
+
+    .nameInput,
+    .emailInput {
+      color: ${({ theme }) => theme.color.gray3};
+      font: ${({ theme }) => theme.font.body2};
+      padding-left: 2.3rem;
+      &::placeholder {
+        color: ${({ theme }) => theme.color.gray1};
+        font: ${({ theme }) => theme.font.body2};
+      }
+    }
+
+    .name,
+    .email {
+      display: flex;
+      align-items: center;
+      width: 7rem;
+      height: 2.6rem;
+      font: ${({ theme }) => theme.font.body2};
+      color: ${({ theme }) => theme.color.gray3};
+      border-right: 1px solid ${({ theme }) => theme.color.lightgray2};
+      padding-right: 2rem;
+      white-space: nowrap;
+    }
   `,
 };
 
 const ContactUsInput = () => {
-  const [name, setName] = useInput("");
-  const [email, setEmail] = useInput("");
-  const [text, setText] = useInput("");
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [text, setText] = useState('');
 
-  const onClickHandler = async () => {
+  const onClickHandler = useCallback(async () => {
     await postMail(name, email, text);
-  };
+    setName('');
+    setEmail('');
+    setText('');
+  }, [name, email, text]);
+
+  const onChangeName = useCallback(e => {
+    setName(e.target.value);
+  }, []);
+
+  const onChangeEmail = useCallback(e => {
+    setEmail(e.target.value);
+  }, []);
+
+  const onChangeText = useCallback(e => {
+    setText(e.target.value);
+  }, []);
 
   return (
     <Styled.Wrapper>
       <div className="inputinner">
-        <div>
-          <Input
+        <Styled.InputWrapper>
+          <span className="name">name</span>
+          <input
+            className="nameInput"
             placeholder="이름을 입력해주세요."
-            font="body2"
             value={name}
-            onChange={setName}
-          >
-            <span className="name">name</span>
-          </Input>
-        </div>
-        <div>
-          <Input
+            onChange={onChangeName}
+          />
+        </Styled.InputWrapper>
+        <Styled.InputWrapper>
+          <span className="email">e-mail</span>
+          <input
+            className="emailInput"
             placeholder="이메일을 입력해주세요."
-            font="body2"
             value={email}
-            onChange={setEmail}
-            >
-            <span className="email">e-mail</span>
-          </Input>
-        </div>
+            onChange={onChangeEmail}
+          />
+        </Styled.InputWrapper>
         <textarea
           className="text"
           value={text}
           placeholder="내용을 입력해주세요."
-          onChange={setText}
+          onChange={onChangeText}
         >
           {text}
         </textarea>
-        <div
-          onClick={onClickHandler}
-        >
-          <Button
-            primary
-            rounded
-            full
-            padding="1.2rem 0"
-          >
+        <div onClick={onClickHandler}>
+          <Button primary rounded full padding="1.2rem 0">
             TAKEUS에 보내기
           </Button>
         </div>
