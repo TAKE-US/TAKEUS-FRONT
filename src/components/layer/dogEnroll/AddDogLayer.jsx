@@ -2,7 +2,7 @@
 /* eslint-disable arrow-parens */
 import React from 'react';
 import styled from 'styled-components';
-import AddDogCardContainer from 'components/atoms/AddDogCardContainer';
+import AddDogCardContainer from 'components/atoms/AddDog/AddDogCardContainer';
 
 const Styled = {
   Wrapper: styled.section`
@@ -22,12 +22,14 @@ const Styled = {
 };
 
 const AddDogLayer = ({ setEnrollData, imageList, setImageList, initial }) => {
+  const filterImageList = imageList.length > 0 ? imageList.filter(v => v.id > 0) : [];
+
   return (
     <Styled.Wrapper>
       <section className='title'>대상견 사진을 올려주세요.(최대 5개)</section>
       <AddDogCardContainer
         setEnrollData={setEnrollData}
-        imageList={imageList}
+        imageList={filterImageList}
         setImageList={setImageList}
         initial={initial}
       />
