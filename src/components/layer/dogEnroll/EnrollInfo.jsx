@@ -1,7 +1,7 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable max-len */
 /* eslint-disable arrow-parens */
-
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import {
   RadioButton,
@@ -23,68 +23,8 @@ import useEnrollData from 'hooks/useEnrollData';
 import { postEnroll, putDog } from 'lib/api/sample';
 import { withRouter } from 'react-router-dom';
 import { useHistory } from 'react-router';
+import EnrollInfoWrap from './EnrollInfoStyle';
 
-const EnrollInfoWrap = styled.section`
-  .wrap {
-    margin-top: 6rem;
-    padding: 0 12rem;
-    label {
-      min-width: 15.2rem;
-      font: ${({ theme }) => theme.font.title2};
-    }
-
-    &:last-child {
-      margin-top: 8rem;
-      margin-bottom: 18rem;
-    }
-    &--flex {
-      display: flex;
-      align-items: center;
-    }
-
-    &--add {
-      width: 100%;
-      height: 20rem;
-    }
-    &.contact {
-      .contact-layer {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        grid-auto-rows: 3.2rem;
-        column-gap: 1.9rem;
-        row-gap: 1.2rem;
-        margin-top: 2.4rem;
-      }
-      .contact__btn {
-        svg {
-          width: calc(2.4rem - 0.2rem);
-          height: calc(2.4rem - 0.2rem);
-          margin-right: 0.8rem;
-          stroke: ${({ theme }) => theme.color.primary};
-        }
-        &:hover {
-          svg {
-            stroke: ${({ theme }) => theme.color.white};
-          }
-        }
-      }
-    }
-  }
-  .dropdown {
-    position: relative;
-    display: flex;
-    font: ${({ theme }) => theme.font.button};
-    color: ${({ theme }) => theme.color.gray3};
-    &::after {
-      content: '';
-      width: 0;
-      top: 0;
-      right: 0;
-      margin: 0 1rem;
-      border-right: solid 1px ${({ theme }) => theme.color.lightgray2};
-    }
-  }
-`;
 
 const ContactsList = [
   {
@@ -115,7 +55,7 @@ const EnrollInfo = ({ edit }) => {
   const [dropArray, setDrop] = useState([]);
   const [contactList, setContactList] = useState([{ type: '', value: '' }]);
   const [selectedContact, setContact] = useState({});
-  const [createdImage, setCreatedImage] = useState([]);
+  const [imageList, setImageList] = useState([]);
   const [genderItems, setGenderItems] = useState([
     { value: '여', select: true },
     { value: '남', select: false },
@@ -131,7 +71,7 @@ const EnrollInfo = ({ edit }) => {
   ]);
   const [initial, setInitial] = useState();
 
-  const setEnrollDataCallback = useCallback(
+  const setEnrollDataCallback = React.useCallback(
     (name, value) => {
       setEnrollData(name, value);
     },
@@ -154,9 +94,9 @@ const EnrollInfo = ({ edit }) => {
   useEffect(() => {
     (async () => {
       if (!edit) return;
+
       const data = history.location.state ? history.location.state.dog : null;
       setInitial(data);
-
       setGenderItems(prev => {
         return prev.map(item => {
           return item.value === data.gender
@@ -238,8 +178,11 @@ const EnrollInfo = ({ edit }) => {
     if (enrollData?.인스타그램) formData.append('instagram', enrollData?.인스타그램);
     if (enrollData?.트위터) formData.append('twitter', enrollData?.트위터);
 
-    for (let i = 0; i < Array.from(createdImage).length; i++) {
-      formData.append('photos', createdImage[i]['image']);
+    if (edit) formData.append('photo_link', []);
+    for (let i = 0; i < Array.from(imageList).length; i++) {
+      if (typeof imageList[i]['imgURL'] === 'string')
+        formData.append('photo_link', imageList[i]['imgURL']);
+      else formData.append('photos', imageList[i]['imgURL']);
     }
 
     if (edit) await putDog(history.location.state?.dog._id, formData);
@@ -250,15 +193,15 @@ const EnrollInfo = ({ edit }) => {
   return (
     <EnrollInfoWrap>
       <form onSubmit={handleSubmit}>
-        <div className="wrap wrap--add">
+        <div className='wrap wrap--add'>
           <AddDogLayer
-            createdImage={createdImage}
-            setCreatedImage={setCreatedImage}
+            imageList={imageList}
+            setImageList={setImageList}
             setEnrollData={setEnrollDataCallback}
             initial={initial?.photos}
           />
         </div>
-        <div className="wrap wrap--flex">
+        <div className='wrap wrap--flex'>
           <label>출국정보</label>
           <EnrollSearchbar
             enroll
@@ -267,90 +210,90 @@ const EnrollInfo = ({ edit }) => {
             initialEndingAirport={initial?.endingAirport}
           />
         </div>
-        <div className="wrap wrap--flex">
+        <div className='wrap wrap--flex'>
           <label>대상견 이름</label>
           <Input
-            placeholder="ex 멍멍이"
+            placeholder='ex 멍멍이'
             maxLength={30}
-            caption="30자 이내로 적어주세요."
+            caption='30자 이내로 적어주세요.'
             setEnrollData={setEnrollDataCallback}
-            name="name"
-            font="body3"
+            name='name'
+            font='body3'
             initial={initial?.name}
           />
         </div>
-        <div className="wrap wrap--flex">
+        <div className='wrap wrap--flex'>
           <label>대상견 성별</label>
           <RadioButton
             items={genderItems}
             setItems={setGenderItems}
             setEnrollData={setEnrollDataCallback}
-            name="gender"
+            name='gender'
           />
         </div>
-        <div className="wrap wrap--flex">
+        <div className='wrap wrap--flex'>
           <label>대상견 나이</label>
           <Input
-            placeholder="ex 1살 , 2개월 등"
+            placeholder='ex 1살 , 2개월 등'
             maxLength={10}
-            caption="10자 이내로 적어주세요."
+            caption='10자 이내로 적어주세요.'
             setEnrollData={setEnrollDataCallback}
-            name="age"
-            font="body3"
+            name='age'
+            font='body3'
             initial={initial?.age}
           />
         </div>
-        <div className="wrap wrap--flex">
+        <div className='wrap wrap--flex'>
           <label>대상견 무게</label>
-          <Counter setEnrollData={setEnrollDataCallback} name="weight" initial={initial?.weight} />
+          <Counter setEnrollData={setEnrollDataCallback} name='weight' initial={initial?.weight} />
         </div>
-        <div className="wrap wrap--flex">
+        <div className='wrap wrap--flex'>
           <label>중성화 여부</label>
           <RadioButton
             items={isNeutering}
             setItems={setIsNeutering}
             setEnrollData={setEnrollDataCallback}
-            name="neutralization"
+            name='neutralization'
           />
         </div>
-        <div className="wrap wrap--flex">
+        <div className='wrap wrap--flex'>
           <label>건강상태</label>
           <Input
-            placeholder="ex 접종내역, 건강상태, 유의할 점 등"
+            placeholder='ex 접종내역, 건강상태, 유의할 점 등'
             maxLength={50}
-            caption="50자 이내로 적어주세요."
+            caption='50자 이내로 적어주세요.'
             setEnrollData={setEnrollDataCallback}
-            name="health"
-            font="body3"
+            name='health'
+            font='body3'
             initial={initial?.health}
           />
         </div>
-        <div className="wrap wrap--flex">
+        <div className='wrap wrap--flex'>
           <label>소속여부</label>
           <RadioButton
             items={isInstitution}
             setItems={setIsInstitution}
             setEnrollData={setEnrollDataCallback}
-            name="isInstitution"
+            name='isInstitution'
           />
           <Input
-            placeholder="단체명을 입력해주세요."
+            placeholder='단체명을 입력해주세요.'
             maxLength={15}
-            caption="15자 이내로 적어주세요."
+            caption='15자 이내로 적어주세요.'
             setEnrollData={setEnrollDataCallback}
-            name="institutionName"
-            font="body3"
+            name='institutionName'
+            font='body3'
             initial={initial?.institutionName}
           />
         </div>
-        <div className="wrap contact">
+        <div className='wrap contact'>
           <label>연락처</label>
-          <div className="contact-layer">
+          <div className='contact-layer'>
             {contactList.map((contact, i) => (
               <Input
                 placeholder={'연락처를 입력해 주세요'}
                 key={`contact-${i}`}
-                font="body3"
+                font='body3'
                 name={dropArray[i]}
                 selectedContact={selectedContact}
                 setContact={setContact}
@@ -358,13 +301,13 @@ const EnrollInfo = ({ edit }) => {
                 initial={contact}
                 isContact={true}
               >
-                <div className="dropdown">
+                <div className='dropdown'>
                   <Dropdown
                     item={ContactsList}
-                    placeholder="연락처"
+                    placeholder='연락처'
                     rounded
                     small
-                    font="body3"
+                    font='body3'
                     dropArray={dropArray}
                     onDrop={onDrop}
                     id={i}
@@ -373,20 +316,20 @@ const EnrollInfo = ({ edit }) => {
                 </div>
               </Input>
             ))}
-            <div className="contact__btn" onClick={addContactList}>
-              <Button rounded full padding="1rem 0" font="gnb">
+            <div className='contact__btn' onClick={addContactList}>
+              <Button rounded full padding='1rem 0' font='gnb'>
                 <Plus />
                 연락처 추가하기
               </Button>
             </div>
           </div>
         </div>
-        <div className="wrap">
+        <div className='wrap'>
           <TextField
-            label="내용을 작성해주세요"
+            label='내용을 작성해주세요'
             maxLength={500}
             setEnrollData={setEnrollDataCallback}
-            name="detail"
+            name='detail'
             initial={initial?.detail}
           />
         </div>

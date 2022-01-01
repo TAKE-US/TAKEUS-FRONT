@@ -32,14 +32,11 @@ const Menu = {
       }
 
       .text {
-        margin-top: 0.6rem;
+        width: 50px;
+        margin-top: 0.2rem;
         font: ${({ theme }) => theme.font.body2};
-        color: ${props =>
-          props.currCountry
-            ? props.currCountry === '국가'
-              ? '#C1C1C1'
-              : '#3D3D3D'
-            : '#C1C1C1'};
+        color: ${props => (props.currCountry ? (props.currCountry === '국가' ? '#C1C1C1' : '#3D3D3D') : '#C1C1C1')};
+        font-size: 1.6rem;
       }
     }
     svg {
@@ -54,6 +51,7 @@ const Menu = {
       }
       .text {
         margin-top: 0;
+        font-size: 1.6rem;
       }
     }
   `,
@@ -67,6 +65,7 @@ const Menu = {
     border-radius: 1rem;
     margin-top: 1.6rem;
     background-color: ${({ theme }) => theme.color.white};
+    font-size: 1.6rem;
     &.enroll {
       width: 15.8rem;
       z-index: 10;
@@ -111,29 +110,14 @@ const DropdownCountry = ({ currCountry, setCurrCountry, country, enroll }) => {
 
   return (
     <Menu.Container>
-      <Menu.Button
-        onClick={onClick}
-        currCountry={currCountry}
-        isActive={isActive}
-        className={enroll ? 'enroll' : ''}
-      >
+      <Menu.Button onClick={onClick} currCountry={currCountry} isActive={isActive} className={enroll ? 'enroll' : ''}>
         <div className='destination'>
           {!enroll && <span className='name'>국가</span>}
-          <span className='text'>
-            {currCountry
-              ? currCountry
-              : enroll
-              ? enroll.initialValue
-              : '어디로 가시나요?'}
-          </span>
+          <span className='text'>{currCountry ? currCountry : enroll ? enroll.initialValue : '어디로 가시나요?'}</span>
         </div>
         <Arrow />
       </Menu.Button>
-      <Menu.List
-        ref={dropdownRef}
-        isActive={isActive}
-        className={enroll ? 'enroll' : ''}
-      >
+      <Menu.List ref={dropdownRef} isActive={isActive} className={enroll ? 'enroll' : ''}>
         <Menu.Ul className={enroll ? 'enroll' : ''}>
           {country.map((country, index) => (
             <li

@@ -294,7 +294,6 @@ export const putReview = async (id, data) => {
 };
 
 export const postEnroll = async data => {
-  console.log(data);
   const body = data;
   try {
     const data = await instance.post('/api/dogs', body, {
@@ -316,9 +315,9 @@ export const postEnroll = async data => {
 export const putDog = async (dogId, data) => {
   const body = data;
   try {
-    const data = await instance.put(`/api/dogs/detail/${dogId}`, body, {
+    const data = await instance.patch(`/api/dogs/detail/${dogId}`, body, {
       headers: {
-        'Content-Type': 'multipart/form-data; boundary=<calculated when request is sent>',
+        'Content-Type': 'multipart/form-data',
         'x-auth-token': localStorage.getItem('token'),
       },
     });
@@ -351,17 +350,17 @@ export const putDogStatus = async (dogId, data) => {
 
 export const getMyData = async () => {
   try {
-    const data = await instance.get("/api/users/login", {
+    const data = await instance.get('/api/users/login', {
       header: {
-        "Content-Type": "application/json",
-        "x-auth-token": localStorage.getItem("token"),
+        'Content-Type': 'application/json',
+        'x-auth-token': localStorage.getItem('token'),
       },
     });
     console.log(data);
-    console.log("[SUCCESS] GET my data");
+    console.log('[SUCCESS] GET my data');
     return data.data.data;
   } catch (e) {
-    console.log("[FAIL] GET my data");
+    console.log('[FAIL] GET my data');
     throw e;
   }
 };
@@ -373,15 +372,15 @@ export const postNaverToken = async (code, state) => {
   };
   console.log(code, state);
   try {
-    const data = await instance.post("/api/users/naverLogin", body, {
+    const data = await instance.post('/api/users/naverLogin', body, {
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     });
-    console.log("[SUCCESS] Naver Login");
+    console.log('[SUCCESS] Naver Login');
     return data.data;
   } catch (e) {
-    console.log("[FAIL] Naver Login");
+    console.log('[FAIL] Naver Login');
     return null;
   }
 };
