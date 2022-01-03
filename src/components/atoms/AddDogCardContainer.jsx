@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable arrow-parens */
-import React, { useState, useRef, useEffect } from "react";
-import styled from "styled-components";
-import AddDogCard from "components/atoms/AddDogCard";
+import React, { useState, useRef, useEffect } from 'react';
+import styled from 'styled-components';
+import { ImageCard, AddDogCard } from 'components';
 
 const Styled = {
   Wrapper: styled.section`
@@ -11,70 +11,43 @@ const Styled = {
   `,
 };
 
-const AddDogCardContainer = ({ createdImage, setCreatedImage, initial }) => {
-  const [boxList, setBoxList] = useState([1, 0, 0, 0, 0]);
-  const [URLArray, setURLArray] = useState([]);
-  const [photoId, setPhotoId] = useState(0);
-  const nextId = useRef(0);
+const AddDogCardContainer = ({ imageList, setImageList, initial }) => {
+  const [imagePreviewList, setImgPreviewList] = useState([1, 0, 0, 0, 0]);
 
-  const photoHandle = e => {
-    const photoFile = e.target.files;
-    (async () => {
-      arrayHandle(photoFile);
-    })();
-  };
-
-  const arrayHandle = photoFile => {
-    const idPhoto = {
-      id: nextId.current,
-      photoFile: photoFile,
-      url: URLArray,
-    };
-    if (photoFile !== null) setBoxList([idPhoto, ...boxList]);
-    nextId.current += 1;
-    setPhotoId(nextId.current);
-  };
+  useEffect(() => {
+    initial?.forEach((value, index) => {
+      setImageList(prev => [{ id: index, imgURL: value }, ...prev]);
+      setImgPreviewList(prev => [{ id: index, imgURL: value }, ...prev]);
+    });
+  }, [initial, setImageList]);
 
   const deleteHandle = e => {
     const deletedKey = e.target.nextSibling.dataset.key;
-    setBoxList(prev => prev.filter(photo => photo.id !== Number(deletedKey)));
-    setCreatedImage(prev => prev.filter(photo => photo.id !== Number(deletedKey)));
+    setImgPreviewList(prev => prev.filter(photo => photo.id !== Number(deletedKey)));
+    setImageList(prev => prev.filter(photo => photo.id !== Number(deletedKey)));
   };
 
-  useEffect(() => {
-    initial?.length > 0 && initial.map(URL => setURLArray(prev => prev.concat(URL)));
-    if (initial?.length > 0) {
-      const initialList = initial.map((URL, index) => {
-        return {
-          id: index,
-          photoFile: URL,
-        };
-      });
-      setBoxList(boxList => [...initialList, ...boxList]);
-      nextId.current = initialList.length;
-      setPhotoId(nextId.current);
-    }
-  }, [initial]);
+  console.log('CardContainer');
+  console.log(imageList);
 
   return (
     <Styled.Wrapper>
-      <>
-        {boxList.map((value, i) =>
-          i < 5 ? (
+      {imagePreviewList.map((value, i) =>
+        i < 5 ? (
+          value === 1 ? (
             <AddDogCard
               key={i}
               value={value}
-              photoId={photoId}
-              photoHandle={photoHandle}
-              deleteHandle={deleteHandle}
-              URLArray={URLArray}
-              setURLArray={setURLArray}
-              createdImage={createdImage}
-              setCreatedImage={setCreatedImage}
+              imagePreviewList={imagePreviewList}
+              imageList={imageList}
+              setImgPreviewList={setImgPreviewList}
+              setImageList={setImageList}
             />
-          ) : null
-        )}
-      </>
+          ) : (
+            <ImageCard key={i} value={value} imagePreviewList={imagePreviewList} deleteHandle={deleteHandle} />
+          )
+        ) : null
+      )}
     </Styled.Wrapper>
   );
 };

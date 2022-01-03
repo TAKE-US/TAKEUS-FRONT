@@ -1,7 +1,7 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable max-len */
 /* eslint-disable arrow-parens */
-
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import {
   RadioButton,
@@ -23,68 +23,7 @@ import useEnrollData from 'hooks/useEnrollData';
 import { postEnroll, putDog } from 'lib/api/sample';
 import { withRouter } from 'react-router-dom';
 import { useHistory } from 'react-router';
-
-const EnrollInfoWrap = styled.section`
-  .wrap {
-    margin-top: 6rem;
-    padding: 0 12rem;
-    label {
-      min-width: 15.2rem;
-      font: ${({ theme }) => theme.font.title2};
-    }
-
-    &:last-child {
-      margin-top: 8rem;
-      margin-bottom: 18rem;
-    }
-    &--flex {
-      display: flex;
-      align-items: center;
-    }
-
-    &--add {
-      width: 100%;
-      height: 20rem;
-    }
-    &.contact {
-      .contact-layer {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        grid-auto-rows: 3.2rem;
-        column-gap: 1.9rem;
-        row-gap: 1.2rem;
-        margin-top: 2.4rem;
-      }
-      .contact__btn {
-        svg {
-          width: calc(2.4rem - 0.2rem);
-          height: calc(2.4rem - 0.2rem);
-          margin-right: 0.8rem;
-          stroke: ${({ theme }) => theme.color.primary};
-        }
-        &:hover {
-          svg {
-            stroke: ${({ theme }) => theme.color.white};
-          }
-        }
-      }
-    }
-  }
-  .dropdown {
-    position: relative;
-    display: flex;
-    font: ${({ theme }) => theme.font.button};
-    color: ${({ theme }) => theme.color.gray3};
-    &::after {
-      content: '';
-      width: 0;
-      top: 0;
-      right: 0;
-      margin: 0 1rem;
-      border-right: solid 1px ${({ theme }) => theme.color.lightgray2};
-    }
-  }
-`;
+import EnrollInfoWrap from './EnrollInfoStyle';
 
 const ContactsList = [
   {
@@ -115,7 +54,7 @@ const EnrollInfo = ({ edit }) => {
   const [dropArray, setDrop] = useState([]);
   const [contactList, setContactList] = useState([{ type: '', value: '' }]);
   const [selectedContact, setContact] = useState({});
-  const [createdImage, setCreatedImage] = useState([]);
+  const [imageList, setImageList] = useState([]);
   const [genderItems, setGenderItems] = useState([
     { value: '여', select: true },
     { value: '남', select: false },
@@ -131,7 +70,7 @@ const EnrollInfo = ({ edit }) => {
   ]);
   const [initial, setInitial] = useState();
 
-  const setEnrollDataCallback = useCallback(
+  const setEnrollDataCallback = React.useCallback(
     (name, value) => {
       setEnrollData(name, value);
     },
@@ -154,9 +93,9 @@ const EnrollInfo = ({ edit }) => {
   useEffect(() => {
     (async () => {
       if (!edit) return;
+
       const data = history.location.state ? history.location.state.dog : null;
       setInitial(data);
-
       setGenderItems(prev => {
         return prev.map(item => {
           return item.value === data.gender
@@ -238,8 +177,11 @@ const EnrollInfo = ({ edit }) => {
     if (enrollData?.인스타그램) formData.append('instagram', enrollData?.인스타그램);
     if (enrollData?.트위터) formData.append('twitter', enrollData?.트위터);
 
-    for (let i = 0; i < Array.from(createdImage).length; i++) {
-      formData.append('photos', createdImage[i]['image']);
+    if (edit) formData.append('photo_link', []);
+    for (let i = 0; i < Array.from(imageList).length; i++) {
+      if (typeof imageList[i]['imgURL'] === 'string')
+        formData.append('photo_link', imageList[i]['imgURL']);
+      else formData.append('photos', imageList[i]['imgURL']);
     }
 
     if (edit) await putDog(history.location.state?.dog._id, formData);
@@ -252,8 +194,8 @@ const EnrollInfo = ({ edit }) => {
       <form onSubmit={handleSubmit}>
         <div className="wrap wrap--add">
           <AddDogLayer
-            createdImage={createdImage}
-            setCreatedImage={setCreatedImage}
+            imageList={imageList}
+            setImageList={setImageList}
             setEnrollData={setEnrollDataCallback}
             initial={initial?.photos}
           />
