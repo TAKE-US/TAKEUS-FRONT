@@ -120,8 +120,11 @@ const DropdownAirport = ({ currCountry, currAirport, setCurrAirport, allAirport,
 
   useEffect(() => {
     setAirport(allAirport[currCountry]);
-    // setCurrAirport("");
-  }, [currCountry, setCurrAirport, allAirport]);
+  }, [currCountry, allAirport]);
+
+  useEffect(() => {
+    setCurrAirport('');
+  }, [setCurrAirport, currCountry]);
 
   return (
     <Menu.Container enroll={enroll}>

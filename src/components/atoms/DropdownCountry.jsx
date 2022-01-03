@@ -35,8 +35,10 @@ const Menu = {
         width: 50px;
         margin-top: 0.2rem;
         font: ${({ theme }) => theme.font.body2};
-        color: ${props => (props.currCountry ? (props.currCountry === '국가' ? '#C1C1C1' : '#3D3D3D') : '#C1C1C1')};
+        color: ${props =>
+          props.currCountry ? (props.currCountry === '국가' ? '#C1C1C1' : '#3D3D3D') : '#C1C1C1'};
         font-size: 1.6rem;
+        white-space: nowrap;
       }
     }
     svg {
@@ -77,24 +79,25 @@ const Menu = {
     padding: 0;
     margin: 0;
 
-    li {
-      width: 18.4rem;
-      height: 3.2rem;
-      padding-left: 1.4rem;
-      font: ${({ theme }) => theme.font.body1};
-      color: ${props => (props.selected ? '#FDCB02' : '#3D3D3D')};
-      display: flex;
-      align-items: center;
-      border-radius: 1rem;
-      &:hover {
-        cursor: pointer;
-        background-color: ${({ theme }) => theme.color.bg_yellow};
-      }
-    }
     &.enroll {
       li {
         width: 14.8rem;
       }
+    }
+  `,
+
+  Li: styled.li`
+    color: ${props => (props.selected ? '#FDCB02' : '#3D3D3D')};
+    width: 18.4rem;
+    height: 3.2rem;
+    padding-left: 1.4rem;
+    font: ${({ theme }) => theme.font.body1};
+    display: flex;
+    align-items: center;
+    border-radius: 1rem;
+    &:hover {
+      cursor: pointer;
+      background-color: ${({ theme }) => theme.color.bg_yellow};
     }
   `,
 };
@@ -110,17 +113,24 @@ const DropdownCountry = ({ currCountry, setCurrCountry, country, enroll }) => {
 
   return (
     <Menu.Container>
-      <Menu.Button onClick={onClick} currCountry={currCountry} isActive={isActive} className={enroll ? 'enroll' : ''}>
-        <div className='destination'>
-          {!enroll && <span className='name'>국가</span>}
-          <span className='text'>{currCountry ? currCountry : enroll ? enroll.initialValue : '어디로 가시나요?'}</span>
+      <Menu.Button
+        onClick={onClick}
+        currCountry={currCountry}
+        isActive={isActive}
+        className={enroll ? 'enroll' : ''}
+      >
+        <div className="destination">
+          {!enroll && <span className="name">국가</span>}
+          <span className="text">
+            {currCountry ? currCountry : enroll ? enroll.initialValue : '어디로 가시나요?'}
+          </span>
         </div>
         <Arrow />
       </Menu.Button>
       <Menu.List ref={dropdownRef} isActive={isActive} className={enroll ? 'enroll' : ''}>
         <Menu.Ul className={enroll ? 'enroll' : ''}>
           {country.map((country, index) => (
-            <li
+            <Menu.Li
               key={`country-dropdown-${index}`}
               selected={currCountry === country ? true : false}
               onClick={() => {
@@ -129,7 +139,7 @@ const DropdownCountry = ({ currCountry, setCurrCountry, country, enroll }) => {
               }}
             >
               {country}
-            </li>
+            </Menu.Li>
           ))}
         </Menu.Ul>
       </Menu.List>
