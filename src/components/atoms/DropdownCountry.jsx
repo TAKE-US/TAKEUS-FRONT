@@ -122,7 +122,14 @@ const DropdownCountry = ({ currCountry, setCurrCountry, country, enroll }) => {
         <div className="destination">
           {!enroll && <span className="name">국가</span>}
           <span className="text">
-            {currCountry ? currCountry : enroll ? enroll.initialValue : '어디로 가시나요?'}
+            {/* {currCountry ? currCountry : enroll ? enroll.initialValue : '어디로 가시나요?'} */}
+            {currCountry
+              ? currCountry
+              : enroll?.initialValue
+              ? enroll.initialValue
+              : enroll
+              ? '국가'
+              : '어디로 가시나요?'}
           </span>
         </div>
         <Arrow />

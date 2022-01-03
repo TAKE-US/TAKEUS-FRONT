@@ -30,14 +30,9 @@ const Search = {
   `,
 };
 
-const Searchbar = ({
-  initialData,
-  setEnrollData,
-  initialEndingCountry,
-  initialEndingAirport,
-}) => {
-  const [currCountry, setCurrCountry] = useState('국가');
-  const [currAirport, setCurrAirport] = useState('공항명');
+const Searchbar = ({ initialData, setEnrollData, initialEndingCountry, initialEndingAirport }) => {
+  const [currCountry, setCurrCountry] = useState('');
+  const [currAirport, setCurrAirport] = useState('');
   const [country, setCountry] = useState([]);
   const [allAirport, setAllAirport] = useState('');
 
@@ -68,7 +63,7 @@ const Searchbar = ({
   return (
     <>
       <Search.Container>
-        <div className='dropdown dropdown__country'>
+        <div className="dropdown dropdown__country">
           <DropdownCountry
             enroll={{ initialValue: initialData?.endingCountry }}
             currCountry={currCountry}
@@ -76,7 +71,7 @@ const Searchbar = ({
             country={country}
           />
         </div>
-        <div className='dropdown dropdown__airport'>
+        <div className="dropdown dropdown__airport">
           <DropdownAirport
             enroll={{ initialValue: initialData?.endingAirport }}
             currCountry={currCountry}
