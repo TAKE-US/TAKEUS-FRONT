@@ -68,9 +68,8 @@ const ReviewCard = ({ review, editHandler, deleteHandler }) => {
   const isLogin = review.user === localStorage.getItem("ID");
   const [availableImg, setAvailableImg] = useState(true);
   const formatDate = rawDate => {
-    const [date, time] = rawDate.split("T");
-    const [hour, minute] = time.split(":");
-    return `${date}  ${hour}:${minute}`;
+    const [date] = rawDate.split("T");
+    return `${date.replaceAll("-", ".")}`;
   };
 
   return (
