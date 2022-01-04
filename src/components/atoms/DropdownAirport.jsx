@@ -61,10 +61,9 @@ const Menu = {
     padding: 1rem 0.6rem;
     box-shadow: 0rem 0rem 3rem 0.1rem rgba(0, 0, 0, 0.1);
     border-radius: 1rem;
-    margin-left: -1rem;
+    margin-left: ${props => (props.enroll ? '0rem' : '-2rem')};
     margin-top: 1.6rem;
-    background-color: ${props =>
-      props.enroll ? props.theme.color.black : props.theme.color.white};
+    background-color: ${({ theme }) => theme.color.white};
     &.enroll {
       width: 49rem;
       z-index: 10;
@@ -112,6 +111,8 @@ const DropdownAirport = ({ currCountry, currAirport, setCurrAirport, allAirport,
   const dropdownRef = useRef(null);
   const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
   const [airport, setAirport] = useState('');
+  const airportRef = useRef(false);
+  const countryRef = useRef(false);
 
   const onClick = e => {
     e.preventDefault();
@@ -120,8 +121,29 @@ const DropdownAirport = ({ currCountry, currAirport, setCurrAirport, allAirport,
 
   useEffect(() => {
     setAirport(allAirport[currCountry]);
-    // setCurrAirport("");
-  }, [currCountry, setCurrAirport, allAirport]);
+  }, [currCountry, allAirport]);
+
+  useEffect(() => {
+    if (airportRef.current && countryRef.current) {
+      setCurrAirport('');
+    }
+  }, [currCountry, setCurrAirport]);
+
+  useEffect(() => {
+    if (!airportRef.current) {
+      airportRef.current = true;
+    } else {
+      console.log('updated');
+    }
+  }, [currAirport]);
+
+  useEffect(() => {
+    if (!countryRef.current) {
+      countryRef.current = true;
+    } else {
+      console.log('updated');
+    }
+  }, [currCountry]);
 
   return (
     <Menu.Container enroll={enroll}>
@@ -135,12 +157,24 @@ const DropdownAirport = ({ currCountry, currAirport, setCurrAirport, allAirport,
         <div className="destination">
           {!enroll && <span className="name">공항명</span>}
           <span className="text">
-            {currAirport ? currAirport : enroll ? enroll.initialValue : '도착 공항은 어디인가요?'}
+            {/* {currAirport ? currAirport : enroll ? enroll.initialValue : '도착 공항은 어디인가요?'} */}
+            {currAirport
+              ? currAirport
+              : enroll?.initialValue
+              ? enroll.initialValue
+              : enroll
+              ? '공항명'
+              : '도착 공항은 어디인가요?'}
           </span>
         </div>
         <Arrow />
       </Menu.Button>
-      <Menu.Nav ref={dropdownRef} isActive={isActive} className={enroll ? 'enroll' : ''}>
+      <Menu.Nav
+        ref={dropdownRef}
+        isActive={isActive}
+        className={enroll ? 'enroll' : ''}
+        enroll={enroll}
+      >
         <Menu.Ul>
           {airport &&
             Object.keys(airport).map((city, index) => (

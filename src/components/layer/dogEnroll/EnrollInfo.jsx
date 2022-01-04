@@ -25,7 +25,6 @@ import { withRouter } from 'react-router-dom';
 import { useHistory } from 'react-router';
 import EnrollInfoWrap from './EnrollInfoStyle';
 
-
 const ContactsList = [
   {
     img: <Kakao />,
@@ -193,7 +192,7 @@ const EnrollInfo = ({ edit }) => {
   return (
     <EnrollInfoWrap>
       <form onSubmit={handleSubmit}>
-        <div className='wrap wrap--add'>
+        <div className="wrap wrap--add">
           <AddDogLayer
             imageList={imageList}
             setImageList={setImageList}
@@ -201,7 +200,7 @@ const EnrollInfo = ({ edit }) => {
             initial={initial?.photos}
           />
         </div>
-        <div className='wrap wrap--flex'>
+        <div className="wrap wrap--flex">
           <label>출국정보</label>
           <EnrollSearchbar
             enroll
@@ -210,90 +209,90 @@ const EnrollInfo = ({ edit }) => {
             initialEndingAirport={initial?.endingAirport}
           />
         </div>
-        <div className='wrap wrap--flex'>
+        <div className="wrap wrap--flex">
           <label>대상견 이름</label>
           <Input
-            placeholder='ex 멍멍이'
+            placeholder="ex 멍멍이"
             maxLength={30}
-            caption='30자 이내로 적어주세요.'
+            caption="30자 이내로 적어주세요."
             setEnrollData={setEnrollDataCallback}
-            name='name'
-            font='body3'
+            name="name"
+            font="body3"
             initial={initial?.name}
           />
         </div>
-        <div className='wrap wrap--flex'>
+        <div className="wrap wrap--flex">
           <label>대상견 성별</label>
           <RadioButton
             items={genderItems}
             setItems={setGenderItems}
             setEnrollData={setEnrollDataCallback}
-            name='gender'
+            name="gender"
           />
         </div>
-        <div className='wrap wrap--flex'>
+        <div className="wrap wrap--flex">
           <label>대상견 나이</label>
           <Input
-            placeholder='ex 1살 , 2개월 등'
+            placeholder="ex 1살 , 2개월 등"
             maxLength={10}
-            caption='10자 이내로 적어주세요.'
+            caption="10자 이내로 적어주세요."
             setEnrollData={setEnrollDataCallback}
-            name='age'
-            font='body3'
+            name="age"
+            font="body3"
             initial={initial?.age}
           />
         </div>
-        <div className='wrap wrap--flex'>
+        <div className="wrap wrap--flex">
           <label>대상견 무게</label>
-          <Counter setEnrollData={setEnrollDataCallback} name='weight' initial={initial?.weight} />
+          <Counter setEnrollData={setEnrollDataCallback} name="weight" initial={initial?.weight} />
         </div>
-        <div className='wrap wrap--flex'>
+        <div className="wrap wrap--flex">
           <label>중성화 여부</label>
           <RadioButton
             items={isNeutering}
             setItems={setIsNeutering}
             setEnrollData={setEnrollDataCallback}
-            name='neutralization'
+            name="neutralization"
           />
         </div>
-        <div className='wrap wrap--flex'>
+        <div className="wrap wrap--flex">
           <label>건강상태</label>
           <Input
-            placeholder='ex 접종내역, 건강상태, 유의할 점 등'
+            placeholder="ex 접종내역, 건강상태, 유의할 점 등"
             maxLength={50}
-            caption='50자 이내로 적어주세요.'
+            caption="50자 이내로 적어주세요."
             setEnrollData={setEnrollDataCallback}
-            name='health'
-            font='body3'
+            name="health"
+            font="body3"
             initial={initial?.health}
           />
         </div>
-        <div className='wrap wrap--flex'>
+        <div className="wrap wrap--flex">
           <label>소속여부</label>
           <RadioButton
             items={isInstitution}
             setItems={setIsInstitution}
             setEnrollData={setEnrollDataCallback}
-            name='isInstitution'
+            name="isInstitution"
           />
           <Input
-            placeholder='단체명을 입력해주세요.'
+            placeholder="단체명을 입력해주세요."
             maxLength={15}
-            caption='15자 이내로 적어주세요.'
+            caption="15자 이내로 적어주세요."
             setEnrollData={setEnrollDataCallback}
-            name='institutionName'
-            font='body3'
+            name="institutionName"
+            font="body3"
             initial={initial?.institutionName}
           />
         </div>
-        <div className='wrap contact'>
+        <div className="wrap contact">
           <label>연락처</label>
-          <div className='contact-layer'>
+          <div className="contact-layer">
             {contactList.map((contact, i) => (
               <Input
                 placeholder={'연락처를 입력해 주세요'}
                 key={`contact-${i}`}
-                font='body3'
+                font="body3"
                 name={dropArray[i]}
                 selectedContact={selectedContact}
                 setContact={setContact}
@@ -301,13 +300,13 @@ const EnrollInfo = ({ edit }) => {
                 initial={contact}
                 isContact={true}
               >
-                <div className='dropdown'>
+                <div className="dropdown">
                   <Dropdown
                     item={ContactsList}
-                    placeholder='연락처'
+                    placeholder="연락처"
                     rounded
                     small
-                    font='body3'
+                    font="body3"
                     dropArray={dropArray}
                     onDrop={onDrop}
                     id={i}
@@ -316,20 +315,20 @@ const EnrollInfo = ({ edit }) => {
                 </div>
               </Input>
             ))}
-            <div className='contact__btn' onClick={addContactList}>
-              <Button rounded full padding='1rem 0' font='gnb'>
+            <div className="contact__btn" onClick={addContactList}>
+              <Button rounded full padding="1rem 0" font="gnb">
                 <Plus />
                 연락처 추가하기
               </Button>
             </div>
           </div>
         </div>
-        <div className='wrap'>
+        <div className="wrap">
           <TextField
-            label='내용을 작성해주세요'
+            label="내용을 작성해주세요"
             maxLength={500}
             setEnrollData={setEnrollDataCallback}
-            name='detail'
+            name="detail"
             initial={initial?.detail}
           />
         </div>

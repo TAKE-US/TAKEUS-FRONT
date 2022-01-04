@@ -73,6 +73,7 @@ const Searchbar = () => {
       } catch (e) {
         // TODO
         // error 처리 필요!
+        console.error(e);
       }
     })();
   }, []);

@@ -31,8 +31,8 @@ const Search = {
 };
 
 const Searchbar = ({ initialData, setEnrollData, initialEndingCountry, initialEndingAirport }) => {
-  const [currCountry, setCurrCountry] = useState("국가");
-  const [currAirport, setCurrAirport] = useState("공항명");
+  const [currCountry, setCurrCountry] = useState('');
+  const [currAirport, setCurrAirport] = useState('');
   const [country, setCountry] = useState([]);
   const [allAirport, setAllAirport] = useState("");
 
