@@ -84,6 +84,7 @@ const ReviewPostInfo = ({ edit, history, match }) => {
           )
         );
         setInitial(data);
+        setSelectedHashtags(data.hashtags);
         setEnrollData("title", data.title);
         setEnrollData("content", data.content);
         setEnrollData("endingAirport", data.endingAirport);
@@ -126,7 +127,12 @@ const ReviewPostInfo = ({ edit, history, match }) => {
 
       <div className="wrap">
         <label>봉사 지역</label>
-        <EnrollSearchbar initialData={initial} enroll setEnrollData={setEnrollData} />
+        <EnrollSearchbar
+          initialEndingCountry={initial?.endingCountry}
+          initialEndingAirport={initial?.endingAirport}
+          enroll
+          setEnrollData={setEnrollData}
+        />
       </div>
 
       <div className="wrap">
@@ -182,7 +188,7 @@ const ReviewPostInfo = ({ edit, history, match }) => {
           } else {
             postReview(enrollData);
           }
-          history.push("/review");
+          history.goBack();
         }}
       >
         <Button full rounded padding="15px 0" font="button">
