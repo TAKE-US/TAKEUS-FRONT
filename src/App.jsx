@@ -16,6 +16,7 @@ const Styled = {
 };
 
 function App() {
+  console.log("test");
   return (
     <>
       <GlobalStyle />
