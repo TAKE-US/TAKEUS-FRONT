@@ -55,36 +55,31 @@ const ReviewPostInfo = ({ edit, history, match }) => {
     { tag: "대상견케어", active: false },
   ]);
   const [initial, setInitial] = useState();
-  const [selectedHashtags, setSelectedHashtags] = useState([]);
   const [radioItems, setRadioItems] = useState([
     { value: "선택 안함", select: true },
     { value: "개인 구조자", select: false },
     { value: "단체", select: false },
   ]);
 
-  const toggleHashtag = idx => {
+  const toggleHashtag = value => {
     setHashtags(
-      [...hashtags].map((hashtag, i) => (i !== idx ? hashtag : Object.assign(hashtag, { active: !hashtag.active })))
+      [...hashtags].map(hashtag =>
+        hashtag.tag !== value ? hashtag : Object.assign(hashtag, { active: !hashtag.active })
+      )
     );
   };
 
   useEffect(() => {
-    if (match.params.id) {
+    if (edit) {
       (async () => {
         const data = await getReviewDetail(match.params.id);
-        const results = data.hashtags.map(hashtag => hashtags.find(item => item?.tag === hashtag));
-        results.map(result =>
-          setHashtags(prev =>
-            prev.map(hashtag => (hashtag?.tag === result?.tag ? { ...hashtag, active: true } : { ...hashtag }))
-          )
-        );
         setRadioItems(prev =>
           prev.map(radio =>
             radio.value === data.isInstitution ? { ...radio, select: true } : { ...radio, select: false }
           )
         );
+        data.hashtags.forEach(value => toggleHashtag(value));
         setInitial(data);
-        setSelectedHashtags(data.hashtags);
         setEnrollData("title", data.title);
         setEnrollData("content", data.content);
         setEnrollData("endingAirport", data.endingAirport);
@@ -97,16 +92,11 @@ const ReviewPostInfo = ({ edit, history, match }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [match.params.id, setEnrollData]);
 
-  const addHashtag = hashtag => {
-    if (hashtag.active) {
-      selectedHashtags.push(hashtag.tag);
-      setSelectedHashtags(selectedHashtags);
-    } else {
-      selectedHashtags.splice(selectedHashtags.indexOf(hashtag.tag), 1);
-      setSelectedHashtags(selectedHashtags);
-    }
-    setEnrollData("hashtags", selectedHashtags);
-  };
+  useEffect(() => {
+    const updatedHashtags = [];
+    hashtags.forEach(hashtag => hashtag.active && updatedHashtags.push(hashtag.tag));
+    setEnrollData("hashtags", updatedHashtags);
+  }, [hashtags, setEnrollData]);
 
   return (
     <ReviewInfoStyle>
@@ -138,16 +128,15 @@ const ReviewPostInfo = ({ edit, history, match }) => {
       <div className="wrap">
         <label>해시 태그</label>
         <div className="wrap--flex">
-          {hashtags.map((hashtag, i) => (
+          {hashtags.map(hashtag => (
             <div
               className="hashtag"
               onClick={() => {
-                toggleHashtag(i);
-                addHashtag(hashtag);
+                toggleHashtag(hashtag.tag);
               }}
-              key={`hashtag-${i}`}
+              key={`hashtag-${hashtag.tag}`}
             >
-              <Hashtag tag={hashtag.tag} primary={hashtag.active} />
+              <Hashtag tag={hashtag.tag} primary={hashtag.active} hasActiveHashtag={true} />
             </div>
           ))}
         </div>
