@@ -15,10 +15,12 @@ const AddDogCardContainer = ({ imageList, setImageList, initial }) => {
   const [imagePreviewList, setImgPreviewList] = useState([1, 0, 0, 0, 0]);
 
   useEffect(() => {
-    initial?.forEach((value, index) => {
-      setImageList(prev => [{ id: index, imgURL: value }, ...prev]);
-      setImgPreviewList(prev => [{ id: index, imgURL: value }, ...prev]);
-    });
+    initial
+      ?.filter(v => v.length > 0)
+      .forEach((value, index) => {
+        setImageList(prev => [{ id: index, imgURL: value }, ...prev]);
+        setImgPreviewList(prev => [{ id: index, imgURL: value }, ...prev]);
+      });
   }, [initial, setImageList]);
 
   const deleteHandle = e => {
@@ -26,9 +28,6 @@ const AddDogCardContainer = ({ imageList, setImageList, initial }) => {
     setImgPreviewList(prev => prev.filter(photo => photo.id !== Number(deletedKey)));
     setImageList(prev => prev.filter(photo => photo.id !== Number(deletedKey)));
   };
-
-  console.log('CardContainer');
-  console.log(imageList);
 
   return (
     <Styled.Wrapper>
@@ -44,7 +43,12 @@ const AddDogCardContainer = ({ imageList, setImageList, initial }) => {
               setImageList={setImageList}
             />
           ) : (
-            <ImageCard key={i} value={value} imagePreviewList={imagePreviewList} deleteHandle={deleteHandle} />
+            <ImageCard
+              key={i}
+              value={value}
+              imagePreviewList={imagePreviewList}
+              deleteHandle={deleteHandle}
+            />
           )
         ) : null
       )}

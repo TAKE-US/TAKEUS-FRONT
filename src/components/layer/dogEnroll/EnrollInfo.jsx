@@ -179,6 +179,8 @@ const EnrollInfo = ({ edit }) => {
 
     if (edit) formData.append('photo_link', []);
     for (let i = 0; i < Array.from(imageList).length; i++) {
+      if (imageList[i]['imgURL']?.length < 1) continue;
+
       if (typeof imageList[i]['imgURL'] === 'string')
         formData.append('photo_link', imageList[i]['imgURL']);
       else formData.append('photos', imageList[i]['imgURL']);
@@ -332,9 +334,9 @@ const EnrollInfo = ({ edit }) => {
             initial={initial?.detail}
           />
         </div>
-        <div className="wrap">
-          <div className="wrap__button">
-            <Button rounded full font="button" padding="1.5rem">
+        <div className='wrap'>
+          <div className='wrap__button'>
+            <Button rounded full font='button' padding='1.5rem'>
               대상견 {edit ? '수정' : '등록'}하기
             </Button>
           </div>
