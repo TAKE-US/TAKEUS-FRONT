@@ -56,6 +56,7 @@ const Styled = {
     border-radius: 1rem;
     margin-top: 1.6rem;
     background-color: ${({ theme }) => theme.color.white};
+    z-index: 2;
   `,
 
   Ul: styled.ul`
@@ -132,7 +133,7 @@ const Dropdown = ({
       <Styled.Nav ref={dropdownRef} isActive={isActive}>
         <Styled.Ul>
           {item.map((value, index) => (
-            <>
+            <React.Fragment key={index}>
               <Styled.List
                 key={index}
                 selected={list === value['type'] ? true : false}
@@ -145,7 +146,7 @@ const Dropdown = ({
               >
                 {value['type']}
               </Styled.List>
-            </>
+            </React.Fragment>
           ))}
         </Styled.Ul>
       </Styled.Nav>
