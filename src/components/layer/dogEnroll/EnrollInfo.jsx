@@ -77,11 +77,19 @@ const EnrollInfo = ({ edit }) => {
     [setEnrollData]
   );
 
-  const onDrop = (dropArray, value, id) => {
+  const onDrop = (dropArray, type, id) => {
+    const targetIndex = contactList.findIndex((_, index) => index === id);
+    let withOutTargetList = [
+      ...contactList.slice(0, targetIndex),
+      { ...contactList[targetIndex], type },
+      ...contactList.slice(targetIndex + 1),
+    ];
+    setContactList(withOutTargetList);
+
     if (dropArray.key === id) {
-      setDrop(Array.from(dropArray).map(val => (val.id === id ? { key: id, type: value } : val)));
+      setDrop(Array.from(dropArray).map(val => (val.id === id ? { key: id, type } : val)));
     } else {
-      setDrop(dropArray => dropArray.concat({ key: id, type: value }));
+      setDrop(dropArray => dropArray.concat({ key: id, type }));
     }
   };
 
@@ -171,6 +179,7 @@ const EnrollInfo = ({ edit }) => {
       enrollData?.institutionName ? enrollData.institutionName : ''
     );
     formData.append('detail', enrollData?.detail ? enrollData.detail : '');
+
     if (enrollData?.카카오톡) formData.append('kakaotalkId', enrollData?.카카오톡);
     if (enrollData?.전화번호) formData.append('phoneNumber', enrollData?.전화번호);
     if (enrollData?.페이스북) formData.append('facebook', enrollData?.페이스북);
@@ -180,15 +189,14 @@ const EnrollInfo = ({ edit }) => {
     if (edit) formData.append('photo_link', []);
     for (let i = 0; i < Array.from(imageList).length; i++) {
       if (imageList[i]['imgURL']?.length < 1) continue;
-
       if (typeof imageList[i]['imgURL'] === 'string')
         formData.append('photo_link', imageList[i]['imgURL']);
       else formData.append('photos', imageList[i]['imgURL']);
     }
 
-    if (edit) await putDog(history.location.state?.dog._id, formData);
-    else await postEnroll(formData);
-    history.push('/dog/enroll/confirm');
+    // if (edit) await putDog(history.location.state?.dog._id, formData);
+    // else await postEnroll(formData);
+    // history.push('/dog/enroll/confirm');
   };
 
   return (
@@ -290,14 +298,15 @@ const EnrollInfo = ({ edit }) => {
         <div className="wrap contact">
           <label>연락처</label>
           <div className="contact-layer">
-            {contactList.map((contact, i) => (
+            {contactList?.map((contact, i) => (
               <Input
                 placeholder={'연락처를 입력해 주세요'}
                 key={`contact-${i}`}
                 font="body3"
                 name={dropArray[i]}
-                selectedContact={selectedContact}
-                setContact={setContact}
+                index={i}
+                contactList={contactList}
+                setContactList={setContactList}
                 setEnrollData={setEnrollDataCallback}
                 initial={contact}
                 isContact={true}
@@ -334,9 +343,9 @@ const EnrollInfo = ({ edit }) => {
             initial={initial?.detail}
           />
         </div>
-        <div className='wrap'>
-          <div className='wrap__button'>
-            <Button rounded full font='button' padding='1.5rem'>
+        <div className="wrap">
+          <div className="wrap__button">
+            <Button rounded full font="button" padding="1.5rem">
               대상견 {edit ? '수정' : '등록'}하기
             </Button>
           </div>
