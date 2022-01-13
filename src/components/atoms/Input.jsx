@@ -68,9 +68,11 @@ const Input = ({
   font,
   disabled,
   setEnrollData,
+  contactList,
   name,
-  setContact,
+  setContactList,
   initial,
+  index,
   isContact,
 }) => {
   const [value, setValue] = useState('');
@@ -114,13 +116,14 @@ const Input = ({
     }
   };
 
-  const onBlurHandler = () => {
-    if (name && name['type'] !== undefined) {
-      const newVal = {};
-      newVal[name['type']] = value;
-      setContact(newVal);
-    } else {
-      setEnrollData(name, value);
+  const onBlurHandler = ({ target }) => {
+    if (isContact) {
+      const toBeChangeContact = { type: contactList[index].type, value: [target.value] };
+      const newContactListState = contactList.map((value, i) => {
+        if (index !== i) return value;
+        else return toBeChangeContact;
+      });
+      setContactList(newContactListState);
     }
   };
 
