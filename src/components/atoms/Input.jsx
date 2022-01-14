@@ -91,7 +91,7 @@ const Input = ({
     (name, value) => {
       setEnrollData(name, value);
     },
-    [setEnrollData]
+    [setEnrollData],
   );
 
   useEffect(() => {
@@ -106,7 +106,7 @@ const Input = ({
     }
   }, [isValid, initial, isContact, setEnrollDataCallback, name]);
 
-  const changeValue = evt => {
+  const changeValue = (evt) => {
     const newValue = evt.target.value;
 
     if (isValid) setValue(newValue);
@@ -124,6 +124,12 @@ const Input = ({
         else return toBeChangeContact;
       });
       setContactList(newContactListState);
+    } else {
+      if (name) {
+        const newVal = {};
+        newVal[name['type']] = value;
+        setEnrollData(name, value);
+      }
     }
   };
 
