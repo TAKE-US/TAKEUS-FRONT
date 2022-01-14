@@ -3,16 +3,7 @@
 /* eslint-disable arrow-parens */
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import {
-  RadioButton,
-  Counter,
-  TextField,
-  AddDogLayer,
-  Input,
-  Button,
-  EnrollSearchbar,
-  Dropdown,
-} from 'components';
+import { RadioButton, Counter, TextField, AddDogLayer, Input, Button, EnrollSearchbar, Dropdown } from 'components';
 import { ReactComponent as Kakao } from 'assets/icon/ic_kakao_24.svg';
 import { ReactComponent as Call } from 'assets/icon/ic_call_24.svg';
 import { ReactComponent as Instagram } from 'assets/icon/ic_instar_24.svg';
@@ -48,6 +39,14 @@ const ContactsList = [
   },
 ];
 
+const contactKoreanToEnglishMap = {
+  카카오톡: 'kakaotalkId',
+  전화번호: 'phoneNumber',
+  페이스북: 'facebook',
+  인스타그램: 'instagram',
+  트위터: 'twitter',
+};
+
 const EnrollInfo = ({ edit }) => {
   const history = useHistory();
   const [enrollData, setEnrollData] = useEnrollData({});
@@ -56,9 +55,9 @@ const EnrollInfo = ({ edit }) => {
   const [selectedContact, setContact] = useState({});
   const [imageList, setImageList] = useState([]);
   const [genderItems, setGenderItems] = useState([
-    { value: '여', select: true },
+    { value: '여', select: false },
     { value: '남', select: false },
-    { value: '선택안함', select: false },
+    { value: '선택안함', select: true },
   ]);
   const [isNeutering, setIsNeutering] = useState([
     { value: '완료', select: true },
@@ -74,18 +73,26 @@ const EnrollInfo = ({ edit }) => {
     (name, value) => {
       setEnrollData(name, value);
     },
-    [setEnrollData]
+    [setEnrollData],
   );
 
-  const onDrop = (dropArray, value, id) => {
+  const onDrop = (dropArray, type, id) => {
+    const targetIndex = contactList.findIndex((_, index) => index === id);
+    let withOutTargetList = [
+      ...contactList.slice(0, targetIndex),
+      { ...contactList[targetIndex], type },
+      ...contactList.slice(targetIndex + 1),
+    ];
+    setContactList(withOutTargetList);
+
     if (dropArray.key === id) {
-      setDrop(Array.from(dropArray).map(val => (val.id === id ? { key: id, type: value } : val)));
+      setDrop(Array.from(dropArray).map((val) => (val.id === id ? { key: id, type } : val)));
     } else {
-      setDrop(dropArray => dropArray.concat({ key: id, type: value }));
+      setDrop((dropArray) => dropArray.concat({ key: id, type }));
     }
   };
 
-  const addContactList = e => {
+  const addContactList = (e) => {
     e.preventDefault();
     setContactList(contactList.concat({ type: '', value: '' }));
   };
@@ -96,28 +103,26 @@ const EnrollInfo = ({ edit }) => {
 
       const data = history.location.state ? history.location.state.dog : null;
       setInitial(data);
-      setGenderItems(prev => {
-        return prev.map(item => {
+      setGenderItems((prev) => {
+        return prev.map((item) => {
           return item.value === data.gender
             ? { value: item.value, select: true }
             : { value: item.value, select: false };
         });
       });
-      setEnrollDataCallback('gender', genderItems.find(value => value.select === true).value);
-      setIsNeutering(prev =>
-        prev.map(item => {
+      setEnrollDataCallback('gender', genderItems.find((value) => value.select === true).value);
+      setIsNeutering((prev) =>
+        prev.map((item) => {
           const isNeutralized = data.neutralization ? '완료' : '미완료';
-          return item.value === isNeutralized
-            ? { ...item, select: true }
-            : { ...item, select: false };
-        })
+          return item.value === isNeutralized ? { ...item, select: true } : { ...item, select: false };
+        }),
       );
 
-      setIsInstitution(prev =>
-        prev.map(item => {
+      setIsInstitution((prev) =>
+        prev.map((item) => {
           const isGroup = data.isInstitution ? '단체' : '개인구조자';
           return item.value === isGroup ? { ...item, select: true } : { ...item, select: false };
-        })
+        }),
       );
 
       const existedContactList = [
@@ -129,18 +134,18 @@ const EnrollInfo = ({ edit }) => {
       ];
 
       setContactList([]);
-      existedContactList.forEach(contact => {
+      existedContactList.forEach((contact) => {
         if (Object.values(contact)[0].length === 1) {
           let newValue = {};
           newValue.type = Object.keys(contact)[0];
           newValue.value = Object.values(contact)[0];
-          setContactList(prev => prev.concat(newValue));
+          setContactList((prev) => prev.concat(newValue));
         } else if (Object.values(contact)[0].length > 1) {
-          Object.values(contact)[0].forEach(repeated => {
+          Object.values(contact)[0].forEach((repeated) => {
             let newValue = {};
             newValue.type = Object.keys(contact)[0];
             newValue.value = repeated;
-            setContactList(prev => prev.concat(newValue));
+            setContactList((prev) => prev.concat(newValue));
           });
         }
       });
@@ -154,35 +159,29 @@ const EnrollInfo = ({ edit }) => {
     }
   }, [selectedContact, setEnrollData]);
 
-  const handleSubmit = async event => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData();
     formData.append('endingCountry', enrollData.endingCountry);
     formData.append('endingAirport', enrollData.endingAirport);
     formData.append('name', enrollData.name);
-    formData.append('gender', enrollData.gender);
+    formData.append('gender', enrollData.gender ? enrollData.gender : '선택안함');
     formData.append('age', enrollData.age);
     formData.append('weight', enrollData.weight);
     formData.append('neutralization', enrollData?.neutralization === '완료' ? true : false);
     formData.append('health', enrollData.health);
     formData.append('isInstitution', enrollData?.isInstitution === '단체' ? true : false);
-    formData.append(
-      'institutionName',
-      enrollData?.institutionName ? enrollData.institutionName : ''
-    );
+    formData.append('institutionName', enrollData?.institutionName ? enrollData.institutionName : '');
     formData.append('detail', enrollData?.detail ? enrollData.detail : '');
-    if (enrollData?.카카오톡) formData.append('kakaotalkId', enrollData?.카카오톡);
-    if (enrollData?.전화번호) formData.append('phoneNumber', enrollData?.전화번호);
-    if (enrollData?.페이스북) formData.append('facebook', enrollData?.페이스북);
-    if (enrollData?.인스타그램) formData.append('instagram', enrollData?.인스타그램);
-    if (enrollData?.트위터) formData.append('twitter', enrollData?.트위터);
+
+    contactList.forEach(({ type, value }) => {
+      if (value !== undefined && value.length !== 0) formData.append(contactKoreanToEnglishMap[type], value[0]);
+    });
 
     if (edit) formData.append('photo_link', []);
     for (let i = 0; i < Array.from(imageList).length; i++) {
       if (imageList[i]['imgURL']?.length < 1) continue;
-
-      if (typeof imageList[i]['imgURL'] === 'string')
-        formData.append('photo_link', imageList[i]['imgURL']);
+      if (typeof imageList[i]['imgURL'] === 'string') formData.append('photo_link', imageList[i]['imgURL']);
       else formData.append('photos', imageList[i]['imgURL']);
     }
 
@@ -290,14 +289,15 @@ const EnrollInfo = ({ edit }) => {
         <div className="wrap contact">
           <label>연락처</label>
           <div className="contact-layer">
-            {contactList.map((contact, i) => (
+            {contactList?.map((contact, i) => (
               <Input
                 placeholder={'연락처를 입력해 주세요'}
                 key={`contact-${i}`}
                 font="body3"
                 name={dropArray[i]}
-                selectedContact={selectedContact}
-                setContact={setContact}
+                index={i}
+                contactList={contactList}
+                setContactList={setContactList}
                 setEnrollData={setEnrollDataCallback}
                 initial={contact}
                 isContact={true}
@@ -334,9 +334,9 @@ const EnrollInfo = ({ edit }) => {
             initial={initial?.detail}
           />
         </div>
-        <div className='wrap'>
-          <div className='wrap__button'>
-            <Button rounded full font='button' padding='1.5rem'>
+        <div className="wrap">
+          <div className="wrap__button">
+            <Button rounded full font="button" padding="1.5rem">
               대상견 {edit ? '수정' : '등록'}하기
             </Button>
           </div>

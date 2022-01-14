@@ -68,9 +68,11 @@ const Input = ({
   font,
   disabled,
   setEnrollData,
+  contactList,
   name,
-  setContact,
+  setContactList,
   initial,
+  index,
   isContact,
 }) => {
   const [value, setValue] = useState('');
@@ -89,7 +91,7 @@ const Input = ({
     (name, value) => {
       setEnrollData(name, value);
     },
-    [setEnrollData]
+    [setEnrollData],
   );
 
   useEffect(() => {
@@ -104,7 +106,7 @@ const Input = ({
     }
   }, [isValid, initial, isContact, setEnrollDataCallback, name]);
 
-  const changeValue = evt => {
+  const changeValue = (evt) => {
     const newValue = evt.target.value;
 
     if (isValid) setValue(newValue);
@@ -114,13 +116,20 @@ const Input = ({
     }
   };
 
-  const onBlurHandler = () => {
-    if (name && name['type'] !== undefined) {
-      const newVal = {};
-      newVal[name['type']] = value;
-      setContact(newVal);
+  const onBlurHandler = ({ target }) => {
+    if (isContact) {
+      const toBeChangeContact = { type: contactList[index].type, value: [target.value] };
+      const newContactListState = contactList.map((value, i) => {
+        if (index !== i) return value;
+        else return toBeChangeContact;
+      });
+      setContactList(newContactListState);
     } else {
-      setEnrollData(name, value);
+      if (name) {
+        const newVal = {};
+        newVal[name['type']] = value;
+        setEnrollData(name, value);
+      }
     }
   };
 
