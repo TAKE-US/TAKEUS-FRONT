@@ -122,20 +122,18 @@ const Dropdown = ({ item, placeholder, rounded, font, caption, small, dropArray,
       <Styled.Nav ref={dropdownRef} isActive={isActive}>
         <Styled.Ul>
           {item.map((value, index) => (
-            <>
-              <Styled.List
-                key={index}
-                selected={list === value['type'] ? true : false}
-                onClick={() => {
-                  setList(value['type']);
-                  setImage(value['img']);
-                  onDrop(dropArray, value['type'], id);
-                  setIsActive(!isActive);
-                }}
-              >
-                {value['type']}
-              </Styled.List>
-            </>
+            <Styled.List
+              key={`${value.type}-${index}`}
+              selected={list === value['type'] ? true : false}
+              onClick={() => {
+                setList(value['type']);
+                setImage(value['img']);
+                onDrop(dropArray, value['type'], id);
+                setIsActive(!isActive);
+              }}
+            >
+              {value['type']}
+            </Styled.List>
           ))}
         </Styled.Ul>
       </Styled.Nav>

@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
-import styled from "styled-components";
-import QueryString from "qs";
-import { withRouter } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
+import QueryString from 'qs';
+import { withRouter } from 'react-router-dom';
 //asset
-import DogPlane from "assets/img/img_dogswithplane.png";
-import DogHug from "assets/img/img_hugwithdog.png";
+import DogPlane from 'assets/img/img_dogswithplane.png';
+import DogHug from 'assets/img/img_hugwithdog.png';
 //layer
-import { DogCardContainer, ReviewCardContainer, Filter, PaginationNav, Loading } from "components";
+import { DogCardContainer, ReviewCardContainer, Filter, PaginationNav, Loading } from 'components';
 //api
-import { getMyDogs, getMyReviews } from "lib/api/sample";
+import { getMyDogs, getMyReviews } from 'lib/api/sample';
 
 const Styled = {
   Wrapper: styled.div``,
@@ -17,7 +17,7 @@ const Styled = {
     min-width: 100%;
     padding-top: 14rem;
     padding-bottom: 8rem;
-    background: url(${props => props.bg}) no-repeat center right;
+    background: url(${(props) => props.bg}) no-repeat center right;
     & > div {
       .tab-wrapper {
         display: grid;
@@ -51,7 +51,7 @@ const Styled = {
   Tab: styled.button`
     width: 16.4rem;
     padding: 1.4rem 2.2rem;
-    background: ${props => (props.select ? props.theme.color.lightgray1 : props.theme.color.white)};
+    background: ${(props) => (props.select ? props.theme.color.lightgray1 : props.theme.color.white)};
     border-radius: 1rem;
     font: ${({ theme }) => theme.font.button};
     line-height: 2.2rem;
@@ -63,8 +63,8 @@ const Styled = {
 
 const MypageHeader = ({ location, history }) => {
   const [tabs, setTabs] = useState([
-    { value: "이동봉사 모집글", select: true },
-    { value: "이동봉사 후기글", select: false },
+    { value: '이동봉사 모집글', select: true },
+    { value: '이동봉사 후기글', select: false },
   ]);
   const [dogs, setDogs] = useState(null);
   const [reviews, setReviews] = useState(null);
@@ -72,22 +72,22 @@ const MypageHeader = ({ location, history }) => {
   const [dogsTotalPage, setDogsTotalPage] = useState(1);
   const [reviewsPage, setReviewsPage] = useState(1);
   const [reviewsTotalPage, setReviewsTotalPage] = useState(1);
-  const contents = ["최신순", "오래된순"];
+  const contents = ['최신순', '오래된순'];
   const [selectedFilter, setSelectedFilter] = useState(contents[0]);
   const [isLoading, setIsLoading] = useState(false);
 
   const query = QueryString.parse(location.search, { ignoreQueryPrefix: true });
 
   useEffect(() => {
-    if (query?.select === "post") {
+    if (query?.select === 'post') {
       setTabs([
-        { value: "이동봉사 모집글", select: true },
-        { value: "이동봉사 후기글", select: false },
+        { value: '이동봉사 모집글', select: true },
+        { value: '이동봉사 후기글', select: false },
       ]);
-    } else if (query?.select === "review") {
+    } else if (query?.select === 'review') {
       setTabs([
-        { value: "이동봉사 모집글", select: false },
-        { value: "이동봉사 후기글", select: true },
+        { value: '이동봉사 모집글', select: false },
+        { value: '이동봉사 후기글', select: true },
       ]);
     }
   }, [query?.select]);
@@ -99,8 +99,8 @@ const MypageHeader = ({ location, history }) => {
   //   setTabs(newTabs);
   // };
 
-  const selectHandler = t => {
-    t.value.split(" ")[1] === "모집글" ? history.push("mypage?select=post") : history.push("mypage?select=review");
+  const selectHandler = (t) => {
+    t.value.split(' ')[1] === '모집글' ? history.push('mypage?select=post') : history.push('mypage?select=review');
   };
 
   useEffect(() => {
@@ -124,15 +124,20 @@ const MypageHeader = ({ location, history }) => {
       <Styled.Header bg={tabs[0].select ? DogPlane : DogHug}>
         <div>
           <nav className="tab-wrapper">
-            {tabs.map(tab => (
-              <Styled.Tab key={tab} className="tab_button" onClick={() => selectHandler(tab)} select={tab.select}>
+            {tabs.map((tab, index) => (
+              <Styled.Tab
+                key={`tab-${index}`}
+                className="tab_button"
+                onClick={() => selectHandler(tab)}
+                select={tab.select}
+              >
                 {tab.value}
               </Styled.Tab>
             ))}
           </nav>
           <section className="text">
             <h1>
-              내가 올린 <b>이동 봉사 {tabs.filter(t => t.select).map(t => t.value.split(" ")[1])}</b>을 한번에
+              내가 올린 <b>이동 봉사 {tabs.filter((t) => t.select).map((t) => t.value.split(' ')[1])}</b>을 한번에
               확인해보세요!
             </h1>
             <p>여러분의 도움으로 한 생명이 새로운 삶을 살게 되었어요 🙏🏻</p>
