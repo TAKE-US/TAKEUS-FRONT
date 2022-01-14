@@ -55,9 +55,9 @@ const EnrollInfo = ({ edit }) => {
   const [selectedContact, setContact] = useState({});
   const [imageList, setImageList] = useState([]);
   const [genderItems, setGenderItems] = useState([
-    { value: '여', select: true },
+    { value: '여', select: false },
     { value: '남', select: false },
-    { value: '선택안함', select: false },
+    { value: '선택안함', select: true },
   ]);
   const [isNeutering, setIsNeutering] = useState([
     { value: '완료', select: true },
@@ -165,7 +165,7 @@ const EnrollInfo = ({ edit }) => {
     formData.append('endingCountry', enrollData.endingCountry);
     formData.append('endingAirport', enrollData.endingAirport);
     formData.append('name', enrollData.name);
-    formData.append('gender', enrollData.gender);
+    formData.append('gender', enrollData.gender ? enrollData.gender : '선택안함');
     formData.append('age', enrollData.age);
     formData.append('weight', enrollData.weight);
     formData.append('neutralization', enrollData?.neutralization === '완료' ? true : false);
@@ -174,7 +174,9 @@ const EnrollInfo = ({ edit }) => {
     formData.append('institutionName', enrollData?.institutionName ? enrollData.institutionName : '');
     formData.append('detail', enrollData?.detail ? enrollData.detail : '');
 
-    contactList.forEach(({ type, value }) => formData.append(contactKoreanToEnglishMap[type], value[0]));
+    contactList.forEach(({ type, value }) => {
+      if (value !== undefined && value.length !== 0) formData.append(contactKoreanToEnglishMap[type], value[0]);
+    });
 
     if (edit) formData.append('photo_link', []);
     for (let i = 0; i < Array.from(imageList).length; i++) {
