@@ -7,10 +7,6 @@ import { postToken } from 'lib/api/sample';
 const KakaoPage = () => {
   const code = new URL(window.location.href).searchParams.get('code');
 
-  let redirectURL = '';
-  if (process.env.NODE_ENV === 'development') redirectURL = 'http://localhost:3000/oauth/callback/kakao';
-  else redirectURL = 'https://takeus-front.vercel.app/oauth/callback/kakao';
-
   const handleSuccess = async (token, social) => {
     const data = await postToken(token, social);
     localStorage.setItem('email', data.email);
@@ -20,10 +16,14 @@ const KakaoPage = () => {
     else window.open('https://takeus-front.vercel.app/', '_self');
   };
 
+  let redirectURL;
+  if (process.env.NODE_ENV === 'development') redirectURL = 'http://localhost:3000/oauth/callback/kakao';
+  else redirectURL = process.env.REACT_APP_KAKAO_REDIRECT;
+
   const getKakaoToken = async () => {
     const body = {
       grant_type: 'authorization_code',
-      client_id: 'f67ac346de494c1931b31d6ec8ea192e',
+      client_id: process.env.REACT_APP_KAKAO_CLIENTID,
       redirect_uri: redirectURL,
       code: code,
     };

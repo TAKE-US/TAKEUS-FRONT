@@ -38,11 +38,11 @@ const Styled = {
 };
 
 const LoginKakao = () => {
-  const REST_API_KEY = 'f67ac346de494c1931b31d6ec8ea192e';
+  const REST_API_KEY = process.env.REACT_APP_CLIENTID;
   const REDIRECT_URI =
     process.env.NODE_ENV === 'development'
       ? 'http://localhost:3000/oauth/callback/kakao'
-      : 'https://takeus-front.vercel.app/oauth/callback/kakao';
+      : process.env.REACT_APP_KAKAO_REDIRECT;
 
   const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?
                           response_type=code&
