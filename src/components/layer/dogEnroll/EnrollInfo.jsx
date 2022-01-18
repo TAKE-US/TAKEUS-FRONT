@@ -190,7 +190,8 @@ const EnrollInfo = ({ edit }) => {
     try {
       if (enrollData.endingCountry.length === 0) throw ERROR_MESSAGE.NO_COUNTRY_SELECTED;
       else if (enrollData.endingAirport.length === 0) throw ERROR_MESSAGE.NO_AIRPORT_SELECTED;
-      else if (isInstitution && enrollData.institutionName.length === 0) throw ERROR_MESSAGE.NO_INSTITUTION_SELECTED;
+      else if (enrollData.isInstitution && enrollData.institutionName.length === 0)
+        throw ERROR_MESSAGE.NO_INSTITUTION_SELECTED;
       else if (contactList.length === 0 || contactList.map((contact) => contact.value).join('').length === 0)
         throw ERROR_MESSAGE.NO_CONTACT_SELECTED;
     } catch (e) {
