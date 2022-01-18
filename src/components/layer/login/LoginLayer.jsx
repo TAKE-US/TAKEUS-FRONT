@@ -1,15 +1,15 @@
-import React from "react";
-import styled from "styled-components";
-import { LoginKakao, LoginNaver } from "components";
-import { GoogleLogin } from "react-google-login";
-import { useHistory } from "react-router";
-import LoginImg from "assets/img/img_Login.png";
-import GoogleIcon from "assets/img/ic_google.svg";
-import { ReactComponent as Title } from "assets/icon/ic_logo_wordmark_middle.svg";
-import { ReactComponent as SubTitle } from "assets/icon/Group.svg";
+import React from 'react';
+import styled from 'styled-components';
+import { LoginKakao, LoginNaver } from 'components';
+import { GoogleLogin } from 'react-google-login';
+import { useHistory } from 'react-router';
+import LoginImg from 'assets/img/img_Login.png';
+import GoogleIcon from 'assets/img/ic_google.svg';
+import { ReactComponent as Title } from 'assets/icon/ic_logo_wordmark_middle.svg';
+import { ReactComponent as SubTitle } from 'assets/icon/Group.svg';
 
 //api
-import { postToken } from "lib/api/sample";
+import { postToken } from 'lib/api/sample';
 
 const Styled = {
   Wrapper: styled.div`
@@ -73,7 +73,7 @@ const Styled = {
   Button: styled.button`
     width: 45.2rem;
     height: 4.8rem;
-    background-color: ${props => props.color};
+    background-color: ${(props) => props.color};
     border-radius: 2.1rem;
     padding-left: 1rem;
     margin-bottom: 1.7rem;
@@ -100,16 +100,15 @@ const Styled = {
 const LoginLayer = () => {
   const history = useHistory();
   const handleSuccess = async (token, social) => {
-    console.log(token);
     const data = await postToken(token, social);
-    localStorage.setItem("email", data.email);
-    localStorage.setItem("token", data.token);
-    localStorage.setItem("ID", data.id);
-    history.push("/");
+    localStorage.setItem('email', data.email);
+    localStorage.setItem('token', data.accessToken);
+    localStorage.setItem('ID', data.id);
+    history.push('/');
   };
 
   // 로그인 실패 시
-  const handleFailure = error => {
+  const handleFailure = (error) => {
     console.log(error);
   };
 
@@ -117,7 +116,7 @@ const LoginLayer = () => {
     <Styled.Wrapper>
       <Styled.ImageContainer>
         <Title />
-        <SubTitle style={{ marginTop: "2.1rem" }} />
+        <SubTitle style={{ marginTop: '2.1rem' }} />
       </Styled.ImageContainer>
       <Styled.Section>
         <div className="content-wrapper">
@@ -127,18 +126,13 @@ const LoginLayer = () => {
           <LoginNaver handleSuccess={handleSuccess} />
           <GoogleLogin
             clientId={process.env.REACT_APP_GOOGLE_CLIENTID}
-            render={renderProps => (
-              <Styled.Button
-                className="google"
-                type="button"
-                color={"white"}
-                onClick={renderProps.onClick}
-              >
+            render={(renderProps) => (
+              <Styled.Button className="google" type="button" color={'white'} onClick={renderProps.onClick}>
                 <img className="googleIcon" src={GoogleIcon} alt="google" />
                 구글로 시작하기
               </Styled.Button>
             )}
-            onSuccess={res => handleSuccess(res.accessToken, "google")}
+            onSuccess={(res) => handleSuccess(res.accessToken, 'google')}
             onFailure={handleFailure}
           />
         </div>
