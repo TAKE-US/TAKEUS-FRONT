@@ -15,7 +15,7 @@ const NaverPage = () => {
   useEffect(() => {
     const getToken = async () => {
       const data = await postNaverToken(code, state);
-      localStorage.setItem('token', data.token);
+      localStorage.setItem('token', data.accessToken);
       localStorage.setItem('ID', data.id);
       localStorage.setItem('email', data.email);
       openNewPage();

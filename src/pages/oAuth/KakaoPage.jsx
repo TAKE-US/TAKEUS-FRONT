@@ -8,16 +8,13 @@ const KakaoPage = () => {
   const code = new URL(window.location.href).searchParams.get('code');
 
   let redirectURL = '';
-  if (process.env.NODE_ENV === 'development')
-    redirectURL = 'http://localhost:3000/oauth/callback/kakao';
+  if (process.env.NODE_ENV === 'development') redirectURL = 'http://localhost:3000/oauth/callback/kakao';
   else redirectURL = 'https://take--us.web.app/oauth/callback/kakao';
 
   const handleSuccess = async (token, social) => {
-    console.log(token, social);
     const data = await postToken(token, social);
-    console.log(data);
     localStorage.setItem('email', data.email);
-    localStorage.setItem('token', data.token);
+    localStorage.setItem('token', data.accessToken);
     localStorage.setItem('ID', data.id);
     if (process.env.NODE_ENV === 'development') window.open('http://localhost:3000', '_self');
     else window.open('https://take--us.web.app/', '_self');
@@ -49,7 +46,7 @@ const KakaoPage = () => {
   };
 
   useEffect(() => {
-    if (code) getKakaoToken().then(data => handleSuccess(data, 'kakao'));
+    if (code) getKakaoToken().then((data) => handleSuccess(data, 'kakao'));
   });
 
   return <Loading />;
