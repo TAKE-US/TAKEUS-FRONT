@@ -9,7 +9,7 @@ const KakaoPage = () => {
 
   let redirectURL = '';
   if (process.env.NODE_ENV === 'development') redirectURL = 'http://localhost:3000/oauth/callback/kakao';
-  else redirectURL = 'https://take--us.web.app/oauth/callback/kakao';
+  else redirectURL = 'https://takeus-front.vercel.app/oauth/callback/kakao';
 
   const handleSuccess = async (token, social) => {
     const data = await postToken(token, social);
@@ -17,7 +17,7 @@ const KakaoPage = () => {
     localStorage.setItem('token', data.accessToken);
     localStorage.setItem('ID', data.id);
     if (process.env.NODE_ENV === 'development') window.open('http://localhost:3000', '_self');
-    else window.open('https://take--us.web.app/', '_self');
+    else window.open('https://takeus-front.vercel.app/', '_self');
   };
 
   const getKakaoToken = async () => {

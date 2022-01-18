@@ -9,7 +9,7 @@ const NaverPage = () => {
 
   const openNewPage = () => {
     if (process.env.NODE_ENV === 'development') window.open('http://localhost:3000', '_self');
-    else window.open('https://take--us.web.app/', '_self');
+    else window.open('https://takeus-front.vercel.app/', '_self');
   };
 
   useEffect(() => {
