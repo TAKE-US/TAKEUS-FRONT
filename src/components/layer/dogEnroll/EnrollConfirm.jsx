@@ -33,7 +33,9 @@ const EnrollFinish = () => {
         <MatchingImg />
       </div>
       <p className="text">봉사자와 매칭완료 시 매칭완료를 눌러 상태를 꼭 변경해주세요!</p>
-      <div className="button" onClick={() => history.push('/mypage?select=post')}>
+      {/* TODO 계속 에러가 발생해서 임시 수정 */}
+      {/* <div className="button" onClick={() => history.push('/mypage?select=post')}> */}
+      <div className="button" onClick={() => history.push('/')}>
         <Button primary rounded padding="1.2rem 3rem" font="button">
           확인 완료
         </Button>

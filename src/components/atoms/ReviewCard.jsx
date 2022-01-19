@@ -68,9 +68,8 @@ const ReviewCard = ({ review, editHandler, deleteHandler }) => {
   const isLogin = review.user === localStorage.getItem("ID");
   const [availableImg, setAvailableImg] = useState(true);
   const formatDate = rawDate => {
-    const [date, time] = rawDate.split("T");
-    const [hour, minute] = time.split(":");
-    return `${date}  ${hour}:${minute}`;
+    const [date] = rawDate.split("T");
+    return `${date.replaceAll("-", ".")}`;
   };
 
   return (
@@ -89,9 +88,8 @@ const ReviewCard = ({ review, editHandler, deleteHandler }) => {
         </article>
         <section className="description">
           <p>
-            작성일ㅣ{formatDate(review.writeDate)} &nbsp;&nbsp;지역ㅣ{review.endingAirport.split(" ")[0]}{" "}
-            &nbsp;&nbsp;봉사단체ㅣ
-            {review.institutionName}
+            작성일ㅣ{formatDate(review.writeDate)} &nbsp;&nbsp;지역ㅣ{review.endingAirport.split(" ")[0]} &nbsp;&nbsp;
+            {review.isInstitution}ㅣ{review.institutionName}
           </p>
           {isLogin && (
             <div className="button-wrap">

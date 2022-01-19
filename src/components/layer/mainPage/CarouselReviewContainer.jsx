@@ -1,10 +1,10 @@
 /* eslint-disable arrow-parens */
-import React, { useRef, useState, useEffect } from "react";
-import styled from "styled-components";
-import { CarouselReviewCard } from "components";
-import { Carousel } from "components";
-import { getReviewsWithTags } from "lib/api/sample";
-import { withRouter } from "react-router-dom";
+import React, { useRef, useState, useEffect } from 'react';
+import styled from 'styled-components';
+import { CarouselReviewCard } from 'components';
+import { Carousel } from 'components';
+import { getReviewsWithTags } from 'lib/api/sample';
+import { withRouter } from 'react-router-dom';
 
 const ContainerWrap = styled.article`
   height: 100%;
@@ -50,7 +50,7 @@ const CarouselReviewContainer = ({ history }) => {
 
   useEffect(() => {
     (async () => {
-      const data = await getReviewsWithTags("이동봉사과정", 1);
+      const data = await getReviewsWithTags('이동봉사과정', 1);
       setReviewTotalCount(data.data.length);
       data.data && setReview(data.data.slice(0, 6));
     })();
@@ -62,7 +62,7 @@ const CarouselReviewContainer = ({ history }) => {
         <section className="container-top__title">
           <p className="container-top__title__number">{reviewTotalCount}</p>
           명이 TAKEUS와 함께하고 있습니다.
-          <button className="container-top__title__button" onClick={() => history.push("/dog/search")}>
+          <button className="container-top__title__button" onClick={() => history.push('/review')}>
             더보기
           </button>
         </section>
@@ -70,7 +70,8 @@ const CarouselReviewContainer = ({ history }) => {
       </article>
       <article className="container-bottom">
         <div className="container-bottom__cards" ref={listRef}>
-          {reviews.length && reviews.map(review => <CarouselReviewCard key={review._id} review={review} />)}
+          {reviews.length &&
+            reviews.map(review => <CarouselReviewCard key={review._id} review={review} />)}
         </div>
       </article>
     </ContainerWrap>

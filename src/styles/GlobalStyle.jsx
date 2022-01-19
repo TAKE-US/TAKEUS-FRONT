@@ -1,11 +1,15 @@
-import { createGlobalStyle } from "styled-components";
-import reset from "styled-reset";
+import { createGlobalStyle } from 'styled-components';
+import reset from 'styled-reset';
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
 
   * {
     box-sizing: border-box;
+  }
+
+  .Toastify__toast--error{
+    font-size: 14px;
   }
 
   html{

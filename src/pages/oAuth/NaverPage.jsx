@@ -9,13 +9,13 @@ const NaverPage = () => {
 
   const openNewPage = () => {
     if (process.env.NODE_ENV === 'development') window.open('http://localhost:3000', '_self');
-    else window.open('https://take--us.web.app/', '_self');
+    else window.open('https://takeus-front.vercel.app/', '_self');
   };
 
   useEffect(() => {
     const getToken = async () => {
       const data = await postNaverToken(code, state);
-      localStorage.setItem('token', data.token);
+      localStorage.setItem('token', data.accessToken);
       localStorage.setItem('ID', data.id);
       localStorage.setItem('email', data.email);
       openNewPage();

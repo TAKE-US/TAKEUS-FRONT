@@ -2,21 +2,11 @@
   "env": {
     "browser": true
   },
-  "extends": [
-    "react-app",
-    "react-app/jest",
-    "eslint:recommended",
-    "plugin:react/recommended"
-  ],
-  "plugins": [
-    "react"
-  ],
+  "extends": ["react-app", "react-app/jest", "eslint:recommended", "plugin:react/recommended"],
+  "plugins": ["react"],
   "rules": {
     "react/prop-types": "off",
-    "arrow-parens": [
-      "error",
-      "as-needed"
-    ],
+    "arrow-parens": "off",
     "no-multiple-empty-lines": [
       "error",
       {
@@ -25,10 +15,7 @@
         "maxEOF": 0
       }
     ],
-    "semi": [
-      "error",
-      "always"
-    ],
+    "semi": ["error", "always"],
     "max-len": [
       "error",
       {

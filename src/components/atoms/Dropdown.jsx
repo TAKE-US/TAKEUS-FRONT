@@ -16,7 +16,7 @@ const Styled = {
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    padding: ${props => (props.small ? '0' : '2.4rem 2.6rem')};
+    padding: ${(props) => (props.small ? '0' : '2.4rem 2.6rem')};
 
     .destination {
       display: flex;
@@ -29,33 +29,34 @@ const Styled = {
       }
 
       .name {
-        display: ${props => (props.caption ? 'block' : 'none')};
+        display: ${(props) => (props.caption ? 'block' : 'none')};
         font: ${({ theme }) => theme.font.caption};
         color: ${({ theme }) => theme.color.gray3};
       }
 
       .text {
-        margin-top: ${props => (props.caption ? '0.6rem' : '0')};
-        margin-left: ${props => props.image && '0.4rem'};
+        margin-top: ${(props) => (props.caption ? '0.6rem' : '0')};
+        margin-left: ${(props) => props.image && '0.4rem'};
         font: ${({ theme, fontStyle }) => (fontStyle ? theme.font[fontStyle] : theme.font.body2)};
-        color: ${props => (props.list ? '#3D3D3D' : '#C1C1C1')};
+        color: ${(props) => (props.list ? '#3D3D3D' : '#C1C1C1')};
       }
     }
 
     .arrowimg {
-      transform: ${props => props.isActive && 'rotate(180deg)'};
+      transform: ${(props) => props.isActive && 'rotate(180deg)'};
     }
   `,
 
   Nav: styled.nav`
     width: 100%;
     position: absolute;
-    display: ${props => (props.isActive ? 'flex' : 'none')};
+    display: ${(props) => (props.isActive ? 'flex' : 'none')};
     padding: 1rem 0.6rem;
     box-shadow: 0rem 0rem 3rem 0.1rem rgba(0, 0, 0, 0.1);
     border-radius: 1rem;
     margin-top: 1.6rem;
     background-color: ${({ theme }) => theme.color.white};
+    z-index: 2;
   `,
 
   Ul: styled.ul`
@@ -82,30 +83,19 @@ const Styled = {
   Img: styled.div``,
 };
 
-const Dropdown = ({
-  item,
-  placeholder,
-  rounded,
-  font,
-  caption,
-  small,
-  dropArray,
-  onDrop,
-  id,
-  initial,
-}) => {
+const Dropdown = ({ item, placeholder, rounded, font, caption, small, dropArray, onDrop, id, initial }) => {
   const dropdownRef = useRef(null);
   const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
   const [list, setList] = useState('');
   const [image, setImage] = useState('');
-  const onClick = e => {
+  const onClick = (e) => {
     e.preventDefault();
     setIsActive(!isActive);
   };
 
   useEffect(() => {
     setList(initial.type);
-    setImage(item.filter(category => category.type === initial.type)[0]?.img);
+    setImage(item.filter((category) => category.type === initial.type)[0]?.img);
   }, [item, initial]);
 
   return (
@@ -132,20 +122,18 @@ const Dropdown = ({
       <Styled.Nav ref={dropdownRef} isActive={isActive}>
         <Styled.Ul>
           {item.map((value, index) => (
-            <>
-              <Styled.List
-                key={index}
-                selected={list === value['type'] ? true : false}
-                onClick={() => {
-                  setList(value['type']);
-                  setImage(value['img']);
-                  onDrop(dropArray, value['type'], id);
-                  setIsActive(!isActive);
-                }}
-              >
-                {value['type']}
-              </Styled.List>
-            </>
+            <Styled.List
+              key={`${value.type}-${index}`}
+              selected={list === value['type'] ? true : false}
+              onClick={() => {
+                setList(value['type']);
+                setImage(value['img']);
+                onDrop(dropArray, value['type'], id);
+                setIsActive(!isActive);
+              }}
+            >
+              {value['type']}
+            </Styled.List>
           ))}
         </Styled.Ul>
       </Styled.Nav>
