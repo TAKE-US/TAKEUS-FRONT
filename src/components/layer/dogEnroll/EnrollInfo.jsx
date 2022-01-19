@@ -2,7 +2,8 @@
 /* eslint-disable max-len */
 /* eslint-disable arrow-parens */
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { RadioButton, Counter, TextField, AddDogLayer, Input, Button, EnrollSearchbar, Dropdown } from 'components';
 import { ReactComponent as Kakao } from 'assets/icon/ic_kakao_24.svg';
 import { ReactComponent as Call } from 'assets/icon/ic_call_24.svg';
@@ -15,6 +16,7 @@ import { postEnroll, putDog } from 'lib/api/sample';
 import { withRouter } from 'react-router-dom';
 import { useHistory } from 'react-router';
 import EnrollInfoWrap from './EnrollInfoStyle';
+import ERROR_MESSAGE from 'lib/message/error';
 
 const ContactsList = [
   {
@@ -164,12 +166,12 @@ const EnrollInfo = ({ edit }) => {
     const formData = new FormData();
     formData.append('endingCountry', enrollData.endingCountry);
     formData.append('endingAirport', enrollData.endingAirport);
-    formData.append('name', enrollData.name);
+    formData.append('name', enrollData.name ? enrollData.name : '이름없음');
     formData.append('gender', enrollData.gender ? enrollData.gender : '선택안함');
-    formData.append('age', enrollData.age);
+    formData.append('age', enrollData.age ? enrollData.age : '모름');
     formData.append('weight', enrollData.weight);
     formData.append('neutralization', enrollData?.neutralization === '완료' ? true : false);
-    formData.append('health', enrollData.health);
+    formData.append('health', enrollData.health ? enrollData.health : '특이사항 없음');
     formData.append('isInstitution', enrollData?.isInstitution === '단체' ? true : false);
     formData.append('institutionName', enrollData?.institutionName ? enrollData.institutionName : '');
     formData.append('detail', enrollData?.detail ? enrollData.detail : '');
@@ -185,6 +187,18 @@ const EnrollInfo = ({ edit }) => {
       else formData.append('photos', imageList[i]['imgURL']);
     }
 
+    try {
+      if (enrollData.endingCountry.length === 0) throw ERROR_MESSAGE.NO_COUNTRY_SELECTED;
+      else if (enrollData.endingAirport.length === 0) throw ERROR_MESSAGE.NO_AIRPORT_SELECTED;
+      else if (enrollData.isInstitution && enrollData.institutionName.length === 0)
+        throw ERROR_MESSAGE.NO_INSTITUTION_SELECTED;
+      else if (contactList.length === 0 || contactList.map((contact) => contact.value).join('').length === 0)
+        throw ERROR_MESSAGE.NO_CONTACT_SELECTED;
+    } catch (e) {
+      toast.error(e);
+      return;
+    }
+
     if (edit) await putDog(history.location.state?.dog._id, formData);
     else await postEnroll(formData);
     history.push('/dog/enroll/confirm');
@@ -192,6 +206,7 @@ const EnrollInfo = ({ edit }) => {
 
   return (
     <EnrollInfoWrap>
+      <ToastContainer />
       <form onSubmit={handleSubmit}>
         <div className="wrap wrap--add">
           <AddDogLayer
