@@ -21,7 +21,7 @@ export const postMail = async (name, email, text) => {
     text: text,
   };
   try {
-    await axios.post('/api/email', body, {
+    await instance.post('/api/email', body, {
       headers: {
         'Content-Type': 'application/json',
         'x-auth-token': localStorage.getItem('token'),
@@ -227,7 +227,7 @@ export const deleteReview = async (id) => {
 
 export const deleteDog = async (id) => {
   try {
-    await axios.delete(`/api/dogs/detail/${id}`, {
+    await instance.delete(`/api/dogs/detail/${id}`, {
       headers: {
         'x-auth-token': localStorage.getItem('token'),
       },
