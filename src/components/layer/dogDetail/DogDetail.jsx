@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
-import styled from "styled-components";
-import { useHistory } from "react-router";
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
+import { useHistory } from 'react-router';
 
 import { ReactComponent as EditIcon } from 'assets/img/ic_edit.svg';
 import { Swiper, DogDetailInfo, CopyLinkButton, DeleteModal, ReportModal, MatchingModal } from 'components';
 
-import { putDogStatus } from "lib/api/sample";
+import { putDogStatus } from 'lib/api/sample';
 
 const DogDetailWrap = styled.div`
   display: flex;
@@ -123,9 +123,9 @@ const DogDetailWrap = styled.div`
 const DogDetail = ({ dog }) => {
   const history = useHistory();
   const [myPost, setMyPost] = useState(false);
-  const isLogin = localStorage.getItem("token");
-  const myId = localStorage.getItem("ID");
-  const [dogStatus, setDogStatus] = useState("waiting");
+  const isLogin = localStorage.getItem('token');
+  const myId = localStorage.getItem('ID');
+  const [dogStatus, setDogStatus] = useState('waiting');
 
   const handleClick = () => {
     putDogStatus(dog._id, { status: 'done' });
@@ -135,22 +135,8 @@ const DogDetail = ({ dog }) => {
 
   useEffect(() => {
     if (myId === dog.user) setMyPost(true);
-    dog.status === "done" ? setDogStatus("done") : setDogStatus("wating");
+    dog.status === 'done' ? setDogStatus('done') : setDogStatus('wating');
   }, [dog, myId]);
-
-  const handleClick = () => {
-    const data = {
-      status: 'done',
-    };
-    putDogStatus(dog._id, data);
-    setDogStatus('done');
-  };
-
-  const goEditPage = () => {
-    history.push({ pathname: `${dog._id}/edit`, state: { dog } });
-  };
-
-  console.log('dog', dog.instituionName, dog);
 
   return (
     <DogDetailWrap>
@@ -161,7 +147,7 @@ const DogDetail = ({ dog }) => {
       <header>
         <div className="dog--title">
           <h1>{dog.name}</h1>
-          <h2>{dog.isInstitution ? `단체 | ${dog.institutionName}` : "개인구조자"}</h2>
+          <h2>{dog.isInstitution ? `단체 | ${dog.institutionName}` : '개인구조자'}</h2>
         </div>
         {isLogin &&
           (myPost ? (
