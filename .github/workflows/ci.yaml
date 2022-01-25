@@ -23,7 +23,7 @@ jobs:
         run: yarn install
 
       - name: Setting .env
-        run: echo "REACT_APP_GOOGLE_CLIENTID=${{ secrets.REACT_APP_GOOGLE_CLIENTID }}" > .env && echo "API_DOMAIN=${{ secrets.API_DOMAIN }}" > .env && echo "API_DOMAIN=${{ secrets.API_DOMAIN }}\nREACT_APP_GOOGLE_CLIENTID=${{ secrets.REACT_APP_GOOGLE_CLIENTID }}"
+        run: echo "REACT_APP_GOOGLE_CLIENTID=${{ secrets.REACT_APP_GOOGLE_CLIENTID }}" > .env && echo "API_DOMAIN=${{ secrets.API_DOMAIN }}" > .env && echo .env
 
       - name: Build webpack
         run: yarn build
