@@ -34,6 +34,8 @@ jobs:
       - name: Setting Naver Auth .env
         run: echo "REACT_APP_NAVER_REDIRECT=${{ secrets.REACT_APP_NAVER_REDIRECT }}" >> .env && echo "REACT_APP_NAVER_CLIENTID=${{ secrets.REACT_APP_NAVER_CLIENTID }}" >> .env && echo "REACT_APP_NAVER_STATE_STRING=${{ secrets.REACT_APP_NAVER_STATE_STRING }}" >> .env
 
+      - run: cat .env
+
       - name: Build webpack
         run: yarn build
 
