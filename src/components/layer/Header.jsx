@@ -121,7 +121,7 @@ const Header = () => {
   const location = useLocation();
   const history = useHistory();
   const [isScrolling, setIsScrolling] = useState(false);
-  const isLogin = isExpired ? false : localStorage.getItem('token');
+  const [isLogin, setIsLogin] = useState(isExpired ? false : localStorage.getItem('token'));
 
   const scrollHandler = useCallback(() => {
     if (isLogin) {
@@ -144,6 +144,10 @@ const Header = () => {
   useEffect(() => {
     window.addEventListener('scroll', scrollHandler);
   }, [scrollHandler]);
+
+  useEffect(() => {
+    setIsLogin(isExpired ? false : localStorage.getItem('token'));
+  }, []);
 
   if (location.pathname === '/login') return '';
 
