@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable arrow-parens */
 import React from 'react';
 import styled from 'styled-components';
@@ -38,18 +39,13 @@ const Styled = {
 };
 
 const LoginKakao = () => {
-  const REST_API_KEY = process.env.REACT_APP_CLIENTID;
+  const REST_API_KEY = process.env.REACT_APP_KAKAO_CLIENTID;
   const REDIRECT_URI =
     process.env.NODE_ENV === 'development'
       ? 'http://localhost:3000/oauth/callback/kakao'
       : process.env.REACT_APP_KAKAO_REDIRECT;
 
-  const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?
-                          response_type=code&
-                          client_id=${REST_API_KEY}&
-                          redirect_uri=${REDIRECT_URI}&
-                          response_type=code`;
-
+  const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
   const LoginClickHandler = () => window.location.assign(KAKAO_AUTH_URL);
 
   return (

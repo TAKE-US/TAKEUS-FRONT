@@ -18,6 +18,7 @@ const NaverPage = () => {
       localStorage.setItem('token', data.accessToken);
       localStorage.setItem('ID', data.id);
       localStorage.setItem('email', data.email);
+      localStorage.setItem('issuedAt', data.issuedAt);
       openNewPage();
     };
 

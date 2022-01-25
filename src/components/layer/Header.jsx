@@ -35,8 +35,8 @@ const Head = {
       align-items: center;
       height: 100%;
       padding: 0 9.2rem;
-      background-color: ${props => (props.isScrolling ? '#FFFFFF' : 'transparent')};
-      box-shadow: ${props => props.isScrolling && '0rem 0rem 1.6rem 0.1rem rgba(0, 0, 0, 0.08)'};
+      background-color: ${(props) => (props.isScrolling ? '#FFFFFF' : 'transparent')};
+      box-shadow: ${(props) => props.isScrolling && '0rem 0rem 1.6rem 0.1rem rgba(0, 0, 0, 0.08)'};
       transition: background-color 0.6s;
       svg {
         &:hover {
@@ -59,7 +59,7 @@ const Head = {
     flex-direction: column;
     align-items: center;
     font: ${({ theme }) => theme.font.gnb};
-    color: ${props => props.isSelect && '#FDCB02'};
+    color: ${(props) => props.isSelect && '#FDCB02'};
 
     &:hover {
       cursor: pointer;
@@ -70,7 +70,7 @@ const Head = {
       content: '';
       position: relative;
       top: 0.5rem;
-      display: ${props => (props.isSelect ? 'block' : 'none')};
+      display: ${(props) => (props.isSelect ? 'block' : 'none')};
       width: 0.4rem;
       height: 0.4rem;
       background-color: ${({ theme }) => theme.color.primary};
@@ -111,12 +111,17 @@ const Head = {
   `,
 };
 
+const getIssuedAtTime = () => localStorage.getItem('issuedAt');
+const getNowTime = () => Math.floor(+new Date() / 1000);
+const ONE_HOUR_BEFORE_ONEMINUTE = 3540;
+const isExpired = getNowTime() - getIssuedAtTime() > ONE_HOUR_BEFORE_ONEMINUTE;
+
 const Header = () => {
   const noticeElement = useRef(null);
   const location = useLocation();
   const history = useHistory();
   const [isScrolling, setIsScrolling] = useState(false);
-  const isLogin = localStorage.getItem('token');
+  const [isLogin, setIsLogin] = useState(isExpired ? false : localStorage.getItem('token'));
 
   const scrollHandler = useCallback(() => {
     if (isLogin) {
@@ -139,6 +144,10 @@ const Header = () => {
   useEffect(() => {
     window.addEventListener('scroll', scrollHandler);
   }, [scrollHandler]);
+
+  useEffect(() => {
+    setIsLogin(isExpired ? false : localStorage.getItem('token'));
+  }, []);
 
   if (location.pathname === '/login') return '';
 
