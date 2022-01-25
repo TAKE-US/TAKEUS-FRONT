@@ -1,14 +1,13 @@
 /* eslint-disable arrow-parens */
-import axios from "axios";
+import axios from 'axios';
 
-const apiServer = "https://takeus.shop";
 const instance = axios.create({
-  baseURL: process.env.NODE_ENV === "development" ? "/" : apiServer,
+  baseURL: process.env.NODE_ENV === 'development' ? '/' : process.env.API_DOMAIN,
 });
 
 export const getDogs = async () => {
   try {
-    const data = await instance.get("/api/dogs");
+    const data = await instance.get('/api/dogs');
     return data.data.data;
   } catch (e) {
     return e;
@@ -22,10 +21,10 @@ export const postMail = async (name, email, text) => {
     text: text,
   };
   try {
-    await axios.post("/api/email", body, {
+    await axios.post('/api/email', body, {
       headers: {
-        "Content-Type": "application/json",
-        "x-auth-token": localStorage.getItem("token"),
+        'Content-Type': 'application/json',
+        'x-auth-token': localStorage.getItem('token'),
       },
     });
   } catch (e) {
@@ -35,7 +34,7 @@ export const postMail = async (name, email, text) => {
 
 export const getCountry = async () => {
   try {
-    const data = await instance.get("/api/airports/country");
+    const data = await instance.get('/api/airports/country');
     return data.data;
   } catch (e) {
     return [];
@@ -44,8 +43,8 @@ export const getCountry = async () => {
 
 export const getPageDogs = async (num, selected) => {
   try {
-    const filter = selected === "최신순" ? "latest" : "oldest";
-    const data = await instance.get("/api/dogs", {
+    const filter = selected === '최신순' ? 'latest' : 'oldest';
+    const data = await instance.get('/api/dogs', {
       params: {
         order: filter,
         page: num,
@@ -57,11 +56,11 @@ export const getPageDogs = async (num, selected) => {
   }
 };
 
-export const getDogDetail = async id => {
+export const getDogDetail = async (id) => {
   try {
     const data = await instance.get(`/api/dogs/detail/${id}`, {
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     });
     return data.data.data;
@@ -70,11 +69,11 @@ export const getDogDetail = async id => {
   }
 };
 
-export const getReviews = async num => {
+export const getReviews = async (num) => {
   try {
-    const data = await instance.get("/api/reviews", {
+    const data = await instance.get('/api/reviews', {
       params: {
-        order: "latest",
+        order: 'latest',
         page: num,
       },
     });
@@ -85,7 +84,7 @@ export const getReviews = async num => {
 };
 
 export const getSearchDogs = async (airport, selectedFilter, num) => {
-  const filter = selectedFilter === "최신순" ? "latest" : "oldest";
+  const filter = selectedFilter === '최신순' ? 'latest' : 'oldest';
   try {
     const data = await instance.get(`/api/dogs/search/${airport}`, {
       params: {
@@ -100,12 +99,12 @@ export const getSearchDogs = async (airport, selectedFilter, num) => {
 };
 
 export const getMyDogs = async (num, selectedFilter) => {
-  const filter = selectedFilter === "최신순" ? "latest" : "oldest";
+  const filter = selectedFilter === '최신순' ? 'latest' : 'oldest';
   try {
-    const data = await instance.get("/api/dogs/my", {
+    const data = await instance.get('/api/dogs/my', {
       headers: {
-        "Content-Type": "application/json",
-        "x-auth-token": localStorage.getItem("token"),
+        'Content-Type': 'application/json',
+        'x-auth-token': localStorage.getItem('token'),
       },
       params: {
         order: filter,
@@ -119,12 +118,12 @@ export const getMyDogs = async (num, selectedFilter) => {
 };
 
 export const getMyReviews = async (num, selectedFilter) => {
-  const filter = selectedFilter === "최신순" ? "latest" : "oldest";
+  const filter = selectedFilter === '최신순' ? 'latest' : 'oldest';
   try {
-    const data = await instance.get("/api/reviews/list/my", {
+    const data = await instance.get('/api/reviews/list/my', {
       headers: {
-        "Content-Type": "application/json",
-        "x-auth-token": localStorage.getItem("token"),
+        'Content-Type': 'application/json',
+        'x-auth-token': localStorage.getItem('token'),
       },
       params: {
         order: filter,
@@ -137,11 +136,11 @@ export const getMyReviews = async (num, selectedFilter) => {
   }
 };
 
-export const getReviewDetail = async id => {
+export const getReviewDetail = async (id) => {
   try {
     const data = await instance.get(`/api/reviews/detail/${id}`, {
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     });
     return data.data.data;
@@ -150,9 +149,9 @@ export const getReviewDetail = async id => {
   }
 };
 
-export const getReviewsWithTags = async (hashtag = "", num, selectedFilter) => {
+export const getReviewsWithTags = async (hashtag = '', num, selectedFilter) => {
   try {
-    const filter = selectedFilter === "최신순" ? "latest" : "oldest";
+    const filter = selectedFilter === '최신순' ? 'latest' : 'oldest';
     const data = await instance.get(`/api/reviews/${hashtag}`, {
       params: {
         order: filter,
@@ -167,7 +166,7 @@ export const getReviewsWithTags = async (hashtag = "", num, selectedFilter) => {
 
 export const getReviewsSearch = async (hashtag, num, selectedFilter, search) => {
   try {
-    const filter = selectedFilter === "최신순" ? "latest" : "oldest";
+    const filter = selectedFilter === '최신순' ? 'latest' : 'oldest';
     const data = await instance.get(`/api/reviews/${search}?hashtags=${hashtag}`, {
       params: {
         order: filter,
@@ -186,9 +185,9 @@ export const postToken = async (token, social) => {
     social: social,
   };
   try {
-    const data = await instance.post("/api/users/login", body, {
+    const data = await instance.post('/api/users/login', body, {
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     });
     return data.data;
@@ -197,13 +196,13 @@ export const postToken = async (token, social) => {
   }
 };
 
-export const postReview = async data => {
+export const postReview = async (data) => {
   const body = data;
   try {
-    const data = await instance.post("/api/reviews", body, {
+    const data = await instance.post('/api/reviews', body, {
       headers: {
-        "Content-Type": "application/json",
-        "x-auth-token": localStorage.getItem("token"),
+        'Content-Type': 'application/json',
+        'x-auth-token': localStorage.getItem('token'),
       },
     });
     return data;
@@ -212,12 +211,12 @@ export const postReview = async data => {
   }
 };
 
-export const deleteReview = async id => {
+export const deleteReview = async (id) => {
   try {
     const res = await instance.delete(`/api/reviews/detail/${id}`, {
       headers: {
-        "Content-Type": "application/json",
-        "x-auth-token": localStorage.getItem("token"),
+        'Content-Type': 'application/json',
+        'x-auth-token': localStorage.getItem('token'),
       },
     });
     return res;
@@ -226,11 +225,11 @@ export const deleteReview = async id => {
   }
 };
 
-export const deleteDog = async id => {
+export const deleteDog = async (id) => {
   try {
     await axios.delete(`/api/dogs/detail/${id}`, {
       headers: {
-        "x-auth-token": localStorage.getItem("token"),
+        'x-auth-token': localStorage.getItem('token'),
       },
     });
   } catch (e) {
@@ -243,8 +242,8 @@ export const putReview = async (id, data) => {
   try {
     const data = await instance.put(`/api/reviews/detail/${id}`, body, {
       headers: {
-        "Content-Type": "application/json",
-        "x-auth-token": localStorage.getItem("token"),
+        'Content-Type': 'application/json',
+        'x-auth-token': localStorage.getItem('token'),
       },
     });
     return data;
@@ -253,13 +252,13 @@ export const putReview = async (id, data) => {
   }
 };
 
-export const postEnroll = async data => {
+export const postEnroll = async (data) => {
   const body = data;
   try {
-    const data = await instance.post("/api/dogs", body, {
+    const data = await instance.post('/api/dogs', body, {
       headers: {
-        "Content-Type": "multipart/form-data; boundary=<calculated when request is sent>",
-        "x-auth-token": localStorage.getItem("token"),
+        'Content-Type': 'multipart/form-data; boundary=<calculated when request is sent>',
+        'x-auth-token': localStorage.getItem('token'),
       },
     });
     return data;
@@ -273,8 +272,8 @@ export const putDog = async (dogId, data) => {
   try {
     const data = await instance.patch(`/api/dogs/detail/${dogId}`, body, {
       headers: {
-        "Content-Type": "multipart/form-data",
-        "x-auth-token": localStorage.getItem("token"),
+        'Content-Type': 'multipart/form-data',
+        'x-auth-token': localStorage.getItem('token'),
       },
     });
     return data;
@@ -288,8 +287,8 @@ export const putDogStatus = async (dogId, data) => {
   try {
     const data = await instance.put(`/api/dogs/detail/${dogId}/status`, body, {
       headers: {
-        "Content-Type": "application/json",
-        "x-auth-token": localStorage.getItem("token"),
+        'Content-Type': 'application/json',
+        'x-auth-token': localStorage.getItem('token'),
       },
     });
     return data;
@@ -300,10 +299,10 @@ export const putDogStatus = async (dogId, data) => {
 
 export const getMyData = async () => {
   try {
-    const data = await instance.get("/api/users/login", {
+    const data = await instance.get('/api/users/login', {
       header: {
-        "Content-Type": "application/json",
-        "x-auth-token": localStorage.getItem("token"),
+        'Content-Type': 'application/json',
+        'x-auth-token': localStorage.getItem('token'),
       },
     });
     return data.data.data;
@@ -318,9 +317,9 @@ export const postNaverToken = async (code, state) => {
     state: state,
   };
   try {
-    const data = await instance.post("/api/users/naverLogin", body, {
+    const data = await instance.post('/api/users/naverLogin', body, {
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     });
     return data.data;

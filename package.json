@@ -57,7 +57,7 @@
     "typescript": "^4.4.3",
     "yarn": "^1.22.17"
   },
-  "proxy": "https://takeus.shop/",
+  "proxy": "https://takeus-dev.shop",
   "eslintConfig": {
     "overrides": [
       {

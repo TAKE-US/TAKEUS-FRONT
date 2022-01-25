@@ -17,14 +17,17 @@ jobs:
         with:
           path: node_modules
           key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
-      
+
       - name: Install Dependencies
         if: steps.node-cache.outputs.cache-hit != 'true'
         run: yarn install
 
       - name: Setting .env
         run: echo "REACT_APP_GOOGLE_CLIENTID=${{ secrets.REACT_APP_GOOGLE_CLIENTID }}" > .env
-        
+
+      - name: Setting .env
+        run: echo "API_DOMAIN=${{ secrets.API_DOMAIN }}" > .env
+
       - name: Build webpack
         run: yarn build
 
@@ -34,4 +37,3 @@ jobs:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_TAKE__US }}'
           expires: 1d
           projectId: take--us
-
