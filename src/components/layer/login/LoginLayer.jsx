@@ -104,6 +104,8 @@ const LoginLayer = () => {
     localStorage.setItem('email', data.email);
     localStorage.setItem('token', data.accessToken);
     localStorage.setItem('ID', data.id);
+    localStorage.setItem('issuedAt', data.issuedAt);
+
     history.push('/');
   };
 
