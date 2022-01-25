@@ -5,7 +5,6 @@ import { ReviewPage, ReviewPostPage } from "pages";
 
 const DogRouter = ({ match }) => {
   const path = match.path;
-  console.log(path);
   return (
     <>
       <Route exact path={path} component={ReviewPage} />

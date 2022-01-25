@@ -106,7 +106,6 @@ const MypageHeader = ({ location, history }) => {
   useEffect(() => {
     setIsLoading(true);
     (async () => {
-      console.log(selectedFilter);
       const data = await getMyDogs(dogsPage, selectedFilter);
       setDogs(data[0]);
       setDogsTotalPage(data[1]);
@@ -114,7 +113,6 @@ const MypageHeader = ({ location, history }) => {
       const ReviewData = await getMyReviews(reviewsPage, selectedFilter);
       setReviews(ReviewData[0]);
       setReviewsTotalPage(ReviewData[1]);
-      console.log(data, ReviewData);
       setIsLoading(false);
     })();
   }, [dogsPage, reviewsPage, selectedFilter]);

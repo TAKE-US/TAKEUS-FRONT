@@ -131,16 +131,12 @@ const DropdownAirport = ({ currCountry, currAirport, setCurrAirport, allAirport,
   useEffect(() => {
     if (!airportRef.current) {
       airportRef.current = true;
-    } else {
-      console.log("updated");
     }
   }, [currAirport]);
 
   useEffect(() => {
     if (!countryRef.current) {
       countryRef.current = true;
-    } else {
-      console.log("updated");
     }
   }, [currCountry]);
 
