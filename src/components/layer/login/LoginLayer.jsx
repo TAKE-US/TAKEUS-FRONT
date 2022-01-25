@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import { LoginKakao, LoginNaver } from 'components';
 import { GoogleLogin } from 'react-google-login';
-import { useHistory } from 'react-router';
 import LoginImg from 'assets/img/img_Login.png';
 import GoogleIcon from 'assets/img/ic_google.svg';
 import { ReactComponent as Title } from 'assets/icon/ic_logo_wordmark_middle.svg';
@@ -98,13 +97,15 @@ const Styled = {
 };
 
 const LoginLayer = () => {
-  const history = useHistory();
   const handleSuccess = async (token, social) => {
     const data = await postToken(token, social);
     localStorage.setItem('email', data.email);
     localStorage.setItem('token', data.accessToken);
     localStorage.setItem('ID', data.id);
-    history.push('/');
+    localStorage.setItem('issuedAt', data.issuedAt);
+
+    if (process.env.NODE_ENV === 'development') window.open('http://localhost:3000', '_self');
+    else window.open('https://takeus-front.vercel.app/', '_self');
   };
 
   // 로그인 실패 시
