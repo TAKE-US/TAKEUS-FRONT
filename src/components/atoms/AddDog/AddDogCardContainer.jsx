@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable arrow-parens */
-import React, { useState, useRef, useEffect } from 'react';
-import styled from 'styled-components';
-import { ImageCard, AddDogCard } from 'components';
+import React, { useState, useRef, useEffect } from "react";
+import styled from "styled-components";
+import { ImageCard, AddDogCard } from "components";
 
 const Styled = {
   Wrapper: styled.section`

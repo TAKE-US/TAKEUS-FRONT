@@ -38,7 +38,6 @@ const Carousel = ({ listRef, movingValue }) => {
   };
 
   const RightScroll = () => {
-    console.log(listRef.current.clientWidth);
     if (position < 1361) {
       setPosition(position + movingValue);
     } else {

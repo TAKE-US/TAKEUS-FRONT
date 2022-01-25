@@ -109,9 +109,7 @@ const LoginLayer = () => {
   };
 
   // 로그인 실패 시
-  const handleFailure = (error) => {
-    console.log(error);
-  };
+  const handleFailure = () => {};
 
   return (
     <Styled.Wrapper>

@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
-import { Loading } from 'components';
-import axios from 'axios';
-import qs from 'qs';
-import { postToken } from 'lib/api/sample';
+import React, { useEffect } from "react";
+import { Loading } from "components";
+import axios from "axios";
+import qs from "qs";
+import { postToken } from "lib/api/sample";
 
 const KakaoPage = () => {
-  const code = new URL(window.location.href).searchParams.get('code');
+  const code = new URL(window.location.href).searchParams.get("code");
 
   const handleSuccess = async (token, social) => {
     const data = await postToken(token, social);
@@ -30,18 +30,15 @@ const KakaoPage = () => {
     };
     try {
       const data = await axios({
-        method: 'POST',
-        url: 'https://kauth.kakao.com/oauth/token',
+        method: "POST",
+        url: "https://kauth.kakao.com/oauth/token",
         headers: {
-          'content-type': 'application/x-www-form-urlencoded',
+          "content-type": "application/x-www-form-urlencoded",
         },
         data: qs.stringify(body),
       });
-      console.log('[SUCCESS] Kakao Login');
       return data.data.access_token;
     } catch (e) {
-      console.log('[FAIL] Kakao Login');
-      console.log(e);
       return e;
     }
   };
