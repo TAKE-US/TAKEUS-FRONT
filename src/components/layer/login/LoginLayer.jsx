@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { LoginKakao, LoginNaver } from 'components';
 import { GoogleLogin } from 'react-google-login';
@@ -97,6 +98,7 @@ const Styled = {
 };
 
 const LoginLayer = () => {
+  const history = useHistory();
   const handleSuccess = async (token, social) => {
     const data = await postToken(token, social);
     localStorage.setItem('email', data.email);
@@ -104,8 +106,7 @@ const LoginLayer = () => {
     localStorage.setItem('ID', data.id);
     localStorage.setItem('issuedAt', data.issuedAt);
 
-    if (process.env.NODE_ENV === 'development') window.open('http://localhost:3000', '_self');
-    else window.open('https://takeus-front.vercel.app/', '_self');
+    history.push('/');
   };
 
   // 로그인 실패 시
