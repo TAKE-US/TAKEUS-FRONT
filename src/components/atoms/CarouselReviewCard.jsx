@@ -47,8 +47,9 @@ const CarouselReviewCard = ({ review }) => {
   return (
     <Card onClick={() => window.open(review.content)}>
       <img
-        src={review.crawlingData[0].image ? review.crawlingData[0].image : review_Img}
+        src={review?.crawlingData[0]?.image ? review.crawlingData[0].image : review_Img}
         alt="review_Img"
+        onError={(e) => (e.target.src = review_Img)}
       />
       <section className="cardInfo">
         <div className="cardInfo__title">
