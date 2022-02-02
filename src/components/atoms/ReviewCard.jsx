@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import styled from "styled-components";
+import React, { useState } from 'react';
+import styled from 'styled-components';
 //components
-import { Hashtag, ReviewDeleteModal } from "components";
+import { Hashtag, ReviewDeleteModal } from 'components';
 
 const Styled = {
   Wrapper: styled.div`
@@ -46,7 +46,7 @@ const Styled = {
           }
           &__edit {
             ::after {
-              content: "|";
+              content: '|';
               padding-left: 1rem;
             }
           }
@@ -65,18 +65,18 @@ const Styled = {
 };
 
 const ReviewCard = ({ review, editHandler, deleteHandler }) => {
-  const isLogin = review.user === localStorage.getItem("ID");
+  const isLogin = review.user === localStorage.getItem('ID');
   const [availableImg, setAvailableImg] = useState(true);
-  const formatDate = rawDate => {
-    const [date] = rawDate.split("T");
-    return `${date.replaceAll("-", ".")}`;
+  const formatDate = (rawDate) => {
+    const [date] = rawDate.split('T');
+    return `${date.replaceAll('-', '.')}`;
   };
 
   return (
     <Styled.Wrapper onClick={() => window.open(review.content)}>
       <section className="text">
         <section className="tags">
-          {review.hashtags.map(tag => (
+          {review.hashtags.map((tag) => (
             <div className="hashtag" key={tag}>
               <Hashtag tag={tag} primary />
             </div>
@@ -88,27 +88,27 @@ const ReviewCard = ({ review, editHandler, deleteHandler }) => {
         </article>
         <section className="description">
           <p>
-            작성일ㅣ{formatDate(review.writeDate)} &nbsp;&nbsp;지역ㅣ{review.endingAirport.split(" ")[0]} &nbsp;&nbsp;
+            작성일ㅣ{formatDate(review.writeDate)} &nbsp;&nbsp;지역ㅣ{review.endingAirport.split(' ')[0]} &nbsp;&nbsp;
             {review.isInstitution}ㅣ{review.institutionName}
           </p>
           {isLogin && (
             <div className="button-wrap">
-              <button className="button-wrap__edit" onClick={evt => editHandler(evt, review._id)}>
+              <button className="button-wrap__edit" onClick={(evt) => editHandler(evt, review._id)}>
                 수정
               </button>
-              <button className="button-wrap__delete" onClick={e => e.stopPropagation()}>
+              <button className="button-wrap__delete" onClick={(e) => e.stopPropagation()}>
                 <ReviewDeleteModal deleteHandler={deleteHandler} id={review._id} />
               </button>
             </div>
           )}
         </section>
       </section>
-      {availableImg && (
+      {availableImg && review?.crawlingData[0]?.image && (
         <img
           className="image"
-          src={review.crawlingData[0].image}
+          src={review?.crawlingData[0]?.image}
           alt="review_img"
-          onError={e => setAvailableImg(false)}
+          onError={(e) => setAvailableImg(false)}
         />
       )}
     </Styled.Wrapper>

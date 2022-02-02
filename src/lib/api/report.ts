@@ -1,29 +1,22 @@
-import axios from "axios";
+import axios from 'axios';
 
-const apiServer = "https://takeus.shop";
 const instance = axios.create({
-  baseURL: process.env.NODE_ENV === "development" ? "/" : apiServer
+  baseURL: process.env.NODE_ENV === 'development' ? '/' : process.env.REACT_APP_API_DOMAIN,
 });
-
 
 export const postDogDetailReport = async (userId: string, dogDetailId: string): Promise<void> => {
   const body = {
     targetUser: userId,
-    targetDog: dogDetailId
+    targetDog: dogDetailId,
   };
   try {
-    await instance.post("/api/reports", body,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          "x-auth-token": localStorage.getItem("token"),
-        },
-      }
-    );
-    
-    console.log("[SUCCESS] POST report");
+    await instance.post('/api/reports', body, {
+      headers: {
+        'Content-Type': 'application/json',
+        'x-auth-token': localStorage.getItem('token'),
+      },
+    });
   } catch (e) {
-    console.log("[FAIL] POST report");
-    throw e;
+    throw new Error('fail post report');
   }
 };
