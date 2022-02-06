@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { LoginKakao, LoginNaver } from 'components';
@@ -7,7 +7,8 @@ import LoginImg from 'assets/img/img_Login.png';
 import GoogleIcon from 'assets/img/ic_google.svg';
 import { ReactComponent as Title } from 'assets/icon/ic_logo_wordmark_middle.svg';
 import { ReactComponent as SubTitle } from 'assets/icon/Group.svg';
-
+//loginState
+import { LoginDispatchContext } from 'lib/context/context';
 //api
 import { postToken } from 'lib/api/sample';
 
@@ -99,6 +100,8 @@ const Styled = {
 
 const LoginLayer = () => {
   const history = useHistory();
+  const setIsLogin = useContext(LoginDispatchContext);
+
   const handleSuccess = async (token, social) => {
     const data = await postToken(token, social);
     localStorage.setItem('email', data.email);
@@ -106,6 +109,7 @@ const LoginLayer = () => {
     localStorage.setItem('ID', data.id);
     localStorage.setItem('issuedAt', data.issuedAt);
 
+    setIsLogin(true);
     history.push('/');
   };
 

@@ -1,11 +1,12 @@
-import React from "react";
-import { BrowserRouter as Router } from "react-router-dom";
-import ContentRouter from "router";
+import React from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
+import ContentRouter from 'router';
 
-import GlobalStyle from "./styles/GlobalStyle";
-import styled from "styled-components";
+import GlobalStyle from './styles/GlobalStyle';
+import styled from 'styled-components';
 
-import { Header, Footer } from "./components/index";
+import { Header, Footer } from './components/index';
+import LoginProvider from './lib/context/provider';
 
 const Styled = {
   ContentWrapper: styled.main`
@@ -20,11 +21,13 @@ function App() {
     <>
       <GlobalStyle />
       <Router>
-        <Header />
-        <Styled.ContentWrapper>
-          <ContentRouter />
-        </Styled.ContentWrapper>
-        <Footer />
+        <LoginProvider>
+          <Header />
+          <Styled.ContentWrapper>
+            <ContentRouter />
+          </Styled.ContentWrapper>
+          <Footer />
+        </LoginProvider>
       </Router>
     </>
   );
