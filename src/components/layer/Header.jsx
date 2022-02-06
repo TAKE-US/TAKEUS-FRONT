@@ -1,9 +1,10 @@
-import React, { useEffect, useState, useCallback, useRef } from 'react';
+import React, { useEffect, useState, useCallback, useRef, useContext } from 'react';
 import { useLocation, useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { ReactComponent as LogoBlack } from '../../assets/img/ic_logo_wordmark_black_small.svg';
 import { LogOut } from '../';
+import { LoginStateContext } from 'lib/context/context';
 
 const Head = {
   Notice: styled.div`
@@ -121,45 +122,40 @@ const Header = () => {
   const location = useLocation();
   const history = useHistory();
   const [isScrolling, setIsScrolling] = useState(false);
-  const [isLogin, setIsLogin] = useState(isExpired ? false : localStorage.getItem('token'));
+  const [isValidToken, setIsValidToken] = useState(isExpired);
+  const isLogin = useContext(LoginStateContext);
 
   const scrollHandler = useCallback(() => {
-    if (isLogin) {
-      if (window.scrollY > 0) {
-        setIsScrolling(true);
-      } else {
-        setIsScrolling(false);
-      }
+    if (isLogin && isValidToken) {
+      if (window.scrollY > 0) setIsScrolling(true);
+      else setIsScrolling(false);
     } else {
       if (!noticeElement.current) return;
 
-      if (window.scrollY > noticeElement.current.clientHeight) {
-        setIsScrolling(true);
-      } else {
-        setIsScrolling(false);
-      }
+      if (window.scrollY > noticeElement.current.clientHeight) setIsScrolling(true);
+      else setIsScrolling(false);
     }
-  }, [isLogin]);
+  }, [isValidToken, isLogin]);
 
   useEffect(() => {
     window.addEventListener('scroll', scrollHandler);
   }, [scrollHandler]);
 
   useEffect(() => {
-    setIsLogin(isExpired ? false : localStorage.getItem('token'));
+    setIsValidToken(isExpired);
   }, []);
 
   if (location.pathname === '/login') return '';
 
   return (
     <>
-      {!isLogin && (
+      {(!isValidToken || !isLogin) && (
         <Head.Notice ref={noticeElement}>
           <Link to="login">회원가입을 하시면 대상견 등록이 가능합니다:)</Link>
         </Head.Notice>
       )}
 
-      <Head.Wrap isScrolling={isScrolling} isLogin={isLogin}>
+      <Head.Wrap isScrolling={isScrolling} isValidToken={isValidToken}>
         <div className="inner">
           <Link to="/">
             <LogoBlack fill={isScrolling || location.pathname !== '/' ? '#FDCB02' : '#1A1A1A'} />
@@ -198,7 +194,7 @@ const Header = () => {
               About us
             </Head.Content>
           </div>
-          {isLogin ? (
+          {isValidToken && isLogin ? (
             <Head.Login>
               <Link className="enroll" to="/dog/enroll/caution">
                 대상견 등록
