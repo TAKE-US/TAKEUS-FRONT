@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
-import styled from "styled-components";
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
 
-import { getCountry } from "lib/api/sample";
-import { DropdownCountry, DropdownAirport, Button } from "components";
-import { ReactComponent as SearchImg } from "assets/icon/ic_search_white_24.svg";
-import { useHistory } from "react-router";
+import { getCountry } from 'lib/api/sample';
+import { DropdownCountry, DropdownAirport, Button } from 'components';
+import { ReactComponent as SearchImg } from 'assets/icon/ic_search_white_24.svg';
+import { useHistory } from 'react-router';
 
 const Search = {
   Container: styled.div`
@@ -43,7 +43,7 @@ const Search = {
         flex: 1;
         &:before {
           position: absolute;
-          content: "";
+          content: '';
           top: 0;
           left: -2.6rem;
           height: 3.6rem;
@@ -56,10 +56,10 @@ const Search = {
 };
 
 const Searchbar = () => {
-  const [currCountry, setCurrCountry] = useState("");
-  const [currAirport, setCurrAirport] = useState("");
+  const [currCountry, setCurrCountry] = useState('');
+  const [currAirport, setCurrAirport] = useState('');
   const [country, setCountry] = useState([]);
-  const [allAirport, setAllAirport] = useState("");
+  const [allAirport, setAllAirport] = useState('');
   const history = useHistory();
 
   useEffect(() => {
@@ -72,7 +72,7 @@ const Searchbar = () => {
       } catch (e) {
         // TODO
         // error 처리 필요!
-        console.error(e);
+        console.log(e);
       }
     })();
   }, []);
