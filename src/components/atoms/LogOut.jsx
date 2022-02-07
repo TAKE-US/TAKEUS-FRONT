@@ -1,8 +1,9 @@
-import React, { useRef } from 'react';
+import React, { useRef, useContext } from 'react';
 import styled from 'styled-components';
-import { useDetectOutsideClick } from 'hooks/useDetectOutsideClick';
 import { withRouter } from 'react-router-dom';
 import QueryString from 'qs';
+import { useDetectOutsideClick } from 'hooks/useDetectOutsideClick';
+import { LoginDispatchContext } from 'lib/context/context';
 
 const Styled = {
   Wrap: styled.div`
@@ -24,7 +25,7 @@ const Styled = {
     position: absolute;
     right: -0.9rem;
     top: 3rem;
-    display: ${props => (props.isActive ? 'flex' : 'none')};
+    display: ${(props) => (props.isActive ? 'flex' : 'none')};
     flex-direction: column;
     background-color: ${({ theme }) => theme.color.white};
     padding: 1.9rem 1.7rem;
@@ -86,8 +87,7 @@ const Styled = {
 
   Page: styled.div`
     font: ${({ theme }) => theme.font.body3};
-    background-color: ${({ theme, isSelect }) =>
-      isSelect ? theme.color.primary_light : theme.color.lightgray1};
+    background-color: ${({ theme, isSelect }) => (isSelect ? theme.color.primary_light : theme.color.lightgray1)};
     padding: 1rem 2.2rem;
     border-radius: 0.5rem;
     white-space: nowrap;
@@ -105,13 +105,12 @@ const Styled = {
 const LogOut = ({ history, location }) => {
   const statusRef = useRef(null);
   const [isActive, setIsActive] = useDetectOutsideClick(statusRef, false);
-  // const [email, setEmail] = useState("takeus@gmail.com");
+  const setIsLogin = useContext(LoginDispatchContext);
 
   const query = QueryString.parse(location.search, { ignoreQueryPrefix: true });
-
   const email = localStorage.getItem('email');
 
-  const onClick = e => {
+  const onClick = (e) => {
     e.preventDefault();
     setIsActive(!isActive);
   };
@@ -120,6 +119,8 @@ const LogOut = ({ history, location }) => {
     localStorage.removeItem('token');
     localStorage.removeItem('ID');
     localStorage.removeItem('email');
+    localStorage.removeItem('issuedAt');
+    setIsLogin(false);
     history.push('/');
   };
 
