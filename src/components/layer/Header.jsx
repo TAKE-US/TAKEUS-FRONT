@@ -112,21 +112,15 @@ const Head = {
   `,
 };
 
-const getIssuedAtTime = () => localStorage.getItem('issuedAt');
-const getNowTime = () => Math.floor(+new Date() / 1000);
-const ONE_HOUR_BEFORE_ONEMINUTE = 3540;
-const isExpired = getNowTime() - getIssuedAtTime() > ONE_HOUR_BEFORE_ONEMINUTE;
-
 const Header = () => {
   const noticeElement = useRef(null);
   const location = useLocation();
   const history = useHistory();
   const [isScrolling, setIsScrolling] = useState(false);
-  const [isValidToken, setIsValidToken] = useState(isExpired);
   const isLogin = useContext(LoginStateContext);
 
   const scrollHandler = useCallback(() => {
-    if (isLogin && isValidToken) {
+    if (isLogin) {
       if (window.scrollY > 0) setIsScrolling(true);
       else setIsScrolling(false);
     } else {
@@ -135,27 +129,23 @@ const Header = () => {
       if (window.scrollY > noticeElement.current.clientHeight) setIsScrolling(true);
       else setIsScrolling(false);
     }
-  }, [isValidToken, isLogin]);
+  }, [isLogin]);
 
   useEffect(() => {
     window.addEventListener('scroll', scrollHandler);
   }, [scrollHandler]);
 
-  useEffect(() => {
-    setIsValidToken(isExpired);
-  }, []);
-
   if (location.pathname === '/login') return '';
 
   return (
     <>
-      {(!isValidToken || !isLogin) && (
+      {!isLogin && (
         <Head.Notice ref={noticeElement}>
           <Link to="login">회원가입을 하시면 대상견 등록이 가능합니다:)</Link>
         </Head.Notice>
       )}
 
-      <Head.Wrap isScrolling={isScrolling} isValidToken={isValidToken}>
+      <Head.Wrap isScrolling={isScrolling}>
         <div className="inner">
           <Link to="/">
             <LogoBlack fill={isScrolling || location.pathname !== '/' ? '#FDCB02' : '#1A1A1A'} />
@@ -194,7 +184,7 @@ const Header = () => {
               About us
             </Head.Content>
           </div>
-          {isValidToken && isLogin ? (
+          {isLogin ? (
             <Head.Login>
               <Link className="enroll" to="/dog/enroll/caution">
                 대상견 등록
