@@ -13,6 +13,14 @@ jobs:
         id: node-cache
         env:
           cache-name: node-cache
+          REACT_APP_GOOGLE_CLIENTID: ${{ secrets.REACT_APP_GOOGLE_CLIENTID }}
+          REACT_APP_API_DOMAIN: ${{ secrets.REACT_APP_API_DOMAIN }}
+          REACT_APP_KAKAO_REDIRECT: ${{ secrets.REACT_APP_KAKAO_REDIRECT }}
+          REACT_APP_KAKAO_CLIENTID: ${{ secrets.REACT_APP_KAKAO_CLIENTID }}
+          REACT_APP_NAVER_REDIRECT: ${{ secrets.REACT_APP_NAVER_REDIRECT }}
+          REACT_APP_NAVER_CLIENTID: ${{ secrets.REACT_APP_NAVER_CLIENTID }}
+          REACT_APP_NAVER_STATE_STRING: ${{ secrets.REACT_APP_NAVER_STATE_STRING }}
+
         uses: actions/cache@v2
         with:
           path: node_modules
@@ -21,20 +29,6 @@ jobs:
       - name: Install Dependencies
         if: steps.node-cache.outputs.cache-hit != 'true'
         run: yarn install
-
-      - name: Setting Google Client ID .env
-        run: echo "REACT_APP_GOOGLE_CLIENTID=${{ secrets.REACT_APP_GOOGLE_CLIENTID }}" >> .env
-
-      - name: Setting API Domain .env
-        run: echo "REACT_APP_API_DOMAIN=${{ secrets.REACT_APP_API_DOMAIN }}" >> .env
-
-      - name: Setting Kakao Auth .env
-        run: echo "REACT_APP_KAKAO_REDIRECT=${{ secrets.REACT_APP_KAKAO_REDIRECT }}" >> .env && echo "REACT_APP_KAKAO_CLIENTID=${{ secrets.REACT_APP_KAKAO_CLIENTID }}" >> .env
-
-      - name: Setting Naver Auth .env
-        run: echo "REACT_APP_NAVER_REDIRECT=${{ secrets.REACT_APP_NAVER_REDIRECT }}" >> .env && echo "REACT_APP_NAVER_CLIENTID=${{ secrets.REACT_APP_NAVER_CLIENTID }}" >> .env && echo "REACT_APP_NAVER_STATE_STRING=${{ secrets.REACT_APP_NAVER_STATE_STRING }}" >> .env
-
-      - run: cat .env
 
       - name: Build webpack
         run: yarn build
