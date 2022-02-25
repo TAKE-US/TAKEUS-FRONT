@@ -104,7 +104,6 @@ const EnrollInfo = ({ edit }) => {
       if (!edit) return;
 
       const data = history.location.state ? history.location.state.dog : null;
-      console.log(data.detail);
       setInitial(data);
       setGenderItems((prev) => {
         return prev.map((item) => {
@@ -120,7 +119,6 @@ const EnrollInfo = ({ edit }) => {
           return item.value === isNeutralized ? { ...item, select: true } : { ...item, select: false };
         }),
       );
-
       setIsInstitution((prev) =>
         prev.map((item) => {
           const isGroup = data.isInstitution ? '단체' : '개인구조자';
@@ -135,7 +133,6 @@ const EnrollInfo = ({ edit }) => {
         { 트위터: data.twitter },
         { 카카오톡: data.kakaotalkId },
       ];
-
       setContactList([]);
       existedContactList.forEach((contact) => {
         if (Object.values(contact)[0].length === 1) {
