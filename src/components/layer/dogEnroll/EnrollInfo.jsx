@@ -190,9 +190,11 @@ const EnrollInfo = ({ edit }) => {
     try {
       if (enrollData.endingCountry.length === 0) throw ERROR_MESSAGE.NO_COUNTRY_SELECTED;
       else if (enrollData.endingAirport.length === 0) throw ERROR_MESSAGE.NO_AIRPORT_SELECTED;
-      else if (enrollData.isInstitution && enrollData.institutionName.length === 0)
+      else if (enrollData.isInstitution === '단체' && enrollData.institutionName.length === 0) {
         throw ERROR_MESSAGE.NO_INSTITUTION_SELECTED;
-      else if (contactList.length === 0 || contactList.map((contact) => contact.value).join('').length === 0)
+      } else if (enrollData.isInstitution === '개인구조자' && enrollData.institutionName.length > 0) {
+        throw ERROR_MESSAGE.REMOVE_INSTITUTION_NAME;
+      } else if (contactList.length === 0 || contactList.map((contact) => contact.value).join('').length === 0)
         throw ERROR_MESSAGE.NO_CONTACT_SELECTED;
     } catch (e) {
       toast.error(e);
