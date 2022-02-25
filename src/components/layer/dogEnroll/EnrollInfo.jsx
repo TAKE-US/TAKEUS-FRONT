@@ -69,7 +69,7 @@ const EnrollInfo = ({ edit }) => {
     { value: '개인구조자', select: true },
     { value: '단체', select: false },
   ]);
-  const [initial, setInitial] = useState();
+  const [initial, setInitial] = useState({});
 
   const setEnrollDataCallback = React.useCallback(
     (name, value) => {
@@ -104,6 +104,7 @@ const EnrollInfo = ({ edit }) => {
       if (!edit) return;
 
       const data = history.location.state ? history.location.state.dog : null;
+      console.log(data.detail);
       setInitial(data);
       setGenderItems((prev) => {
         return prev.map((item) => {
@@ -174,7 +175,7 @@ const EnrollInfo = ({ edit }) => {
     formData.append('health', enrollData.health ? enrollData.health : '특이사항 없음');
     formData.append('isInstitution', enrollData?.isInstitution === '단체' ? true : false);
     formData.append('institutionName', enrollData?.institutionName ? enrollData.institutionName : '');
-    formData.append('detail', enrollData?.detail ? enrollData.detail : '');
+    formData.append('detail', enrollData?.detail ? enrollData.detail : initial.detail);
 
     contactList.forEach(({ type, value }) => {
       if (value !== undefined && value.length !== 0) formData.append(contactKoreanToEnglishMap[type], value[0]);
