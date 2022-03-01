@@ -267,6 +267,21 @@ export const postEnroll = async (data) => {
   }
 };
 
+export const patchDog = async (dogId, data) => {
+  const body = data;
+  try {
+    const data = await instance.patch(`/api/dogs/detail/${dogId}`, body, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        'x-auth-token': localStorage.getItem('token'),
+      },
+    });
+    return data;
+  } catch (e) {
+    return e;
+  }
+};
+
 export const putDog = async (dogId, data) => {
   const body = data;
   try {
