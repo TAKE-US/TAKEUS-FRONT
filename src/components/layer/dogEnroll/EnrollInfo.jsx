@@ -69,7 +69,7 @@ const EnrollInfo = ({ edit }) => {
     { value: '개인구조자', select: true },
     { value: '단체', select: false },
   ]);
-  const [initial, setInitial] = useState();
+  const [initial, setInitial] = useState({});
 
   const setEnrollDataCallback = React.useCallback(
     (name, value) => {
@@ -119,7 +119,6 @@ const EnrollInfo = ({ edit }) => {
           return item.value === isNeutralized ? { ...item, select: true } : { ...item, select: false };
         }),
       );
-
       setIsInstitution((prev) =>
         prev.map((item) => {
           const isGroup = data.isInstitution ? '단체' : '개인구조자';
@@ -134,7 +133,6 @@ const EnrollInfo = ({ edit }) => {
         { 트위터: data.twitter },
         { 카카오톡: data.kakaotalkId },
       ];
-
       setContactList([]);
       existedContactList.forEach((contact) => {
         if (Object.values(contact)[0].length === 1) {
@@ -174,7 +172,7 @@ const EnrollInfo = ({ edit }) => {
     formData.append('health', enrollData.health ? enrollData.health : '특이사항 없음');
     formData.append('isInstitution', enrollData?.isInstitution === '단체' ? true : false);
     formData.append('institutionName', enrollData?.institutionName ? enrollData.institutionName : '');
-    formData.append('detail', enrollData?.detail ? enrollData.detail : '');
+    formData.append('detail', enrollData?.detail ? enrollData.detail : initial.detail);
 
     contactList.forEach(({ type, value }) => {
       if (value !== undefined && value.length !== 0) formData.append(contactKoreanToEnglishMap[type], value[0]);
@@ -190,9 +188,11 @@ const EnrollInfo = ({ edit }) => {
     try {
       if (enrollData.endingCountry.length === 0) throw ERROR_MESSAGE.NO_COUNTRY_SELECTED;
       else if (enrollData.endingAirport.length === 0) throw ERROR_MESSAGE.NO_AIRPORT_SELECTED;
-      else if (enrollData.isInstitution && enrollData.institutionName.length === 0)
+      else if (enrollData.isInstitution === '단체' && enrollData.institutionName.length === 0) {
         throw ERROR_MESSAGE.NO_INSTITUTION_SELECTED;
-      else if (contactList.length === 0 || contactList.map((contact) => contact.value).join('').length === 0)
+      } else if (enrollData.isInstitution === '개인구조자' && enrollData.institutionName.length > 0) {
+        throw ERROR_MESSAGE.REMOVE_INSTITUTION_NAME;
+      } else if (contactList.length === 0 || contactList.map((contact) => contact.value).join('').length === 0)
         throw ERROR_MESSAGE.NO_CONTACT_SELECTED;
     } catch (e) {
       toast.error(e);
