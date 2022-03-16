@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
-import styled from "styled-components";
-import { withRouter } from "react-router";
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
+import { withRouter } from 'react-router';
 
-import { Input, Button, Hashtag, RadioButton, TextField, EnrollSearchbar } from "components";
-import useEnrollData from "hooks/useEnrollData";
-import { postReview, getReviewDetail, putReview } from "lib/api/sample";
+import { Input, Button, Hashtag, RadioButton, TextField, EnrollSearchbar } from 'components';
+import useEnrollData from 'hooks/useEnrollData';
+import { postReview, getReviewDetail, putReview } from 'lib/api/sample';
 
 const ReviewInfoStyle = styled.section`
   .wrap {
@@ -45,27 +45,27 @@ const ReviewInfoStyle = styled.section`
 const ReviewPostInfo = ({ edit, history, match }) => {
   const [enrollData, setEnrollData] = useEnrollData({});
   const [hashtags, setHashtags] = useState([
-    { tag: "이동봉사과정", active: false },
-    { tag: "도착공항정보", active: false },
-    { tag: "보호단체관련", active: false },
-    { tag: "이동봉사준비", active: false },
-    { tag: "봉사국가", active: false },
-    { tag: "주의사항", active: false },
-    { tag: "입국심사", active: false },
-    { tag: "대상견케어", active: false },
+    { tag: '이동봉사과정', active: false },
+    { tag: '도착공항정보', active: false },
+    { tag: '보호단체관련', active: false },
+    { tag: '이동봉사준비', active: false },
+    { tag: '봉사국가', active: false },
+    { tag: '주의사항', active: false },
+    { tag: '입국심사', active: false },
+    { tag: '대상견케어', active: false },
   ]);
   const [initial, setInitial] = useState();
   const [radioItems, setRadioItems] = useState([
-    { value: "선택 안함", select: true },
-    { value: "개인 구조자", select: false },
-    { value: "단체", select: false },
+    { value: '선택 안함', select: true },
+    { value: '개인 구조자', select: false },
+    { value: '단체', select: false },
   ]);
 
-  const toggleHashtag = value => {
+  const toggleHashtag = (value) => {
     setHashtags(
-      [...hashtags].map(hashtag =>
-        hashtag.tag !== value ? hashtag : Object.assign(hashtag, { active: !hashtag.active })
-      )
+      [...hashtags].map((hashtag) =>
+        hashtag.tag !== value ? hashtag : Object.assign(hashtag, { active: !hashtag.active }),
+      ),
     );
   };
 
@@ -73,20 +73,20 @@ const ReviewPostInfo = ({ edit, history, match }) => {
     if (edit) {
       (async () => {
         const data = await getReviewDetail(match.params.id);
-        setRadioItems(prev =>
-          prev.map(radio =>
-            radio.value === data.isInstitution ? { ...radio, select: true } : { ...radio, select: false }
-          )
+        setRadioItems((prev) =>
+          prev.map((radio) =>
+            radio.value === data.isInstitution ? { ...radio, select: true } : { ...radio, select: false },
+          ),
         );
-        data.hashtags.forEach(value => toggleHashtag(value));
+        data.hashtags.forEach((value) => toggleHashtag(value));
         setInitial(data);
-        setEnrollData("title", data.title);
-        setEnrollData("content", data.content);
-        setEnrollData("endingAirport", data.endingAirport);
-        setEnrollData("endingCountry", data.endingCountry);
-        setEnrollData("hashtags", data.hashtags);
-        setEnrollData("isInstitution", data.isInstitution);
-        setEnrollData("institutionName", data.institutionName);
+        setEnrollData('title', data.title);
+        setEnrollData('content', data.content);
+        setEnrollData('endingAirport', data.endingAirport);
+        setEnrollData('endingCountry', data.endingCountry);
+        setEnrollData('hashtags', data.hashtags);
+        setEnrollData('isInstitution', data.isInstitution);
+        setEnrollData('institutionName', data.institutionName);
       })();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -94,8 +94,8 @@ const ReviewPostInfo = ({ edit, history, match }) => {
 
   useEffect(() => {
     const updatedHashtags = [];
-    hashtags.forEach(hashtag => hashtag.active && updatedHashtags.push(hashtag.tag));
-    setEnrollData("hashtags", updatedHashtags);
+    hashtags.forEach((hashtag) => hashtag.active && updatedHashtags.push(hashtag.tag));
+    setEnrollData('hashtags', updatedHashtags);
   }, [hashtags, setEnrollData]);
 
   return (
@@ -128,7 +128,7 @@ const ReviewPostInfo = ({ edit, history, match }) => {
       <div className="wrap">
         <label>해시 태그</label>
         <div className="wrap--flex">
-          {hashtags.map(hashtag => (
+          {hashtags.map((hashtag) => (
             <div
               className="hashtag"
               onClick={() => {
@@ -171,17 +171,32 @@ const ReviewPostInfo = ({ edit, history, match }) => {
       </div>
       <div
         className="wrap"
-        onClick={() => {
-          if (edit) {
-            putReview(match.params.id, enrollData);
-          } else {
-            postReview(enrollData);
+        onClick={async () => {
+          try {
+            if (edit) {
+              await putReview(match.params.id, enrollData);
+            } else {
+              await postReview(enrollData);
+            }
+            history.goBack();
+          } catch (error) {
+            switch (error.response.status) {
+              case 401:
+                alert('로그인 후 후기 작성이 가능합니다!');
+                history.push('/login');
+                break;
+              case 400:
+                alert('필수 요소들을 작성해주세요!');
+                break;
+              default:
+                alert('후기 생성에 실패했습니다!');
+                break;
+            }
           }
-          history.goBack();
         }}
       >
         <Button full rounded padding="15px 0" font="button">
-          {edit ? "후기 수정하기" : "후기 등록하기"}
+          {edit ? '후기 수정하기' : '후기 등록하기'}
         </Button>
       </div>
     </ReviewInfoStyle>

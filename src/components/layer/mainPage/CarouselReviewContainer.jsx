@@ -50,9 +50,9 @@ const CarouselReviewContainer = ({ history }) => {
 
   useEffect(() => {
     (async () => {
-      const data = await getReviewsWithTags('이동봉사과정', 1);
-      setReviewTotalCount(data.data.length);
-      data.data && setReview(data.data.slice(0, 6));
+      const { data, totalNum } = await getReviewsWithTags('이동봉사과정', 1);
+      setReviewTotalCount(totalNum);
+      data && setReview(data.slice(0, 6));
     })();
   }, []);
 
