@@ -178,6 +178,7 @@ const ReviewPostInfo = ({ edit, history, match }) => {
             } else {
               await postReview(enrollData);
             }
+            history.goBack();
           } catch (error) {
             switch (error.response.status) {
               case 401:
