@@ -91,6 +91,7 @@ const ReviewSearch = () => {
         setIsloading(false);
       } else {
         const reviewData = await getReviewsWithTags(activeHashtag, pageNum, selectedFilter);
+        console.log('reviews tags');
         setReviews(reviewData.data);
         setTotalPage(reviewData.totalNum);
         setIsloading(false);
@@ -144,7 +145,7 @@ const ReviewSearch = () => {
                 </section>
                 <Filter contents={contents} setSelectedFilter={setSelectedFilter} selectedFilter={selectedFilter} />
               </Styled.Option>
-              <ReviewCardContainer reviews={reviews} />
+                  <ReviewCardContainer reviews={reviews} setReviews={setReviews}/>
             </>
           )}
         </>

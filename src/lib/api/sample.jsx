@@ -7,8 +7,8 @@ const instance = axios.create({
 
 export const getDogs = async () => {
   try {
-    const data = await instance.get('/api/dogs');
-    return data.data.data;
+    const { data } = await instance.get('/api/dogs');
+    return data;
   } catch (e) {
     return e;
   }
@@ -151,7 +151,12 @@ export const getReviewDetail = async (id) => {
 
 export const getReviewsWithTags = async (hashtag = '', num, selectedFilter) => {
   try {
-    const filter = selectedFilter === '최신순' ? 'latest' : 'oldest';
+    let filter= '';
+    if (selectedFilter) {
+      filter = selectedFilter === '최신순' ? 'latest' : 'oldest';
+    } else {
+      filter = 'latest';
+    }
     const data = await instance.get(`/api/reviews/${hashtag}`, {
       params: {
         order: filter,
@@ -196,19 +201,14 @@ export const postToken = async (token, social) => {
   }
 };
 
-export const postReview = async (data) => {
-  const body = data;
-  try {
-    const data = await instance.post('/api/reviews', body, {
-      headers: {
-        'Content-Type': 'application/json',
-        'x-auth-token': localStorage.getItem('token'),
-      },
-    });
-    return data;
-  } catch (e) {
-    return e;
-  }
+export const postReview = async (body) => {
+  const data = await instance.post('/api/reviews', body, {
+    headers: {
+      'Content-Type': 'application/json',
+      'x-auth-token': localStorage.getItem('token'),
+    },
+  });
+  return data;
 };
 
 export const deleteReview = async (id) => {
