@@ -19,7 +19,7 @@ const Styled = {
       position: relative;
       &__img {
         position: absolute;
-        top: 7.2rem;
+        top: 6.5rem;
         left: 2.5rem;
         max-width: 2rem;
         max-height: 2rem;
@@ -29,7 +29,16 @@ const Styled = {
         width: 9rem;
         height: 2rem;
         left: 4.5rem;
-        top: 7.2rem;
+        top: 6.5rem;
+        font: ${({ theme }) => theme.font.gnb};
+        color: ${({ theme }) => theme.color.primary};
+      }
+      &__description {
+        position: absolute;
+        width: 9rem;
+        height: 2rem;
+        left: 4.5rem;
+        top: 8.5rem;
         font: ${({ theme }) => theme.font.gnb};
         color: ${({ theme }) => theme.color.primary};
       }
@@ -64,28 +73,29 @@ const Styled = {
   `,
 };
 
-const extractLastId = array => {
+const extractLastId = (array) => {
   if (array.length === 0) return 0;
   return array.sort((a, b) => b.id - a.id)[0].id;
 };
 
 const AddDogCard = ({ setImgPreviewList, imageList, setImageList }) => {
-  const setImagePreview = e => {
+  const setImagePreview = (e) => {
     const reader = new FileReader();
     const file = e.target.files[0];
     reader.onload = () => {
-      setImageList(prev => [{ id: extractLastId(imageList) + 1, file: file, imgURL: e.target.files[0] }, ...prev]);
-      setImgPreviewList(prev => [{ id: extractLastId(imageList) + 1, file: file, imgURL: reader.result }, ...prev]);
+      setImageList((prev) => [{ id: extractLastId(imageList) + 1, file: file, imgURL: e.target.files[0] }, ...prev]);
+      setImgPreviewList((prev) => [{ id: extractLastId(imageList) + 1, file: file, imgURL: reader.result }, ...prev]);
     };
     if (file) reader.readAsDataURL(file);
   };
 
   return (
     <Styled.Wrapper>
-      <div className='card'>
-        <img className='card__img' src={btn_plus} alt='plus' />
-        <p className='card__content'>사진 추가하기</p>
-        <input className='card__input' type='file' id='detail_image' accept='image/*' onChange={setImagePreview} />
+      <div className="card">
+        <img className="card__img" src={btn_plus} alt="plus" />
+        <p className="card__content">사진 추가하기</p>
+        <p className="card__description">(15MB 이하)</p>
+        <input className="card__input" type="file" id="detail_image" accept="image/*" onChange={setImagePreview} />
       </div>
     </Styled.Wrapper>
   );
