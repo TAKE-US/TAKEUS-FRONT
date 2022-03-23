@@ -10,7 +10,7 @@ import LoginProvider from './lib/context/provider';
 
 const Styled = {
   ContentWrapper: styled.main`
-    max-width: 1080px;
+    max-width: 108rem;
     margin: 0 auto;
     margin-top: -8.8rem;
   `,
