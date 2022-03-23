@@ -48,8 +48,6 @@ const Head = {
       .gnb {
         display: flex;
         justify-content: space-between;
-        margin-left: 18rem;
-        margin-right: 42.2rem;
         width: 58.6rem;
       }
     }

@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router";
-import styled from "styled-components";
+import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router';
+import styled from 'styled-components';
 
-import { ReviewSearchbar, Filter, PaginationNav, ReviewCardContainer, Hashtag, Empty, Loading } from "components";
-import { ReactComponent as RegisterBtn } from "assets/img/btn_register.svg";
+import { ReviewSearchbar, Filter, PaginationNav, ReviewCardContainer, Hashtag, Empty, Loading } from 'components';
+import { ReactComponent as RegisterBtn } from 'assets/img/btn_register.svg';
 //api
-import { getReviewsWithTags, getReviewsSearch } from "lib/api/sample";
+import { getReviewsWithTags, getReviewsSearch } from 'lib/api/sample';
 
 const Styled = {
   Wrapper: styled.div`
@@ -37,13 +37,12 @@ const Styled = {
     .search {
       display: flex;
       justify-content: center;
+      align-items: center;
       margin-top: 2.4rem;
-
       > div {
         margin-right: 0.8rem;
       }
-
-      .button {
+      > .button {
         padding: 0rem;
       }
     }
@@ -62,23 +61,23 @@ const Styled = {
 
 const ReviewSearch = () => {
   const history = useHistory();
-  const contents = ["최신순", "오래된순"];
+  const contents = ['최신순', '오래된순'];
   const [selectedFilter, setSelectedFilter] = useState(contents[0]);
   const [reviews, setReviews] = useState(null);
   const [pageNum, setPageNum] = useState(1);
   const [totalPage, setTotalPage] = useState(0);
-  const [activeHashtag, setActiveHashtag] = useState("");
-  const [searchState, setSearchState] = useState("");
+  const [activeHashtag, setActiveHashtag] = useState('');
+  const [searchState, setSearchState] = useState('');
   const [isLoading, setIsloading] = useState(false);
   const [hashtags, setHashtags] = useState([
-    { tag: "이동봉사과정", active: false },
-    { tag: "도착공항정보", active: false },
-    { tag: "보호단체관련", active: false },
-    { tag: "이동봉사준비", active: false },
-    { tag: "봉사국가", active: false },
-    { tag: "주의사항", active: false },
-    { tag: "입국심사", active: false },
-    { tag: "대상견케어", active: false },
+    { tag: '이동봉사과정', active: false },
+    { tag: '도착공항정보', active: false },
+    { tag: '보호단체관련', active: false },
+    { tag: '이동봉사준비', active: false },
+    { tag: '봉사국가', active: false },
+    { tag: '주의사항', active: false },
+    { tag: '입국심사', active: false },
+    { tag: '대상견케어', active: false },
   ]);
 
   useEffect(() => {
@@ -100,17 +99,17 @@ const ReviewSearch = () => {
     // setIsloading(false);
   }, [activeHashtag, pageNum, selectedFilter, hashtags, searchState]);
 
-  const toggleHashtag = tagName => {
+  const toggleHashtag = (tagName) => {
     setHashtags(
-      hashtags.map(hashtag =>
+      hashtags.map((hashtag) =>
         hashtag.tag === tagName && activeHashtag !== tagName
           ? Object.assign(hashtag, { active: true })
-          : Object.assign(hashtag, { active: false })
-      )
+          : Object.assign(hashtag, { active: false }),
+      ),
     );
 
-    let newActiveHashtag = hashtags.filter(hashtag => hashtag.active);
-    newActiveHashtag.length !== 0 ? setActiveHashtag(newActiveHashtag[0].tag) : setActiveHashtag("");
+    let newActiveHashtag = hashtags.filter((hashtag) => hashtag.active);
+    newActiveHashtag.length !== 0 ? setActiveHashtag(newActiveHashtag[0].tag) : setActiveHashtag('');
   };
 
   return (
@@ -123,7 +122,7 @@ const ReviewSearch = () => {
         <div className="search">
           <ReviewSearchbar setSearchState={setSearchState} />
           <button className="button">
-            <RegisterBtn onClick={() => history.push("/review/post")} />
+            <RegisterBtn width="6.2rem" height="6.2rem" onClick={() => history.push('/review/post')} />
           </button>
         </div>
       </Styled.Search>
@@ -145,7 +144,7 @@ const ReviewSearch = () => {
                 </section>
                 <Filter contents={contents} setSelectedFilter={setSelectedFilter} selectedFilter={selectedFilter} />
               </Styled.Option>
-                  <ReviewCardContainer reviews={reviews} setReviews={setReviews}/>
+              <ReviewCardContainer reviews={reviews} setReviews={setReviews} />
             </>
           )}
         </>

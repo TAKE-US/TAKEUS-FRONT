@@ -1,9 +1,9 @@
-import React, { useRef } from "react";
-import styled from "styled-components";
+import React, { useRef } from 'react';
+import styled from 'styled-components';
 //hooks
-import { useDetectOutsideClick } from "hooks/useDetectOutsideClick";
+import { useDetectOutsideClick } from 'hooks/useDetectOutsideClick';
 //asset
-import downIcon from "../../assets/icon/ic_arrow_bottom_18.svg";
+import downIcon from '../../assets/icon/ic_arrow_bottom_18.svg';
 
 const Wrapper = styled.section`
   display: flex;
@@ -25,9 +25,10 @@ const SelectedFilter = styled.button`
   p {
     font: ${({ theme }) => theme.font.button_small};
     line-height: 2.5rem;
+    white-space: nowrap;
   }
   img {
-    transform: ${props => props.isOpen && "rotate(180deg)"};
+    transform: ${(props) => props.isOpen && 'rotate(180deg)'};
     transition: transform 0.3s;
   }
 `;
@@ -60,7 +61,7 @@ const DropDownWrap = styled.div`
       display: none;
     }
     ::after {
-      content: "";
+      content: '';
       display: block;
       position: relative;
       top: 0.9rem;
