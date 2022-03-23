@@ -1,25 +1,23 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 //assets
-import leftBtnIcon from "assets/img/ic_arrow_left_24.svg";
-import rightBtnIcon from "assets/img/ic_arrow_right_black_24.svg";
+import leftBtnIcon from 'assets/img/ic_arrow_left_24.svg';
+import rightBtnIcon from 'assets/img/ic_arrow_right_black_24.svg';
 
 const PaginationNav = ({ pageNum, setPageNum, totalPage, review }) => {
-  const pageNums = [1];
   const denominator = review ? 7 : 16;
-  for (var i = 2; i <= totalPage / denominator; i++) {
-    pageNums.push(i);
-  }
+  const calculatedPage = Math.ceil(totalPage / denominator);
+  const pageNums = [...Array(calculatedPage)].map((v, i) => i + 1);
 
   //page 이동 함수
   const nextPageHandler = () => {
     if (pageNum !== pageNums.length) {
-      setPageNum(prev => prev + 1);
+      setPageNum((prev) => prev + 1);
     }
   };
   const prevPageHandler = () => {
     if (pageNum !== 1) {
-      setPageNum(prev => prev - 1);
+      setPageNum((prev) => prev - 1);
     }
   };
 
@@ -66,11 +64,11 @@ const PageBtn = styled.button`
   display: block;
   width: 2.6rem;
   height: 2.9rem;
-  color: ${props => (props.isSelect ? "#F29C42" : "#3D3D3D")};
+  color: ${(props) => (props.isSelect ? '#F29C42' : '#3D3D3D')};
   font: ${({ theme }) => theme.font.button_small};
   ::after {
-    content: "";
-    display: ${props => (props.isSelect ? "block" : "none")};
+    content: '';
+    display: ${(props) => (props.isSelect ? 'block' : 'none')};
     position: relative;
     top: 6px;
     padding-left: 10px;
@@ -81,5 +79,5 @@ const PageMoveButton = styled.button`
   display: flex;
   width: 1.8rem;
   height: 1.8rem;
-  background: url(${props => props.bg}) no-repeat top center;
+  background: url(${(props) => props.bg}) no-repeat top center;
 `;

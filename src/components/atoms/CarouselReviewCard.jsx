@@ -51,7 +51,7 @@ const CarouselReviewCard = ({ review }) => {
           {review.title.length < 21 ? review.title : review.title.slice(0, 21).concat('...')}
         </div>
         <div className="cardInfo__content">
-          {review.crawlingData[0].desc ? review.crawlingData[0].desc : defaultText}
+          {review.crawlingData[0]?.desc ? review.crawlingData[0].desc : defaultText}
         </div>
       </section>
     </Card>
