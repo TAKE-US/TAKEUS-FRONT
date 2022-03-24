@@ -84,7 +84,7 @@ const ReviewCard = ({ review, editHandler, deleteHandler }) => {
         </section>
         <article>
           <h1>{review.title}</h1>
-          <p>{review.crawlingData[0].desc}</p>
+          <p>{review.crawlingData[0]?.desc}</p>
         </article>
         <section className="description">
           <p>

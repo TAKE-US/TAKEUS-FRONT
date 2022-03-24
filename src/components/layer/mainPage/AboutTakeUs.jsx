@@ -59,10 +59,9 @@ const AboutTakeUs = () => {
     <Styled.Wrapper>
       <h2 className="title">ABOUT TAKE US</h2>
       <p>
-        테이커스는 2021년부터 지금까지 유기견과 봉사자를 위한 서비스를 운영하고
-        있습니다.
-        <br />
-        테이커스는 멋있고 어쩌고 저쩌고 그렇습니다. 테이커스와 함께해주세요!
+        테이커스는 2021년부터 지금까지 해외로 입양이 확정된 대상견과 이동봉사자를 위한 서비스를 운영하고 있습니다.
+        <br/>
+        새로운 삶을 찾아 떠나는 강아지들의 여행을 테이커스와 함께 응원해주세요!
       </p>
       <Styled.ContentArea>
         <Styled.Content>
