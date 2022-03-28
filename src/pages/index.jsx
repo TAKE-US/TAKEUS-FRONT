@@ -12,3 +12,4 @@ export { default as KakaoPage } from './oAuth/KakaoPage';
 export { default as NaverPage } from './oAuth/NaverPage';
 export { default as DogEnrollCautionPage } from './dogEnroll/DogEnrollCautionPage';
 export { default as DogEnrollConfirmPage } from './dogEnroll/DogEnrollConfirmPage';
+export { default as MobilePage } from './MobilePage';
