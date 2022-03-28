@@ -3,7 +3,10 @@ import styled from 'styled-components';
 import mobilePreparingImg from 'assets/img/img_mobile_preparing.png';
 
 const MobilePage = () => {
-  const handleLinkCopy = () => navigator.clipboard.writeText(document.location.href);
+  const handleLinkCopy = () => {
+    navigator.clipboard.writeText(document.location.href);
+    alert('링크가 복사되었습니다!');
+  };
 
   return (
     <MobilePageWrapper>
