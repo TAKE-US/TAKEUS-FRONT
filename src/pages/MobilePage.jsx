@@ -29,6 +29,9 @@ const MobilePageWrapper = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  & > img {
+    width: 127px;
+  }
   & > .title {
     margin-top: 20px;
     font-weight: 700;
