@@ -30,7 +30,7 @@ const MobilePageWrapper = styled.section`
   justify-content: center;
   align-items: center;
   & > img {
-    width: 127px;
+    width: 172px;
   }
   & > .title {
     margin-top: 20px;
