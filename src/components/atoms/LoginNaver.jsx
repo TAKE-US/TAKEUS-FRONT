@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable arrow-parens */
 import React from 'react';
 import styled from 'styled-components';
@@ -43,14 +44,8 @@ const LoginNaver = () => {
       ? 'http://localhost:3000/oauth/callback/naver'
       : process.env.REACT_APP_NAVER_REDIRECT;
 
-  const NAVER_AUTH_URL = `https://nid.naver.com/oauth2.0/authorize?response_type=code
-                          &client_id=${process.env.REACT_APP_NAVER_CLIENTID}
-                          &state=${process.env.REACT_APP_NAVER_STATE_STRING}
-                          &redirect_uri=${CALLBACK_URL}`;
-
-  const LoginClickHandler = () => {
-    window.location.assign(NAVER_AUTH_URL);
-  };
+  const NAVER_AUTH_URL = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${process.env.REACT_APP_NAVER_CLIENTID}&state=${process.env.REACT_APP_NAVER_STATE_STRING}&redirect_uri=${CALLBACK_URL}`;
+  const LoginClickHandler = () => window.location.assign(NAVER_AUTH_URL);
 
   return (
     <Styled.Button type="button" color={'#1EC800'} onClick={LoginClickHandler}>
