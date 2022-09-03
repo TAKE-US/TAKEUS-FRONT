@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import ContentRouter from 'router';
 import { isMobile } from 'react-device-detect';
@@ -9,6 +9,7 @@ import styled from 'styled-components';
 import { Header, Footer } from './components/index';
 import LoginProvider from './lib/context/provider';
 import { MobilePage } from 'pages';
+import ReactGA from 'react-ga';
 
 const Styled = {
   ContentWrapper: styled.main`
@@ -18,7 +19,15 @@ const Styled = {
   `,
 };
 
+const TRACKING_ID = 'G-ZQN8W2SDPD';
+ReactGA.initialize(TRACKING_ID);
+
 function App() {
+
+  useEffect(() => {
+    ReactGA.pageview(window.location.pathname + window.location.search);
+  }, []);
+  
   return (
     <>
       <GlobalStyle />
