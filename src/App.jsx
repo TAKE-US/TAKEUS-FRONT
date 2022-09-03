@@ -20,11 +20,11 @@ const Styled = {
 };
 
 const TRACKING_ID = 'G-ZQN8W2SDPD';
-ReactGA.initialize(TRACKING_ID);
 
 function App() {
 
   useEffect(() => {
+    ReactGA.initialize(TRACKING_ID);
     ReactGA.pageview(window.location.pathname + window.location.search);
   }, []);
   
